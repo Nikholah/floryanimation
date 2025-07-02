@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spectacles de Bulles - Magie et Émerveillement</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #4a90e2;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #4a90e2;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #4a90e2, #63b3ed);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Bubbles Animation */
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .bubble:nth-child(1) { width: 80px; height: 80px; left: 10%; animation-delay: -2s; }
+        .bubble:nth-child(2) { width: 60px; height: 60px; left: 20%; animation-delay: -4s; }
+        .bubble:nth-child(3) { width: 100px; height: 100px; left: 60%; animation-delay: -1s; }
+        .bubble:nth-child(4) { width: 40px; height: 40px; left: 80%; animation-delay: -3s; }
+        .bubble:nth-child(5) { width: 120px; height: 120px; left: 70%; animation-delay: -5s; }
+
+        /* Sections */
+        .section {
+            padding: 5rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            text-align: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Cards */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border: 2px solid #4a90e2;
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #4a90e2;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="#accueil" class="logo">✨ FloryAnimation</a>
+        <ul class="nav-links">
+            <li><a href="#accueil">Accueil</a></li>
+            <li><a href="#nous-connaitre">Nous Connaître</a></li>
+            <li><a href="#spectacles">Spectacles</a></li>
+            <li><a href="#mascottes">Mascottes</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section id="accueil" class="hero">
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+
+    <div class="hero-content">
+        <h1>Spectacles de Bulles Magiques</h1>
+        <p>Plongez dans un univers féerique où les bulles de savon prennent vie pour émerveiller petits et grands</p>
+        <a href="#spectacles" class="cta-button">Découvrir nos Spectacles</a>
+    </div>
+</section>
+
+<!-- Nous Connaître -->
+<section id="nous-connaitre" class="section">
+    <h2>Nous Connaître</h2>
+    <p>L’histoire de <strong>Flory Animation</strong> commence avec une passion transmise de génération en génération — celle de
+        <strong>Flory Anne</strong>, née Anne-Marie en 1969. Fille d’un couple de magiciens, elle grandit dans l’univers féerique du
+        spectacle. Dès l’âge de 6 ans, elle monte sur scène pour suivre les traces de ses parents tout en débutant ses
+        premiers cours de danse classique et de piano.</p>
+    <p>À 14 ans, portée par le désir d’indépendance artistique, elle présente seule son premier numéro de magie
+        générale. Elle parcourt alors la France entière, faisant de chaque scène une nouvelle aventure.</p>
+    <p>L’année suivante, une rencontre déterminante avec <strong>Annie Fratellini</strong> marque un tournant dans son parcours.
+        Flory Anne explore l’univers du cirque : acrobatie, jonglerie, expression scénique… autant de disciplines qui
+        forgent son identité d’artiste plurielle.</p>
+    <p>À 19 ans, elle approfondit sa maîtrise de l’acrobatie grâce à une formation dispensée par les professeurs du
+        prestigieux <strong>Cirque de Pékin</strong>, réputés pour leur exigence et leur discipline. Ces échanges riches lui offrent une
+        approche plus rigoureuse et raffinée de la scène.</p>
+    <p>Mais sa plus belle création reste sa propre famille. Flory Anne devient maman d’une fille en 1995, puis d’un
+        garçon en 1999 — deux sources d’inspiration qui enrichissent profondément son univers artistique et
+        personnel.</p>
+    <p>Aujourd’hui, <strong>Flory Animation</strong> est bien plus qu’une compagnie artistique : c’est une aventure familiale, portée
+        par la passion, la transmission et la joie de créer pour émerveiller petits et grands. Leur plus grand bonheur ?
+        <strong>Partager avec vous la magie de leurs créations.</strong></p>
+</section>
+
+<!-- Spectacles -->
+<section id="spectacles" class="section">
+    <h2>Nos Spectacles</h2>
+    <div class="cards-container">
+        <div class="card">
+            <h3>🎭 Spectacle Classique</h3>
+            <p>Un spectacle interactif de 45 minutes mêlant bulles géantes, musique et participation du public. Parfait pour les événements familiaux et les fêtes d'anniversaire.</p>
+        </div>
+        <div class="card">
+            <h3>✨ Spectacle Théâtral</h3>
+            <p>Une performance artistique de 60 minutes qui raconte une histoire à travers les bulles. Idéal pour les théâtres, festivals et événements culturels.</p>
+        </div>
+        <div class="card">
+            <h3>🌟 Animation Événementielle</h3>
+            <p>Animations courtes et dynamiques pour inaugurer vos événements. Parfait pour les centres commerciaux, entreprises et manifestations publiques.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Mascottes -->
+<section id="mascottes" class="section">
+    <h2>Mascottes</h2>
+    <div class="cards-container">
+        <div class="card">
+            <h3>🫧 Bulle la Magicienne</h3>
+            <p>Notre mascotte principale qui accompagne les spectacles et crée une connexion unique avec les enfants. Disponible pour les photos et les interactions.</p>
+        </div>
+        <div class="card">
+            <h3>🎪 Spectacles avec Mascottes</h3>
+            <p>Combinez la magie des bulles avec la présence chaleureuse de nos mascottes pour une expérience complète et inoubliable.</p>
+        </div>
+        <div class="card">
+            <h3>📸 Séances Photos</h3>
+            <p>Organisez des séances photos mémorables avec nos mascottes et créez des souvenirs magiques pour toute la famille.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="contact">
+    <div class="section">
+        <h2>Contact</h2>
+        <p>Prêt à ajouter une touche de magie à votre événement ? Contactez-nous pour discuter de vos besoins et créer ensemble un spectacle sur mesure.</p>
+
+        <div class="contact-info">
+            <div class="contact-item">
+                <h3>📞 Téléphone</h3>
+                <p>+33 X XX XX XX XX</p>
+            </div>
+            <div class="contact-item">
+                <h3>✉️ Email</h3>
+                <p>contact@bullesmagiques.fr</p>
+            </div>
+            <div class="contact-item">
+                <h3>📍 Zone d'intervention</h3>
+                <p>Toute la France métropolitaine</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+            navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+            navbar.style.boxShadow = '0 2px 30px rgba(0, 0, 0, 0.15)';
+        } else {
+            navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+        }
+    });
+
+    // Add animation to cards when they come into view
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+            }
+        });
+    });
+
+    document.querySelectorAll('.card').forEach(card => {
+        observer.observe(card);
+    });
+</script>
+</body>
+</html>

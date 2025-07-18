@@ -97,7 +97,6 @@
             border-radius: 10px;
             z-index: 1000;
             padding: 0.5rem 0;
-            margin-top: 0.5rem;
             border: 1px solid rgba(74, 144, 226, 0.1);
         }
 
@@ -138,7 +137,7 @@
         /* Hero Section */
         .hero {
             height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: #ff3838;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -148,8 +147,42 @@
             overflow: hidden;
         }
 
+        /* Chapiteau de cirque - rayures partant du centre haut et se divisant */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-conic-gradient(
+                    from 0deg at 50% 0%,
+                    #ffffff 0deg 9deg,
+                    #dc2626 9deg 18deg
+                );
+            mask: 
+                linear-gradient(180deg, black 0%, black 60%, transparent 100%);
+            -webkit-mask: 
+                linear-gradient(180deg, black 0%, black 60%, transparent 100%);
+            z-index: 1;
+        }
+
+        /* Overlay pour améliorer la lisibilité du texte */
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(ellipse 70% 50% at 50% 60%, rgba(0, 0, 0, 0.6) 0%, transparent 70%);
+            z-index: 1;
+        }
+
         .hero-content {
-            z-index: 2;
+            z-index: 3;
             max-width: 800px;
             padding: 2rem;
         }
@@ -158,6 +191,7 @@
             font-size: 3.5rem;
             margin-bottom: 1rem;
             animation: fadeInUp 1s ease;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
 
         .hero p {
@@ -255,6 +289,9 @@
             transition: all 0.3s ease;
             border: 2px solid transparent;
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
         .card:hover {
@@ -275,7 +312,7 @@
         }
 
         .card .cta-button {
-            margin-top: 1rem;
+            margin-top: auto;
         }
 
         /* About Section */
@@ -310,31 +347,104 @@
             margin: 0 auto;
         }
 
-        .about-content p {
+
+        .about-text p {
             text-align: left;
             margin-bottom: 1.5rem;
             font-size: 1.1rem;
             color: #555;
+            line-height: 1.6;
         }
 
-        .about-content p:first-of-type {
-            font-size: 1.3rem;
-            color: #4a90e2;
-            font-weight: 600;
-            text-align: center;
-            margin-bottom: 2rem;
+
+
+
+        .first-paragraph {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
         }
 
-        .about-content p:last-of-type {
-            font-size: 1.2rem;
-            color: #4a90e2;
-            font-weight: 600;
-            text-align: center;
-            margin-top: 2rem;
-            padding: 1rem;
-            background: linear-gradient(45deg, rgba(74, 144, 226, 0.1), rgba(99, 179, 237, 0.1));
+        .flory-anne-image {
+            width: 120px;
+            height: 150px;
+            object-fit: cover;
             border-radius: 10px;
-            border-left: 4px solid #4a90e2;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .flory-anne-image:hover {
+            transform: scale(1.05);
+        }
+
+        .first-paragraph p {
+            margin-bottom: 0;
+            flex: 1;
+        }
+
+        .duo-paragraphs {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .duo-image {
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .duo-image:hover {
+            transform: scale(1.05);
+        }
+
+        .duo-text {
+            flex: 1;
+        }
+
+        .duo-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        .duo-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 768px) {
+            .about-content {
+                padding: 2rem;
+            }
+
+            .first-paragraph {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .flory-anne-image {
+                width: 100px;
+                height: 120px;
+                margin-bottom: 1rem;
+            }
+
+            .duo-paragraphs {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .duo-image {
+                width: 100px;
+                height: 120px;
+                margin-bottom: 1rem;
+            }
         }
 
         /* Mascottes Section */
@@ -345,7 +455,6 @@
         }
 
         #mascottes::before {
-            content: '';
             position: absolute;
             top: 0;
             left: 0;
@@ -353,7 +462,6 @@
             bottom: 0;
             background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><defs><pattern id="stars" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.3)"/><circle cx="10" cy="10" r="1" fill="rgba(255,255,255,0.2)"/><circle cx="30" cy="30" r="1.5" fill="rgba(255,255,255,0.25)"/></pattern></defs><rect width="100%" height="100%" fill="url(%23stars)"/></svg>') repeat;
             animation: twinkle 8s ease-in-out infinite;
-            z-index: 1;
         }
 
         #mascottes .section {
@@ -390,13 +498,11 @@
         }
 
         .mascot-image {
-            width: 500px;
             height: 500px;
-            object-fit: contain;
+            object-fit: cover;
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
             transition: all 0.3s ease;
-            background: white;
         }
 
         .mascot-image:hover {
@@ -434,6 +540,7 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 100;
         }
 
         .carousel-nav:hover {
@@ -518,6 +625,311 @@
             50% { opacity: 0.8; }
         }
 
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(45deg, #4a90e2, #63b3ed);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(74, 144, 226, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 30px rgba(74, 144, 226, 0.4);
+            background: linear-gradient(45deg, #63b3ed, #4a90e2);
+        }
+
+        /* Modal/Pop-up Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            max-width: 900px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            animation: slideIn 0.3s ease;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #4a90e2, #63b3ed);
+            color: white;
+            padding: 2rem;
+            border-radius: 20px 20px 0 0;
+            position: relative;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .modal-header .emoji {
+            font-size: 2.5rem;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .modal-body {
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Modal Bubbles Animation */
+        .modal-bubbles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1500;
+            overflow: hidden;
+            display: none;
+        }
+
+        .modal.show .modal-bubbles {
+            display: block;
+        }
+
+        .modal-bubble {
+            position: absolute;
+            border-radius: 50%;
+            animation: modalBubbleFloat 8s ease-in-out infinite;
+            backdrop-filter: blur(1px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .modal-bubble:nth-child(1) { 
+            width: 60px; 
+            height: 60px; 
+            left: 10%; 
+            animation-delay: -2s; 
+            animation-duration: 6s;
+            background: linear-gradient(135deg, rgba(255, 0, 150, 0.3), rgba(0, 204, 255, 0.3));
+        }
+        .modal-bubble:nth-child(2) { 
+            width: 40px; 
+            height: 40px; 
+            left: 20%; 
+            animation-delay: -4s; 
+            animation-duration: 8s;
+            background: linear-gradient(135deg, rgba(255, 154, 0, 0.3), rgba(255, 206, 84, 0.3));
+        }
+        .modal-bubble:nth-child(3) { 
+            width: 80px; 
+            height: 80px; 
+            left: 70%; 
+            animation-delay: -1s; 
+            animation-duration: 7s;
+            background: linear-gradient(135deg, rgba(0, 255, 127, 0.3), rgba(0, 150, 255, 0.3));
+        }
+        .modal-bubble:nth-child(4) { 
+            width: 30px; 
+            height: 30px; 
+            left: 80%; 
+            animation-delay: -3s; 
+            animation-duration: 9s;
+            background: linear-gradient(135deg, rgba(148, 0, 211, 0.3), rgba(255, 0, 255, 0.3));
+        }
+        .modal-bubble:nth-child(5) { 
+            width: 50px; 
+            height: 50px; 
+            left: 50%; 
+            animation-delay: -5s; 
+            animation-duration: 6s;
+            background: linear-gradient(135deg, rgba(255, 69, 0, 0.3), rgba(255, 140, 0, 0.3));
+        }
+        .modal-bubble:nth-child(6) { 
+            width: 35px; 
+            height: 35px; 
+            left: 30%; 
+            animation-delay: -1.5s; 
+            animation-duration: 8s;
+            background: linear-gradient(135deg, rgba(50, 205, 50, 0.3), rgba(124, 252, 0, 0.3));
+        }
+        .modal-bubble:nth-child(7) { 
+            width: 45px; 
+            height: 45px; 
+            left: 60%; 
+            animation-delay: -4.5s; 
+            animation-duration: 7s;
+            background: linear-gradient(135deg, rgba(30, 144, 255, 0.3), rgba(0, 191, 255, 0.3));
+        }
+        .modal-bubble:nth-child(8) { 
+            width: 25px; 
+            height: 25px; 
+            left: 85%; 
+            animation-delay: -2.5s; 
+            animation-duration: 9s;
+            background: linear-gradient(135deg, rgba(255, 20, 147, 0.3), rgba(255, 105, 180, 0.3));
+        }
+
+        @keyframes modalBubbleFloat {
+            0% { 
+                transform: translateY(100vh) rotate(0deg); 
+                opacity: 0; 
+            }
+            10% { 
+                opacity: 1; 
+            }
+            90% { 
+                opacity: 1; 
+            }
+            100% { 
+                transform: translateY(-100px) rotate(360deg); 
+                opacity: 0; 
+            }
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .detail-section {
+            margin-bottom: 2rem;
+        }
+
+        .detail-section h3 {
+            color: #4a90e2;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .detail-section p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .modal-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .modal-badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .modal-badge.duration {
+            background: linear-gradient(45deg, rgba(74, 144, 226, 0.1), rgba(99, 179, 237, 0.1));
+            color: #4a90e2;
+        }
+
+        .modal-badge.price {
+            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            color: white;
+        }
+
+        .modal-badge.interactive {
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            color: white;
+        }
+
+        .modal-badge.public {
+            background: linear-gradient(45deg, #a8edea, #fed6e3);
+            color: #333;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { 
+                opacity: 0;
+                transform: translateY(-50px) scale(0.95);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
@@ -561,7 +973,7 @@
 <!-- Navigation -->
 <nav class="navbar">
     <div class="nav-container">
-        <a href="#accueil" class="logo">✨ FloryAnimation</a>
+        <a href="#accueil" class="logo">✨ Flory Animation</a>
         <ul class="nav-links">
             <li><a href="#accueil">Accueil</a></li>
             <li><a href="#nous-connaitre">Nous Connaître</a></li>
@@ -590,73 +1002,78 @@
     <div class="bubble"></div>
 
     <div class="hero-content">
-        <h1>Spectacles de Bulles Magiques</h1>
-        <p>Plongez dans un univers féerique où les bulles de savon prennent vie pour émerveiller petits et grands</p>
+        <h1>Flory Animation vous invite à découvrir son univers enchanté.</h1>
         <a href="spectacles.html" class="cta-button">Découvrir nos Prestations</a>
     </div>
 </section>
 
 <!-- Nous Connaître -->
 <section id="nous-connaitre" class="section">
-    <h2>Nous Connaître</h2>
+    <h2>À propos de Flory Animation</h2>
     <div class="about-content">
-        <p>L'histoire de <strong>Flory Animation</strong> commence avec une passion transmise de génération en génération — celle de
-            <strong>Flory Anne</strong>, née Anne-Marie en 1969. Fille d'un couple de magiciens, elle grandit dans l'univers féerique du
-            spectacle. Dès l'âge de 6 ans, elle monte sur scène pour suivre les traces de ses parents tout en débutant ses
-            premiers cours de danse classique et de piano.</p>
-        <p>À 14 ans, portée par le désir d'indépendance artistique, elle présente seule son premier numéro de magie
-            générale. Elle parcourt alors la France entière, faisant de chaque scène une nouvelle aventure.</p>
-        <p>L'année suivante, une rencontre déterminante avec <strong>Annie Fratellini</strong> marque un tournant dans son parcours.
-            Flory Anne explore l'univers du cirque : acrobatie, jonglerie, expression scénique… autant de disciplines qui
-            forgent son identité d'artiste plurielle.</p>
-        <p>À 19 ans, elle approfondit sa maîtrise de l'acrobatie grâce à une formation dispensée par les professeurs du
-            prestigieux <strong>Cirque de Pékin</strong>, réputés pour leur exigence et leur discipline. Ces échanges riches lui offrent une
-            approche plus rigoureuse et raffinée de la scène.</p>
-        <p>Mais sa plus belle création reste sa propre famille. Flory Anne devient maman d'une fille en 1995, puis d'un
-            garçon en 1999 — deux sources d'inspiration qui enrichissent profondément son univers artistique et
-            personnel.</p>
-        <p>Aujourd'hui, <strong>Flory Animation</strong> est bien plus qu'une compagnie artistique : c'est une aventure familiale, portée
-            par la passion, la transmission et la joie de créer pour émerveiller petits et grands. Leur plus grand bonheur ?
-            <strong>Partager avec vous la magie de leurs créations.</strong></p>
+        <div class="about-text">
+            <div class="first-paragraph">
+                <img src="img/FLORY_ANNE.jpg" alt="Flory Anne - Artiste magicienne" class="flory-anne-image">
+                <p><strong>Flory Animation</strong>, c'est avant tout une histoire de passion et de transmission. Fondée par <strong>Flory Anne</strong>, fille de magiciens, l'univers du spectacle a bercé son enfance. Dès l'âge de 6 ans, elle fait ses premiers pas sur scène, tout en débutant des cours de danse classique et de piano.</p>
+            </div>
+            
+            <p>À 14 ans, elle présente son premier numéro de magie en solo et parcourt la France, affirmant peu à peu son identité artistique. Sa rencontre marquante avec <strong>Annie Fratellini</strong> la plonge dans le monde du cirque, enrichissant sa palette avec l'acrobatie, la jonglerie et l'expression scénique.</p>
+            
+            <p>Plus tard, une formation auprès des professeurs du <strong>Cirque de Pékin</strong> vient parfaire sa rigueur et sa maîtrise du mouvement. Inspiré par l'imaginaire des dessins animés et l'élégance rétro des années 50, son personnage naît comme une silhouette hors du temps.</p>
+            
+            <div class="duo-paragraphs">
+                <img src="img/duo.jpeg" alt="Flory Animation - Duo artistique" class="duo-image">
+                <div class="duo-text">
+                    <p>Au fil des années, elle le sculpte, le réinvente, l'habille de nuances nouvelles. De scène en scène, il devient le fil rouge d'un univers singulier qu'elle décline avec poésie.</p>
+                    
+                    <p>Sa plus belle création reste sa propre famille. Flory Anne devient maman en 1995, puis en 1999. Deux sources d'inspiration qui enrichissent profondément son univers artistique et personnel.</p>
+                </div>
+            </div>
+            
+            <p>Aujourd'hui, <strong>Flory Animation</strong> est bien plus qu'une compagnie artistique : c'est une aventure familiale, portée par la passion, la transmission et la joie de créer pour émerveiller petits et grands. Leur plus grand bonheur ? <strong>Partager avec vous la magie de leurs créations.</strong></p>
+        </div>
     </div>
 </section>
 
 <!-- Prestations -->
 <section id="spectacles" class="section">
     <h2>Nos Prestations</h2>
-    <p>Découvrez notre univers magique à travers nos spectacles et animations, chacun conçu pour émerveiller et enchanter votre public.</p>
+    <p>Découvrez notre univers magique à travers nos spectacles.</p>
     
     <div class="cards-container">
-        <div class="card">
-            <h3>🎭 Spectacle Cabaret</h3>
-            <p><strong>"Étincelle magique"</strong></p>
-            <p>Un spectacle de magie cabaret où mystère, poésie et illusion se mêlent dans une ambiance feutrée et intemporelle. Parfait pour les soirées adultes et événements d'entreprise.</p>
-            <a href="spectacles.html#spectacle-cabaret" class="cta-button">Découvrir</a>
-        </div>
-        
+
         <div class="card">
             <h3>👨‍👩‍👧‍👦 Spectacle Enfants & Familles</h3>
+            <p><strong>"L'atelier Magique"</strong></p>
             <p>Un mélange subtil et enchanteur d'effets magiques et de jonglerie dans un grenier plein de charme. Une aventure interactive pour toute la famille.</p>
-            <a href="spectacles.html#spectacle-enfants" class="cta-button">Découvrir</a>
+            <a href="#" class="cta-button" onclick="openModal('modal-enfants'); return false;">Découvrir</a>
         </div>
-        
+
         <div class="card">
             <h3>🎄 Spectacle Noël</h3>
             <p><strong>"Nani, la Lutine Magicienne"</strong></p>
             <p>Un monde féerique où la magie de Noël prend vie. Nani découvre des objets magiques dans son atelier merveilleux pour une expérience inoubliable.</p>
-            <a href="spectacles.html#spectacle-noel" class="cta-button">Découvrir</a>
+            <a href="#" class="cta-button" onclick="openModal('modal-noel'); return false;">Découvrir</a>
         </div>
-        
+
         <div class="card">
             <h3>🫧 Animation Bar à Bulles</h3>
             <p>Animation d'intérieur en déambulation. L'art éphémère du souffleur de bulles pour une expérience visuelle et sensorielle unique.</p>
-            <a href="spectacles.html#animation-bar-bulles" class="cta-button">Découvrir</a>
+            <a href="#" class="cta-button" onclick="openModal('modal-bar-bulles'); return false;">Découvrir</a>
         </div>
         
         <div class="card">
             <h3>🎨 Atelier Bulles</h3>
             <p>Atelier pédagogique participatif pour découvrir l'art des bulles. Idéal pour stimuler la créativité des enfants à partir de 4 ans.</p>
-            <a href="spectacles.html#atelier-bulles" class="cta-button">Découvrir</a>
+            <a href="#" class="cta-button" onclick="openModal('modal-atelier'); return false;">Découvrir</a>
+        </div>
+
+
+        <div class="card">
+            <h3>🎭 Spectacle Cabaret</h3>
+            <p><strong>"Étincelle magique"</strong></p>
+            <p>Un spectacle de magie cabaret où mystère, poésie et illusion se mêlent dans une ambiance feutrée et intemporelle. Parfait pour les soirées adultes et événements d'entreprise.</p>
+            <a href="#" class="cta-button" onclick="openModal('modal-cabaret'); return false;">Découvrir</a>
         </div>
     </div>
 
@@ -673,7 +1090,7 @@
     <div class="carousel-container">
         <div class="carousel-track" id="carouselTrack">
             <div class="carousel-slide">
-                <img src="img/LA LICORNE.jpg" alt="Mascotte Licorne" class="mascot-image">
+                <img src="img/LA_LICORNE.jpg" alt="Mascotte Licorne" class="mascot-image">
                 <div class="mascot-content">
                     <h3>🦄 La Licorne</h3>
                     <p>Prestation en complément d'une animation. Personnage pour accueillir votre public et créer une atmosphère magique et féerique.</p>
@@ -682,7 +1099,7 @@
             </div>
 
             <div class="carousel-slide">
-                <img src="img/LA POULE.jpg" alt="Mascotte Poule" class="mascot-image">
+                <img src="img/LA_POULE.jpg" alt="Mascotte Poule" class="mascot-image">
                 <div class="mascot-content">
                     <h3>🐔 La Poule</h3>
                     <p>Prestation en complément d'une animation. Personnage pour accueillir votre public avec bonne humeur et convivialité.</p>
@@ -691,7 +1108,7 @@
             </div>
 
             <div class="carousel-slide">
-                <img src="img/LE CLOWN.jpg" alt="Mascotte Clown" class="mascot-image">
+                <img src="img/LE_CLOWN.jpg" alt="Mascotte Clown" class="mascot-image">
                 <div class="mascot-content">
                     <h3>🤡 Le Clown</h3>
                     <p>Prestation en complément d'une animation. Personnage pour accueillir votre public et apporter joie et rires à votre événement.</p>
@@ -709,7 +1126,7 @@
             </div>
 
             <div class="carousel-slide">
-                <img src="img/SAPIN DE NOEL.jpg" alt="Mascotte Sapin de Noël" class="mascot-image">
+                <img src="img/SAPIN_DE_NOEL.jpg" alt="Mascotte Sapin de Noël" class="mascot-image">
                 <div class="mascot-content">
                     <h3>🎄 Le Sapin de Noël</h3>
                     <p>Prestation en complément d'une animation. Personnage pour accueillir votre public durant la période des fêtes et créer l'esprit de Noël.</p>
@@ -735,24 +1152,236 @@
 <section id="contact" class="contact">
     <div class="section">
         <h2>Contact</h2>
-        <p>Prêt à ajouter une touche de magie à votre événement ? Contactez-nous pour discuter de vos besoins et créer ensemble un spectacle sur mesure.</p>
+        <p>Contactez-nous pour transformer votre projet en une réalité magique.</p>
 
         <div class="contact-info">
             <div class="contact-item">
                 <h3>📞 Téléphone</h3>
-                <p>+33 6 67 78 54 19</p>
+                <p><a href="tel:+33667785419" style="color: white; text-decoration: none;">+33 6 67 78 54 19</a></p>
             </div>
             <div class="contact-item">
                 <h3>✉️ Email</h3>
-                <p>floryanimation@free.fr</p>
-            </div>
-            <div class="contact-item">
-                <h3>📍 Zone d'intervention</h3>
-                <p>Toute la France métropolitaine</p>
+                <p><a href="mailto:floryanimation@free.fr" style="color: white; text-decoration: none;">floryanimation@free.fr</a></p>
             </div>
         </div>
     </div>
 </section>
+
+<!-- Back to Top Button -->
+<button class="back-to-top" id="backToTop" onclick="scrollToTop()">
+    ↑
+</button>
+
+<!-- Modals for each spectacle -->
+<!-- Modal Spectacle Cabaret -->
+<div class="modal" id="modal-cabaret">
+    <div class="modal-bubbles">
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+    </div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2><span class="emoji">🎭</span> Spectacle Cabaret - "Étincelle magique"</h2>
+            <button class="modal-close" onclick="closeModal('modal-cabaret')">×</button>
+        </div>
+        <div class="modal-body">
+            <img src="img/CABARET.jpeg" alt="Spectacle Cabaret" class="modal-image">
+            
+            <div class="detail-section">
+                <h3>📖 Description</h3>
+                <p>Entrez dans l'univers singulier de Flory Anne, magicienne pour un spectacle de magie cabaret où mystère, poésie et illusion se mêlent dans une ambiance feutrée et intemporelle.</p>
+                <p>Sous les lumières tamisées d'un cabaret aux allures rétro, Flory Anne entre en scène. Élégante, toujours en interaction avec son public, elle enchaîne les numéros avec une grâce naturelle et une présence scénique captivante.</p>
+            </div>
+
+            <div class="detail-section">
+                <h3>✨ Ambiance</h3>
+                <p>Chaque tableau est une surprise, chaque tour, un poème visuel. Flory Anne apporte une touche féminine et théâtrale. Elle suscite l'émotion et l'émerveillement à chaque instant.</p>
+                <p>Le spectacle commence d'un simple claquement de doigts où une étincelle apparaît. Sur scène flotte la magie d'un instant comme des souvenirs suspendus.</p>
+            </div>
+
+            <div class="modal-badges">
+                <div class="modal-badge interactive">🎪 Spectacle de Scène</div>
+                <div class="modal-badge public">👥 Adultes - Événements d'entreprise</div>
+                <div class="modal-badge duration">⏱️ 20-30 minutes</div>
+                <div class="modal-badge price">💰 Tarif sur demande</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Spectacle Enfants -->
+<div class="modal" id="modal-enfants">
+    <div class="modal-bubbles">
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+    </div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2><span class="emoji">👨‍👩‍👧‍👦</span> Spectacle Enfants & Familles</h2>
+            <button class="modal-close" onclick="closeModal('modal-enfants')">×</button>
+        </div>
+        <div class="modal-body">
+            <img src="img/SPECTACLE_ENFANTS_AVEC_NOUNOURS1.jpeg" alt="Spectacle Enfants" class="modal-image">
+            
+            <div class="detail-section">
+                <h3>📖 Description</h3>
+                <p>Ce spectacle est un mélange subtil et enchanteur d'effets magiques et de jonglerie. La scène se déroule dans un grenier plein de charme, où une grande malle ancienne trône au centre, entourée d'objets mystérieux et colorés.</p>
+                <p>Flory Anne utilise des objets (foulard, balles, colliers…) qu'elle trouve autour d'elle.</p>
+            </div>
+
+            <div class="detail-section">
+                <h3>🎨 Contenu</h3>
+                <p>Entre jonglerie, tours de magie et bulles de savon, chaque instant est une explosion de couleurs et d'effets magiques. La musique, rythmée et joyeuse, accompagne cette aventure, renforçant la magie de l'instant.</p>
+                <p>Spectacle enchanteur qui transporte petits et grands dans un univers féerique avec participation active du public.</p>
+            </div>
+
+            <div class="modal-badges">
+                <div class="modal-badge interactive">✨ Spectacle Interactif</div>
+                <div class="modal-badge public">👨‍👩‍👧‍👦 Tous publics - Familles</div>
+                <div class="modal-badge duration">⏱️ 20-45 minutes</div>
+                <div class="modal-badge price">💰 Devis sur demande</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Spectacle Noël -->
+<div class="modal" id="modal-noel">
+    <div class="modal-bubbles">
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+    </div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2><span class="emoji">🎄</span> Spectacle Noël - "Nani, la Lutine Magicienne"</h2>
+            <button class="modal-close" onclick="closeModal('modal-noel')">×</button>
+        </div>
+        <div class="modal-body">
+            <img src="img/noel.jpeg" alt="Spectacle Noël" class="modal-image">
+            
+            <div class="detail-section">
+                <h3>📖 Description</h3>
+                <p>Un monde féerique où la magie de Noël prend vie dans un décor hivernal enchanteur, au cœur d'un lieu secret où les jouets s'animent et où l'esprit de Noël s'exprime à chaque souffle.</p>
+                <p>Au centre de cet atelier merveilleux, trône une grande malle en bois... C'est là que commence l'incroyable aventure.</p>
+            </div>
+
+            <div class="detail-section">
+                <h3>🎭 Personnage</h3>
+                <p>Nani, la Lutine magicienne, entre en scène, curieuse et pétillante. Elle découvre une malle remplie d'objets magiques, tous plus extraordinaires les uns que les autres.</p>
+            </div>
+
+            <div class="detail-section">
+                <h3>🎨 Contenu</h3>
+                <p>Des assiettes tourbillonnantes, des foulards enchantés, des boules lumineuses qui dansent comme des étoiles filantes. Nani jongle, enchante, fait disparaître et réapparaître ses objets féeriques avec tendresse.</p>
+                <p>Les enfants rient, s'émerveillent et deviennent les apprentis d'un instant.</p>
+                <p><em>"Tant que Nani la Lutine magicienne veille sur la malle, l'esprit de Noël ne s'éteindra jamais !"</em></p>
+            </div>
+
+            <div class="modal-badges">
+                <div class="modal-badge interactive">✨ Spectacle Interactif</div>
+                <div class="modal-badge public">🎄 Spécial Noël - Enfants</div>
+                <div class="modal-badge duration">⏱️ 20-45 minutes</div>
+                <div class="modal-badge price">💰 Tarif sur demande</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Animation Bar à Bulles -->
+<div class="modal" id="modal-bar-bulles">
+    <div class="modal-bubbles">
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+    </div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2><span class="emoji">🫧</span> Animation "Le Bar à Bulles"</h2>
+            <button class="modal-close" onclick="closeModal('modal-bar-bulles')">×</button>
+        </div>
+        <div class="modal-body">
+            <img src="img/Magie.jpg" alt="Animation Bar à Bulles" class="modal-image">
+            
+            <div class="detail-section">
+                <h3>📖 Description</h3>
+                <p>L'art éphémère du souffleur de bulles transforme un simple liquide en poésie aérienne. Expérience unique, visuelle et sensorielle où chaque bulle raconte une histoire avant de s'envoler.</p>
+                <p><em>"C'est un art de l'instant, du vent et de la lumière. Un art qui ne se conserve pas… mais qui se vit"</em></p>
+            </div>
+
+            <div class="modal-badges">
+                <div class="modal-badge interactive">✨ Animation de proximité</div>
+                <div class="modal-badge public">👥 Tous publics - Déambulation</div>
+                <div class="modal-badge duration">🏢 Animation d'intérieur</div>
+                <div class="modal-badge price">💰 Tarif sur demande</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Atelier Bulles -->
+<div class="modal" id="modal-atelier">
+    <div class="modal-bubbles">
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+        <div class="modal-bubble"></div>
+    </div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2><span class="emoji">🎨</span> Atelier "Magie des bulles de savon"</h2>
+            <button class="modal-close" onclick="closeModal('modal-atelier')">×</button>
+        </div>
+        <div class="modal-body">
+            <img src="img/FLORY_ANIMATION_L_ATELIER_MAGIQUE_1.jpg" alt="Atelier Bulles" class="modal-image">
+            
+            <div class="detail-section">
+                <h3>📖 Description</h3>
+                <p>Atelier interactif permettant de découvrir l'art des bulles de savon. Les participants explorent les propriétés physiques des bulles tout en développant leur créativité.</p>
+            </div>
+
+            <div class="detail-section">
+                <h3>🎯 Objectifs pédagogiques</h3>
+                <p>• Stimuler la créativité et la motricité fine</p>
+                <p>• Découvrir les propriétés physiques des bulles</p>
+                <p>• Encourager la coopération et le jeu collectif</p>
+            </div>
+
+            <div class="modal-badges">
+                <div class="modal-badge interactive">✨ Atelier participatif</div>
+                <div class="modal-badge public">👶 Enfants dès 4 ans - Jusqu'à 15 participants</div>
+                <div class="modal-badge duration">⏱️ 30 min à 1h30</div>
+                <div class="modal-badge price">💰 Tarif sur demande</div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     let currentSlide = 0;
@@ -824,6 +1453,60 @@
 
     document.querySelectorAll('.card').forEach(card => {
         observer.observe(card);
+    });
+
+    // Back to Top Button functionality
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    // Show/hide back to top button on scroll
+    window.addEventListener('scroll', function() {
+        const backToTopBtn = document.getElementById('backToTop');
+        if (window.scrollY > 300) {
+            backToTopBtn.classList.add('show');
+        } else {
+            backToTopBtn.classList.remove('show');
+        }
+    });
+
+    // Modal functions
+    function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+    }
+
+    function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto'; // Re-enable background scrolling
+        }
+    }
+
+    // Close modal when clicking outside content
+    window.addEventListener('click', function(event) {
+        if (event.target.classList.contains('modal')) {
+            event.target.classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            const openModal = document.querySelector('.modal.show');
+            if (openModal) {
+                openModal.classList.remove('show');
+                document.body.style.overflow = 'auto';
+            }
+        }
     });
 </script>
 </body>

@@ -106,7 +106,6 @@
             border-radius: 10px;
             z-index: 1000;
             padding: 0.5rem 0;
-            margin-top: 0.5rem;
             border: 1px solid rgba(74, 144, 226, 0.1);
         }
 
@@ -252,6 +251,18 @@
 
         .spectacle-card:hover .spectacle-image {
             transform: scale(1.05);
+        }
+
+        .spectacle-images {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            flex-shrink: 0;
+        }
+
+        .spectacle-images .spectacle-image {
+            width: 300px;
+            height: 200px;
         }
 
         .spectacle-content {
@@ -469,6 +480,15 @@
                 width: 100%;
                 height: 200px;
             }
+
+            .spectacle-images {
+                width: 100%;
+            }
+
+            .spectacle-images .spectacle-image {
+                width: 100%;
+                height: 150px;
+            }
         }
     </style>
 </head>
@@ -476,18 +496,18 @@
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo">✨ FloryAnimation</a>
+            <a href="index.html" class="logo">✨ Flory Animation</a>
             <ul class="nav-links">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="index.html#nous-connaitre">Nous Connaître</a></li>
                 <li class="dropdown">
                     <a href="spectacles.html" class="active">Prestations <span class="dropdown-arrow">▼</span></a>
                     <div class="dropdown-content">
-                        <a href="#spectacle-cabaret">🎭 Spectacle Cabaret</a>
                         <a href="#spectacle-enfants">👨‍👩‍👧‍👦 Spectacle Enfants</a>
                         <a href="#spectacle-noel">🎄 Spectacle Noël</a>
-                        <a href="#animation-bar-bulles">🫧 Animation Bar à Bulles</a>
+                        <a href="#animation-bar-bulles">🫧 Bar à Bulles</a>
                         <a href="#atelier-bulles">🎨 Atelier Bulles</a>
+                        <a href="#spectacle-cabaret">🎭 Spectacle Cabaret</a>
                     </div>
                 </li>
                 <li><a href="index.html#mascottes">Mascottes</a></li>
@@ -517,63 +537,19 @@
             <h2>Nos Spectacles</h2>
             
             <div class="spectacles-grid">
-                <!-- Spectacle Cabaret -->
-                <div class="spectacle-card" id="spectacle-cabaret">
-                    <img src="img/CABARET.jpeg" alt="Spectacle Cabaret - Étincelle magique" class="spectacle-image">
-                    <div class="spectacle-content">
-                        <h3><span class="emoji">🎭</span> Spectacle Cabaret - "Étincelle magique"</h3>
-                    
-                    <div class="spectacle-details">
-                        <div class="detail-item">
-                            <div class="detail-label">Description :</div>
-                            <div class="detail-content">
-                                Entrez dans l'univers singulier de Flory Anne, magicienne pour un spectacle de magie cabaret où mystère, poésie et illusion se mêlent dans une ambiance feutrée et intemporelle.
-                                Sous les lumières tamisées d'un cabaret aux allures rétro, Flory Anne entre en scène. Élégante, toujours en interaction avec son public, elle enchaîne les numéros avec une grâce naturelle et une présence scénique captivante.
-                            </div>
-                        </div>
-
-                        <div class="detail-item">
-                            <div class="detail-label">Ambiance :</div>
-                            <div class="detail-content">
-                                Chaque tableau est une surprise, chaque tour, un poème visuel. Flory Anne apporte une touche féminine et théâtrale.
-                                Elle suscite l'émotion et l'émerveillement à chaque instant. Le spectacle commence d'un simple claquement de doigts où une étincelle apparaît.
-                                Sur scène flotte la magie d'un instant comme des souvenirs suspendus.
-                            </div>
-                        </div>
-
-                        <div class="interactive-badge">
-                            🎪 Spectacle de Scène
-                        </div>
-
-                        <div class="detail-item">
-                            <div class="detail-label">Public :</div>
-                            <div class="detail-content">
-                                Adultes - Idéal pour cabarets, soirées privées, événements d'entreprise
-                            </div>
-                        </div>
-
-                        <div class="duration">
-                            ⏱️ Durée : 20 - 30 minutes
-                        </div>
-
-                        <div class="price">
-                            💰 Tarif : sur demande
-                        </div>
-                    </div>
-                    </div>
-                </div>
 
                 <!-- Spectacle Enfants -->
                 <div class="spectacle-card reverse" id="spectacle-enfants">
-                    <img src="img/SPECTACLE ENFANTS AVEC NOUNOURS1.jpeg" alt="Spectacle Enfants & Familles" class="spectacle-image">
+                    <img src="img/SPECTACLE_ENFANTS_AVEC_NOUNOURS1.jpeg" alt="Spectacle Enfants & Familles" class="spectacle-image">
                     <div class="spectacle-content">
                         <h3><span class="emoji">👨‍👩‍👧‍👦</span> Spectacle Enfants & Familles</h3>
-                    
+                        <h3> "L'atelier Magique"</h3>
+
                     <div class="spectacle-details">
                         <div class="detail-item">
                             <div class="detail-label">Description :</div>
                             <div class="detail-content">
-                                Ce spectacle est un mélange subtil et enchanteur d'effets magiques et de jonglerie. 
+                                Ce spectacle est un mélange subtil et enchanteur d'effets magiques et de jonglerie.
                                 La scène se déroule dans un grenier plein de charme, où une grande malle ancienne trône au centre, entourée d'objets mystérieux et colorés.
                                 Flory Anne utilise des objets (foulard, balles, colliers…) qu'elle trouve autour d'elle.
                             </div>
@@ -582,7 +558,7 @@
                         <div class="detail-item">
                             <div class="detail-label">Contenu :</div>
                             <div class="detail-content">
-                                Entre jonglerie, tours de magie et bulles de savon, chaque instant est une explosion de couleurs et d'effets magiques. 
+                                Entre jonglerie, tours de magie et bulles de savon, chaque instant est une explosion de couleurs et d'effets magiques.
                                 La musique, rythmée et joyeuse, accompagne cette aventure, renforçant la magie de l'instant.
                                 Spectacle enchanteur qui transporte petits et grands dans un univers féerique.
                             </div>
@@ -603,7 +579,7 @@
                         </div>
 
                         <div class="price">
-                            💰 Tarif : Devis sur demande
+                            💰 Tarif : sur demande
                         </div>
                     </div>
                     </div>
@@ -613,8 +589,9 @@
                 <div class="spectacle-card" id="spectacle-noel">
                     <img src="img/noel.jpeg" alt="Spectacle Noël - Nani, la Lutine Magicienne" class="spectacle-image">
                     <div class="spectacle-content">
-                        <h3><span class="emoji">🎄</span> Spectacle Noël - "Nani, la Lutine Magicienne"</h3>
-                    
+                        <h3><span class="emoji">🎄</span> Spectacle Noël </h3>
+                        <h3> "Nani, la Lutine Magicienne"</h3>
+
                     <div class="spectacle-details">
                         <div class="detail-item">
                             <div class="detail-label">Description :</div>
@@ -660,20 +637,12 @@
                     </div>
                     </div>
                 </div>
-            </div>
-        </section>
 
-        <!-- Animations & Ateliers -->
-        <section class="section" id="animations-ateliers">
-            <h2>Animations & Ateliers</h2>
-            <p>Découvrez nos prestations interactives et participatives pour une expérience plus intimiste et pédagogique.</p>
-            
-            <div class="spectacles-grid">
                 <!-- Animation Bar à Bulles -->
                 <div class="spectacle-card" id="animation-bar-bulles">
-                    <img src="img/Magie.jpg" alt="Animation Le Bar à Bulles" class="spectacle-image">
+                    <img src="img/BULLE_SAVON_TABLE_LUMINEUSE.jpg" alt="Animation Le Bar à Bulles" class="spectacle-image">
                     <div class="spectacle-content">
-                        <h3><span class="emoji">🫧</span> Animation "Le Bar à Bulles"</h3>
+                        <h3><span class="emoji">🫧</span>  Le Bar à Bulles</h3>
                         
                         <div class="spectacle-details">
                             <div class="detail-item">
@@ -712,9 +681,9 @@
 
                 <!-- Atelier des Bulles -->
                 <div class="spectacle-card reverse" id="atelier-bulles">
-                    <img src="img/FLORY ANIMATION L ATELIER MAGIQUE 1.jpg" alt="Atelier Magie des bulles de savon" class="spectacle-image">
+                    <img src="img/FLORY_ANIMATION_L_ATELIER_MAGIQUE_1.jpg" alt="Atelier Magie des bulles de savon" class="spectacle-image">
                     <div class="spectacle-content">
-                        <h3><span class="emoji">🎨</span> Atelier "Magie des bulles de savon"</h3>
+                        <h3><span class="emoji">🎨</span> Atelier "Bulles de savon"</h3>
                         
                         <div class="spectacle-details">
                             <div class="detail-item">
@@ -727,8 +696,7 @@
                             <div class="detail-item">
                                 <div class="detail-label">Description :</div>
                                 <div class="detail-content">
-                                    Atelier interactif permettant de découvrir l'art des bulles de savon. 
-                                    Les participants explorent les propriétés physiques des bulles tout en développant leur créativité.
+                                    Atelier interactif permettant de découvrir l'art des bulles de savon.
                                 </div>
                             </div>
 
@@ -743,12 +711,6 @@
                                 ✨ Atelier participatif
                             </div>
 
-                            <div class="detail-item">
-                                <div class="detail-label">Objectifs pédagogiques :</div>
-                                <div class="detail-content">
-                                    Stimuler la créativité et la motricité fine • Découvrir les propriétés physiques des bulles • Encourager la coopération et le jeu collectif
-                                </div>
-                            </div>
 
                             <div class="detail-item">
                                 <div class="detail-label">Public :</div>
@@ -767,31 +729,75 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Spectacle Cabaret -->
+                <div class="spectacle-card" id="spectacle-cabaret">
+                    <div class="spectacle-images">
+                        <img src="img/CABARET.jpeg" alt="Spectacle Cabaret - Étincelle magique" class="spectacle-image">
+                    </div>
+                    <div class="spectacle-content">
+                        <h3><span class="emoji">🎭</span> Spectacle Cabaret - "Étincelle magique"</h3>
+
+                        <div class="spectacle-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Description :</div>
+                                <div class="detail-content">
+                                    Entrez dans l'univers singulier de Flory Anne, magicienne pour un spectacle de magie cabaret où mystère, poésie et illusion se mêlent dans une ambiance feutrée et intemporelle.
+                                    Sous les lumières tamisées d'un cabaret aux allures rétro, Flory Anne entre en scène. Élégante, toujours en interaction avec son public, elle enchaîne les numéros avec une grâce naturelle et une présence scénique captivante.
+                                </div>
+                            </div>
+
+                            <div class="detail-item">
+                                <div class="detail-label">Ambiance :</div>
+                                <div class="detail-content">
+                                    Chaque tableau est une surprise, chaque tour, un poème visuel. Flory Anne apporte une touche féminine et théâtrale.
+                                    Elle suscite l'émotion et l'émerveillement à chaque instant. Le spectacle commence d'un simple claquement de doigts où une étincelle apparaît.
+                                    Sur scène flotte la magie d'un instant comme des souvenirs suspendus.
+                                </div>
+                            </div>
+
+                            <div class="interactive-badge">
+                                🎪 Spectacle de Scène
+                            </div>
+
+                            <div class="detail-item">
+                                <div class="detail-label">Public :</div>
+                                <div class="detail-content">
+                                    Adultes - Idéal pour cabarets, soirées privées, événements d'entreprise
+                                </div>
+                            </div>
+
+                            <div class="duration">
+                                ⏱️ Durée : 20 - 30 minutes
+                            </div>
+
+                            <div class="price">
+                                💰 Tarif : sur demande
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
         </section>
 
         <!-- Call to Action -->
         <section class="cta-section">
             <div class="cta-content">
-                <h2>Prêt à Réserver Votre Spectacle ?</h2>
-                <p>Contactez-nous pour discuter de vos besoins et créer ensemble un spectacle sur mesure pour votre événement.</p>
+                <h2> Contact </h2>
+                <p>Contactez-nous pour transformer votre projet en une réalité magique.</p>
                 
                 <div class="contact-info">
                     <div class="contact-item">
                         <h3>📞 Téléphone</h3>
-                        <p>+33 6 67 78 54 19</p>
+                        <p><a href="tel:+33667785419" style="color: white; text-decoration: none;">+33 6 67 78 54 19</a></p>
                     </div>
                     <div class="contact-item">
                         <h3>✉️ Email</h3>
-                        <p>floryanimation@free.fr</p>
-                    </div>
-                    <div class="contact-item">
-                        <h3>📍 Zone d'intervention</h3>
-                        <p>Toute la France métropolitaine</p>
+                        <p><a href="mailto:floryanimation@free.fr" style="color: white; text-decoration: none;">floryanimation@free.fr</a></p>
                     </div>
                 </div>
-                
-                <a href="index.html#contact" class="cta-button">Contactez-nous</a>
             </div>
         </section>
     </main>

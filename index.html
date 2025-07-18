@@ -183,8 +183,61 @@
 
         .hero-content {
             z-index: 3;
-            max-width: 800px;
+            max-width: 1200px;
             padding: 2rem;
+        }
+
+        /* Hero Lists */
+        .hero-lists {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+            text-align: left;
+        }
+
+        .hero-list-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .hero-list-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-list-item h3 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-list-item ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .hero-list-item li {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .hero-list-item li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #feca57;
+            font-weight: bold;
         }
 
         .hero h1 {
@@ -1097,6 +1150,33 @@
     <div class="hero-content">
         <h1>Flory Animation vous invite à découvrir son univers enchanté.</h1>
         <a href="spectacles.html" class="cta-button">Découvrir nos Prestations</a>
+        
+        <div class="hero-lists">
+            <div class="hero-list-item">
+                <h3>Collectivités</h3>
+                <ul>
+                    <li>Écoles, Mairies</li>
+                    <li>Centres Culturels</li>
+                    <li>Centres de Loisirs...</li>
+                </ul>
+            </div>
+            
+            <div class="hero-list-item">
+                <h3>Événementiels</h3>
+                <ul>
+                    <li>Soirées d'entreprises</li>
+                    <li>Arbres de Noël...</li>
+                </ul>
+            </div>
+            
+            <div class="hero-list-item">
+                <h3>Particuliers</h3>
+                <ul>
+                    <li>Mariages, Anniversaires</li>
+                    <li>Différentes formules adaptables à votre événement...</li>
+                </ul>
+            </div>
+        </div>
     </div>
 </section>
 

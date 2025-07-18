@@ -601,6 +601,66 @@
             padding: 2rem;
             border-radius: 15px;
             backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item.priority {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-item.priority h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-item.priority p {
+            font-size: 2.1rem;
+            font-weight: bold;
+        }
+
+        .contact-item.priority a {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            display: inline-block;
+            margin-top: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item.priority a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Bouton Instagram */
+        .instagram-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            margin-top: 2rem;
+        }
+
+        .instagram-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+
+        .instagram-button::before {
+            content: '📷';
+            font-size: 1.3rem;
         }
 
         /* Animations */
@@ -659,6 +719,39 @@
             transform: translateY(-3px);
             box-shadow: 0 6px 30px rgba(74, 144, 226, 0.4);
             background: linear-gradient(45deg, #63b3ed, #4a90e2);
+        }
+
+        /* Instagram Float Button */
+        .instagram-float {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: white;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            text-decoration: none;
+            padding: 10px;
+        }
+
+        .instagram-float:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .instagram-float img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         /* Modal/Pop-up Styles */
@@ -980,11 +1073,11 @@
             <li class="dropdown">
                 <a href="spectacles.html">Prestations <span class="dropdown-arrow">▼</span></a>
                 <div class="dropdown-content">
-                    <a href="spectacles.html#spectacle-cabaret">🎭 Spectacle Cabaret</a>
                     <a href="spectacles.html#spectacle-enfants">👨‍👩‍👧‍👦 Spectacle Enfants</a>
                     <a href="spectacles.html#spectacle-noel">🎄 Spectacle Noël</a>
-                    <a href="spectacles.html#animation-bar-bulles">🫧 Animation Bar à Bulles</a>
+                    <a href="spectacles.html#animation-bar-bulles">🫧 Bar à Bulles</a>
                     <a href="spectacles.html#atelier-bulles">🎨 Atelier Bulles</a>
+                    <a href="spectacles.html#spectacle-cabaret">🎭 Spectacle Cabaret</a>
                 </div>
             </li>
             <li><a href="#mascottes">Mascottes</a></li>
@@ -1035,52 +1128,6 @@
     </div>
 </section>
 
-<!-- Prestations -->
-<section id="spectacles" class="section">
-    <h2>Nos Prestations</h2>
-    <p>Découvrez notre univers magique à travers nos spectacles.</p>
-    
-    <div class="cards-container">
-
-        <div class="card">
-            <h3>👨‍👩‍👧‍👦 Spectacle Enfants & Familles</h3>
-            <p><strong>"L'atelier Magique"</strong></p>
-            <p>Un mélange subtil et enchanteur d'effets magiques et de jonglerie dans un grenier plein de charme. Une aventure interactive pour toute la famille.</p>
-            <a href="#" class="cta-button" onclick="openModal('modal-enfants'); return false;">Découvrir</a>
-        </div>
-
-        <div class="card">
-            <h3>🎄 Spectacle Noël</h3>
-            <p><strong>"Nani, la Lutine Magicienne"</strong></p>
-            <p>Un monde féerique où la magie de Noël prend vie. Nani découvre des objets magiques dans son atelier merveilleux pour une expérience inoubliable.</p>
-            <a href="#" class="cta-button" onclick="openModal('modal-noel'); return false;">Découvrir</a>
-        </div>
-
-        <div class="card">
-            <h3>🫧 Animation Bar à Bulles</h3>
-            <p>Animation d'intérieur en déambulation. L'art éphémère du souffleur de bulles pour une expérience visuelle et sensorielle unique.</p>
-            <a href="#" class="cta-button" onclick="openModal('modal-bar-bulles'); return false;">Découvrir</a>
-        </div>
-        
-        <div class="card">
-            <h3>🎨 Atelier Bulles</h3>
-            <p>Atelier pédagogique participatif pour découvrir l'art des bulles. Idéal pour stimuler la créativité des enfants à partir de 4 ans.</p>
-            <a href="#" class="cta-button" onclick="openModal('modal-atelier'); return false;">Découvrir</a>
-        </div>
-
-
-        <div class="card">
-            <h3>🎭 Spectacle Cabaret</h3>
-            <p><strong>"Étincelle magique"</strong></p>
-            <p>Un spectacle de magie cabaret où mystère, poésie et illusion se mêlent dans une ambiance feutrée et intemporelle. Parfait pour les soirées adultes et événements d'entreprise.</p>
-            <a href="#" class="cta-button" onclick="openModal('modal-cabaret'); return false;">Découvrir</a>
-        </div>
-    </div>
-
-    <div style="text-align: center; margin-top: 3rem;">
-        <a href="spectacles.html" class="cta-button" style="font-size: 1.2rem; padding: 1.2rem 2.5rem;">Voir toutes nos prestations</a>
-    </div>
-</section>
 
 <!-- Mascottes Carousel -->
 <section id="mascottes" class="section">
@@ -1093,7 +1140,7 @@
                 <img src="img/LA_LICORNE.jpg" alt="Mascotte Licorne" class="mascot-image">
                 <div class="mascot-content">
                     <h3>🦄 La Licorne</h3>
-                    <p>Prestation en complément d'une animation. Personnage pour accueillir votre public et créer une atmosphère magique et féerique.</p>
+                    <p>Prestation en complément d'une animation. Personnage pour accueillir votre public.</p>
                     <p><strong>Tarif : sur demande</strong></p>
                 </div>
             </div>
@@ -1102,7 +1149,7 @@
                 <img src="img/LA_POULE.jpg" alt="Mascotte Poule" class="mascot-image">
                 <div class="mascot-content">
                     <h3>🐔 La Poule</h3>
-                    <p>Prestation en complément d'une animation. Personnage pour accueillir votre public avec bonne humeur et convivialité.</p>
+                    <p>Prestation en complément d'une animation. Personnage pour accueillir votre public.</p>
                     <p><strong>Tarif : sur demande</strong></p>
                 </div>
             </div>
@@ -1111,7 +1158,7 @@
                 <img src="img/LE_CLOWN.jpg" alt="Mascotte Clown" class="mascot-image">
                 <div class="mascot-content">
                     <h3>🤡 Le Clown</h3>
-                    <p>Prestation en complément d'une animation. Personnage pour accueillir votre public et apporter joie et rires à votre événement.</p>
+                    <p>Prestation en complément d'une animation. Personnage pour accueillir votre public.</p>
                     <p><strong>Tarif : sur demande</strong></p>
                 </div>
             </div>
@@ -1120,7 +1167,7 @@
                 <img src="img/NOUNOURS.jpg" alt="Mascotte Nounours" class="mascot-image">
                 <div class="mascot-content">
                     <h3>🧸 Le Nounours</h3>
-                    <p>Prestation en complément d'une animation. Personnage pour accueillir votre public avec douceur et tendresse, parfait pour les plus petits.</p>
+                    <p>Prestation en complément d'une animation. Personnage pour accueillir votre public.</p>
                     <p><strong>Tarif : sur demande</strong></p>
                 </div>
             </div>
@@ -1129,7 +1176,7 @@
                 <img src="img/SAPIN_DE_NOEL.jpg" alt="Mascotte Sapin de Noël" class="mascot-image">
                 <div class="mascot-content">
                     <h3>🎄 Le Sapin de Noël</h3>
-                    <p>Prestation en complément d'une animation. Personnage pour accueillir votre public durant la période des fêtes et créer l'esprit de Noël.</p>
+                    <p>Prestation en complément d'une animation. Personnage pour accueillir votre public.</p>
                     <p><strong>Tarif : sur demande</strong></p>
                 </div>
             </div>
@@ -1155,11 +1202,11 @@
         <p>Contactez-nous pour transformer votre projet en une réalité magique.</p>
 
         <div class="contact-info">
-            <div class="contact-item">
+            <div class="contact-item priority">
                 <h3>📞 Téléphone</h3>
                 <p><a href="tel:+33667785419" style="color: white; text-decoration: none;">+33 6 67 78 54 19</a></p>
             </div>
-            <div class="contact-item">
+            <div class="contact-item priority">
                 <h3>✉️ Email</h3>
                 <p><a href="mailto:floryanimation@free.fr" style="color: white; text-decoration: none;">floryanimation@free.fr</a></p>
             </div>
@@ -1172,216 +1219,13 @@
     ↑
 </button>
 
-<!-- Modals for each spectacle -->
-<!-- Modal Spectacle Cabaret -->
-<div class="modal" id="modal-cabaret">
-    <div class="modal-bubbles">
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-    </div>
-    <div class="modal-content">
-        <div class="modal-header">
-            <h2><span class="emoji">🎭</span> Spectacle Cabaret - "Étincelle magique"</h2>
-            <button class="modal-close" onclick="closeModal('modal-cabaret')">×</button>
-        </div>
-        <div class="modal-body">
-            <img src="img/CABARET.jpeg" alt="Spectacle Cabaret" class="modal-image">
-            
-            <div class="detail-section">
-                <h3>📖 Description</h3>
-                <p>Entrez dans l'univers singulier de Flory Anne, magicienne pour un spectacle de magie cabaret où mystère, poésie et illusion se mêlent dans une ambiance feutrée et intemporelle.</p>
-                <p>Sous les lumières tamisées d'un cabaret aux allures rétro, Flory Anne entre en scène. Élégante, toujours en interaction avec son public, elle enchaîne les numéros avec une grâce naturelle et une présence scénique captivante.</p>
-            </div>
+<!-- Instagram Float Button -->
+<a href="https://www.instagram.com/floryanimation/" target="_blank" rel="noopener noreferrer" class="instagram-float">
+    <img src="img/instagram.png" alt="Instagram">
+</a>
 
-            <div class="detail-section">
-                <h3>✨ Ambiance</h3>
-                <p>Chaque tableau est une surprise, chaque tour, un poème visuel. Flory Anne apporte une touche féminine et théâtrale. Elle suscite l'émotion et l'émerveillement à chaque instant.</p>
-                <p>Le spectacle commence d'un simple claquement de doigts où une étincelle apparaît. Sur scène flotte la magie d'un instant comme des souvenirs suspendus.</p>
-            </div>
 
-            <div class="modal-badges">
-                <div class="modal-badge interactive">🎪 Spectacle de Scène</div>
-                <div class="modal-badge public">👥 Adultes - Événements d'entreprise</div>
-                <div class="modal-badge duration">⏱️ 20-30 minutes</div>
-                <div class="modal-badge price">💰 Tarif sur demande</div>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!-- Modal Spectacle Enfants -->
-<div class="modal" id="modal-enfants">
-    <div class="modal-bubbles">
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-    </div>
-    <div class="modal-content">
-        <div class="modal-header">
-            <h2><span class="emoji">👨‍👩‍👧‍👦</span> Spectacle Enfants & Familles</h2>
-            <button class="modal-close" onclick="closeModal('modal-enfants')">×</button>
-        </div>
-        <div class="modal-body">
-            <img src="img/SPECTACLE_ENFANTS_AVEC_NOUNOURS1.jpeg" alt="Spectacle Enfants" class="modal-image">
-            
-            <div class="detail-section">
-                <h3>📖 Description</h3>
-                <p>Ce spectacle est un mélange subtil et enchanteur d'effets magiques et de jonglerie. La scène se déroule dans un grenier plein de charme, où une grande malle ancienne trône au centre, entourée d'objets mystérieux et colorés.</p>
-                <p>Flory Anne utilise des objets (foulard, balles, colliers…) qu'elle trouve autour d'elle.</p>
-            </div>
-
-            <div class="detail-section">
-                <h3>🎨 Contenu</h3>
-                <p>Entre jonglerie, tours de magie et bulles de savon, chaque instant est une explosion de couleurs et d'effets magiques. La musique, rythmée et joyeuse, accompagne cette aventure, renforçant la magie de l'instant.</p>
-                <p>Spectacle enchanteur qui transporte petits et grands dans un univers féerique avec participation active du public.</p>
-            </div>
-
-            <div class="modal-badges">
-                <div class="modal-badge interactive">✨ Spectacle Interactif</div>
-                <div class="modal-badge public">👨‍👩‍👧‍👦 Tous publics - Familles</div>
-                <div class="modal-badge duration">⏱️ 20-45 minutes</div>
-                <div class="modal-badge price">💰 Devis sur demande</div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Spectacle Noël -->
-<div class="modal" id="modal-noel">
-    <div class="modal-bubbles">
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-    </div>
-    <div class="modal-content">
-        <div class="modal-header">
-            <h2><span class="emoji">🎄</span> Spectacle Noël - "Nani, la Lutine Magicienne"</h2>
-            <button class="modal-close" onclick="closeModal('modal-noel')">×</button>
-        </div>
-        <div class="modal-body">
-            <img src="img/noel.jpeg" alt="Spectacle Noël" class="modal-image">
-            
-            <div class="detail-section">
-                <h3>📖 Description</h3>
-                <p>Un monde féerique où la magie de Noël prend vie dans un décor hivernal enchanteur, au cœur d'un lieu secret où les jouets s'animent et où l'esprit de Noël s'exprime à chaque souffle.</p>
-                <p>Au centre de cet atelier merveilleux, trône une grande malle en bois... C'est là que commence l'incroyable aventure.</p>
-            </div>
-
-            <div class="detail-section">
-                <h3>🎭 Personnage</h3>
-                <p>Nani, la Lutine magicienne, entre en scène, curieuse et pétillante. Elle découvre une malle remplie d'objets magiques, tous plus extraordinaires les uns que les autres.</p>
-            </div>
-
-            <div class="detail-section">
-                <h3>🎨 Contenu</h3>
-                <p>Des assiettes tourbillonnantes, des foulards enchantés, des boules lumineuses qui dansent comme des étoiles filantes. Nani jongle, enchante, fait disparaître et réapparaître ses objets féeriques avec tendresse.</p>
-                <p>Les enfants rient, s'émerveillent et deviennent les apprentis d'un instant.</p>
-                <p><em>"Tant que Nani la Lutine magicienne veille sur la malle, l'esprit de Noël ne s'éteindra jamais !"</em></p>
-            </div>
-
-            <div class="modal-badges">
-                <div class="modal-badge interactive">✨ Spectacle Interactif</div>
-                <div class="modal-badge public">🎄 Spécial Noël - Enfants</div>
-                <div class="modal-badge duration">⏱️ 20-45 minutes</div>
-                <div class="modal-badge price">💰 Tarif sur demande</div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Animation Bar à Bulles -->
-<div class="modal" id="modal-bar-bulles">
-    <div class="modal-bubbles">
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-    </div>
-    <div class="modal-content">
-        <div class="modal-header">
-            <h2><span class="emoji">🫧</span> Animation "Le Bar à Bulles"</h2>
-            <button class="modal-close" onclick="closeModal('modal-bar-bulles')">×</button>
-        </div>
-        <div class="modal-body">
-            <img src="img/Magie.jpg" alt="Animation Bar à Bulles" class="modal-image">
-            
-            <div class="detail-section">
-                <h3>📖 Description</h3>
-                <p>L'art éphémère du souffleur de bulles transforme un simple liquide en poésie aérienne. Expérience unique, visuelle et sensorielle où chaque bulle raconte une histoire avant de s'envoler.</p>
-                <p><em>"C'est un art de l'instant, du vent et de la lumière. Un art qui ne se conserve pas… mais qui se vit"</em></p>
-            </div>
-
-            <div class="modal-badges">
-                <div class="modal-badge interactive">✨ Animation de proximité</div>
-                <div class="modal-badge public">👥 Tous publics - Déambulation</div>
-                <div class="modal-badge duration">🏢 Animation d'intérieur</div>
-                <div class="modal-badge price">💰 Tarif sur demande</div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Atelier Bulles -->
-<div class="modal" id="modal-atelier">
-    <div class="modal-bubbles">
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-        <div class="modal-bubble"></div>
-    </div>
-    <div class="modal-content">
-        <div class="modal-header">
-            <h2><span class="emoji">🎨</span> Atelier "Magie des bulles de savon"</h2>
-            <button class="modal-close" onclick="closeModal('modal-atelier')">×</button>
-        </div>
-        <div class="modal-body">
-            <img src="img/FLORY_ANIMATION_L_ATELIER_MAGIQUE_1.jpg" alt="Atelier Bulles" class="modal-image">
-            
-            <div class="detail-section">
-                <h3>📖 Description</h3>
-                <p>Atelier interactif permettant de découvrir l'art des bulles de savon. Les participants explorent les propriétés physiques des bulles tout en développant leur créativité.</p>
-            </div>
-
-            <div class="detail-section">
-                <h3>🎯 Objectifs pédagogiques</h3>
-                <p>• Stimuler la créativité et la motricité fine</p>
-                <p>• Découvrir les propriétés physiques des bulles</p>
-                <p>• Encourager la coopération et le jeu collectif</p>
-            </div>
-
-            <div class="modal-badges">
-                <div class="modal-badge interactive">✨ Atelier participatif</div>
-                <div class="modal-badge public">👶 Enfants dès 4 ans - Jusqu'à 15 participants</div>
-                <div class="modal-badge duration">⏱️ 30 min à 1h30</div>
-                <div class="modal-badge price">💰 Tarif sur demande</div>
-            </div>
-        </div>
-    </div>
-</div>
 
 <script>
     let currentSlide = 0;

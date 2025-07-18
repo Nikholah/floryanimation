@@ -262,7 +262,7 @@
 
         .spectacle-images .spectacle-image {
             width: 300px;
-            height: 200px;
+
         }
 
         .spectacle-content {
@@ -352,9 +352,8 @@
         .interactive-badge {
             background: linear-gradient(45deg, #4ecdc4, #44a08d);
             color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
             font-weight: bold;
             display: inline-block;
             margin-top: 1rem;
@@ -428,11 +427,112 @@
             border-radius: 15px;
             backdrop-filter: blur(10px);
             text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item.priority {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         .contact-item h3 {
             margin-bottom: 0.5rem;
             color: white;
+        }
+
+        .contact-item.priority h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-item.priority p {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        .contact-item.priority a {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            display: inline-block;
+            margin-top: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item.priority a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(45deg, #4a90e2, #63b3ed);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(74, 144, 226, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 30px rgba(74, 144, 226, 0.4);
+            background: linear-gradient(45deg, #63b3ed, #4a90e2);
+        }
+
+        /* Instagram Button */
+        .instagram-float {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: white;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            text-decoration: none;
+            padding: 10px;
+        }
+
+        .instagram-float:hover {
+            transform: translateY(-3px) scale(1.1);
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .instagram-float img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
 
         /* Animations */
@@ -564,9 +664,7 @@
                             </div>
                         </div>
 
-                        <div class="interactive-badge">
-                            ✨ Spectacle Interactif
-                        </div>
+
 
                         <div class="detail-item">
                             <div class="detail-content">
@@ -580,6 +678,9 @@
 
                         <div class="price">
                             💰 Tarif : sur demande
+                        </div>
+                        <div class="interactive-badge">
+                            ✨ Spectacle Interactif
                         </div>
                     </div>
                     </div>
@@ -617,9 +718,7 @@
                             </div>
                         </div>
 
-                        <div class="interactive-badge">
-                            ✨ Spectacle Interactif
-                        </div>
+
 
                         <div class="detail-item">
                             <div class="detail-content">
@@ -633,6 +732,9 @@
 
                         <div class="price">
                             💰 Tarif : sur demande
+                        </div>
+                        <div class="interactive-badge">
+                            ✨ Spectacle Interactif
                         </div>
                     </div>
                     </div>
@@ -661,9 +763,7 @@
                                 </div>
                             </div>
 
-                            <div class="interactive-badge">
-                                ✨ Animation de proximité
-                            </div>
+
 
                             <div class="detail-item">
                                 <div class="detail-label">Public :</div>
@@ -674,6 +774,9 @@
 
                             <div class="price">
                                 💰 Tarif : sur demande
+                            </div>
+                            <div class="interactive-badge">
+                                ✨ Animation de proximité
                             </div>
                         </div>
                     </div>
@@ -707,9 +810,7 @@
                                 </div>
                             </div>
 
-                            <div class="interactive-badge">
-                                ✨ Atelier participatif
-                            </div>
+
 
 
                             <div class="detail-item">
@@ -725,6 +826,10 @@
 
                             <div class="price">
                                 💰 Tarif : sur demande
+                            </div>
+
+                            <div class="interactive-badge">
+                                ✨ Atelier participatif
                             </div>
                         </div>
                     </div>
@@ -756,9 +861,6 @@
                                 </div>
                             </div>
 
-                            <div class="interactive-badge">
-                                🎪 Spectacle de Scène
-                            </div>
 
                             <div class="detail-item">
                                 <div class="detail-label">Public :</div>
@@ -774,6 +876,11 @@
                             <div class="price">
                                 💰 Tarif : sur demande
                             </div>
+
+                            <div class="interactive-badge">
+                                🎪 Spectacle de Scène
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -789,11 +896,11 @@
                 <p>Contactez-nous pour transformer votre projet en une réalité magique.</p>
                 
                 <div class="contact-info">
-                    <div class="contact-item">
+                    <div class="contact-item priority">
                         <h3>📞 Téléphone</h3>
                         <p><a href="tel:+33667785419" style="color: white; text-decoration: none;">+33 6 67 78 54 19</a></p>
                     </div>
-                    <div class="contact-item">
+                    <div class="contact-item priority">
                         <h3>✉️ Email</h3>
                         <p><a href="mailto:floryanimation@free.fr" style="color: white; text-decoration: none;">floryanimation@free.fr</a></p>
                     </div>
@@ -801,6 +908,16 @@
             </div>
         </section>
     </main>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        ↑
+    </button>
+
+    <!-- Instagram Button -->
+    <a href="https://www.instagram.com/floryanimation/" target="_blank" rel="noopener noreferrer" class="instagram-float">
+        <img src="img/instagram.png" alt="Instagram">
+    </a>
 
     <script>
         // Smooth scrolling for navigation links
@@ -840,6 +957,24 @@
 
         document.querySelectorAll('.spectacle-card').forEach(card => {
             observer.observe(card);
+        });
+
+        // Back to Top Button functionality
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Show/hide back to top button on scroll
+        window.addEventListener('scroll', function() {
+            const backToTopBtn = document.getElementById('backToTop');
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
         });
     </script>
 </body>

@@ -1,0 +1,211 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Background stage -->
+  <rect x="0" y="0" width="800" height="600" fill="#ffffff"/>
+  
+  <!-- Stage floor -->
+  <ellipse cx="400" cy="580" rx="380" ry="40" fill="#8b6914" opacity="0.6"/>
+  
+  <!-- Left curtain curved open from center -->
+  <path d="M 400,100 
+         C 350,100 300,120 250,180
+         C 200,240 150,300 100,400
+         C 50,500 25,550 0,600
+         L 0,0
+         L 350,0
+         C 380,0 400,50 400,100
+         Z" 
+        fill="url(#curtainGradient)" 
+        filter="url(#shadow)"/>
+  
+  <!-- Right curtain curved open from center -->
+  <path d="M 400,100 
+         C 450,100 500,120 550,180
+         C 600,240 650,300 700,400
+         C 750,500 775,550 800,600
+         L 800,0
+         L 450,0
+         C 420,0 400,50 400,100
+         Z" 
+        fill="url(#curtainGradient)" 
+        filter="url(#shadow)"/>
+  
+  <!-- Top valance with draping -->
+  <path d="M 0,0 
+         C 100,40 200,60 300,40
+         C 400,20 500,20 600,40
+         C 700,60 800,40 800,0
+         L 800,80
+         C 700,100 600,80 500,80
+         C 400,80 300,80 200,80
+         C 100,80 0,100 0,80
+         Z" 
+        fill="url(#valanceGradient)" 
+        filter="url(#shadow)"/>
+  
+  <!-- Decorative gold trim on valance -->
+  <path d="M 0,80 
+         C 100,100 200,80 300,80
+         C 400,80 500,80 600,80
+         C 700,80 800,100 800,80
+         L 800,85
+         C 700,105 600,85 500,85
+         C 400,85 300,85 200,85
+         C 100,85 0,105 0,85
+         Z" 
+        fill="#d4af37" 
+        opacity="0.8"/>
+  
+  <!-- Stars on curtains -->
+  <g id="stars">
+    <!-- Left curtain stars -->
+    <circle cx="100" cy="150" r="3" fill="#ffd700" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="180" cy="250" r="2.5" fill="#ffd700" opacity="0.7">
+      <animate attributeName="opacity" values="0.7;0.2;0.7" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="50" cy="350" r="3.5" fill="#ffd700" opacity="0.9">
+      <animate attributeName="opacity" values="0.9;0.4;0.9" dur="1.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="150" cy="400" r="2" fill="#ffd700" opacity="0.6">
+      <animate attributeName="opacity" values="0.6;0.2;0.6" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="250" cy="100" r="2.8" fill="#ffd700" opacity="0.75">
+      <animate attributeName="opacity" values="0.75;0.3;0.75" dur="2.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="80" cy="200" r="2.3" fill="#ffd700" opacity="0.65">
+      <animate attributeName="opacity" values="0.65;0.25;0.65" dur="2.7s" repeatCount="indefinite"/>
+    </circle>
+
+    <circle cx="30" cy="450" r="2.7" fill="#ffd700" opacity="0.7">
+      <animate attributeName="opacity" values="0.7;0.3;0.7" dur="2.4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="190" cy="180" r="2.1" fill="#ffd700" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;0.2;0.8" dur="2.1s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="130" cy="300" r="2.9" fill="#ffd700" opacity="0.75">
+      <animate attributeName="opacity" values="0.75;0.25;0.75" dur="2.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="70" cy="500" r="2.4" fill="#ffd700" opacity="0.65">
+      <animate attributeName="opacity" values="0.65;0.3;0.65" dur="2.3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="160" cy="520" r="2.2" fill="#ffd700" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;0.3;0.8" dur="1.7s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="40" cy="120" r="2.5" fill="#ffd700" opacity="0.75">
+      <animate attributeName="opacity" values="0.75;0.25;0.75" dur="2.9s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="210" cy="450" r="2.8" fill="#ffd700" opacity="0.85">
+      <animate attributeName="opacity" values="0.85;0.35;0.85" dur="2.2s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- Right curtain stars -->
+    <circle cx="700" cy="150" r="3" fill="#ffd700" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2.3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="620" cy="250" r="2.5" fill="#ffd700" opacity="0.7">
+      <animate attributeName="opacity" values="0.7;0.2;0.7" dur="1.9s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="750" cy="350" r="3.5" fill="#ffd700" opacity="0.9">
+      <animate attributeName="opacity" values="0.9;0.4;0.9" dur="2.7s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="650" cy="400" r="2" fill="#ffd700" opacity="0.6">
+      <animate attributeName="opacity" values="0.6;0.2;0.6" dur="2.1s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="550" cy="100" r="2.8" fill="#ffd700" opacity="0.75">
+      <animate attributeName="opacity" values="0.75;0.3;0.75" dur="2.6s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="720" cy="200" r="2.3" fill="#ffd700" opacity="0.65">
+      <animate attributeName="opacity" values="0.65;0.25;0.65" dur="2.4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="770" cy="450" r="2.7" fill="#ffd700" opacity="0.7">
+      <animate attributeName="opacity" values="0.7;0.3;0.7" dur="2.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="610" cy="180" r="2.1" fill="#ffd700" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;0.2;0.8" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="670" cy="300" r="2.9" fill="#ffd700" opacity="0.75">
+      <animate attributeName="opacity" values="0.75;0.25;0.75" dur="2.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="730" cy="500" r="2.4" fill="#ffd700" opacity="0.65">
+      <animate attributeName="opacity" values="0.65;0.3;0.65" dur="2.7s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="640" cy="520" r="2.2" fill="#ffd700" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2.9s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="760" cy="120" r="2.5" fill="#ffd700" opacity="0.75">
+      <animate attributeName="opacity" values="0.75;0.25;0.75" dur="2.3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="590" cy="450" r="2.8" fill="#ffd700" opacity="0.85">
+      <animate attributeName="opacity" values="0.85;0.35;0.85" dur="2.6s" repeatCount="indefinite"/>
+    </circle>
+
+    <!-- Star shapes -->
+    <path d="M 120,200 l 3,10 l 10,0 l -8,6 l 3,10 l -8,-6 l -8,6 l 3,-10 l -8,-6 l 10,0 z" 
+          fill="#ffd700" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2.4s" repeatCount="indefinite"/>
+      <animateTransform attributeName="transform" type="rotate" from="0 120 210" to="360 120 210" dur="10s" repeatCount="indefinite"/>
+    </path>
+    
+    <path d="M 680,300 l 3,10 l 10,0 l -8,6 l 3,10 l -8,-6 l -8,6 l 3,-10 l -8,-6 l 10,0 z"
+          fill="#ffd700" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2.8s" repeatCount="indefinite"/>
+      <animateTransform attributeName="transform" type="rotate" from="0 680 310" to="360 680 310" dur="12s" repeatCount="indefinite"/>
+    </path>
+
+    <path d="M 600,150 l 2,8 l 8,0 l -6,5 l 2,8 l -6,-5 l -6,5 l 2,-8 l -6,-5 l 8,0 z"
+          fill="#ffd700" opacity="0.75">
+      <animate attributeName="opacity" values="0.75;0.25;0.75" dur="2.5s" repeatCount="indefinite"/>
+      <animateTransform attributeName="transform" type="rotate" from="0 600 158" to="360 600 158" dur="13s" repeatCount="indefinite"/>
+    </path>
+
+    <path d="M 80,450 l 2,7 l 7,0 l -5,4 l 2,7 l -5,-4 l -5,4 l 2,-7 l -5,-4 l 7,0 z"
+          fill="#ffd700" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2.2s" repeatCount="indefinite"/>
+      <animateTransform attributeName="transform" type="rotate" from="0 80 457" to="360 80 457" dur="11s" repeatCount="indefinite"/>
+    </path>
+
+    <path d="M 720,420 l 2,7 l 7,0 l -5,4 l 2,7 l -5,-4 l -5,4 l 2,-7 l -5,-4 l 7,0 z"
+          fill="#ffd700" opacity="0.85">
+      <animate attributeName="opacity" values="0.85;0.35;0.85" dur="2.7s" repeatCount="indefinite"/>
+      <animateTransform attributeName="transform" type="rotate" from="0 720 427" to="360 720 427" dur="14s" repeatCount="indefinite"/>
+    </path>
+  </g>
+  
+  <!-- Stage lights effect -->
+  <ellipse cx="400" cy="300" rx="250" ry="200" fill="url(#lightGradient)" opacity="0.3"/>
+  
+  <defs>
+    <!-- Curtain gradient -->
+    <linearGradient id="curtainGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#8b0000;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#cd0000;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b0000;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Valance gradient -->
+    <linearGradient id="valanceGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#cd0000;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b0000;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Light gradient -->
+    <radialGradient id="lightGradient">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0" />
+    </radialGradient>
+    
+    <!-- Shadow filter -->
+    <filter id="shadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="2" dy="2" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.5"/>
+      </feComponentTransfer>
+      <feMerge> 
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/> 
+      </feMerge>
+    </filter>
+  </defs>
+</svg>

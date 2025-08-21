@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spectacles de Bulles - Magie et Émerveillement</title>
+    <title>MAGIE – ANIMATION INTERGENERATIONNELLE</title>
+    <meta name="description" content="Découvrez Flory Animation, spécialiste des spectacles magiques et animations intergénérationnelles. Réservez des moments inoubliables pour toute la famille.">
+    <meta name="keywords" content="magie, animation, spectacles, intergénérationnel, mascottes, Flory Animation">
+    <meta name="author" content="Flory Animation">
+    <meta name="robots" content="index, follow">
     <style>
         * {
             margin: 0;
@@ -57,6 +61,7 @@
             text-decoration: none;
             color: #333;
             font-weight: 500;
+            font-size: 25px;
             transition: all 0.3s ease;
             position: relative;
         }
@@ -109,6 +114,7 @@
             padding: 0.8rem 1.5rem;
             text-decoration: none;
             display: block;
+            font-size: 20px;
             transition: all 0.3s ease;
             border-radius: 0;
         }
@@ -137,7 +143,11 @@
         /* Hero Section */
         .hero {
             height: 100vh;
-            background: #ff3838;
+            background-image: url("img/theatre-curtain.svg");
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            /*background-image: url("/img/theatre.jpg");*/
             display: flex;
             align-items: center;
             justify-content: center;
@@ -147,39 +157,7 @@
             overflow: hidden;
         }
 
-        /* Chapiteau de cirque - rayures partant du centre haut et se divisant */
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                repeating-conic-gradient(
-                    from 0deg at 50% 0%,
-                    #ffffff 0deg 9deg,
-                    #dc2626 9deg 18deg
-                );
-            mask: 
-                linear-gradient(180deg, black 0%, black 60%, transparent 100%);
-            -webkit-mask: 
-                linear-gradient(180deg, black 0%, black 60%, transparent 100%);
-            z-index: 1;
-        }
 
-        /* Overlay pour améliorer la lisibilité du texte */
-        .hero::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(ellipse 70% 50% at 50% 60%, rgba(0, 0, 0, 0.6) 0%, transparent 70%);
-            z-index: 1;
-        }
 
         .hero-content {
             z-index: 3;
@@ -197,27 +175,27 @@
         }
 
         .hero-list-item {
-            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             border-radius: 15px;
             padding: 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(74, 144, 226, 1);
             transition: all 0.3s ease;
         }
 
         .hero-list-item:hover {
             transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(0, 0, 0, 0.15);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         .hero-list-item h3 {
-            color: white;
+            color: #4a90e2;
             font-size: 1.3rem;
             margin-bottom: 1rem;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1px;
+            text-decoration: underline;
         }
 
         .hero-list-item ul {
@@ -226,7 +204,7 @@
         }
 
         .hero-list-item li {
-            color: rgba(255, 255, 255, 0.9);
+            color: #4a90e2;
             margin-bottom: 0.5rem;
             padding-left: 1.5rem;
             position: relative;
@@ -236,15 +214,19 @@
             content: '✓';
             position: absolute;
             left: 0;
-            color: #feca57;
+            color: #4a90e2;
             font-weight: bold;
         }
 
         .hero h1 {
             font-size: 3.5rem;
+            color: #4a90e2;
             margin-bottom: 1rem;
             animation: fadeInUp 1s ease;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+            text-shadow: -1px -1px 0 #252fae,
+            1px -1px 0 #252fae,
+            -1px 1px 0 #252fae,
+            1px 1px 0 #252fae;
         }
 
         .hero p {
@@ -256,7 +238,7 @@
         .cta-button {
             display: inline-block;
             padding: 1rem 2rem;
-            background: linear-gradient(45deg, #ff6b6b, #feca57);
+            background: linear-gradient(45deg, #ff0000, #cf3434);
             color: white;
             text-decoration: none;
             border-radius: 50px;
@@ -297,10 +279,10 @@
         }
 
         .section h2 {
+            color: #4a90e2;
             font-size: 2.5rem;
             text-align: center;
             margin-bottom: 3rem;
-            color: #333;
             position: relative;
         }
 
@@ -370,7 +352,6 @@
 
         /* About Section */
         #nous-connaitre {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             position: relative;
             overflow: hidden;
         }
@@ -394,7 +375,7 @@
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 3rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.2);
             max-width: 1200px;
             margin: 0 auto;
@@ -402,11 +383,11 @@
 
 
         .about-text p {
-            text-align: left;
             margin-bottom: 1.5rem;
             font-size: 1.1rem;
             color: #555;
             line-height: 1.6;
+            text-align: justify;
         }
 
 
@@ -435,6 +416,7 @@
 
         .first-paragraph p {
             margin-bottom: 0;
+            margin-top: 50px;
             flex: 1;
         }
 
@@ -502,7 +484,6 @@
 
         /* Mascottes Section */
         #mascottes {
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
             position: relative;
             overflow: hidden;
         }
@@ -637,7 +618,7 @@
 
         /* Contact Section */
         .contact {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            background:#4a90e2 ;
             color: white;
             text-align: center;
         }
@@ -670,7 +651,7 @@
         }
 
         .contact-item.priority p {
-            font-size: 2.1rem;
+            font-size: 1.5rem;
             font-weight: bold;
         }
 
@@ -1113,6 +1094,10 @@
                 right: 10px;
             }
         }
+
+        .reverse {
+            flex-direction: row-reverse;
+        }
     </style>
 </head>
 <body>
@@ -1122,7 +1107,7 @@
         <a href="#accueil" class="logo">✨ Flory Animation</a>
         <ul class="nav-links">
             <li><a href="#accueil">Accueil</a></li>
-            <li><a href="#nous-connaitre">Nous Connaître</a></li>
+            <li><a href="#nous-connaitre">A propos</a></li>
             <li class="dropdown">
                 <a href="spectacles.html">Prestations <span class="dropdown-arrow">▼</span></a>
                 <div class="dropdown-content">
@@ -1141,39 +1126,34 @@
 
 <!-- Hero Section -->
 <section id="accueil" class="hero">
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
 
     <div class="hero-content">
-        <h1>Flory Animation vous invite à découvrir son univers enchanté.</h1>
-        <a href="spectacles.html" class="cta-button">Découvrir nos Prestations</a>
+        <h1>Flory Animation vous invite à découvrir son univers enchanté...</h1>
+        <a href="spectacles.html" class="cta-button">Découvrir nos prestations</a>
         
         <div class="hero-lists">
             <div class="hero-list-item">
-                <h3>Collectivités</h3>
+                <h3>Collectivité</h3>
                 <ul>
-                    <li>Écoles, Mairies</li>
-                    <li>Centres Culturels</li>
+                    <li>École, Mairie</li>
+                    <li>Centre Culturel</li>
                     <li>Centres de Loisirs...</li>
                 </ul>
             </div>
             
             <div class="hero-list-item">
-                <h3>Événementiels</h3>
+                <h3>Événementiel</h3>
                 <ul>
-                    <li>Soirées d'entreprises</li>
-                    <li>Arbres de Noël...</li>
+                    <li>Soirée d'entreprise</li>
+                    <li>Arbre de Noël...</li>
                 </ul>
             </div>
             
             <div class="hero-list-item">
-                <h3>Particuliers</h3>
+                <h3>Particulier</h3>
                 <ul>
-                    <li>Mariages, Anniversaires</li>
-                    <li>Différentes formules adaptables à votre événement...</li>
+                    <li>Mariage</li>
+                    <li>Anniversaire...</li>
                 </ul>
             </div>
         </div>
@@ -1193,17 +1173,21 @@
             <p>À 14 ans, elle présente son premier numéro de magie en solo et parcourt la France, affirmant peu à peu son identité artistique. Sa rencontre marquante avec <strong>Annie Fratellini</strong> la plonge dans le monde du cirque, enrichissant sa palette avec l'acrobatie, la jonglerie et l'expression scénique.</p>
             
             <p>Plus tard, une formation auprès des professeurs du <strong>Cirque de Pékin</strong> vient parfaire sa rigueur et sa maîtrise du mouvement. Inspiré par l'imaginaire des dessins animés et l'élégance rétro des années 50, son personnage naît comme une silhouette hors du temps.</p>
-            
-            <div class="duo-paragraphs">
-                <img src="img/duo.jpeg" alt="Flory Animation - Duo artistique" class="duo-image">
+
+            <p>Au fil des années, elle le sculpte, le réinvente, l'habille de nuances nouvelles. De scène en scène, </br>il devient le fil rouge d'un univers singulier qu'elle décline avec poésie.</p>
+
+            <p>Sa plus belle création reste sa propre famille. Flory Anne devient maman en 1995, puis en 1999. </br>Deux sources d'inspiration qui enrichissent profondément son univers artistique et personnel.</p>
+
+            <div class="duo-paragraphs reverse">
+                <img src="img/famille.jpg" alt="Flory Animation - Duo artistique" class="duo-image">
                 <div class="duo-text">
-                    <p>Au fil des années, elle le sculpte, le réinvente, l'habille de nuances nouvelles. De scène en scène, il devient le fil rouge d'un univers singulier qu'elle décline avec poésie.</p>
-                    
-                    <p>Sa plus belle création reste sa propre famille. Flory Anne devient maman en 1995, puis en 1999. Deux sources d'inspiration qui enrichissent profondément son univers artistique et personnel.</p>
+
+
+                <p>Aujourd'hui, <strong>Flory Animation</strong> est bien plus qu'une compagnie artistique : c'est une aventure familiale, portée par la passion, la transmission et la joie de créer pour émerveiller petits et grands. </p>
+                <p>Leur plus grand bonheur ? <strong>Partager avec vous la magie de leurs créations.</strong></p>
                 </div>
             </div>
-            
-            <p>Aujourd'hui, <strong>Flory Animation</strong> est bien plus qu'une compagnie artistique : c'est une aventure familiale, portée par la passion, la transmission et la joie de créer pour émerveiller petits et grands. Leur plus grand bonheur ? <strong>Partager avec vous la magie de leurs créations.</strong></p>
+
         </div>
     </div>
 </section>
@@ -1212,15 +1196,13 @@
 <!-- Mascottes Carousel -->
 <section id="mascottes" class="section">
     <h2>Mascottes</h2>
-    <p>Découvrez nos adorables mascottes qui accompagnent nos spectacles et créent des moments magiques inoubliables.</p>
-
     <div class="carousel-container">
         <div class="carousel-track" id="carouselTrack">
             <div class="carousel-slide">
                 <img src="img/LA_LICORNE.jpg" alt="Mascotte Licorne" class="mascot-image">
                 <div class="mascot-content">
                     <h3>🦄 La Licorne</h3>
-                    <p>Prestation en complément d'une animation. Personnage pour accueillir votre public.</p>
+                    <p>Prestation en complément d'une animation. </br>Personnage pour accueillir votre public.</p>
                     <p><strong>Tarif : sur demande</strong></p>
                 </div>
             </div>
@@ -1229,7 +1211,7 @@
                 <img src="img/LA_POULE.jpg" alt="Mascotte Poule" class="mascot-image">
                 <div class="mascot-content">
                     <h3>🐔 La Poule</h3>
-                    <p>Prestation en complément d'une animation. Personnage pour accueillir votre public.</p>
+                    <p>Prestation en complément d'une animation. </br>Personnage pour accueillir votre public.</p>
                     <p><strong>Tarif : sur demande</strong></p>
                 </div>
             </div>
@@ -1238,7 +1220,7 @@
                 <img src="img/LE_CLOWN.jpg" alt="Mascotte Clown" class="mascot-image">
                 <div class="mascot-content">
                     <h3>🤡 Le Clown</h3>
-                    <p>Prestation en complément d'une animation. Personnage pour accueillir votre public.</p>
+                    <p>Prestation en complément d'une animation. </br>Personnage pour accueillir votre public.</p>
                     <p><strong>Tarif : sur demande</strong></p>
                 </div>
             </div>
@@ -1247,7 +1229,7 @@
                 <img src="img/NOUNOURS.jpg" alt="Mascotte Nounours" class="mascot-image">
                 <div class="mascot-content">
                     <h3>🧸 Le Nounours</h3>
-                    <p>Prestation en complément d'une animation. Personnage pour accueillir votre public.</p>
+                    <p>Prestation en complément d'une animation. </br>Personnage pour accueillir votre public.</p>
                     <p><strong>Tarif : sur demande</strong></p>
                 </div>
             </div>
@@ -1256,7 +1238,7 @@
                 <img src="img/SAPIN_DE_NOEL.jpg" alt="Mascotte Sapin de Noël" class="mascot-image">
                 <div class="mascot-content">
                     <h3>🎄 Le Sapin de Noël</h3>
-                    <p>Prestation en complément d'une animation. Personnage pour accueillir votre public.</p>
+                    <p>Prestation en complément d'une animation. </br>Personnage pour accueillir votre public.</p>
                     <p><strong>Tarif : sur demande</strong></p>
                 </div>
             </div>
@@ -1285,6 +1267,10 @@
             <div class="contact-item priority">
                 <h3>📞 Téléphone</h3>
                 <p><a href="tel:+33667785419" style="color: white; text-decoration: none;">+33 6 67 78 54 19</a></p>
+            </div>
+            <div class="contact-item priority">
+                <h3> Instagram</h3>
+                <p><a href="https://www.instagram.com/floryanimation/" style="color: white; text-decoration: none;">Flory Animation</a></p>
             </div>
             <div class="contact-item priority">
                 <h3>✉️ Email</h3>

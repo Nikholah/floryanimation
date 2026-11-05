@@ -13,11 +13,13 @@ const home = (anchor: string) => (onHome ? `#${anchor}` : url(`index.html#${anch
 const show = (anchor: string) => (current === 'prestations' ? `#${anchor}` : url(`spectacles.html#${anchor}`));
 
 const prestations = [
-    { anchor: 'spectacle-enfants', label: '👨‍👩‍👧‍👦 Spectacle Enfants' },
-    { anchor: 'spectacle-noel', label: '🎄 Spectacle Noël' },
-    { anchor: 'spectacle-cabaret', label: '🎭 Spectacle Cabaret' },
-    { anchor: 'animation-bar-bulles', label: '🫧 Bar à Bulles' },
-    { anchor: 'atelier-bulles', label: '🎨 Atelier Bulles' },
+    { anchor: 'bubble-magic-show', label: 'Bubble Magic Show' },
+    { anchor: 'la-valise', label: 'La Valise' },
+    { anchor: 'spectacles-thematiques', label: 'Spectacles thématiques' },
+    { anchor: 'jardin-des-bulles', label: 'Le Jardin des Bulles' },
+    { anchor: 'atelier-bulles', label: 'Atelier Bulles de Savon' },
+    { anchor: 'mariage', label: 'Mariage' },
+    { anchor: 'dans-ma-bulle', label: 'Dans ma bulle' },
 ];
 ---
 <nav class="navbar">

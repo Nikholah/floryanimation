@@ -1,187 +1,87 @@
 /* Styles propres à l'accueil (index). */
 
-/* Hero Section */
+/* Hero : photo « fond décor Flory Animation » + boutons */
 .hero {
-    min-height: 100vh;
-    padding: 110px 0 3rem; /* espace sous la navbar fixe */
-    background-image: url("../assets/img/theatre-curtain.svg");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-
+    position: relative;
+    margin-top: 78px; /* sous la navbar fixe */
+    height: calc(100vh - 78px);
+    min-height: 420px;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     text-align: center;
-    color: white;
-    position: relative;
     overflow: hidden;
+    background: #0d1220;
 }
 
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%; /* garde le nom « Flory Animation », en haut de l'image */
+}
 
+/* Dégradé en bas de l'image pour la lisibilité des boutons */
+.hero::after {
+    content: '';
+    position: absolute;
+    inset: 50% 0 0 0;
+    background: linear-gradient(to bottom, rgba(13, 18, 32, 0), rgba(13, 18, 32, 0.75));
+    pointer-events: none;
+}
 
 .hero-content {
+    position: relative;
     z-index: 3;
     max-width: 1200px;
-    padding: 2rem;
-}
-
-/* Hero Lists */
-.hero-lists {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-    text-align: left;
-}
-
-.hero-list-item {
-    backdrop-filter: blur(10px);
-    border-radius: 15px;
-    padding: 1.5rem;
-    border: 1px solid rgba(74, 144, 226, 1);
-    transition: all 0.3s ease;
-}
-
-.hero-list-item:hover {
-    transform: translateY(-5px);
-    background: rgba(0, 0, 0, 0.15);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.hero-list-item h3 {
-    color: #4a90e2;
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-decoration: underline;
-}
-
-.hero-list-item ul {
-    list-style: none;
-    padding: 0;
-}
-
-.hero-list-item li {
-    color: #4a90e2;
-    margin-bottom: 0.5rem;
-    padding-left: 1.5rem;
-    position: relative;
-}
-
-.hero-list-item li::before {
-    content: '✓';
-    position: absolute;
-    left: 0;
-    color: #4a90e2;
-    font-weight: bold;
-}
-
-.hero h1 {
-    font-size: 3.5rem;
-    color: #4a90e2;
-    margin-bottom: 1rem;
-    animation: fadeInUp 1s ease;
-    text-shadow: -1px -1px 0 #252fae,
-    1px -1px 0 #252fae,
-    -1px 1px 0 #252fae,
-    1px 1px 0 #252fae;
-}
-
-.hero p {
-    font-size: 1.3rem;
-    margin-bottom: 2rem;
-    animation: fadeInUp 1s ease 0.3s both;
+    padding: 2rem 2rem 8vh;
 }
 
 .cta-button {
     display: inline-block;
-    padding: 1rem 2rem;
+    padding: 1rem 2.2rem;
     background: linear-gradient(45deg, #ff0000, #cf3434);
     color: white;
     text-decoration: none;
     border-radius: 50px;
     font-weight: bold;
+    font-size: 1.15rem;
     transition: all 0.3s ease;
-    animation: fadeInUp 1s ease 0.6s both;
+    animation: fadeInUp 1s ease 0.3s both;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
 }
 
 .cta-button:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
 }
 
-/* Hero : accroche, zone, boutons d'action, bandeau saisonnier */
-.hero .hero-eyebrow {
-    display: inline-block;
-    padding: 0.3rem 1.2rem;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 50px;
-    font-size: 1rem;
-    font-weight: bold;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #252fae;
-    margin-bottom: 0.75rem;
-}
-
-.hero .hero-zone {
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: #252fae;
-    margin-bottom: 2rem;
-}
-
-.hero-actions {
+.hero-secondary {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 1rem;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    animation: fadeInUp 1s ease 0.5s both;
 }
 
-.cta-button.cta-secondary {
-    background: white;
-    color: #cf3434;
-    border: 2px solid #cf3434;
-}
-
-.hero-link {
+.cta-outline {
     display: inline-block;
-    margin-top: 1.25rem;
-    color: #252fae;
-    font-weight: bold;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    animation: fadeInUp 1s ease 0.8s both;
-}
-
-.hero-link:hover {
-    color: #cf3434;
-}
-
-.season-banner {
-    display: table; /* sur sa propre ligne, centré, largeur ajustée au texte */
-    margin: 0 auto 1.5rem;
     padding: 0.6rem 1.4rem;
-    background: white;
-    color: #a3141c;
-    border: 2px solid #cf3434;
-    border-radius: 50px;
+    color: white;
     text-decoration: none;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-    animation: fadeInUp 1s ease both;
+    font-weight: bold;
+    border: 2px solid rgba(255, 255, 255, 0.85);
+    border-radius: 50px;
+    background: rgba(13, 18, 32, 0.45);
     transition: all 0.3s ease;
 }
 
-.season-banner:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-}
-
-.season-banner[hidden] {
-    display: none;
+.cta-outline:hover {
+    background: white;
+    color: #0d1220;
 }
 
 /* Sections */
@@ -257,7 +157,6 @@
     margin: 0 auto;
 }
 
-
 .about-text p {
     margin-bottom: 1.5rem;
     font-size: 1.1rem;
@@ -266,95 +165,18 @@
     text-align: justify;
 }
 
-
-
-
-.first-paragraph {
-    display: flex;
-    align-items: flex-start;
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.flory-anne-image {
-    width: 120px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-    flex-shrink: 0;
-}
-
-.flory-anne-image:hover {
-    transform: scale(1.05);
-}
-
-.first-paragraph p {
-    margin-bottom: 0;
-    margin-top: 50px;
-    flex: 1;
-}
-
-.duo-paragraphs {
-    display: flex;
-    align-items: flex-start;
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.duo-image {
-    height: 150px;
-    object-fit: cover;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-    flex-shrink: 0;
-}
-
-.duo-image:hover {
-    transform: scale(1.05);
-}
-
-.duo-text {
-    flex: 1;
-}
-
-.duo-text p {
-    margin-bottom: 1.5rem;
-}
-
-.duo-text p:last-child {
-    margin-bottom: 0;
+.about-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 15px;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 768px) {
     .about-content {
         padding: 2rem;
-    }
-
-    .first-paragraph {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    .flory-anne-image {
-        width: 100px;
-        height: 120px;
-        margin-bottom: 1rem;
-    }
-
-    .duo-paragraphs {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    .duo-image {
-        width: 100px;
-        height: 120px;
-        margin-bottom: 1rem;
     }
 }
 
@@ -411,34 +233,33 @@
     transform: translateY(-2px);
 }
 
-/* Responsive */
+/* Responsive : en mobile, l'image est affichée en entier (sans recadrage), boutons dessous */
 @media (max-width: 768px) {
     .hero {
-        padding-top: 95px;
+        height: auto;
+        min-height: 0;
+        flex-direction: column;
+        align-items: stretch;
     }
 
-    .hero h1 {
-        font-size: 2rem;
+    .hero-bg {
+        position: static;
+        height: auto;
     }
 
-    .hero p {
-        font-size: 1.1rem;
+    .hero::after {
+        display: none;
     }
 
-    .hero .hero-eyebrow {
-        font-size: 0.85rem;
-        letter-spacing: 2px;
+    .hero-content {
+        padding: 1.5rem 1rem 2rem;
     }
 
-    .season-banner {
-        font-size: 0.9rem;
+    .hero-secondary {
+        flex-direction: column;
+        align-items: center;
     }
 }
-
-.reverse {
-    flex-direction: row-reverse;
-}
-
 
 /* Anciennement en styles inline */
 .contact-item a {

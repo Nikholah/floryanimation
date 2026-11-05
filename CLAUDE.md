@@ -1,7 +1,7 @@
 # CLAUDE.md — Site Flory Animation
 
 Document de référence pour toutes les sessions de travail sur ce dépôt.
-Dernière mise à jour : 2026-11-05 (réponses du client intégrées, nettoyage, migration Astro à l'identique).
+Dernière mise à jour : 2026-11-05 (nouvelles prestations de la cliente, bannière photo, retrait des anciennes prestations).
 
 ---
 
@@ -9,15 +9,19 @@ Dernière mise à jour : 2026-11-05 (réponses du client intégrées, nettoyage,
 
 - **Client** : Flory Animation, compagnie familiale fondée par **Flory Anne**, magicienne (fille de magiciens, formée au cirque auprès d'Annie Fratellini et des professeurs du Cirque de Pékin).
 - **Univers** : magie, jonglerie, bulles de savon. Personnage inspiré des dessins animés et de l'élégance rétro des années 50. Ton poétique et féerique.
-- **Prestations** (tous les tarifs restent « sur demande », décision ferme) :
-  | Prestation | Public | Durée | Ancre actuelle |
-  |---|---|---|---|
-  | Spectacle Enfants & Familles « L'atelier magique » | enfants, familles | 20-45 min | `spectacles.html#spectacle-enfants` |
-  | Spectacle de Noël « Nani, la Lutine Magicienne » | enfants, familles | 20-45 min | `spectacles.html#spectacle-noel` |
-  | Spectacle Cabaret « Étincelle magique » | adultes | 20-30 min | `spectacles.html#spectacle-cabaret` |
-  | Le Bar à Bulles (déambulation) | tous publics | — | `spectacles.html#animation-bar-bulles` |
-  | Atelier « Bulles de Savon » (pédagogique, 15 participants max) | dès 4 ans | 30 min-1h30 | `spectacles.html#atelier-bulles` |
-- **Mascottes : retirées de l'offre et du site** (section, lien de menu et images supprimés le 2026-11-05).
+- **Prestations actuelles** (liste fournie par la cliente le 2026-11-05, elle remplace toutes les anciennes ; tous les tarifs restent « sur demande », décision ferme). Durées et publics **non communiqués** sauf mention contraire : ne rien inventer.
+  | Catégorie | Prestation | Infos connues | Visuel | Ancre (`spectacles.html#…`) |
+  |---|---|---|---|---|
+  | Spectacles | « Bubble Magic Show » | ambiance Cabaret | `BUBBLE_MAGIC_SHOW.jpg` | `bubble-magic-show` |
+  | Spectacles | « La Valise » | ambiance Poétique | `LA_VALISE.png` | `la-valise` |
+  | Spectacles thématiques (`#spectacles-thematiques`) | Carnaval (« Le Carnaval de Nani ») | — | `AFFICHE_CARNAVAL_DE_NANI.jpg` | `carnaval` |
+  | Spectacles thématiques | Noël (« Nani la Lutine » et « Bulles de Noël ») | — | les 2 affiches `AFFICHE_NOEL_*.png` | `spectacle-noel` |
+  | Animation déambulation extérieur | Le Jardin des Bulles | en extérieur | `BULLE_SAVON_TABLE_LUMINEUSE.jpg` (ancienne photo réutilisée) | `jardin-des-bulles` |
+  | Atelier | L'Atelier « Bulles de Savon » | à partir de 6 ans | `les_bulles.jpeg` (ancienne photo réutilisée) | `atelier-bulles` |
+  | Mariage | « L'art et l'émotion au cœur de votre mariage » : formules **Instant Précieux** (bulles pendant la séance photo), **Éclat de Bulles** (pendant le vin d'honneur), **Prestige** (« Entre Toi et Moi », spectacle féerique de bulles de savon) | cible particuliers | aucune photo (TODO) | `mariage`, `mariage-instant-precieux`, `mariage-eclat-de-bulles`, `mariage-prestige` |
+  | Dans ma bulle | Vivre une expérience unique et éphémère : être dans une bulle géante | — | `DANS_MA_BULLE.jpg` | `dans-ma-bulle` |
+- **Anciennes prestations supprimées le 2026-11-05** : L'atelier magique, Nani la Lutine Magicienne (ancienne fiche), Cabaret « Étincelle magique », Bar à Bulles, ancien Atelier Bulles (dès 4 ans), ainsi que les mascottes.
+- **Textes provisoires** : tous les textes descriptifs de `src/pages/spectacles.astro` sont des **versions de test** rédigées par Claude, en attendant les textes définitifs de la cliente. Chacun est entouré de `<!-- TEXTE PROVISOIRE -->` … `<!-- /TEXTE PROVISOIRE -->` (11 blocs : Bubble Magic Show, La Valise, Carnaval, Noël, Jardin des Bulles, Atelier, introduction Mariage, 3 formules Mariage, Dans ma bulle). Les infos manquantes (durées, publics, nombre de participants, photo Mariage) sont signalées par des commentaires `<!-- TODO … -->`. Chercher `TEXTE PROVISOIRE` et `TODO` pour les retrouver.
 - **Cibles** : collectivités (écoles, mairies, centres culturels, centres de loisirs), événementiel (soirées d'entreprise, arbres de Noël des CSE), particuliers (mariages, anniversaires).
 - **Zone d'intervention : France entière et international.** Le site doit donc être **bilingue français / anglais** (voir §6, décision D1).
 - **Objectif n°1** : générer des **demandes de devis et des réservations**.
@@ -48,7 +52,8 @@ floryanimation/
 ├── package.json            # scripts dev / build / preview
 ├── src/
 │   ├── layouts/Base.astro  # <head>, favicon généré, Header, boutons flottants, script commun
-│   ├── components/         # Header.astro (prop current), FloatingButtons.astro
+│   ├── components/         # Header.astro (prop current, liste du menu Prestations), FloatingButtons.astro,
+│   │                       # Prestation.astro (carte de prestation : images, étiquette, texte en slot, tarif, bouton devis)
 │   ├── pages/              # index.astro, spectacles.astro (=> index.html, spectacles.html)
 │   ├── styles/             # global.css (commun), index.css, spectacles.css
 │   ├── scripts/common.ts   # défilement fluide, ombre navbar, retour en haut
@@ -65,14 +70,20 @@ floryanimation/
 ### Images (sources dans `src/assets/img/`)
 | Fichier | Poids | Dimensions | Usage |
 |---|---|---|---|
-| `theatre-curtain.svg` | 10 Ko | vectoriel | fond du hero de l'accueil |
-| `FLORY_ANNE.jpg` | 92 Ko | 1080×1727 | À propos + **favicon** (déclaré `image/png`) |
-| `famille.jpg` | 406 Ko | 991×834 | À propos (affichée à 150 px de haut) |
-| `SPECTACLE_ENFANTS_AVEC_NOUNOURS1.jpeg` | 232 Ko | 1413×900 | prestations |
-| `noel.jpeg`, `noel2.jpeg`, `CABARET.jpeg`, `BULLE_SAVON_TABLE_LUMINEUSE.jpg`, `les_bulles.jpeg` | 65 à 75 Ko | ~1000 px | prestations |
+| `FOND_DECOR_FLORY_ANIMATION.jpg` | 1,6 Mo | 2000×1414 | bannière de l'accueil + section À propos. Le nom « Flory Animation » est écrit dans l'image. Reçue sous le nom `01_DECOR_FEERIQUE_FORET_OUVERTURE_OK.pdf`, mais c'était un JPEG : renommée |
+| `BUBBLE_MAGIC_SHOW.jpg` | 2,3 Mo | 2592×2452 | prestation Bubble Magic Show |
+| `LA_VALISE.png` | 2,2 Mo | 1086×1448 | prestation La Valise |
+| `AFFICHE_CARNAVAL_DE_NANI.jpg` | 550 Ko | 1024×1536 | spectacle thématique Carnaval |
+| `AFFICHE_NOEL_NANI_LA_LUTINE.png`, `AFFICHE_NOEL_BULLES_DE_NOEL.png` | 1,8 et 1,7 Mo | 1024×1536, 843×1264 | spectacle thématique Noël (les deux affiches) |
+| `DANS_MA_BULLE.jpg` | 490 Ko | 1728×3072 | prestation Dans ma bulle |
+| `BULLE_SAVON_TABLE_LUMINEUSE.jpg` | 68 Ko | 2000×900 | Jardin des Bulles (ancienne photo réutilisée en attendant mieux) |
+| `les_bulles.jpeg` | 67 Ko | 1010×916 | Atelier Bulles de Savon (ancienne photo réutilisée) |
+| `FLORY_ANNE.jpg` | 92 Ko | 1080×1727 | **favicon uniquement** (retirée de la bio). À remplacer par un vrai favicon à l'étape 9 |
 | `instagram.png` | 60 Ko | 512×512 | bouton flottant |
 
-Fichiers supprimés le 2026-11-05 (récupérables via l'historique Git, par exemple `git checkout a99ee47 -- img/photo_cabaret.jpg`) : photos des mascottes (`LA_LICORNE`, `LA_POULE`, `LE_CLOWN`, `NOUNOURS`, `SAPIN_DE_NOEL`), `theatre.jpg` (4,9 Mo), `IMG_20220204_190840.jpg`, `Magie.jpg`, `FLORY_ANIMATION_L_ATELIER_MAGIQUE_1.jpg`, `LE_LAPIN.jpg`, `duo.jpeg`, `photoNoel.jpg`, `photo_cabaret.jpg`, `description/rideau theatre.webp`. `.idea/` et `.claude/settings.local.json` ne sont plus suivis par Git.
+Les poids indiqués sont ceux des sources : Astro les convertit en WebP redimensionnés au build.
+
+Fichiers supprimés le 2026-11-05 (récupérables via l'historique Git, par exemple `git checkout a99ee47 -- img/photo_cabaret.jpg`) : anciennes images de prestations et de l'accueil (`SPECTACLE_ENFANTS_AVEC_NOUNOURS1.jpeg`, `noel.jpeg`, `noel2.jpeg`, `CABARET.jpeg`, `famille.jpg`, `theatre-curtain.svg`), photos des mascottes (`LA_LICORNE`, `LA_POULE`, `LE_CLOWN`, `NOUNOURS`, `SAPIN_DE_NOEL`), `theatre.jpg` (4,9 Mo), `IMG_20220204_190840.jpg`, `Magie.jpg`, `FLORY_ANIMATION_L_ATELIER_MAGIQUE_1.jpg`, `LE_LAPIN.jpg`, `duo.jpeg`, `photoNoel.jpg`, `photo_cabaret.jpg`, `description/rideau theatre.webp`. `.idea/` et `.claude/settings.local.json` ne sont plus suivis par Git.
 
 ### Lancer le site en local
 ```bash
@@ -200,8 +211,8 @@ Ordonné par impact sur les réservations rapporté à l'effort. Effort : S (moi
 | # | Action | Résout | Effort |
 |---|---|---|---|
 | 0 | ✅ **Fait le 2026-11-05.** Migration Astro à l'identique : layout, Header, pages FR, images optimisées, workflow de déploiement, code mort supprimé. Rendu comparé élément par élément avec l'ancien site (positions et tailles identiques en desktop, pas de débordement en 375 px). | S3, S4, S5, I7 (en partie) | M/L |
-| 1 | ✅ **Fait le 2026-11-05.** Hero : bandeau saisonnier « Noël : réservez Nani, la Lutine Magicienne » (affiché automatiquement de septembre à décembre, côté navigateur) qui renvoie vers `#spectacle-noel` ; accroche « Magie · Jonglerie · Bulles de savon » ; h1 « Spectacles de magie pour enfants, familles et événements » ; « Partout en France et à l'international » ; boutons « Demander un devis » (email prérempli via `devisHref()`, à remplacer par le formulaire à l'étape 4) et « 📞 06 67 78 54 19 » ; lien « Découvrir nos spectacles ». Le hero passe en `min-height` (le contenu n'est plus coupé en mobile), et le bouton devis est visible sans défiler en 375 px. Mascottes retirées (section, menu, CSS, JS, images). | C2, C8, I1 | S |
-| 2 | **Appels à l'action partout** : « Demander un devis pour ce spectacle » sur chaque prestation (préremplit la prestation dans le formulaire) ; téléphone dans le header ; barre fixe « Appeler / Devis » sur mobile à la place des boutons flottants ; badge tarif remplacé par « Devis gratuit sur demande ». | C3, I11, S6 | S |
+| 1 | ✅ **Fait le 2026-11-05.** Hero : bandeau saisonnier « Noël : réservez Nani, la Lutine Magicienne » (affiché automatiquement de septembre à décembre, côté navigateur) qui renvoie vers `#spectacle-noel` ; accroche « Magie · Jonglerie · Bulles de savon » ; h1 « Spectacles de magie pour enfants, familles et événements » ; « Partout en France et à l'international » ; boutons « Demander un devis » (email prérempli via `devisHref()`, à remplacer par le formulaire à l'étape 4) et « 📞 06 67 78 54 19 » ; lien « Découvrir nos spectacles ». Le hero passe en `min-height` (le contenu n'est plus coupé en mobile), et le bouton devis est visible sans défiler en 375 px. Mascottes retirées (section, menu, CSS, JS, images). **Remplacé le jour même à la demande de la cliente** : la bannière est désormais la photo décor (sans rideaux, sans bandeau de Noël, sans accroche, sans zone ni blocs Collectivité / Événementiel / Particulier), avec « Découvrir nos prestations » au centre et deux boutons discrets « Demander un devis » et téléphone. Le h1 est conservé mais masqué visuellement (`.visually-hidden`). En mobile, la photo s'affiche en entier, avec les boutons dessous. ⚠️ « Partout en France et à l'international » n'apparaît donc plus nulle part (C8 à retraiter, par exemple dans le pied de page à l'étape 7). | C2, I1 | S |
+| 2 | **Appels à l'action partout** : ~~« Demander un devis » sur chaque prestation~~ (✅ fait le 2026-11-05 avec les nouvelles prestations : un bouton par carte et par formule Mariage, objet de l'email prérempli) ; téléphone dans le header ; barre fixe « Appeler / Devis » sur mobile à la place des boutons flottants ; badge tarif remplacé par « Devis gratuit sur demande ». | C3, I11, S6 | S |
 | 3 | **Navigation mobile** : menu burger accessible, menu déroulant au clic, au toucher et au clavier, `scroll-margin-top`. | C1, I11 | S |
 | 4 | **Formulaire de devis Web3Forms** (choix retenu, voir D3) : vous êtes (collectivité / entreprise-CSE / particulier / autre), prestation(s), date, lieu (ville, pays), nombre et âge des spectateurs, intérieur ou extérieur, téléphone, email, message ; honeypot `botcheck`, mention RGPD, message de remerciement, version anglaise. | C4 | M |
 | 5 | **Bloc « Informations pratiques »** sur chaque prestation et dans une FAQ : montage 1 h 30, jusqu'à environ 600 spectateurs, son, lumière et électricité fournis selon la taille du spectacle, pas d'électricité nécessaire en extérieur, intervention en France et à l'international, sur facture. Fiche technique PDF ensuite si utile. | C6 | S |
@@ -232,7 +243,8 @@ Ordonné par impact sur les réservations rapporté à l'effort. Effort : S (moi
 
 ### Code
 - HTML5 sémantique, **indentation de 4 espaces**, guillemets doubles, classes en **kebab-case**, pas de styles inline.
-- **Conserver les ancres des prestations** : `#spectacle-enfants`, `#spectacle-noel`, `#spectacle-cabaret`, `#animation-bar-bulles`, `#atelier-bulles`, ainsi que `#accueil`, `#nous-connaitre`, `#contact`. (`#mascottes` a été supprimée.)
+- **Conserver les ancres des prestations** (utilisées par le menu Prestations) : `#bubble-magic-show`, `#la-valise`, `#spectacles-thematiques` (`#carnaval`, `#spectacle-noel`), `#jardin-des-bulles`, `#atelier-bulles`, `#mariage` (`#mariage-instant-precieux`, `#mariage-eclat-de-bulles`, `#mariage-prestige`), `#dans-ma-bulle`, ainsi que `#accueil`, `#nous-connaitre`, `#contact`. Les anciennes ancres (`#spectacle-enfants`, `#spectacle-cabaret`, `#animation-bar-bulles`, `#mascottes`) ont disparu avec leurs prestations. Toute ancre (`[id]`) a un `scroll-margin-top` pour ne pas passer sous la navbar.
+- Nouvelle prestation : utiliser le composant `Prestation.astro`, ajouter l'entrée dans la liste `prestations` de `Header.astro`, et entourer tout texte non validé par la cliente de `<!-- TEXTE PROVISOIRE -->`.
 - Astro : un élément répété sur plusieurs pages devient un **composant** dans `src/components/` ; le `<head>` vit dans `src/layouts/Base.astro`. Styles communs dans `src/styles/global.css`, styles d'une page dans `src/styles/<page>.css` (importés dans le frontmatter de la page, CSS global non scopé, pour rester proche de l'existant). Scripts en TypeScript dans des balises `<script>` (bundlées par Astro), **jamais d'`onclick` inline**.
 - Liens internes avec `url()` de `src/lib/url.ts`, jamais de chemin absolu en dur.
 - Téléphone, email, Instagram et lien de devis : toujours via `src/lib/contact.ts` (une seule source à modifier).
@@ -282,3 +294,6 @@ Ordonné par impact sur les réservations rapporté à l'effort. Effort : S (moi
 6. **Vidéos** : durée et nombre de clips attendus ; texte parlé (sous-titres FR et EN à prévoir) ?
 7. **Traduction anglaise** : une personne anglophone peut-elle relire ?
 8. **Photos** : de nouvelles photos arrivent-elles avec les vidéos (pour la refonte et l'image de partage Open Graph) ?
+9. **Textes définitifs** des prestations (remplacer les 11 blocs `TEXTE PROVISOIRE`), avec durées, publics et nombre de participants de l'Atelier (`TODO`).
+10. **Photos manquantes** : Mariage (aucune), Jardin des Bulles et Atelier (anciennes photos réutilisées en attendant).
+11. **Logo texte de la navbar** (« ✨ Flory Animation ») : conservé. La demande « remplacer le titre texte du bandeau » a été appliquée à la bannière de l'accueil. À confirmer avec la cliente.

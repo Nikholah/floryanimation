@@ -1,31 +1,18 @@
 ---
-import { Image, getImage } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
 import Base from '../layouts/Base.astro';
+import Prestation from '../components/Prestation.astro';
 import '../styles/spectacles.css';
+import { devisHref } from '../lib/contact';
 
-import enfants from '../assets/img/SPECTACLE_ENFANTS_AVEC_NOUNOURS1.jpeg';
-import noel from '../assets/img/noel.jpeg';
-import noel2 from '../assets/img/noel2.jpeg';
-import cabaret from '../assets/img/CABARET.jpeg';
-import barBulles from '../assets/img/BULLE_SAVON_TABLE_LUMINEUSE.jpg';
+import bubbleMagicShow from '../assets/img/BUBBLE_MAGIC_SHOW.jpg';
+import laValise from '../assets/img/LA_VALISE.png';
+import afficheCarnaval from '../assets/img/AFFICHE_CARNAVAL_DE_NANI.jpg';
+import afficheNoelNani from '../assets/img/AFFICHE_NOEL_NANI_LA_LUTINE.png';
+import afficheNoelBulles from '../assets/img/AFFICHE_NOEL_BULLES_DE_NOEL.png';
+import jardinDesBulles from '../assets/img/BULLE_SAVON_TABLE_LUMINEUSE.jpg';
 import atelierBulles from '../assets/img/les_bulles.jpeg';
+import dansMaBulle from '../assets/img/DANS_MA_BULLE.jpg';
 
-// Image de carte : 600 px de large, sans recadrage (le cadrage est fait en CSS, object-fit: cover)
-// + version grand format pour la lightbox (data-full).
-async function full(src: ImageMetadata) {
-    const img = await getImage({ src, width: Math.min(1600, src.width) });
-    return img.src;
-}
-const fullSrc = {
-    enfants: await full(enfants),
-    noel: await full(noel),
-    noel2: await full(noel2),
-    cabaret: await full(cabaret),
-    barBulles: await full(barBulles),
-    atelierBulles: await full(atelierBulles),
-};
-const card = { width: 600, class: 'spectacle-image' } as const;
 ---
 <Base current="prestations" title="Nos Prestations - FloryAnimation">
     <!-- Hero Section -->
@@ -45,249 +32,188 @@ const card = { width: 600, class: 'spectacle-image' } as const;
 
     <!-- Main Content -->
     <main class="main-content">
-        <!-- Spectacles Section -->
-        <section class="section">
-            <h2>Nos Spectacles</h2>
 
+        <!-- ============ Spectacles ============ -->
+        <section class="section" id="nos-spectacles">
+            <h2>Nos Spectacles</h2>
             <div class="spectacles-grid">
 
-                <!-- Spectacle Enfants -->
-                <div class="spectacle-card reverse" id="spectacle-enfants">
-                    <div>
-                        <Image src={enfants} alt="Spectacle Enfants & Familles" {...card} data-full={fullSrc.enfants} loading="eager" />
-                    </div>
-                    <div class="spectacle-content">
-                        <h3><span class="emoji">👨‍👩‍👧‍👦</span> Spectacle Enfants & Familles</h3>
-                        <h3> "L'atelier magique"</h3>
+                <Prestation
+                    id="bubble-magic-show"
+                    title="Bubble Magic Show"
+                    tag="Ambiance Cabaret"
+                    images={[{ src: bubbleMagicShow, alt: 'Flory Anne en robe rouge sur scène, une bulle de savon au creux de la main, devant un décor de cabaret étoilé' }]}
+                    reverse
+                >
+                    <!-- TEXTE PROVISOIRE -->
+                    <p>Sous les lumières feutrées d'un cabaret aux allures rétro, Flory Anne entre en scène, élégante et malicieuse. Entre tours de magie et bulles de savon qui s'élèvent comme des perles de lumière, chaque numéro devient un instant suspendu. Un spectacle raffiné où l'émerveillement se savoure, entre mystère et poésie.</p>
+                    <!-- /TEXTE PROVISOIRE -->
+                    <!-- TODO : durée et public à confirmer par la cliente -->
+                </Prestation>
 
-                        <div class="spectacle-details">
-                            <div class="detail-item">
-                                <div class="detail-label">Description :</div>
-                                <div class="detail-content">
-                                    Ce spectacle est un mélange subtil et enchanteur d'effets magiques et de jonglerie.
-                                    La scène se déroule dans un grenier plein de charme, où une grande malle ancienne trône au centre, entourée d'objets mystérieux et colorés.
-                                </div>
-                            </div>
+                <Prestation
+                    id="la-valise"
+                    title="La Valise"
+                    tag="Ambiance Poétique"
+                    images={[{ src: laValise, alt: 'Illustration de Flory Anne en combinaison étoilée et chapeau rouge, une valise ancienne à ses pieds, entourée de bulles', portrait: true }]}
+                >
+                    <!-- TEXTE PROVISOIRE -->
+                    <p>D'une simple valise ancienne s'échappent mille trésors : des souvenirs, des rêves et des bulles par dizaines. Avec tendresse et fantaisie, Flory Anne ouvre les portes d'un voyage poétique où chaque objet raconte une histoire. Un moment doux et lumineux, à partager en famille.</p>
+                    <!-- /TEXTE PROVISOIRE -->
+                    <!-- TODO : durée et public à confirmer par la cliente -->
+                </Prestation>
 
-                            <div class="detail-item">
-                                <div class="detail-label">Contenu :</div>
-                                <div class="detail-content">
-                                    Entre jonglerie, tours de magie et bulles de savon, chaque instant est une explosion de couleurs et d'effets magiques.
-                                    La musique, rythmée et joyeuse, accompagne cette aventure, renforçant la magie de l'instant.
-                                    Spectacle enchanteur qui transporte petits et grands dans un univers féerique.
-                                </div>
-                            </div>
+            </div>
+        </section>
 
-                            <div class="detail-item">
-                                <div class="detail-content">
-                                    Participation active du public. Création d'un moment unique où l'imagination devient réalité.
-                                </div>
-                            </div>
+        <!-- ============ Spectacles thématiques ============ -->
+        <section class="section" id="spectacles-thematiques">
+            <h2>Spectacles thématiques</h2>
+            <div class="spectacles-grid">
 
-                            <div class="duration">
-                                ⏱️ Durée : 20 - 45 minutes
-                            </div>
+                <Prestation
+                    id="carnaval"
+                    title="Le Carnaval de Nani"
+                    tag="Spectacle thématique Carnaval"
+                    images={[{ src: afficheCarnaval, alt: 'Affiche « Le Carnaval de Nani » : magie, jonglerie et bulles de savon, Flory Animation', portrait: true }]}
+                    devisLabel="Spectacle Carnaval"
+                    reverse
+                >
+                    <!-- TEXTE PROVISOIRE -->
+                    <p>Confettis, plumes et éclats de couleurs : Nani fait son carnaval ! Magie, jonglerie et bulles de savon s'entremêlent dans une fête joyeuse où les enfants deviennent les complices de chaque tour. Un spectacle pétillant pour célébrer le carnaval à l'école, au centre de loisirs ou en famille.</p>
+                    <!-- /TEXTE PROVISOIRE -->
+                    <!-- TODO : durée et public à confirmer par la cliente -->
+                </Prestation>
 
-                            <div class="price">
-                                💰 Tarif : sur demande
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <Prestation
+                    id="spectacle-noel"
+                    title="Noël"
+                    tag="Nani la Lutine · Bulles de Noël"
+                    images={[
+                        { src: afficheNoelNani, alt: 'Affiche « Spectacle de Noël, Nani la Lutine » : magie, jonglerie, bulles de savon', portrait: true },
+                        { src: afficheNoelBulles, alt: 'Affiche « Bulles de Noël » : spectacle de magie et de bulles de savon', portrait: true },
+                    ]}
+                    devisLabel="Spectacle de Noël"
+                >
+                    <!-- TEXTE PROVISOIRE -->
+                    <p>Quand la neige tombe derrière la fenêtre, la magie de Noël s'invite sur scène. Avec Nani la Lutine ou dans « Bulles de Noël », magie, jonglerie et bulles de savon font briller les yeux des petits comme des grands. Un spectacle féerique pour un arbre de Noël, une fête d'école ou une soirée en famille.</p>
+                    <!-- /TEXTE PROVISOIRE -->
+                    <!-- TODO : durée et public à confirmer par la cliente -->
+                </Prestation>
 
-                <!-- Animation Noël -->
-                <div class="spectacle-card" id="spectacle-noel">
-                    <div class="imgNoel">
-                        <Image src={noel} alt="Spectacle Noël - Nani, la Lutine Magicienne" {...card} data-full={fullSrc.noel} />
-                        <Image src={noel2} alt="Spectacle Noël - Nani, la Lutine Magicienne" {...card} data-full={fullSrc.noel2} />
-                    </div>
-                    <div class="spectacle-content">
-                        <h3><span class="emoji">🎄</span> Spectacle Noël <span class="emoji">🎄</span></h3>
-                        <h3> "Nani, la Lutine Magicienne"</h3>
+            </div>
+        </section>
 
-                        <div class="spectacle-details">
-                            <div class="detail-item">
-                                <div class="detail-label">Description :</div>
-                                <div class="detail-content">
-                                    Un monde féerique où la magie de Noël prend vie dans un décor hivernal enchanteur, au cœur d'un lieu secret où les jouets s'animent et où l'esprit de Noël s'exprime à chaque souffle.
-                                    Au centre de cet atelier merveilleux, trône une grande malle en bois... C'est là que commence l'incroyable aventure.
-                                </div>
-                            </div>
+        <!-- ============ Animation déambulation extérieur ============ -->
+        <section class="section" id="animation-exterieur">
+            <h2>Animation déambulation extérieur</h2>
+            <div class="spectacles-grid">
 
-                            <div class="detail-item">
-                                <div class="detail-label">Personnage :</div>
-                                <div class="detail-content">
-                                    Nani, la Lutine magicienne, entre en scène, curieuse et pétillante. Elle découvre une malle remplie d'objets magiques, tous plus extraordinaires les uns que les autres.
-                                </div>
-                            </div>
+                <Prestation
+                    id="jardin-des-bulles"
+                    title="Le Jardin des Bulles"
+                    tag="Déambulation en extérieur"
+                    images={[{ src: jardinDesBulles, alt: 'Bulles de savon lumineuses au-dessus d’une table' }]}
+                    reverse
+                >
+                    <!-- TEXTE PROVISOIRE -->
+                    <p>Au détour d'une allée, un jardin éphémère prend vie : des bulles s'envolent, scintillent au soleil et dansent au gré du vent. Petits et grands s'émerveillent, tentent de les attraper… et repartent le sourire aux lèvres. Une animation poétique en déambulation, idéale pour les fêtes de plein air.</p>
+                    <!-- /TEXTE PROVISOIRE -->
+                    <!-- TODO : durée et public à confirmer par la cliente -->
+                </Prestation>
 
-                            <div class="detail-item">
-                                <div class="detail-label">Contenu :</div>
-                                <div class="detail-content">
-                                    Des assiettes tourbillonnantes, des foulards enchantés, des boules lumineuses qui dansent comme des étoiles filantes.
-                                    Nani jongle, enchante, fait disparaître et réapparaître ses objets féeriques avec tendresse.
-                                    Les enfants rient, s'émerveillent et deviennent les apprentis d'un instant.
-                                </div>
-                            </div>
+            </div>
+        </section>
 
-                            <div class="detail-item">
-                                <div class="detail-content">
-                                    <em>"Tant que Nani la Lutine magicienne veille sur la malle, l'esprit de Noël ne s'éteindra jamais !"</em>
-                                </div>
-                            </div>
+        <!-- ============ Atelier ============ -->
+        <section class="section" id="ateliers">
+            <h2>L'Atelier « Bulles de Savon »</h2>
+            <div class="spectacles-grid">
 
-                            <div class="duration">
-                                ⏱️ Durée : 20 - 45 minutes
-                            </div>
+                <Prestation
+                    id="atelier-bulles"
+                    title="Atelier « Bulles de Savon »"
+                    tag="Atelier participatif"
+                    images={[{ src: atelierBulles, alt: 'Enfants découvrant les bulles de savon' }]}
+                    details={[{ label: 'Public', value: 'À partir de 6 ans' }]}
+                    devisLabel="Atelier Bulles de Savon"
+                >
+                    <!-- TEXTE PROVISOIRE -->
+                    <p>Comment naît une bulle ? Pourquoi brille-t-elle de toutes les couleurs ? Dans cet atelier ludique, les enfants découvrent les secrets des bulles de savon et apprennent à créer les leurs, des plus petites aux plus étonnantes. Un moment de découverte et d'émerveillement, où chacun repart avec des étoiles dans les yeux.</p>
+                    <!-- /TEXTE PROVISOIRE -->
+                    <!-- TODO : nombre de participants et durée à confirmer par la cliente -->
+                </Prestation>
 
-                            <div class="price">
-                                💰 Tarif : sur demande
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            </div>
+        </section>
 
-                <!-- Spectacle Cabaret -->
-                <div class="spectacle-card" id="spectacle-cabaret">
-                    <div class="spectacle-images">
-                        <Image src={cabaret} alt="Spectacle Cabaret - Étincelle magique" {...card} data-full={fullSrc.cabaret} />
-                    </div>
-                    <div class="spectacle-content">
-                        <h3><span class="emoji">🎭</span> Spectacle Cabaret - "Étincelle magique"</h3>
+        <!-- ============ Mariage ============ -->
+        <section class="section mariage" id="mariage">
+            <h2>Mariage</h2>
+            <p class="mariage-accroche">« L'art et l'émotion au cœur de votre mariage »</p>
 
-                        <div class="spectacle-details">
-                            <div class="detail-item">
-                                <div class="detail-label">Description :</div>
-                                <div class="detail-content">
-                                    Entrez dans l'univers singulier de Flory Anne, magicienne pour un spectacle de magie cabaret où mystère, poésie et illusion se mêlent dans une ambiance feutrée et intemporelle.
-                                    Sous les lumières tamisées d'un cabaret aux allures rétro, Flory Anne entre en scène. Élégante, toujours en interaction avec son public, elle enchaîne les numéros avec une grâce naturelle et une présence scénique captivante.
-                                </div>
-                            </div>
+            <!-- TEXTE PROVISOIRE -->
+            <p class="mariage-intro">Le plus beau jour de votre vie mérite une touche de magie. Des bulles de savon qui s'envolent autour de vous, la lumière qui les traverse, l'émotion de vos invités : Flory Animation compose avec vous un moment unique, élégant et poétique.</p>
+            <!-- /TEXTE PROVISOIRE -->
 
-                            <div class="detail-item">
-                                <div class="detail-label">Ambiance :</div>
-                                <div class="detail-content">
-                                    Chaque tableau est une surprise, chaque tour, un poème visuel. Flory Anne apporte une touche féminine et théâtrale.
-                                    Elle suscite l'émotion et l'émerveillement à chaque instant. Le spectacle commence d'un simple claquement de doigts où une étincelle apparaît.
-                                    Sur scène flotte la magie d'un instant comme des souvenirs suspendus.
-                                </div>
-                            </div>
+            <!-- TODO : photo de mariage à ajouter quand la cliente l'aura fournie -->
 
-                            <div class="detail-item">
-                                <div class="detail-label">Public :</div>
-                                <div class="detail-content">
-                                    Adultes
-                                </div>
-                            </div>
+            <div class="formules">
+                <article class="formule" id="mariage-instant-precieux">
+                    <p class="formule-label">Formule</p>
+                    <h3>Instant Précieux</h3>
+                    <p class="formule-moment">Pendant la séance photo des mariés</p>
+                    <!-- TEXTE PROVISOIRE -->
+                    <p class="formule-texte">Des nuées de bulles enveloppent les mariés pendant la séance photo et subliment chaque cliché. Des images lumineuses et pleines de poésie, souvenirs d'un instant suspendu.</p>
+                    <!-- /TEXTE PROVISOIRE -->
+                    <!-- TODO : durée à confirmer par la cliente -->
+                    <p class="formule-tarif">Tarif : sur demande</p>
+                    <a href={devisHref('Mariage, formule Instant Précieux')} class="devis-button">Demander un devis</a>
+                </article>
 
-                            <div class="duration">
-                                ⏱️ Durée : 20 - 30 minutes
-                            </div>
+                <article class="formule" id="mariage-eclat-de-bulles">
+                    <p class="formule-label">Formule</p>
+                    <h3>Éclat de Bulles</h3>
+                    <p class="formule-moment">Pendant le vin d'honneur</p>
+                    <!-- TEXTE PROVISOIRE -->
+                    <p class="formule-texte">Pendant le vin d'honneur, les bulles s'invitent parmi vos convives : elles dansent, scintillent et éclatent en sourires. Une animation joyeuse et raffinée qui crée la surprise et rassemble petits et grands.</p>
+                    <!-- /TEXTE PROVISOIRE -->
+                    <!-- TODO : durée à confirmer par la cliente -->
+                    <p class="formule-tarif">Tarif : sur demande</p>
+                    <a href={devisHref('Mariage, formule Éclat de Bulles')} class="devis-button">Demander un devis</a>
+                </article>
 
-                            <div class="price">
-                                💰 Tarif : sur demande
-                            </div>
+                <article class="formule formule--vedette" id="mariage-prestige">
+                    <p class="formule-label">Formule</p>
+                    <h3>Prestige</h3>
+                    <p class="formule-moment">« Entre Toi et Moi », spectacle féerique de bulles de savon</p>
+                    <!-- TEXTE PROVISOIRE -->
+                    <p class="formule-texte">« Entre Toi et Moi » est un spectacle féerique de bulles de savon imaginé comme une déclaration. Bulles géantes, jeux de lumière et poésie racontent votre histoire et offrent à vos invités un moment d'émotion inoubliable.</p>
+                    <!-- /TEXTE PROVISOIRE -->
+                    <!-- TODO : durée à confirmer par la cliente -->
+                    <p class="formule-tarif">Tarif : sur demande</p>
+                    <a href={devisHref('Mariage, formule Prestige')} class="devis-button">Demander un devis</a>
+                </article>
+            </div>
+        </section>
 
-                            <div class="interactive-badge">
-                                🎪 Spectacle de Scène
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <!-- ============ Dans ma bulle ============ -->
+        <section class="section" id="experience-bulle">
+            <h2>Dans ma bulle</h2>
+            <div class="spectacles-grid">
 
-                <!-- Animation Bar à Bulles -->
-                <div class="spectacle-card" id="animation-bar-bulles">
-                    <div>
-                        <Image src={barBulles} alt="Animation Le Bar à Bulles" {...card} data-full={fullSrc.barBulles} />
-                    </div>
-                    <div class="spectacle-content">
-                        <h3><span class="emoji">🫧</span>  Le Bar à Bulles</h3>
-
-                        <div class="spectacle-details">
-                            <div class="detail-item">
-                                <div class="detail-label">Format :</div>
-                                <div class="detail-content">
-                                    Animation d'intérieur en déambulation
-                                </div>
-                            </div>
-
-                            <div class="detail-item">
-                                <div class="detail-label">Description :</div>
-                                <div class="detail-content">
-                                    L'art éphémère du souffleur de bulles transforme un simple liquide en poésie aérienne.
-                                    Expérience unique, visuelle et sensorielle où chaque bulle raconte une histoire avant de s'envoler.
-                                    "C'est un art de l'instant, du vent et de la lumière. Un art qui ne se conserve pas… mais qui se vit"
-                                </div>
-                            </div>
-
-                            <div class="detail-item">
-                                <div class="detail-label">Public :</div>
-                                <div class="detail-content">
-                                    Tous publics (adultes et enfants)
-                                </div>
-                            </div>
-
-                            <div class="price">
-                                💰 Tarif : sur demande
-                            </div>
-                            <div class="interactive-badge">
-                                ✨ Animation de proximité
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Atelier des Bulles -->
-                <div class="spectacle-card reverse" id="atelier-bulles">
-                    <div>
-                        <Image src={atelierBulles} alt="Atelier Magie des bulles de savon" {...card} data-full={fullSrc.atelierBulles} />
-                    </div>
-                    <div class="spectacle-content">
-                        <h3><span class="emoji">🎨</span> Atelier "Bulles de Savon"</h3>
-
-                        <div class="spectacle-details">
-                            <div class="detail-item">
-                                <div class="detail-label">Format :</div>
-                                <div class="detail-content">
-                                    Atelier pédagogique participatif
-                                </div>
-                            </div>
-
-                            <div class="detail-item">
-                                <div class="detail-label">Description :</div>
-                                <div class="detail-content">
-                                    Atelier interactif permettant de découvrir l'art des bulles de savon.
-                                </div>
-                            </div>
-
-                            <div class="detail-item">
-                                <div class="detail-label">Participants :</div>
-                                <div class="detail-content">
-                                    Jusqu'à 15 par session
-                                </div>
-                            </div>
-
-                            <div class="detail-item">
-                                <div class="detail-label">Public :</div>
-                                <div class="detail-content">
-                                    Enfants à partir de 4 ans, familles, centres de loisirs
-                                </div>
-                            </div>
-
-                            <div class="duration">
-                                ⏱️ Durée : 30 min à 1h30
-                            </div>
-
-                            <div class="price">
-                                💰 Tarif : sur demande
-                            </div>
-
-                            <div class="interactive-badge">
-                                ✨ Atelier participatif
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <Prestation
+                    id="dans-ma-bulle"
+                    title="Dans ma bulle"
+                    tag="Vivre une expérience unique et éphémère : être dans une bulle géante"
+                    images={[{ src: dansMaBulle, alt: 'Flory Anne debout à l’intérieur d’une bulle de savon géante, sous une lumière bleue', portrait: true }]}
+                    reverse
+                >
+                    <!-- TEXTE PROVISOIRE -->
+                    <p>Et si vous entriez dans une bulle ? Le temps d'un instant, une bulle géante s'élève tout autour de vous et vous enveloppe de lumière. Une expérience unique et éphémère, à vivre en famille, entre amis ou lors d'un événement, pour des souvenirs inoubliables.</p>
+                    <!-- /TEXTE PROVISOIRE -->
+                    <!-- TODO : durée et public à confirmer par la cliente -->
+                </Prestation>
 
             </div>
         </section>
@@ -334,7 +260,7 @@ const card = { width: 600, class: 'spectacle-image' } as const;
             }
         });
     });
-    document.querySelectorAll('.spectacle-card').forEach((card) => observer.observe(card));
+    document.querySelectorAll('.spectacle-card, .formule').forEach((card) => observer.observe(card));
 
     // Lightbox
     const lightbox = document.getElementById('lightbox') as HTMLElement;

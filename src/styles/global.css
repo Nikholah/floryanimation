@@ -231,3 +231,21 @@ body {
         display: none;
     }
 }
+
+/* Texte réservé aux lecteurs d'écran et aux moteurs de recherche */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Les ancres ne passent pas sous la navbar fixe */
+[id] {
+    scroll-margin-top: 95px;
+}

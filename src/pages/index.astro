@@ -5,8 +5,7 @@ import '../styles/index.css';
 import { url } from '../lib/url';
 import { PHONE_DISPLAY, PHONE_HREF, devisHref } from '../lib/contact';
 
-import floryAnne from '../assets/img/FLORY_ANNE.jpg';
-import famille from '../assets/img/famille.jpg';
+import decor from '../assets/img/FOND_DECOR_FLORY_ANIMATION.jpg';
 ---
 <Base
     current="accueil"
@@ -14,49 +13,24 @@ import famille from '../assets/img/famille.jpg';
     description="Découvrez Flory Animation, spécialiste des spectacles magiques et animations intergénérationnelles. Réservez des moments inoubliables pour toute la famille."
     keywords="magie, animation, spectacles, intergénérationnel, Flory Animation"
 >
-    <!-- Hero Section -->
+    <!-- Bannière : photo « fond décor Flory Animation » (le nom est écrit dans l'image) -->
     <section id="accueil" class="hero">
+        <Image
+            src={decor}
+            alt="Flory Animation : une porte de bibliothèque ouverte sur une forêt enchantée illuminée"
+            class="hero-bg"
+            widths={[640, 960, 1280, 1600, 2000]}
+            sizes="100vw"
+            loading="eager"
+            fetchpriority="high"
+        />
         <div class="hero-content">
-            <!-- Bandeau saisonnier : visible de septembre à décembre (masqué par le script en dehors) -->
-            <a href={url('spectacles.html#spectacle-noel')} class="season-banner" id="seasonBanner" hidden>
-                <span aria-hidden="true">🎄</span> Noël : réservez <strong>Nani, la Lutine Magicienne</strong> pour votre arbre de Noël
-            </a>
-
-            <p class="hero-eyebrow">Magie · Jonglerie · Bulles de savon</p>
-            <h1>Spectacles de magie pour enfants, familles et événements</h1>
-            <p class="hero-zone">Partout en France et à l'international</p>
-
-            <div class="hero-actions">
-                <a href={devisHref()} class="cta-button">Demander un devis</a>
-                <a href={PHONE_HREF} class="cta-button cta-secondary"><span aria-hidden="true">📞</span> {PHONE_DISPLAY}</a>
-            </div>
-            <a href={url('spectacles.html')} class="hero-link">Découvrir nos spectacles →</a>
-
-            <div class="hero-lists">
-                <div class="hero-list-item">
-                    <h3>Collectivité</h3>
-                    <ul>
-                        <li>École, Mairie</li>
-                        <li>Centre Culturel</li>
-                        <li>Centres de Loisirs...</li>
-                    </ul>
-                </div>
-
-                <div class="hero-list-item">
-                    <h3>Événementiel</h3>
-                    <ul>
-                        <li>Soirée d'entreprise</li>
-                        <li>Arbre de Noël...</li>
-                    </ul>
-                </div>
-
-                <div class="hero-list-item">
-                    <h3>Particulier</h3>
-                    <ul>
-                        <li>Mariage</li>
-                        <li>Anniversaire...</li>
-                    </ul>
-                </div>
+            <!-- Titre conservé pour le référencement et les lecteurs d'écran, masqué visuellement -->
+            <h1 class="visually-hidden">Flory Animation : spectacles de magie et de bulles de savon</h1>
+            <a href={url('spectacles.html')} class="cta-button">Découvrir nos prestations</a>
+            <div class="hero-secondary">
+                <a href={devisHref()} class="cta-outline">Demander un devis</a>
+                <a href={PHONE_HREF} class="cta-outline"><span aria-hidden="true">📞</span> {PHONE_DISPLAY}</a>
             </div>
         </div>
     </section>
@@ -65,11 +39,15 @@ import famille from '../assets/img/famille.jpg';
     <section id="nous-connaitre" class="section">
         <h2>À propos de Flory Animation</h2>
         <div class="about-content">
+            <Image
+                src={decor}
+                alt="Décor féerique de Flory Animation"
+                class="about-image"
+                widths={[480, 880, 1320]}
+                sizes="(max-width: 960px) 90vw, 880px"
+            />
             <div class="about-text">
-                <div class="first-paragraph">
-                    <Image src={floryAnne} alt="Flory Anne - Artiste magicienne" class="flory-anne-image" width={120} height={150} densities={[1, 2]} fit="cover" />
-                    <p><strong>Flory Animation</strong>, c'est avant tout une histoire de passion et de transmission. Fondée par <strong>Flory Anne</strong>, fille de magiciens, l'univers du spectacle a bercé son enfance. Dès l'âge de 6 ans, elle fait ses premiers pas sur scène, tout en débutant des cours de danse classique et de piano.</p>
-                </div>
+                <p><strong>Flory Animation</strong>, c'est avant tout une histoire de passion et de transmission. Fondée par <strong>Flory Anne</strong>, fille de magiciens, l'univers du spectacle a bercé son enfance. Dès l'âge de 6 ans, elle fait ses premiers pas sur scène, tout en débutant des cours de danse classique et de piano.</p>
 
                 <p>À 14 ans, elle présente son premier numéro de magie en solo et parcourt la France, affirmant peu à peu son identité artistique. Sa rencontre marquante avec <strong>Annie Fratellini</strong> la plonge dans le monde du cirque, enrichissant sa palette avec l'acrobatie, la jonglerie et l'expression scénique.</p>
 
@@ -79,13 +57,8 @@ import famille from '../assets/img/famille.jpg';
 
                 <p>Sa plus belle création reste sa propre famille. Flory Anne devient maman en 1995, puis en 1999.<br>Deux sources d'inspiration qui enrichissent profondément son univers artistique et personnel.</p>
 
-                <div class="duo-paragraphs reverse">
-                    <Image src={famille} alt="Flory Animation - Duo artistique" class="duo-image" width={178} densities={[1, 2]} />
-                    <div class="duo-text">
-                        <p>Aujourd'hui, <strong>Flory Animation</strong> est bien plus qu'une compagnie artistique : c'est une aventure familiale, portée par la passion, la transmission et la joie de créer pour émerveiller petits et grands.</p>
-                        <p>Leur plus grand bonheur ? <strong>Partager avec vous la magie de leurs créations.</strong></p>
-                    </div>
-                </div>
+                <p>Aujourd'hui, <strong>Flory Animation</strong> est bien plus qu'une compagnie artistique : c'est une aventure familiale, portée par la passion, la transmission et la joie de créer pour émerveiller petits et grands.</p>
+                <p>Leur plus grand bonheur ? <strong>Partager avec vous la magie de leurs créations.</strong></p>
             </div>
         </div>
     </section>
@@ -113,12 +86,3 @@ import famille from '../assets/img/famille.jpg';
         </div>
     </section>
 </Base>
-
-<script>
-    // Bandeau de Noël : affiché seulement de septembre à décembre (mois 8 à 11 en JS).
-    // Calculé dans le navigateur pour ne pas dépendre de la date du dernier build.
-    const banner = document.getElementById('seasonBanner');
-    if (banner && new Date().getMonth() >= 8) {
-        banner.hidden = false;
-    }
-</script>

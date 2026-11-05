@@ -1,11 +1,12 @@
 ---
 /**
- * Carte d'une prestation (page Prestations).
- * Le texte descriptif est passé dans le slot par défaut.
+ * Carte d'une prestation (page Prestations, FR et EN).
+ * Le texte descriptif est passé dans `text` (HTML autorisé).
  */
 import { Image, getImage } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
-import { devisHref } from '../lib/contact';
+import { devisHref, type PrestationId } from '../lib/contact';
+import { UI, type Lang } from '../i18n/ui';
 
 interface Visual {
     src: ImageMetadata;
@@ -15,19 +16,22 @@ interface Visual {
 }
 
 interface Props {
+    lang: Lang;
     id: string;
     title: string;
     /** Petite étiquette sous le titre, par exemple « Ambiance Cabaret ». */
     tag?: string;
+    text: string;
     images?: Visual[];
     /** Infos factuelles affichées sous le texte (Public, Format…). */
-    details?: { label: string; value: string }[];
-    /** Nom utilisé dans l'objet de l'email de devis. */
-    devisLabel?: string;
+    details?: readonly { readonly label: string; readonly value: string }[];
+    /** Prestation présélectionnée dans le formulaire de devis. */
+    devisId: PrestationId;
     reverse?: boolean;
 }
 
-const { id, title, tag, images = [], details = [], devisLabel = title, reverse = false } = Astro.props;
+const { lang, id, title, tag, text, images = [], details = [], devisId, reverse = false } = Astro.props;
+const t = UI[lang];
 
 // Version grand format pour la lightbox
 const visuals = await Promise.all(
@@ -57,21 +61,19 @@ const visuals = await Promise.all(
 
         <div class="spectacle-details">
             <div class="detail-content spectacle-text">
-                <slot />
+                <p set:html={text} />
             </div>
 
             {details.map((d) => (
                 <div class="detail-item">
-                    <div class="detail-label">{d.label} :</div>
+                    <div class="detail-label">{d.label}{lang === 'fr' ? ' :' : ':'}</div>
                     <div class="detail-content">{d.value}</div>
                 </div>
             ))}
 
-            <slot name="extra" />
-
-            <div class="price">Tarif : sur demande</div>
+            <div class="price">{t.prestation.price}</div>
             <div>
-                <a href={devisHref(devisLabel)} class="devis-button">Demander un devis</a>
+                <a href={devisHref(devisId, lang)} class="devis-button">{t.prestation.quote}</a>
             </div>
         </div>
     </div>

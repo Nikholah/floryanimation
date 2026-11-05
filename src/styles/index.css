@@ -265,6 +265,8 @@
 .contact-item a {
     color: white;
     text-decoration: none;
+    max-width: 100%;
+    overflow-wrap: anywhere; /* l'adresse email peut passer à la ligne au lieu de déborder */
 }
 
 /* Bandeau d'accroches (réassurance) entre la bannière et À propos */

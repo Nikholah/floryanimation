@@ -1,0 +1,74 @@
+---
+/** Contenu de la page d'accueil, commun au français (src/pages/index.astro) et à l'anglais (src/pages/en/index.astro). */
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import ContactSection from '../components/ContactSection.astro';
+import '../styles/index.css';
+import { PHONE_HREF, devisHref } from '../lib/contact';
+import { pageUrl, UI, type Lang } from '../i18n/ui';
+import { HOME } from '../i18n/home';
+
+import decor from '../assets/img/FOND_DECOR_FLORY_ANIMATION.jpg';
+
+interface Props {
+    lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = HOME[lang];
+const ui = UI[lang];
+---
+<Base lang={lang} page="accueil" title={t.title} description={t.description} keywords={t.keywords}>
+    <!-- Bannière : photo « fond décor Flory Animation » (le nom est écrit dans l'image) -->
+    <section id="accueil" class="hero">
+        <Image
+            src={decor}
+            alt={t.heroAlt}
+            class="hero-bg"
+            widths={[640, 960, 1280, 1600, 2000]}
+            sizes="100vw"
+            loading="eager"
+            fetchpriority="high"
+        />
+        <div class="hero-content">
+            <!-- Titre conservé pour le référencement et les lecteurs d'écran, masqué visuellement -->
+            <h1 class="visually-hidden">{t.h1}</h1>
+            <a href={pageUrl('prestations', lang)} class="cta-button">{t.discover}</a>
+            <div class="hero-secondary">
+                <a href={devisHref(undefined, lang)} class="cta-outline">{t.quote}</a>
+                <a href={PHONE_HREF} class="cta-outline"><span aria-hidden="true">📞</span> {ui.phoneDisplay}</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Accroches de réassurance (sans âge ni dates : voir CLAUDE.md, « Ton des textes ») -->
+    <section class="atouts" aria-label={t.atoutsLabel}>
+        <ul class="atouts-list">
+            {t.atouts.map((a) => (
+                <li class="atout">
+                    <span class="atout-icon" aria-hidden="true">{a.icon}</span>
+                    <span class="atout-text">{a.text}</span>
+                </li>
+            ))}
+        </ul>
+    </section>
+
+    <!-- Nous Connaître -->
+    <section id="nous-connaitre" class="section">
+        <h2>{t.aboutTitle}</h2>
+        <div class="about-content">
+            <Image
+                src={decor}
+                alt={t.aboutAlt}
+                class="about-image"
+                widths={[480, 880, 1320]}
+                sizes="(max-width: 960px) 90vw, 880px"
+            />
+            <div class="about-text">
+                {t.about.map((p) => <p set:html={p} />)}
+            </div>
+        </div>
+    </section>
+
+    <ContactSection lang={lang} variant="accueil" />
+</Base>

@@ -1,0 +1,71 @@
+---
+import Base from '../../layouts/Base.astro';
+import '../../styles/legal.css';
+import { pageUrl } from '../../i18n/ui';
+import { EMAIL, INSTAGRAM_URL, PHONE_HREF, PHONE_INTL } from '../../lib/contact';
+import { HEBERGEUR, LEGAL } from '../../lib/legal';
+---
+<Base lang="en" page="mentions" title="Legal notice - Flory Animation" description="Legal notice of the Flory Animation website: publisher, hosting provider and intellectual property.">
+    <!-- TEXTE PROVISOIRE : traduction du modèle de mentions légales, à faire valider (ce n'est pas un avis juridique).
+         La version française fait foi. -->
+    <main class="legal-page">
+        <h1>Legal notice</h1>
+
+        <section>
+            <h2>Publisher</h2>
+            <p>
+                <strong>{LEGAL.denomination}</strong>, registered non-profit association under French law (association déclarée)<br>
+                Registered office: {LEGAL.siegeVille}, France<br>
+                SIRET: {LEGAL.siret}<br>
+                Activity: performing arts<br>
+                Phone: <a href={PHONE_HREF}>{PHONE_INTL}</a><br>
+                Email: <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+            </p>
+        </section>
+
+        <section>
+            <h2>Publication director</h2>
+            {LEGAL.directeurPublication
+                ? <p>{LEGAL.directeurPublication}</p>
+                : <p class="todo">To be completed: name of the person responsible for the publication (usually the president of the association).</p>}
+        </section>
+
+        <section>
+            <h2>Hosting</h2>
+            <p>
+                {HEBERGEUR.nom}<br>
+                {HEBERGEUR.adresse.replace('États-Unis', 'United States')}<br>
+                <a href={HEBERGEUR.site} target="_blank" rel="noopener noreferrer">{HEBERGEUR.site.replace('https://', '')}</a>
+            </p>
+        </section>
+
+        <section>
+            <h2>Intellectual property</h2>
+            <p>
+                All content on this website (texts, photographs, posters, illustrations, logo and videos) is the property of
+                {LEGAL.denomination} or is used with the permission of its authors. Any reproduction, representation or
+                distribution, in whole or in part, without prior written permission is prohibited.
+            </p>
+        </section>
+
+        <section>
+            <h2>External links</h2>
+            <p>
+                This website contains links to other websites, including our
+                <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">Instagram</a> page.
+                {LEGAL.denomination} is not responsible for the content of these websites.
+            </p>
+        </section>
+
+        <section>
+            <h2>Personal data</h2>
+            <p>
+                To find out how your data is used, please read our
+                <a href={pageUrl('confidentialite', 'en')}>privacy policy</a>.
+            </p>
+        </section>
+
+        <p class="legal-note">The French version of this notice is the authoritative version: <a href={pageUrl('mentions', 'fr')} hreflang="fr" lang="fr">Mentions légales</a>.</p>
+    </main>
+    <!-- /TEXTE PROVISOIRE -->
+</Base>

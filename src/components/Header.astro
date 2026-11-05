@@ -1,60 +1,58 @@
 ---
-import { url } from '../lib/url';
-import { PHONE_DISPLAY, PHONE_HREF } from '../lib/contact';
+import { PHONE_HREF } from '../lib/contact';
+import { pageUrl, UI, type Lang, type PageKey } from '../i18n/ui';
 
 interface Props {
-    /** Page courante : sert à construire les liens et à marquer l'onglet actif. */
-    current: 'accueil' | 'prestations' | 'devis' | 'legal';
+    lang: Lang;
+    /** Page courante : sert à construire les liens, à marquer l'onglet actif et au sélecteur de langue. */
+    page: PageKey;
 }
 
-const { current } = Astro.props;
-const onHome = current === 'accueil';
+const { lang, page } = Astro.props;
+const t = UI[lang];
+const otherLang: Lang = lang === 'fr' ? 'en' : 'fr';
+const onHome = page === 'accueil';
 // Sur l'accueil, ancres locales (défilement fluide) ; ailleurs, liens vers l'accueil.
-const home = (anchor: string) => (onHome ? `#${anchor}` : url(`index.html#${anchor}`));
-const show = (anchor: string) => (current === 'prestations' ? `#${anchor}` : url(`spectacles.html#${anchor}`));
-
-const prestations = [
-    { anchor: 'bubble-magic-show', label: 'Bubble Magic Show' },
-    { anchor: 'la-valise', label: 'La Valise' },
-    { anchor: 'spectacles-thematiques', label: 'Spectacles thématiques' },
-    { anchor: 'jardin-des-bulles', label: 'Le Jardin des Bulles' },
-    { anchor: 'atelier-bulles', label: 'Atelier Bulles de Savon' },
-    { anchor: 'mariage', label: 'Mariage' },
-    { anchor: 'dans-ma-bulle', label: 'Dans ma bulle' },
-    { anchor: 'infos-pratiques', label: 'Informations pratiques' },
-];
+const home = (anchor: string) => (onHome ? `#${anchor}` : pageUrl('accueil', lang, anchor));
+const show = (anchor: string) => (page === 'prestations' ? `#${anchor}` : pageUrl('prestations', lang, anchor));
 ---
-<nav class="navbar" aria-label="Menu principal">
+<nav class="navbar" aria-label={t.nav.label}>
     <div class="nav-container">
-        <a href={onHome ? '#accueil' : url('index.html')} class="logo">✨ Flory Animation</a>
+        <a href={onHome ? '#accueil' : pageUrl('accueil', lang)} class="logo">✨ Flory Animation</a>
 
         <!-- Bouton du menu mobile (visible sous 768 px) -->
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
-            <span class="visually-hidden">Menu</span>
+            <span class="visually-hidden">{t.nav.menu}</span>
             <span class="nav-toggle-bar" aria-hidden="true"></span>
             <span class="nav-toggle-bar" aria-hidden="true"></span>
             <span class="nav-toggle-bar" aria-hidden="true"></span>
         </button>
 
         <ul class="nav-links" id="nav-links">
-            <li><a href={onHome ? '#accueil' : url('index.html')}>Accueil</a></li>
-            <li><a href={home('nous-connaitre')}>À propos</a></li>
+            <li><a href={onHome ? '#accueil' : pageUrl('accueil', lang)}>{t.nav.home}</a></li>
+            <li><a href={home('nous-connaitre')}>{t.nav.about}</a></li>
             <li class="dropdown">
                 <div class="dropdown-head">
-                    <a href={url('spectacles.html')} class:list={{ active: current === 'prestations' }}>Prestations</a>
+                    <a href={pageUrl('prestations', lang)} class:list={{ active: page === 'prestations' }}>{t.nav.prestations}</a>
                     <button class="dropdown-toggle" type="button" aria-expanded="false" aria-controls="sous-menu-prestations">
-                        <span class="visually-hidden">Afficher la liste des prestations</span>
+                        <span class="visually-hidden">{t.nav.submenuToggle}</span>
                         <span class="dropdown-arrow" aria-hidden="true">▼</span>
                     </button>
                 </div>
                 <ul class="dropdown-content" id="sous-menu-prestations">
-                    {prestations.map((p) => <li><a href={show(p.anchor)}>{p.label}</a></li>)}
+                    {t.prestationsMenu.map((p) => <li><a href={show(p.anchor)}>{p.label}</a></li>)}
                 </ul>
             </li>
-            <li><a href={home('contact')}>Contact</a></li>
+            <li><a href={home('contact')}>{t.nav.contact}</a></li>
         </ul>
 
+        <!-- Sélecteur de langue : page équivalente dans l'autre langue (visible à toutes les tailles d'écran) -->
+        <a href={pageUrl(page, otherLang)} class="lang-switch" hreflang={otherLang} lang={otherLang} title={t.langSwitch.title}>
+            <span aria-hidden="true">{t.langSwitch.label}</span>
+            <span class="visually-hidden">{t.langSwitch.title}</span>
+        </a>
+
         <!-- Téléphone (grand écran ; sur mobile et tablette, voir la barre d'action en bas) -->
-        <a href={PHONE_HREF} class="nav-phone"><span aria-hidden="true">📞</span> {PHONE_DISPLAY}</a>
+        <a href={PHONE_HREF} class="nav-phone"><span aria-hidden="true">📞</span> {t.phoneDisplay}</a>
     </div>
 </nav>

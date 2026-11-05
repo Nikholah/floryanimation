@@ -1,4 +1,4 @@
-import { url } from './url';
+import { pageUrl, type Lang } from '../i18n/ui';
 
 /** Coordonnées de contact, à réutiliser partout (header, hero, cartes, footer). */
 export const PHONE_DISPLAY = '06 67 78 54 19';
@@ -18,26 +18,30 @@ export const WEB3FORMS_ACCESS_KEY = '';
 
 /**
  * Prestations proposées dans la liste du formulaire de devis.
- * Les libellés doivent correspondre à ceux passés à devisHref() pour être présélectionnés.
+ * - id : identifiant passé dans l'URL (devis.html?prestation=<id>) pour présélectionner la prestation ;
+ * - fr : libellé envoyé à la cliente dans l'email (toujours en français) et affiché en français ;
+ * - en : libellé affiché sur la version anglaise du formulaire.
  */
 export const PRESTATIONS_DEVIS = [
-    'Bubble Magic Show',
-    'La Valise',
-    'Spectacle Carnaval',
-    'Spectacle de Noël',
-    'Le Jardin des Bulles',
-    'Atelier Bulles de Savon',
-    'Mariage, formule Instant Précieux',
-    'Mariage, formule Éclat de Bulles',
-    'Mariage, formule Prestige',
-    'Dans ma bulle',
+    { id: 'bubble-magic-show', fr: 'Bubble Magic Show', en: 'Bubble Magic Show' },
+    { id: 'la-valise', fr: 'La Valise', en: 'La Valise (The Suitcase)' },
+    { id: 'carnaval', fr: 'Spectacle Carnaval', en: 'Carnival show' },
+    { id: 'noel', fr: 'Spectacle de Noël', en: 'Christmas show' },
+    { id: 'jardin-des-bulles', fr: 'Le Jardin des Bulles', en: 'The Bubble Garden' },
+    { id: 'atelier-bulles', fr: 'Atelier Bulles de Savon', en: 'Soap Bubble Workshop' },
+    { id: 'mariage-instant-precieux', fr: 'Mariage, formule Instant Précieux', en: 'Wedding, Instant Précieux package' },
+    { id: 'mariage-eclat-de-bulles', fr: 'Mariage, formule Éclat de Bulles', en: 'Wedding, Éclat de Bulles package' },
+    { id: 'mariage-prestige', fr: 'Mariage, formule Prestige', en: 'Wedding, Prestige package' },
+    { id: 'dans-ma-bulle', fr: 'Dans ma bulle', en: 'Inside My Bubble' },
 ] as const;
 
+export type PrestationId = (typeof PRESTATIONS_DEVIS)[number]['id'];
+
 /**
- * Lien « Demander un devis » : page du formulaire, avec la prestation présélectionnée.
- * @param prestation libellé de la prestation (voir PRESTATIONS_DEVIS)
+ * Lien « Demander un devis » : page du formulaire (dans la langue demandée),
+ * avec la prestation présélectionnée.
  */
-export function devisHref(prestation?: string): string {
-    const base = url('devis.html');
-    return prestation ? `${base}?prestation=${encodeURIComponent(prestation)}` : base;
+export function devisHref(prestation?: PrestationId, lang: Lang = 'fr'): string {
+    const base = pageUrl('devis', lang);
+    return prestation ? `${base}?prestation=${prestation}` : base;
 }

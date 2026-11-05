@@ -1,0 +1,253 @@
+---
+/**
+ * Contenu de la page Prestations, commun au français (src/pages/spectacles.astro)
+ * et à l'anglais (src/pages/en/shows.astro). Textes : src/i18n/prestations.ts.
+ */
+import Base from '../layouts/Base.astro';
+import Prestation from '../components/Prestation.astro';
+import ContactSection from '../components/ContactSection.astro';
+import '../styles/spectacles.css';
+import { devisHref, type PrestationId } from '../lib/contact';
+import { UI, type Lang } from '../i18n/ui';
+import { PRESTATIONS } from '../i18n/prestations';
+
+import bubbleMagicShow from '../assets/img/BUBBLE_MAGIC_SHOW.jpg';
+import laValise from '../assets/img/LA_VALISE.png';
+import afficheCarnaval from '../assets/img/AFFICHE_CARNAVAL_DE_NANI.jpg';
+import afficheNoelNani from '../assets/img/AFFICHE_NOEL_NANI_LA_LUTINE.png';
+import afficheNoelBulles from '../assets/img/AFFICHE_NOEL_BULLES_DE_NOEL.png';
+import jardinDesBulles from '../assets/img/BULLE_SAVON_TABLE_LUMINEUSE.jpg';
+import atelierBulles from '../assets/img/les_bulles.jpeg';
+import dansMaBulle from '../assets/img/DANS_MA_BULLE.jpg';
+
+interface Props {
+    lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = PRESTATIONS[lang];
+const ui = UI[lang];
+---
+<Base lang={lang} page="prestations" title={t.title} description={t.description}>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+
+        <div class="hero-content">
+            <h1>{t.heroTitle}</h1>
+            <p><strong>{t.heroText}</strong></p>
+        </div>
+    </section>
+
+    <main class="main-content">
+
+        <!-- ============ Spectacles ============ -->
+        <section class="section" id="nos-spectacles">
+            <h2>{t.sections.spectacles}</h2>
+            <div class="spectacles-grid">
+                <Prestation
+                    lang={lang}
+                    id="bubble-magic-show"
+                    title={t.bubbleMagicShow.title}
+                    tag={t.bubbleMagicShow.tag}
+                    text={t.bubbleMagicShow.text}
+                    images={[{ src: bubbleMagicShow, alt: t.bubbleMagicShow.alt }]}
+                    devisId="bubble-magic-show"
+                    reverse
+                />
+                <Prestation
+                    lang={lang}
+                    id="la-valise"
+                    title={t.laValise.title}
+                    tag={t.laValise.tag}
+                    text={t.laValise.text}
+                    images={[{ src: laValise, alt: t.laValise.alt, portrait: true }]}
+                    devisId="la-valise"
+                />
+            </div>
+        </section>
+
+        <!-- ============ Spectacles thématiques ============ -->
+        <section class="section" id="spectacles-thematiques">
+            <h2>{t.sections.thematiques}</h2>
+            <div class="spectacles-grid">
+                <Prestation
+                    lang={lang}
+                    id="carnaval"
+                    title={t.carnaval.title}
+                    tag={t.carnaval.tag}
+                    text={t.carnaval.text}
+                    images={[{ src: afficheCarnaval, alt: t.carnaval.alt, portrait: true }]}
+                    devisId="carnaval"
+                    reverse
+                />
+                <Prestation
+                    lang={lang}
+                    id="spectacle-noel"
+                    title={t.noel.title}
+                    tag={t.noel.tag}
+                    text={t.noel.text}
+                    images={[
+                        { src: afficheNoelNani, alt: t.noel.altNani, portrait: true },
+                        { src: afficheNoelBulles, alt: t.noel.altBulles, portrait: true },
+                    ]}
+                    devisId="noel"
+                />
+            </div>
+        </section>
+
+        <!-- ============ Animation déambulation extérieur ============ -->
+        <section class="section" id="animation-exterieur">
+            <h2>{t.sections.exterieur}</h2>
+            <div class="spectacles-grid">
+                <Prestation
+                    lang={lang}
+                    id="jardin-des-bulles"
+                    title={t.jardin.title}
+                    tag={t.jardin.tag}
+                    text={t.jardin.text}
+                    images={[{ src: jardinDesBulles, alt: t.jardin.alt }]}
+                    devisId="jardin-des-bulles"
+                    reverse
+                />
+            </div>
+        </section>
+
+        <!-- ============ Atelier ============ -->
+        <section class="section" id="ateliers">
+            <h2>{t.sections.atelier}</h2>
+            <div class="spectacles-grid">
+                <Prestation
+                    lang={lang}
+                    id="atelier-bulles"
+                    title={t.atelier.title}
+                    tag={t.atelier.tag}
+                    text={t.atelier.text}
+                    images={[{ src: atelierBulles, alt: t.atelier.alt }]}
+                    details={t.atelier.details}
+                    devisId="atelier-bulles"
+                />
+            </div>
+        </section>
+
+        <!-- ============ Mariage ============ -->
+        <section class="section mariage" id="mariage">
+            <h2>{t.sections.mariage}</h2>
+            <p class="mariage-accroche">{t.mariage.accroche}</p>
+            <p class="mariage-intro">{t.mariage.intro}</p>
+            <!-- TODO : photo de mariage à ajouter quand la cliente l'aura fournie -->
+
+            <div class="formules">
+                {t.mariage.formules.map((f) => (
+                    <article class:list={['formule', { 'formule--vedette': f.id === 'mariage-prestige' }]} id={f.id}>
+                        <p class="formule-label">{ui.prestation.formula}</p>
+                        <h3>{f.nom}</h3>
+                        <p class="formule-moment">{f.moment}</p>
+                        <p class="formule-texte">{f.texte}</p>
+                        <p class="formule-tarif">{ui.prestation.price}</p>
+                        <a href={devisHref(f.id as PrestationId, lang)} class="devis-button">{ui.prestation.quote}</a>
+                    </article>
+                ))}
+            </div>
+        </section>
+
+        <!-- ============ Dans ma bulle ============ -->
+        <section class="section" id="experience-bulle">
+            <h2>{t.sections.bulle}</h2>
+            <div class="spectacles-grid">
+                <Prestation
+                    lang={lang}
+                    id="dans-ma-bulle"
+                    title={t.bulle.title}
+                    tag={t.bulle.tag}
+                    text={t.bulle.text}
+                    images={[{ src: dansMaBulle, alt: t.bulle.alt, portrait: true }]}
+                    devisId="dans-ma-bulle"
+                    reverse
+                />
+            </div>
+        </section>
+
+        <!-- ============ Informations pratiques ============ -->
+        <!-- Pas de FAQ séparée : elle répétait ces encadrés. À ajouter seulement pour des questions
+             non couvertes ici (délai de réservation, déplacements…), quand la cliente aura répondu. -->
+        <section class="section infos-pratiques" id="infos-pratiques">
+            <h2>{t.sections.infos}</h2>
+            <ul class="infos-grid">
+                {t.infos.map((info) => (
+                    <li class="info">
+                        <span class="info-icon" aria-hidden="true">{info.icon}</span>
+                        <h3>{info.title}</h3>
+                        <p>{info.text}</p>
+                    </li>
+                ))}
+            </ul>
+            <p class="infos-cta">
+                <a href={devisHref(undefined, lang)} class="devis-button">{t.infosCta}</a>
+            </p>
+        </section>
+
+        <ContactSection lang={lang} variant="prestations" />
+    </main>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <button class="lightbox-close" type="button" aria-label={ui.lightbox.close}>&times;</button>
+        <div class="lightbox-content">
+            <img id="lightbox-image" class="lightbox-image" src="" alt={ui.lightbox.alt}>
+        </div>
+    </div>
+</Base>
+
+<script>
+    // Animation d'apparition des cartes
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                (entry.target as HTMLElement).style.animation = 'fadeInUp 0.6s ease forwards';
+            }
+        });
+    });
+    document.querySelectorAll('.spectacle-card, .formule').forEach((card) => observer.observe(card));
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox') as HTMLElement;
+    const lightboxImage = document.getElementById('lightbox-image') as HTMLImageElement;
+
+    function openLightbox(src: string, alt: string) {
+        lightboxImage.src = src;
+        lightboxImage.alt = alt;
+        lightbox.style.display = 'flex';
+        setTimeout(() => lightbox.classList.add('show'), 10);
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove('show');
+        setTimeout(() => {
+            lightbox.style.display = 'none';
+            lightboxImage.src = '';
+        }, 300);
+        document.body.style.overflow = 'auto';
+    }
+
+    document.querySelectorAll<HTMLImageElement>('.spectacle-image').forEach((image) => {
+        image.addEventListener('click', () => openLightbox(image.dataset.full ?? image.currentSrc, image.alt));
+    });
+
+    lightbox.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        if (target === lightbox || target.classList.contains('lightbox-image') || target.classList.contains('lightbox-close')) {
+            closeLightbox();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('show')) closeLightbox();
+    });
+</script>

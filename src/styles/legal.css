@@ -58,3 +58,9 @@
         font-size: 1.9rem;
     }
 }
+
+.legal-page .legal-note {
+    margin-top: 2.5rem;
+    font-size: 0.9rem;
+    color: #666;
+}

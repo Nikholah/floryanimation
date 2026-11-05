@@ -1,0 +1,89 @@
+---
+import Base from '../../layouts/Base.astro';
+import '../../styles/legal.css';
+import { pageUrl } from '../../i18n/ui';
+import { EMAIL } from '../../lib/contact';
+import { HEBERGEUR, LEGAL } from '../../lib/legal';
+---
+<Base lang="en" page="confidentialite" title="Privacy policy - Flory Animation" description="How Flory Animation uses and protects the information sent through the quote request form.">
+    <!-- TEXTE PROVISOIRE : traduction du modèle de politique de confidentialité, à faire valider (ce n'est pas un avis juridique).
+         La version française fait foi. À mettre à jour en même temps que la version française. -->
+    <main class="legal-page">
+        <h1>Privacy policy</h1>
+
+        <section>
+            <h2>Data controller</h2>
+            <p>
+                {LEGAL.denomination}, registered non-profit association under French law, {LEGAL.siegeVille}, France.<br>
+                Contact: <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+            </p>
+        </section>
+
+        <section>
+            <h2>Data we collect</h2>
+            <p>When you fill in the <a href={pageUrl('devis', 'en')}>quote request form</a>, we receive:</p>
+            <ul>
+                <li>your name, your email address and, if you choose to give it, your phone number;</li>
+                <li>information about your event: type of organisation, requested show, date, location, number and age of spectators, indoors or outdoors;</li>
+                <li>the content of your message.</li>
+            </ul>
+            <p>When you contact us by phone or email, we receive the information you choose to send us.</p>
+        </section>
+
+        <section>
+            <h2>How we use your data</h2>
+            <p>
+                This information is used only to reply to your request, prepare a quote and, if you confirm, organise the show.
+                It is never sold, rented or used for advertising.
+            </p>
+            <p>
+                This processing is based on your request: these are pre-contractual steps taken at your initiative
+                (Article 6(1)(b) of the General Data Protection Regulation).
+            </p>
+        </section>
+
+        <section>
+            <h2>Recipients</h2>
+            <p>Your data is intended only for {LEGAL.denomination}. To run this website, we use two technical service providers:</p>
+            <ul>
+                <li>
+                    <strong>Web3Forms</strong>, which forwards the content of the quote form by email
+                    (<a href="https://web3forms.com/privacy" target="_blank" rel="noopener noreferrer">Web3Forms privacy policy</a>);
+                </li>
+                <li><strong>{HEBERGEUR.nom}</strong>, which hosts the website and may record technical connection data (such as IP addresses).</li>
+            </ul>
+            <p>These providers may process data outside the European Union.</p>
+        </section>
+
+        <section>
+            <h2>Retention period</h2>
+            <p>
+                Your data is kept for as long as needed to handle your request and follow up on the booking, then for no more
+                than 3 years after our last exchange. Invoices are kept for the period required by law.
+            </p>
+        </section>
+
+        <section>
+            <h2>Your rights</h2>
+            <p>
+                You may at any time ask to access, correct or delete your data, restrict or object to its use, or receive a copy
+                of it. Simply write to <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.
+            </p>
+            <p>
+                If you believe your rights have not been respected, you may lodge a complaint with the French data protection
+                authority, the CNIL (<a href="https://www.cnil.fr/en" target="_blank" rel="noopener noreferrer">cnil.fr</a>).
+            </p>
+        </section>
+
+        <section>
+            <h2>Cookies</h2>
+            <p>
+                This website does not set any cookies and does not use any audience measurement or advertising tools.
+                That is why no consent banner is displayed.
+            </p>
+        </section>
+
+        <p class="legal-note">The French version of this policy is the authoritative version: <a href={pageUrl('confidentialite', 'fr')} hreflang="fr" lang="fr">Politique de confidentialité</a>.</p>
+    </main>
+    <!-- /TEXTE PROVISOIRE -->
+</Base>

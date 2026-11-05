@@ -1,7 +1,7 @@
 # CLAUDE.md — Site Flory Animation
 
 Document de référence pour toutes les sessions de travail sur ce dépôt.
-Dernière mise à jour : 2026-11-05 (nouvelles prestations, menu mobile, barre d'action, formulaire de devis, infos pratiques, accroches, pied de page et pages légales).
+Dernière mise à jour : 2026-11-05 (site bilingue FR/EN, pied de page et pages légales, formulaire de devis, infos pratiques, accroches).
 
 ---
 
@@ -21,7 +21,7 @@ Dernière mise à jour : 2026-11-05 (nouvelles prestations, menu mobile, barre d
   | Mariage | « L'art et l'émotion au cœur de votre mariage » : formules **Instant Précieux** (bulles pendant la séance photo), **Éclat de Bulles** (pendant le vin d'honneur), **Prestige** (« Entre Toi et Moi », spectacle féerique de bulles de savon) | cible particuliers | aucune photo (TODO) | `mariage`, `mariage-instant-precieux`, `mariage-eclat-de-bulles`, `mariage-prestige` |
   | Dans ma bulle | Vivre une expérience unique et éphémère : être dans une bulle géante | — | `DANS_MA_BULLE.jpg` | `dans-ma-bulle` |
 - **Anciennes prestations supprimées le 2026-11-05** : L'atelier magique, Nani la Lutine Magicienne (ancienne fiche), Cabaret « Étincelle magique », Bar à Bulles, ancien Atelier Bulles (dès 4 ans), ainsi que les mascottes.
-- **Textes provisoires** : tous les textes descriptifs de `src/pages/spectacles.astro` sont des **versions de test** rédigées par Claude, en attendant les textes définitifs de la cliente. Chacun est entouré de `<!-- TEXTE PROVISOIRE -->` … `<!-- /TEXTE PROVISOIRE -->` (12 blocs : Bubble Magic Show, La Valise, Carnaval, Noël, Jardin des Bulles, Atelier, introduction Mariage, 3 formules Mariage, Dans ma bulle, section Informations pratiques). Les infos manquantes (durées, publics, nombre de participants, photo Mariage) sont signalées par des commentaires `<!-- TODO … -->`. Sur l'accueil (`src/pages/index.astro`), le bandeau d'accroches est aussi balisé `TEXTE PROVISOIRE`, et la phrase de la bio réécrite sans dates est balisée `TEXTE MODIFIÉ`. Chercher `TEXTE PROVISOIRE`, `TEXTE MODIFIÉ` et `TODO` pour les retrouver.
+- **Textes provisoires** : tous les textes descriptifs des prestations sont des **versions de test** rédigées par Claude, en attendant les textes définitifs de la cliente. Depuis le passage au bilingue, **les textes ne sont plus dans les pages mais dans `src/i18n/`** : `prestations.ts` (cartes, Mariage, informations pratiques), `home.ts` (accroches et bio ; une phrase de la bio est balisée `TEXTE MODIFIÉ`), `devis.ts` ; les pages légales (`mentions-legales.astro`, `confidentialite.astro` et leurs versions `en/`) sont des modèles balisés `<!-- TEXTE PROVISOIRE -->`. **Toute la version anglaise est une première traduction à faire relire** par une personne anglophone. Infos manquantes : commentaires `TODO`. Chercher `TEXTE PROVISOIRE`, `TEXTE MODIFIÉ` et `TODO` pour les retrouver.
 - **Cibles** : collectivités (écoles, mairies, centres culturels, centres de loisirs), événementiel (soirées d'entreprise, arbres de Noël des CSE), particuliers (mariages, anniversaires).
 - **Zone d'intervention : France entière et international.** Le site doit donc être **bilingue français / anglais** (voir §6, décision D1).
 - **Objectif n°1** : générer des **demandes de devis et des réservations**.
@@ -42,24 +42,27 @@ Dernière mise à jour : 2026-11-05 (nouvelles prestations, menu mobile, barre d
 ### Stack (depuis le 2026-11-05)
 - **Astro 7** (site 100 % statique, `output: static`), TypeScript pour les scripts, CSS natif. Seule dépendance : `astro` (avec `sharp` pour les images).
 - **Node.js ≥ 22.23.4** (installé en local : Node 26 LTS, dans `C:\Program Files\nodejs`).
-- Migration faite **à l'identique** : même rendu, mêmes URL (`/index.html`, `/spectacles.html` grâce à `build.format: 'file'`), mêmes ancres. Seules différences voulues : images optimisées en WebP avec `srcset` et lazy loading, favicon de 64 px, code mort supprimé (modale, `.card`, `.bubble` de l'accueil, bouton Instagram inutilisé), styles inline remplacés par des classes, `onclick` remplacés par des écouteurs, boutons du carrousel et de la lightbox avec `aria-label`, ordre du menu déroulant harmonisé.
-- i18n Astro déjà configuré (`fr` par défaut sans préfixe, `en` sous `/en/`), aucune page anglaise encore.
+- Migration faite **à l'identique** : même rendu, mêmes URL françaises (`/index.html`, `/spectacles.html`… grâce à `build.format: 'preserve'`, qui produit aussi `en/index.html`), mêmes ancres. Seules différences voulues : images optimisées en WebP avec `srcset` et lazy loading, favicon de 64 px, code mort supprimé, styles inline remplacés par des classes, `onclick` remplacés par des écouteurs, boutons du carrousel et de la lightbox avec `aria-label`, ordre du menu déroulant harmonisé.
+- **Site bilingue FR / EN** (depuis le 2026-11-05) : français à la racine, anglais sous `/en/` (`en/`, `en/shows.html`, `en/quote.html`, `en/legal-notice.html`, `en/privacy.html`). Chaque page a ses balises `hreflang` (fr, en, x-default = fr) et un bouton de langue (« EN » / « FR ») qui mène à la page équivalente. Routes et libellés communs : `src/i18n/ui.ts` (`ROUTES`, `pageUrl(page, lang, ancre)`, `UI`).
 
 ### Structure du dépôt
 ```
 floryanimation/
-├── astro.config.mjs        # site/base via SITE_URL et BASE_PATH, build.format 'file', i18n fr/en
+├── astro.config.mjs        # site/base via SITE_URL et BASE_PATH, build.format 'preserve', i18n fr/en
 ├── package.json            # scripts dev / build / preview
 ├── src/
-│   ├── layouts/Base.astro  # <head>, favicon généré, Header, boutons flottants, script commun
-│   ├── components/         # Header.astro (prop current, liste du menu Prestations, téléphone), Footer.astro (pied de page commun), FloatingButtons.astro (retour en haut, Instagram, barre d'action mobile),
-│   │                       # Prestation.astro (carte de prestation : images, étiquette, texte en slot, tarif, bouton devis)
-│   ├── pages/              # index.astro, spectacles.astro, devis.astro, mentions-legales.astro, confidentialite.astro (=> *.html)
+│   ├── layouts/Base.astro  # <head> (lang, hreflang), favicon généré, Header, Footer, boutons flottants, script commun ; props lang + page
+│   ├── components/         # Header.astro (menu, sélecteur de langue, téléphone), Footer.astro, FloatingButtons.astro (retour en haut, Instagram, barre d'action mobile),
+│   │                       # Prestation.astro (carte de prestation), ContactSection.astro (bloc Contact de l'accueil et des prestations)
+│   ├── views/              # Home.astro, Prestations.astro, Devis.astro : contenu des pages, commun aux deux langues (prop lang)
+│   ├── pages/              # index.astro, spectacles.astro, devis.astro (une ligne : <Vue lang="fr" />), mentions-legales.astro, confidentialite.astro
+│   │   └── en/             # index.astro, shows.astro, quote.astro (<Vue lang="en" />), legal-notice.astro, privacy.astro
+│   ├── i18n/               # ui.ts (langues, routes, pageUrl, libellés communs), home.ts, prestations.ts, devis.ts (textes FR et EN)
 │   ├── styles/             # global.css (commun, dont le pied de page), index.css, spectacles.css, devis.css, legal.css
 │   ├── scripts/common.ts   # défilement fluide, ombre navbar, retour en haut, menu burger et sous-menu (ouverture/fermeture, Échap)
-│   ├── lib/url.ts          # url('spectacles.html') : préfixe les liens internes avec le base
+│   ├── lib/url.ts          # url('chemin') : préfixe avec le base (utilisé par pageUrl)
 │   ├── lib/legal.ts        # dénomination, forme, SIRET, siège, directeur de publication, hébergeur (mentions légales, confidentialité)
-│   ├── lib/contact.ts      # téléphone, email, Instagram, clé Web3Forms, liste PRESTATIONS_DEVIS, devisHref(prestation) => devis.html?prestation=…
+│   ├── lib/contact.ts      # téléphone, email, Instagram, clé Web3Forms, PRESTATIONS_DEVIS (id + libellés FR/EN), devisHref(id, lang) => devis.html?prestation=<id>
 │   └── assets/img/         # images sources, optimisées au build
 ├── public/                 # copié tel quel : robot.txt (À RENOMMER robots.txt), sitemap.xml (à corriger)
 ├── .github/workflows/deploy.yml   # build + déploiement GitHub Pages
@@ -105,7 +108,7 @@ Génère `dist/`. Puis `npm run preview` pour servir ce build.
 - **Branche de travail : `v2`.** Dépôt GitHub `Nikholah/floryanimation`, actuellement servi par GitHub Pages (`https://nikholah.github.io/floryanimation/`).
 - **GitHub Pages via GitHub Actions** (`.github/workflows/deploy.yml`) : à chaque push sur `main`, build avec `SITE_URL=https://nikholah.github.io` et `BASE_PATH=/floryanimation`, puis déploiement.
 - ⚠️ **Avant de fusionner `v2` dans `main`** : dans GitHub, Settings > Pages > Source, choisir **« GitHub Actions »**. Sinon GitHub Pages continuera de servir la racine de `main`, qui ne contient plus de `index.html` : le site serait cassé.
-- Liens internes : toujours passer par `url()` (`src/lib/url.ts`) ; les images par `astro:assets` ; les `url()` CSS en chemin relatif vers `src/assets`. Le site fonctionne ainsi à la racine (Cloudflare) comme sous `/floryanimation/` (GitHub Pages).
+- Liens internes : toujours passer par `pageUrl(page, lang, ancre)` (`src/i18n/ui.ts`), qui s'appuie sur `url()` (`src/lib/url.ts`) ; les images par `astro:assets` ; les `url()` CSS en chemin relatif vers `src/assets`. Le site fonctionne ainsi à la racine (Cloudflare) comme sous `/floryanimation/` (GitHub Pages).
 - **Domaine `floryanimation.com`** : en attente de libération. Ensuite, **migration vers Cloudflare** en gardant ce nom de domaine.
   - Si l'hébergement passe sur **Cloudflare Pages** : build Astro natif, déploiement à chaque push, HTTPS, mais **25 Mio maximum par fichier** (à respecter pour les vidéos).
   - Le site reste conçu **100 % statique** pour rester portable (GitHub Pages ou Cloudflare Pages), même si Cloudflare permettrait des fonctions serveur.
@@ -138,7 +141,7 @@ Légende : **CONV** conversion · **CIBLE** cibles · **DESIGN** · **MOBILE** �
 | C2 | CONV | **Le test des 5 secondes échoue** : le titre « …vous invite à découvrir son univers enchanté… » ne dit ni *quoi*, ni *où*, ni *quoi faire*. Le seul bouton renvoie vers les prestations. | `index.html` hero |
 | C3 | CONV | ✅ *Corrigé le 2026-11-05 (étape 2).* **Aucun appel à l'action par prestation** (pas de « Demander un devis » ni « Appeler ») ; téléphone absent du header ; contact uniquement en bas de page. | `spectacles.html` |
 | C4 | CONV | ✅ *Formulaire créé le 2026-11-05 (étape 4) ; clé Web3Forms à renseigner.* **Pas de formulaire de devis.** Le `mailto:` échoue souvent sur ordinateur. | — |
-| C5 | I18N | **Site uniquement en français** alors que la zone est nationale et internationale. Un organisateur étranger ne peut ni comprendre l'offre ni la trouver sur Google. | tout |
+| C5 | I18N | ✅ *Corrigé le 2026-11-05 (étape 8) ; traduction à faire relire.* **Site uniquement en français** alors que la zone est nationale et internationale. Un organisateur étranger ne peut ni comprendre l'offre ni la trouver sur Google. | tout |
 | C6 | CONV | *Infos pratiques (étape 5) et accroches sur le parcours (étape 6) ajoutées le 2026-11-05 ; restent : avis et vidéo.* **Réassurance faible** : ni avis, ni vidéo, ni infos pratiques (montage 1 h 30, 600 spectateurs, son et lumière fournis). Le parcours de Flory Anne n'est pas mis en avant sous forme d'accroches. | — |
 | C7 | légal | ✅ *Corrigé le 2026-11-05 (étape 7) ; reste le nom du directeur de publication.* **Pas de pied de page ni de mentions légales** (éditeur, SIRET, hébergeur) ni de politique de confidentialité (obligatoire avec un formulaire). | — |
 | C8 | CONV/SEO | ✅ *Zone rétablie le 2026-11-05 dans les informations pratiques (étape 5) ; à reprendre dans le pied de page (étape 7) et le SEO (étape 9).* **Zone d'intervention absente** : rien n'indique « partout en France et à l'international ». | — |
@@ -219,7 +222,7 @@ Ordonné par impact sur les réservations rapporté à l'effort. Effort : S (moi
 | 5 | ✅ **Fait le 2026-11-05.** Section `#infos-pratiques` en bas de la page Prestations (lien « Informations pratiques » en dernier dans le menu Prestations) : 6 encadrés (Où ? France et international ; installation 1 h 30 ; jusqu'à environ 600 spectateurs ; son, lumière et électricité fournis selon la taille, point au moment du devis ; pas d'électricité en extérieur ; tarifs sur demande, devis gratuit, sur facture) et un bouton « Demander un devis gratuit ». Uniquement des faits validés par la cliente ; la formulation est balisée `TEXTE PROVISOIRE`. Grille de 3 colonnes en desktop, 2 en tablette, 1 en mobile. **FAQ retirée** le même jour, car elle répétait les encadrés. N'en ajouter une que pour des questions non couvertes (délai de réservation, déplacements…), une fois les réponses de la cliente connues. Fiche technique PDF : pas faite (rien à mettre de plus pour l'instant). | C6 (en partie), C8 | S |
 | 6 | ✅ **Fait le 2026-11-05.** Bandeau d'accroches `.atouts` entre la bannière et À propos sur l'accueil : « Née dans une famille de magiciens », « Formée auprès d'Annie Fratellini et du Cirque de Pékin », « Jusqu'à 600 spectateurs, son et lumière fournis », « Partout en France et à l'international ». 4 colonnes en desktop, 2 en tablette, 1 en mobile ; balisé `TEXTE PROVISOIRE`. Dans la bio, « devient maman en 1995, puis en 1999 » devient « devenue maman à deux reprises » (balisé `TEXTE MODIFIÉ`, à faire valider). Plus aucune année ni durée de carrière sur le site ; restent seulement des âges au moment des faits (« dès l'âge de 6 ans », « à 14 ans »), autorisés par la consigne. | C6 (en partie), I10 | S |
 | 7 | ✅ **Fait le 2026-11-05, sauf 2 informations.** Pied de page commun (`Footer.astro`, dans `Base.astro`) : présentation et zone « Partout en France et à l'international », contact (téléphone, email, Instagram), navigation (Accueil, Prestations, Informations pratiques, Devis), © et liens légaux. Pages `mentions-legales.html` (éditeur, directeur de publication, hébergeur GitHub Pages, propriété intellectuelle, liens externes) et `confidentialite.html` (données du formulaire, finalité, base légale, destinataires Web3Forms et hébergeur, conservation 3 ans au plus, droits, CNIL, aucun cookie), balisées `TEXTE PROVISOIRE` (modèles, pas un avis juridique). La mention RGPD du formulaire de devis renvoie vers la politique. 116 liens internes testés sur les 5 pages. ⚠️ À compléter : directeur ou directrice de la publication et durée de conservation à valider (`TODO`). ⚠️ À mettre à jour : hébergeur (`HEBERGEUR` dans `legal.ts`) lors du passage sur Cloudflare, et la section Cookies si on ajoute un outil d'audience ou une vidéo YouTube. Liens FR/EN : à l'étape 8. | C7, C8 | S |
-| 8 | **Version anglaise** : routes `/en/`, sélecteur FR/EN, `hreflang`, traduction des textes (première traduction proposée par Claude, à faire relire, si possible par une personne anglophone, pour garder la poésie). | C5 | M/L |
+| 8 | ✅ **Fait le 2026-11-05.** Version anglaise complète sous `/en/` (accueil, prestations, devis, mentions légales, confidentialité) : contenu des pages dans `src/views/` (une seule mise en page pour les deux langues), textes dans `src/i18n/`, libellés communs et routes dans `ui.ts`. Bouton de langue dans la navbar (visible aussi sur mobile, entre le logo et le burger), `hreflang` réciproques et `x-default`, `lang` correct sur `<html>`. Formulaire anglais : libellés traduits, mais **noms de champs et valeurs envoyés en français** (la cliente reçoit toujours un email en français, avec « Langue du visiteur : Anglais »). Les pages légales anglaises indiquent que la version française fait foi. Noms des spectacles et des formules Mariage gardés en français, avec une traduction entre parenthèses. Testé : 244 liens internes sur les 10 pages, présélection du devis, aucun débordement en 375 et 1 280 px, navbar sur une ligne de 775 à 1 280 px. Au passage : `build.format` passe à `'preserve'`, et l'email du bloc Contact peut désormais passer à la ligne (il débordait entre 900 et 1 020 px). ⚠️ **Traduction à faire relire** par une personne anglophone. | C5 | M/L |
 | 9 | **SEO de base** : titles et meta descriptions par page et par langue, canonical, Open Graph, hiérarchie Hn, `robots.txt` et `sitemap.xml` corrects pour `floryanimation.com`, favicon dédié, JSON-LD `PerformingGroup`/`EntertainmentBusiness` avec `areaServed` France et international, et un `Service` par prestation. | I4, I5, I6, S7 | S/M |
 | 10 | **Vidéo verticale** (assets attendus) : composant `VideoVertical` au format 9:16, `<video controls playsinline preload="none" poster>`, MP4 H.264 environ 720×1280, **moins de 25 Mio par fichier** (limite Cloudflare Pages), sous-titres si texte parlé ; repli possible sur un Short YouTube intégré en mode « façade » (pas d'iframe tant qu'on ne clique pas, `youtube-nocookie`). Emplacements : hero ou haut de l'accueil, et une vidéo par spectacle si disponible. | C6, I9 | M |
 | 11 | **Collecte d'avis** : bouton « Vous avez vu le spectacle ? Laissez-nous un avis » (formulaire Web3Forms court, ou lien vers les avis Google une fois la fiche créée) ; section « Ils en parlent » affichée seulement quand il y aura des avis réels. Hors site : **créer la fiche Google Business Profile** (zone desservie, sans adresse publique). | I3 | S |
@@ -234,7 +237,7 @@ Ordonné par impact sur les réservations rapporté à l'effort. Effort : S (moi
 ## 6. Décisions et conventions
 
 ### Décisions prises (2026-11-05)
-- **D1 Bilingue FR/EN.** Proposition : pages séparées (`/` en français, `/en/` en anglais) avec un sélecteur de langue, plutôt que les deux langues côte à côte sur la même page. C'est plus lisible et Google indexe chaque langue correctement. **À confirmer par Nicolas.**
+- **D1 Bilingue FR/EN** (confirmé et mis en place le 2026-11-05) : pages séparées, `/` en français et `/en/` en anglais, avec un bouton de langue.
 - **D2 Domaine** `floryanimation.com` conservé, migration vers Cloudflare à venir ; travail sur la branche **`v2`**.
 - **D3 Formulaire : Web3Forms** (mis en place le 2026-11-05 ; nouvelle prestation = l'ajouter aussi dans `PRESTATIONS_DEVIS`) (gratuit jusqu'à 250 envois par mois, sans backend, compatible GitHub Pages et Cloudflare Pages). Nicolas doit générer la clé d'accès sur web3forms.com avec floryanimation@free.fr ; elle peut figurer dans le code (clé publique par conception). Penser à vérifier le dossier spam de Free au premier test.
 - **D4 Tarifs** : toujours « sur demande », jamais de montant ni de fourchette.
@@ -245,15 +248,15 @@ Ordonné par impact sur les réservations rapporté à l'effort. Effort : S (moi
 ### Code
 - HTML5 sémantique, **indentation de 4 espaces**, guillemets doubles, classes en **kebab-case**, pas de styles inline.
 - **Conserver les ancres des prestations** (utilisées par le menu Prestations) : `#bubble-magic-show`, `#la-valise`, `#spectacles-thematiques` (`#carnaval`, `#spectacle-noel`), `#jardin-des-bulles`, `#atelier-bulles`, `#mariage` (`#mariage-instant-precieux`, `#mariage-eclat-de-bulles`, `#mariage-prestige`), `#dans-ma-bulle`, `#infos-pratiques`, ainsi que `#accueil`, `#nous-connaitre`, `#contact`. Les anciennes ancres (`#spectacle-enfants`, `#spectacle-cabaret`, `#animation-bar-bulles`, `#mascottes`) ont disparu avec leurs prestations. Toute ancre (`[id]`) a un `scroll-margin-top` pour ne pas passer sous la navbar.
-- Nouvelle prestation : utiliser le composant `Prestation.astro`, ajouter l'entrée dans la liste `prestations` de `Header.astro` et dans `PRESTATIONS_DEVIS` de `src/lib/contact.ts` (même libellé que `devisLabel`), et entourer tout texte non validé par la cliente de `<!-- TEXTE PROVISOIRE -->`.
+- Nouvelle prestation : ajouter ses textes FR **et** EN dans `src/i18n/prestations.ts`, l'afficher avec le composant `Prestation.astro` dans `src/views/Prestations.astro`, ajouter l'entrée du menu dans `UI.fr.prestationsMenu` et `UI.en.prestationsMenu` (`src/i18n/ui.ts`), et l'ajouter dans `PRESTATIONS_DEVIS` (`src/lib/contact.ts`, avec un `id` et ses libellés FR/EN, puis `devisId` sur la carte). Signaler tout texte non validé par un commentaire `// TEXTE PROVISOIRE`.
 - Astro : un élément répété sur plusieurs pages devient un **composant** dans `src/components/` ; le `<head>` vit dans `src/layouts/Base.astro`. Styles communs dans `src/styles/global.css`, styles d'une page dans `src/styles/<page>.css` (importés dans le frontmatter de la page, CSS global non scopé, pour rester proche de l'existant). Scripts en TypeScript dans des balises `<script>` (bundlées par Astro), **jamais d'`onclick` inline**.
-- Liens internes avec `url()` de `src/lib/url.ts`, jamais de chemin absolu en dur.
+- Liens internes avec `pageUrl(page, lang, ancre)` de `src/i18n/ui.ts` (ou `url()` pour un fichier hors pages), jamais de chemin absolu en dur.
 - Téléphone, email, Instagram et lien de devis : toujours via `src/lib/contact.ts` (une seule source à modifier).
 - Rien qui exige un serveur (`output: static`). Pas de nouvelle dépendance sans validation.
 - Images : sources dans `src/assets/img/`, nom en `MAJUSCULES_AVEC_UNDERSCORES`, affichées avec `<Image>` d'`astro:assets` (`width` = largeur affichée, `densities={[1, 2]}`), `alt` descriptif (traduit en anglais pour la version EN). Pas de recadrage au build quand le CSS recadre déjà (`object-fit: cover`).
 - Vérifier `npm run build` sans avertissement avant de proposer une modification.
 - ⚠️ **Media queries** : au build, le minifieur CSS **fusionne les media queries identiques d'un même fichier et les remonte** à la position de la première. Une règle mobile placée dans un second `@media (max-width: 768px)` peut alors se retrouver *avant* la règle de base qu'elle doit surcharger, et être ignorée. Dans un fichier qui contient déjà ce seuil : ajouter la règle dans le bloc existant, utiliser un seuil distinct (par exemple 760 px pour le pied de page) ou un sélecteur plus spécifique. Toujours vérifier le résultat dans le navigateur.
-- **Bilingue** : aucun texte en dur dans les composants ; libellés dans `i18n/fr.json` et `i18n/en.json` ; chaque nouvelle page existe dans les deux langues ; `lang` correct sur `<html>` ; `hreflang` réciproques.
+- **Bilingue** : aucun texte en dur dans les composants et les vues ; libellés communs dans `src/i18n/ui.ts`, textes de page dans `src/i18n/<page>.ts` (objets `fr` / `en` de même forme) ; chaque nouvelle page existe dans les deux langues (route ajoutée dans `ROUTES`) ; les pages légales sont écrites en double (`pages/` et `pages/en/`) et doivent être modifiées ensemble ; dans le formulaire, garder les `name` et `value` en français.
 - Liens externes : `target="_blank" rel="noopener noreferrer"`.
 - Tester en **375 px** et en desktop, dans les deux langues.
 - Travailler sur **`v2`**. Ne **jamais commiter ni pousser** sans demande explicite. Mettre à jour ce fichier à chaque décision.
@@ -289,12 +292,12 @@ Ordonné par impact sur les réservations rapporté à l'effort. Effort : S (moi
 ## 7. Questions encore ouvertes
 
 1. ~~Migration Astro~~ : décidée et faite le 2026-11-05.
-2. **Bilingue** : pages séparées `/en/` (recommandé) ou FR et EN sur la même page ?
+2. ~~Bilingue~~ : pages séparées `/en/`, confirmé et fait le 2026-11-05.
 3. ~~SIRET~~ : vérifié, `822 373 395 00018`.
 4. **Mentions légales** : l'éditeur est l'association Flory Animation (vérifié). Manquent le **nom du directeur ou de la directrice de la publication** et la décision d'afficher ou non l'adresse complète du siège. Durée de conservation des données (3 ans proposés) à valider.
 5. **Cloudflare** : hébergement sur Cloudflare Pages, ou seulement le DNS chez Cloudflare avec GitHub Pages derrière ? Date approximative de libération du domaine ?
 6. **Vidéos** : durée et nombre de clips attendus ; texte parlé (sous-titres FR et EN à prévoir) ?
-7. **Traduction anglaise** : une personne anglophone peut-elle relire ?
+7. **Traduction anglaise** : faite (première version). Une personne anglophone peut-elle la relire ? Les textes sont dans `src/i18n/*.ts` (partie `en`) et `src/pages/en/`.
 8. **Photos** : de nouvelles photos arrivent-elles avec les vidéos (pour la refonte et l'image de partage Open Graph) ?
 9. **Textes définitifs** des prestations (remplacer les 12 blocs `TEXTE PROVISOIRE`), avec durées, publics et nombre de participants de l'Atelier (`TODO`).
 10. **Photos manquantes** : Mariage (aucune), Jardin des Bulles et Atelier (anciennes photos réutilisées en attendant).

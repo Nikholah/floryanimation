@@ -7,9 +7,9 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
     site: process.env.SITE_URL ?? 'https://floryanimation.com',
     base: process.env.BASE_PATH ?? '/',
-    // Conserve les URL actuelles : /index.html et /spectacles.html
+    // 'preserve' : spectacles.astro => spectacles.html (URL actuelles conservées) et en/index.astro => en/index.html
     build: {
-        format: 'file',
+        format: 'preserve',
     },
     i18n: {
         defaultLocale: 'fr',

@@ -307,6 +307,27 @@ body {
     50% { transform: translateY(-20px) rotate(180deg); }
 }
 
+/* Sélecteur de langue (FR / EN), à côté du menu ; sur mobile, entre le logo et le burger */
+.lang-switch {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 36px;
+    padding: 0 0.6rem;
+    border: 2px solid #4a90e2;
+    border-radius: 8px;
+    color: #2e6bb3;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.lang-switch:hover {
+    background: #4a90e2;
+    color: white;
+}
+
 /* Téléphone dans la navbar : grand écran uniquement (au-delà de 1 100 px) */
 .nav-phone {
     display: none;
@@ -431,6 +452,16 @@ body {
 
     .nav-toggle {
         display: flex;
+    }
+
+    .lang-switch {
+        order: 1;
+        margin-left: auto;
+        margin-right: 0.5rem;
+    }
+
+    .nav-toggle {
+        order: 2;
     }
 
     .nav-links {

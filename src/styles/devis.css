@@ -28,6 +28,11 @@ body {
 
 .devis-alt {
     margin-top: 0.75rem;
+    /* flex : les liens passent à la ligne sur mobile (la compression HTML retire les espaces entre eux) */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25rem 0.6rem;
 }
 
 .devis-alt a {

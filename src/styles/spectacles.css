@@ -403,6 +403,8 @@ body {
 .contact-item a {
     color: white;
     text-decoration: none;
+    max-width: 100%;
+    overflow-wrap: anywhere; /* l'adresse email peut passer à la ligne au lieu de déborder */
 }
 
 /* Croix de fermeture de la lightbox (bouton) */

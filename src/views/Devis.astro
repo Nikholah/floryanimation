@@ -1,0 +1,218 @@
+---
+/**
+ * Page « Demander un devis », commune au français (src/pages/devis.astro) et à l'anglais (src/pages/en/quote.astro).
+ * Textes : src/i18n/devis.ts. Les noms de champs et les valeurs envoyés restent en français :
+ * la cliente reçoit toujours un email lisible, quelle que soit la langue du visiteur.
+ */
+import Base from '../layouts/Base.astro';
+import '../styles/devis.css';
+import { EMAIL, PHONE_HREF, PRESTATIONS_DEVIS, WEB3FORMS_ACCESS_KEY } from '../lib/contact';
+import { pageUrl, UI, type Lang } from '../i18n/ui';
+import { DEVIS } from '../i18n/devis';
+
+interface Props {
+    lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = DEVIS[lang];
+const ui = UI[lang];
+// Valeur envoyée pour « je ne sais pas encore » (toujours en français)
+const PRESTATION_INCONNUE = DEVIS.fr.prestationUnknown;
+---
+<Base lang={lang} page="devis" title={t.title} description={t.description}>
+    <main class="devis-page">
+        <header class="devis-intro">
+            <h1>{t.h1}</h1>
+            <p>{t.intro}</p>
+            <p class="devis-alt">
+                {t.alt} <a href={PHONE_HREF}>📞 {ui.phoneDisplay}</a>
+                <span aria-hidden="true">·</span>
+                <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+            </p>
+        </header>
+
+        <!--
+            Envoi via Web3Forms (https://web3forms.com), compatible avec un hébergement statique.
+            Sans JavaScript, le formulaire est envoyé directement à Web3Forms (page de confirmation de Web3Forms).
+            Avec JavaScript, l'envoi se fait en arrière-plan et un message s'affiche ici.
+            Si la clé n'est pas encore renseignée (src/lib/contact.ts), le script ouvre un email prérempli.
+        -->
+        <form
+            id="devis-form"
+            class="devis-form"
+            action="https://api.web3forms.com/submit"
+            method="POST"
+            data-access-key={WEB3FORMS_ACCESS_KEY}
+            data-email={EMAIL}
+            data-unknown={PRESTATION_INCONNUE}
+            data-msg-sending={t.msgSending}
+            data-msg-success={t.msgSuccess}
+            data-msg-error={t.msgError}
+            data-msg-mail={t.msgMail}
+            data-mail-subject={t.mailSubject}
+        >
+            <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY}>
+            <input type="hidden" name="subject" value="Nouvelle demande de devis - site Flory Animation">
+            <input type="hidden" name="from_name" value="Site Flory Animation">
+            <input type="hidden" name="Langue du visiteur" value={lang === 'fr' ? 'Français' : 'Anglais'}>
+            <!-- Piège à robots (honeypot) : doit rester vide -->
+            <input type="checkbox" name="botcheck" class="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+            <fieldset>
+                <legend>{t.eventLegend}</legend>
+
+                <div class="field">
+                    <label for="type_client">{t.youAre} <span class="req" aria-hidden="true">*</span></label>
+                    <select id="type_client" name="Vous êtes" required>
+                        <option value="">{t.choose}</option>
+                        {t.clientTypes.map(([value, label]) => <option value={value}>{label}</option>)}
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="prestation">{t.prestation} <span class="req" aria-hidden="true">*</span></label>
+                    <select id="prestation" name="Prestation" required>
+                        <option value="">{t.choose}</option>
+                        {PRESTATIONS_DEVIS.map((p) => <option value={p.fr} data-id={p.id}>{p[lang]}</option>)}
+                        <option value={PRESTATION_INCONNUE}>{t.prestationUnknown}</option>
+                    </select>
+                </div>
+
+                <div class="field-row">
+                    <div class="field">
+                        <label for="date">{t.date}</label>
+                        <input type="date" id="date" name="Date de l'événement">
+                    </div>
+                    <div class="field">
+                        <label for="lieu">{t.place} <span class="req" aria-hidden="true">*</span></label>
+                        <input type="text" id="lieu" name="Lieu" required autocomplete="address-level2" placeholder={t.placePlaceholder}>
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="field">
+                        <label for="spectateurs">{t.spectators}</label>
+                        <input type="number" id="spectateurs" name="Nombre de spectateurs" min="1" inputmode="numeric">
+                    </div>
+                    <div class="field">
+                        <label for="age">{t.age}</label>
+                        <input type="text" id="age" name="Âge du public" placeholder={t.agePlaceholder}>
+                    </div>
+                </div>
+
+                <fieldset class="field radios">
+                    <legend>{t.indoorLegend}</legend>
+                    {t.indoor.map(([value, label], i) => (
+                        <label><input type="radio" name="Lieu de la prestation" value={value} checked={i === 2}> {label}</label>
+                    ))}
+                </fieldset>
+            </fieldset>
+
+            <fieldset>
+                <legend>{t.contactLegend}</legend>
+
+                <div class="field">
+                    <label for="nom">{t.name} <span class="req" aria-hidden="true">*</span></label>
+                    <input type="text" id="nom" name="name" required autocomplete="name">
+                </div>
+
+                <div class="field-row">
+                    <div class="field">
+                        <label for="email">{t.email} <span class="req" aria-hidden="true">*</span></label>
+                        <input type="email" id="email" name="email" required autocomplete="email">
+                    </div>
+                    <div class="field">
+                        <label for="telephone">{t.phone}</label>
+                        <input type="tel" id="telephone" name="Téléphone" autocomplete="tel">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label for="message">{t.message}</label>
+                    <textarea id="message" name="message" rows="5" placeholder={t.messagePlaceholder}></textarea>
+                </div>
+            </fieldset>
+
+            <p class="rgpd">
+                {t.rgpd}
+                <a href={pageUrl('confidentialite', lang)}>{t.rgpdLink}</a>.
+            </p>
+            <p class="req-note"><span aria-hidden="true">*</span> {t.required}</p>
+
+            <button type="submit" class="devis-submit">{t.submit}</button>
+
+            <div id="devis-status" class="devis-status" role="status" aria-live="polite"></div>
+        </form>
+    </main>
+</Base>
+
+<script>
+    const form = document.getElementById('devis-form') as HTMLFormElement;
+    const status = document.getElementById('devis-status') as HTMLElement;
+    const submit = form.querySelector<HTMLButtonElement>('.devis-submit')!;
+    const prestationSelect = form.querySelector<HTMLSelectElement>('#prestation')!;
+    const message = form.querySelector<HTMLTextAreaElement>('#message')!;
+    const d = form.dataset;
+
+    // Présélection de la prestation depuis l'URL : devis.html?prestation=la-valise
+    const demandee = new URLSearchParams(location.search).get('prestation');
+    if (demandee) {
+        const option = [...prestationSelect.options].find((o) => o.dataset.id === demandee);
+        if (option) {
+            prestationSelect.value = option.value;
+        } else {
+            prestationSelect.value = d.unknown ?? '';
+            message.value = `${demandee}\n`;
+        }
+    }
+
+    function showStatus(type: 'success' | 'error' | 'info', text: string) {
+        status.className = `devis-status devis-status--${type}`;
+        status.textContent = text;
+    }
+
+    // Repli tant que la clé Web3Forms n'est pas renseignée : email prérempli avec toutes les réponses
+    function openMailFallback(data: FormData) {
+        const lines: string[] = [];
+        data.forEach((value, key) => {
+            if (['access_key', 'subject', 'from_name', 'botcheck'].includes(key)) return;
+            if (String(value).trim()) lines.push(`${key} : ${value}`);
+        });
+        const subject = `${d.mailSubject} : ${data.get('Prestation') ?? ''}`;
+        location.href = `mailto:${d.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
+        showStatus('info', d.msgMail ?? '');
+    }
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!form.reportValidity()) return;
+
+        const data = new FormData(form);
+        if (!d.accessKey) {
+            openMailFallback(data);
+            return;
+        }
+
+        submit.disabled = true;
+        showStatus('info', d.msgSending ?? '');
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                headers: { Accept: 'application/json' },
+                body: data,
+            });
+            const result = await response.json();
+            if (response.ok && result.success) {
+                form.reset();
+                showStatus('success', d.msgSuccess ?? '');
+            } else {
+                throw new Error(result.message);
+            }
+        } catch {
+            showStatus('error', `${d.msgError} ${d.email}.`);
+        } finally {
+            submit.disabled = false;
+        }
+    });
+</script>

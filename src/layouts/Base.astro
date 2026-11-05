@@ -4,21 +4,27 @@ import Header from '../components/Header.astro';
 import FloatingButtons from '../components/FloatingButtons.astro';
 import Footer from '../components/Footer.astro';
 import floryAnne from '../assets/img/FLORY_ANNE.jpg';
+import { LANGS, pageUrl, UI, type Lang, type PageKey } from '../i18n/ui';
 import '../styles/global.css';
 
 interface Props {
+    lang: Lang;
+    /** Page courante : sert au menu, au sélecteur de langue et aux liens hreflang. */
+    page: PageKey;
     title: string;
     description?: string;
     keywords?: string;
-    current: 'accueil' | 'prestations' | 'devis' | 'legal';
 }
 
-const { title, description, keywords, current } = Astro.props;
+const { lang, page, title, description, keywords } = Astro.props;
 // Favicon généré au build (64 px) au lieu de la photo pleine taille.
 const favicon = await getImage({ src: floryAnne, width: 64, height: 64, fit: 'cover', format: 'png' });
+// Versions linguistiques de la page (balises hreflang), en URL absolues
+const alternates = LANGS.map((l) => ({ lang: l, href: new URL(pageUrl(page, l), Astro.site).href }));
+const xDefault = new URL(pageUrl(page, 'fr'), Astro.site).href;
 ---
 <!DOCTYPE html>
-<html lang="fr">
+<html lang={UI[lang].htmlLang}>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,15 +34,17 @@ const favicon = await getImage({ src: floryAnne, width: 64, height: 64, fit: 'co
     {keywords && <meta name="keywords" content={keywords}>}
     <meta name="author" content="Flory Animation">
     <meta name="robots" content="index, follow">
+    {alternates.map((a) => <link rel="alternate" hreflang={a.lang} href={a.href}>)}
+    <link rel="alternate" hreflang="x-default" href={xDefault}>
 </head>
 <body>
-    <Header current={current} />
+    <Header lang={lang} page={page} />
 
     <slot />
 
-    <Footer />
+    <Footer lang={lang} />
 
-    <FloatingButtons />
+    <FloatingButtons lang={lang} />
 
     <script>
         import '../scripts/common';

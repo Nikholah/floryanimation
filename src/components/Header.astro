@@ -22,17 +22,32 @@ const prestations = [
     { anchor: 'dans-ma-bulle', label: 'Dans ma bulle' },
 ];
 ---
-<nav class="navbar">
+<nav class="navbar" aria-label="Menu principal">
     <div class="nav-container">
         <a href={onHome ? '#accueil' : url('index.html')} class="logo">✨ Flory Animation</a>
-        <ul class="nav-links">
+
+        <!-- Bouton du menu mobile (visible sous 768 px) -->
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+            <span class="visually-hidden">Menu</span>
+            <span class="nav-toggle-bar" aria-hidden="true"></span>
+            <span class="nav-toggle-bar" aria-hidden="true"></span>
+            <span class="nav-toggle-bar" aria-hidden="true"></span>
+        </button>
+
+        <ul class="nav-links" id="nav-links">
             <li><a href={onHome ? '#accueil' : url('index.html')}>Accueil</a></li>
-            <li><a href={home('nous-connaitre')}>A propos</a></li>
+            <li><a href={home('nous-connaitre')}>À propos</a></li>
             <li class="dropdown">
-                <a href={url('spectacles.html')} class:list={{ active: current === 'prestations' }}>Prestations <span class="dropdown-arrow">▼</span></a>
-                <div class="dropdown-content">
-                    {prestations.map((p) => <a href={show(p.anchor)}>{p.label}</a>)}
+                <div class="dropdown-head">
+                    <a href={url('spectacles.html')} class:list={{ active: current === 'prestations' }}>Prestations</a>
+                    <button class="dropdown-toggle" type="button" aria-expanded="false" aria-controls="sous-menu-prestations">
+                        <span class="visually-hidden">Afficher la liste des prestations</span>
+                        <span class="dropdown-arrow" aria-hidden="true">▼</span>
+                    </button>
                 </div>
+                <ul class="dropdown-content" id="sous-menu-prestations">
+                    {prestations.map((p) => <li><a href={show(p.anchor)}>{p.label}</a></li>)}
+                </ul>
             </li>
             <li><a href={home('contact')}>Contact</a></li>
         </ul>

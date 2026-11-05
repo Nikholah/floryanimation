@@ -1,5 +1,6 @@
 ---
 import { url } from '../lib/url';
+import { PHONE_DISPLAY, PHONE_HREF } from '../lib/contact';
 
 interface Props {
     /** Page courante : sert à construire les liens et à marquer l'onglet actif. */
@@ -51,5 +52,8 @@ const prestations = [
             </li>
             <li><a href={home('contact')}>Contact</a></li>
         </ul>
+
+        <!-- Téléphone (grand écran ; sur mobile et tablette, voir la barre d'action en bas) -->
+        <a href={PHONE_HREF} class="nav-phone"><span aria-hidden="true">📞</span> {PHONE_DISPLAY}</a>
     </div>
 </nav>

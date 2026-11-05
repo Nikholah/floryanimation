@@ -1,9 +1,16 @@
 ---
 import { Image } from 'astro:assets';
 import instagram from '../assets/img/instagram.png';
+import { INSTAGRAM_URL, PHONE_HREF, devisHref } from '../lib/contact';
 ---
 <button class="back-to-top" id="backToTop" type="button" aria-label="Revenir en haut de la page">↑</button>
 
-<a href="https://www.instagram.com/floryanimation/" target="_blank" rel="noopener noreferrer" class="instagram-float">
+<a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" class="instagram-float">
     <Image src={instagram} alt="Instagram" width={40} densities={[1, 2]} />
 </a>
+
+<!-- Barre d'action fixe en bas de l'écran (mobile et tablette, jusqu'à 1 100 px) -->
+<div class="action-bar" role="region" aria-label="Contact rapide">
+    <a href={PHONE_HREF} class="action-bar-call"><span aria-hidden="true">📞</span> Appeler</a>
+    <a href={devisHref()} class="action-bar-devis">Demander un devis</a>
+</div>

@@ -1,7 +1,7 @@
 # CLAUDE.md — Site Flory Animation
 
 Document de référence pour toutes les sessions de travail sur ce dépôt.
-Dernière mise à jour : 2026-11-05 (nouvelles prestations de la cliente, bannière photo, menu mobile).
+Dernière mise à jour : 2026-11-05 (nouvelles prestations de la cliente, bannière photo, menu mobile, barre d'action).
 
 ---
 
@@ -52,7 +52,7 @@ floryanimation/
 ├── package.json            # scripts dev / build / preview
 ├── src/
 │   ├── layouts/Base.astro  # <head>, favicon généré, Header, boutons flottants, script commun
-│   ├── components/         # Header.astro (prop current, liste du menu Prestations), FloatingButtons.astro,
+│   ├── components/         # Header.astro (prop current, liste du menu Prestations, téléphone), FloatingButtons.astro (retour en haut, Instagram, barre d'action mobile),
 │   │                       # Prestation.astro (carte de prestation : images, étiquette, texte en slot, tarif, bouton devis)
 │   ├── pages/              # index.astro, spectacles.astro (=> index.html, spectacles.html)
 │   ├── styles/             # global.css (commun), index.css, spectacles.css
@@ -135,7 +135,7 @@ Légende : **CONV** conversion · **CIBLE** cibles · **DESIGN** · **MOBILE** �
 |---|---|---|---|
 | C1 | MOBILE | ✅ *Corrigé le 2026-11-05 (étape 3).* **Aucune navigation sur mobile** : sous 768 px, `.nav-links { display: none }` sans menu burger. Le menu déroulant « Prestations » ne s'ouvre qu'au survol (`:hover`) : inutilisable au doigt et au clavier. | `index.html`, `spectacles.html` (`@media`, `.dropdown:hover`) |
 | C2 | CONV | **Le test des 5 secondes échoue** : le titre « …vous invite à découvrir son univers enchanté… » ne dit ni *quoi*, ni *où*, ni *quoi faire*. Le seul bouton renvoie vers les prestations. | `index.html` hero |
-| C3 | CONV | **Aucun appel à l'action par prestation** (pas de « Demander un devis » ni « Appeler ») ; téléphone absent du header ; contact uniquement en bas de page. | `spectacles.html` |
+| C3 | CONV | ✅ *Corrigé le 2026-11-05 (étape 2).* **Aucun appel à l'action par prestation** (pas de « Demander un devis » ni « Appeler ») ; téléphone absent du header ; contact uniquement en bas de page. | `spectacles.html` |
 | C4 | CONV | **Pas de formulaire de devis.** Le `mailto:` échoue souvent sur ordinateur. | — |
 | C5 | I18N | **Site uniquement en français** alors que la zone est nationale et internationale. Un organisateur étranger ne peut ni comprendre l'offre ni la trouver sur Google. | tout |
 | C6 | CONV | **Réassurance faible** : ni avis, ni vidéo, ni infos pratiques (montage 1 h 30, 600 spectateurs, son et lumière fournis). Le parcours de Flory Anne n'est pas mis en avant sous forme d'accroches. | — |
@@ -156,7 +156,7 @@ Légende : **CONV** conversion · **CIBLE** cibles · **DESIGN** · **MOBILE** �
 | I8 | A11Y | **Contraste insuffisant** du bleu `#4a90e2` (3,3:1 sur blanc, minimum AA 4,5:1), y compris en blanc sur bleu dans la section Contact. | partout |
 | I9 | DESIGN | **Univers visuel générique** (bleu « template », Arial, verre dépoli, rouge vif) qui ne traduit ni le rétro des années 50 ni le cabaret. Photos petites ; aucune vidéo pour donner envie de voir Flory Anne sur scène. | CSS |
 | I10 | CONV | **Bio qui date la personne** : « devient maman en 1995, puis en 1999 » permet de déduire l'âge. Contraire à la consigne de ne pas mettre l'âge en avant (voir §6, ton). | `index.html` À propos |
-| I11 | MOBILE | *Navbar et ancres corrigées le 2026-11-05 ; reste : boutons flottants.* Boutons flottants de 60 px qui masquent le contenu ; menu en 25 px qui risque de déborder entre 769 et 1 000 px ; header fixe qui masque le haut des ancres (pas de `scroll-margin-top`). | CSS |
+| I11 | MOBILE | ✅ *Corrigé le 2026-11-05 (étapes 2 et 3).* Boutons flottants de 60 px qui masquent le contenu ; menu en 25 px qui risque de déborder entre 769 et 1 000 px ; header fixe qui masque le haut des ancres (pas de `scroll-margin-top`). | CSS |
 
 ### 🟡 Secondaire
 
@@ -212,7 +212,7 @@ Ordonné par impact sur les réservations rapporté à l'effort. Effort : S (moi
 |---|---|---|---|
 | 0 | ✅ **Fait le 2026-11-05.** Migration Astro à l'identique : layout, Header, pages FR, images optimisées, workflow de déploiement, code mort supprimé. Rendu comparé élément par élément avec l'ancien site (positions et tailles identiques en desktop, pas de débordement en 375 px). | S3, S4, S5, I7 (en partie) | M/L |
 | 1 | ✅ **Fait le 2026-11-05.** Hero : bandeau saisonnier « Noël : réservez Nani, la Lutine Magicienne » (affiché automatiquement de septembre à décembre, côté navigateur) qui renvoie vers `#spectacle-noel` ; accroche « Magie · Jonglerie · Bulles de savon » ; h1 « Spectacles de magie pour enfants, familles et événements » ; « Partout en France et à l'international » ; boutons « Demander un devis » (email prérempli via `devisHref()`, à remplacer par le formulaire à l'étape 4) et « 📞 06 67 78 54 19 » ; lien « Découvrir nos spectacles ». Le hero passe en `min-height` (le contenu n'est plus coupé en mobile), et le bouton devis est visible sans défiler en 375 px. Mascottes retirées (section, menu, CSS, JS, images). **Remplacé le jour même à la demande de la cliente** : la bannière est désormais la photo décor (sans rideaux, sans bandeau de Noël, sans accroche, sans zone ni blocs Collectivité / Événementiel / Particulier), avec « Découvrir nos prestations » au centre et deux boutons discrets « Demander un devis » et téléphone. Le h1 est conservé mais masqué visuellement (`.visually-hidden`). En mobile, la photo s'affiche en entier, avec les boutons dessous. ⚠️ « Partout en France et à l'international » n'apparaît donc plus nulle part (C8 à retraiter, par exemple dans le pied de page à l'étape 7). | C2, I1 | S |
-| 2 | **Appels à l'action partout** : ~~« Demander un devis » sur chaque prestation~~ (✅ fait le 2026-11-05 avec les nouvelles prestations : un bouton par carte et par formule Mariage, objet de l'email prérempli) ; téléphone dans le header ; barre fixe « Appeler / Devis » sur mobile à la place des boutons flottants ; badge tarif remplacé par « Devis gratuit sur demande ». | C3, I11, S6 | S |
+| 2 | ✅ **Fait le 2026-11-05.** Bouton « Demander un devis » sur chaque prestation et chaque formule Mariage, avec l'objet de l'email prérempli. Téléphone en pastille dans la navbar au-delà de 1 100 px (`.nav-phone`). Jusqu'à 1 100 px, barre fixe « 📞 Appeler / Demander un devis » en bas de l'écran (`.action-bar`, dans `FloatingButtons.astro`), qui remplace le bouton Instagram flottant (Instagram reste dans Contact). Le bouton « retour en haut » est réduit à 48 px et placé au-dessus de la barre, et le `body` a un `padding-bottom` pour que la barre ne masque pas le bas de page. Le badge « Tarif : sur demande » est **conservé** (demande de la cliente) ; son style rouge sera revu à l'étape 14. | C3, I11, S6 (en partie) | S |
 | 3 | ✅ **Fait le 2026-11-05.** Menu burger sous 768 px (`.nav-toggle`, `aria-expanded`, croix animée) avec panneau déroulant ; sous-menu Prestations ouvrable au toucher et au clic (bouton flèche `.dropdown-toggle`) et, sur grand écran, au survol et au clavier (`:focus-within`) ; fermeture au clic sur un lien, au clic en dehors et avec Échap (le focus revient au bouton) ; contour `:focus-visible` ; navbar sur une seule ligne de 771 à 1 100 px (liens en 19 px, sans retour à la ligne) ; `scroll-margin-top` sur toutes les ancres. Testé en 375, 800 et 1280 px, avec de vrais clics, au clavier et sur les ancres d'une page à l'autre. | C1, I11 (en partie) | S |
 | 4 | **Formulaire de devis Web3Forms** (choix retenu, voir D3) : vous êtes (collectivité / entreprise-CSE / particulier / autre), prestation(s), date, lieu (ville, pays), nombre et âge des spectateurs, intérieur ou extérieur, téléphone, email, message ; honeypot `botcheck`, mention RGPD, message de remerciement, version anglaise. | C4 | M |
 | 5 | **Bloc « Informations pratiques »** sur chaque prestation et dans une FAQ : montage 1 h 30, jusqu'à environ 600 spectateurs, son, lumière et électricité fournis selon la taille du spectacle, pas d'électricité nécessaire en extérieur, intervention en France et à l'international, sur facture. Fiche technique PDF ensuite si utile. | C6 | S |

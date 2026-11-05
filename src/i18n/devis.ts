@@ -5,8 +5,8 @@
  */
 export const DEVIS = {
     fr: {
-        title: 'Demander un devis - Flory Animation',
-        description: "Demandez un devis gratuit pour un spectacle de magie et de bulles de savon, une animation ou un mariage avec Flory Animation, partout en France et à l'international.",
+        title: 'Demander un devis gratuit – Flory Animation',
+        description: "Devis gratuit pour un spectacle de magie et de bulles de savon, une animation ou un mariage, partout en France et à l'international.",
         h1: 'Demander un devis',
         intro: 'Parlez-nous de votre événement : nous vous répondons avec une proposition sur mesure. Le devis est gratuit.',
         alt: 'Vous préférez nous parler ?',
@@ -51,7 +51,7 @@ export const DEVIS = {
         mailSubject: 'Demande de devis',
     },
     en: {
-        title: 'Request a quote - Flory Animation',
+        title: 'Request a free quote – Flory Animation',
         description: 'Request a free quote for a magic and soap bubble show, an entertainment or a wedding with Flory Animation, in France and abroad.',
         h1: 'Request a quote',
         intro: 'Tell us about your event and we will get back to you with a tailor-made proposal. The quote is free.',

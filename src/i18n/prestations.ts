@@ -4,15 +4,15 @@
  * ⚠️ TEXTE PROVISOIRE : tous les textes descriptifs (champ `text`, intro et formules Mariage, encadrés
  * des informations pratiques) sont des versions de test rédigées par Claude, en attendant les textes
  * définitifs de la cliente. La traduction anglaise est à faire relire par une personne anglophone.
- * TODO : durées et publics des prestations, nombre de participants de l'Atelier, photo Mariage.
+ * TODO : durées et publics des prestations (sauf l'Atelier : 1 heure, dès 6 ans, 12 participants maximum, d'après son affiche).
  *
  * Les noms propres des spectacles et des formules Mariage restent en français dans la version anglaise
  * (avec une traduction entre parenthèses quand c'est utile).
  */
 export const PRESTATIONS = {
     fr: {
-        title: 'Nos Prestations - FloryAnimation',
-        description: 'Spectacles de magie et de bulles de savon, spectacles de Noël et de Carnaval, animation en extérieur, atelier, mariage : toutes les prestations de Flory Animation.',
+        title: 'Spectacles, Noël, mariage et ateliers – Flory Animation',
+        description: 'Bubble Magic Show, La Valise, spectacles de Noël et de Carnaval, Jardin des Bulles, atelier et mariage : toutes les prestations de Flory Animation.',
         heroTitle: 'Nos Prestations Magiques',
         heroText: 'Découvrez notre gamme complète de spectacles et animations pour tous les âges',
         sections: {
@@ -52,18 +52,23 @@ export const PRESTATIONS = {
         jardin: {
             title: 'Le Jardin des Bulles',
             tag: 'Déambulation en extérieur',
-            alt: 'Bulles de savon lumineuses au-dessus d’une table',
+            alt: 'Flory Anne accoudée au chariot décoré « Le Jardin des Bulles », dans un champ de fleurs sauvages, entourée de bulles',
             text: "Au détour d'une allée, un jardin éphémère prend vie : des bulles s'envolent, scintillent au soleil et dansent au gré du vent. Petits et grands s'émerveillent, tentent de les attraper… et repartent le sourire aux lèvres. Une animation poétique en déambulation, idéale pour les fêtes de plein air.",
         },
         atelier: {
             title: 'Atelier « Bulles de Savon »',
             tag: 'Atelier participatif',
-            alt: 'Enfants découvrant les bulles de savon',
-            details: [{ label: 'Public', value: 'À partir de 6 ans' }],
+            alt: 'Affiche de l’Atelier « Bulles de Savon » : des enfants font des bulles dans un jardin ; public à partir de 6 ans, durée 1 heure, 12 participants maximum',
+            details: [
+                { label: 'Public', value: 'À partir de 6 ans' },
+                { label: 'Durée', value: '1 heure' },
+                { label: 'Participants', value: '12 au maximum' },
+            ],
             text: "Comment naît une bulle ? Pourquoi brille-t-elle de toutes les couleurs ? Dans cet atelier ludique, les enfants découvrent les secrets des bulles de savon et apprennent à créer les leurs, des plus petites aux plus étonnantes. Un moment de découverte et d'émerveillement, où chacun repart avec des étoiles dans les yeux.",
         },
         mariage: {
             accroche: "« L'art et l'émotion au cœur de votre mariage »",
+            flyerAlt: 'Flyer « Sublimez votre mariage » présentant les formules Instant Précieux, Éclat de Bulles et Prestige',
             intro: 'Le plus beau jour de votre vie mérite une touche de magie. Des bulles de savon qui s\'envolent autour de vous, la lumière qui les traverse, l\'émotion de vos invités : Flory Animation compose avec vous un moment unique, élégant et poétique.',
             formules: [
                 {
@@ -104,7 +109,7 @@ export const PRESTATIONS = {
         infosCta: 'Demander un devis gratuit',
     },
     en: {
-        title: 'Our shows - Flory Animation',
+        title: 'Shows, Christmas, weddings and workshops – Flory Animation',
         description: 'Magic and soap bubble shows, Christmas and Carnival shows, outdoor roaming act, workshop and weddings: all of Flory Animation’s shows, in France and abroad.',
         heroTitle: 'Our Magical Shows',
         heroText: 'Discover our full range of shows and entertainment for all ages',
@@ -145,18 +150,23 @@ export const PRESTATIONS = {
         jardin: {
             title: 'Le Jardin des Bulles (The Bubble Garden)',
             tag: 'Outdoor roaming act',
-            alt: 'Glowing soap bubbles above a table',
+            alt: 'Flory Anne leaning on the decorated “Le Jardin des Bulles” cart in a field of wildflowers, surrounded by bubbles',
             text: 'Around the corner of a path, an ephemeral garden comes to life: bubbles take flight, sparkle in the sun and dance on the breeze. Young and old marvel, try to catch them… and leave with a smile. A poetic roaming act, perfect for outdoor celebrations.',
         },
         atelier: {
             title: 'Soap Bubble Workshop',
             tag: 'Hands-on workshop',
-            alt: 'Children discovering soap bubbles',
-            details: [{ label: 'Audience', value: 'Ages 6 and up' }],
+            alt: 'Poster for the Soap Bubble Workshop: children blowing bubbles in a garden; ages 6 and up, 1 hour, up to 12 participants',
+            details: [
+                { label: 'Audience', value: 'Ages 6 and up' },
+                { label: 'Duration', value: '1 hour' },
+                { label: 'Participants', value: 'Up to 12' },
+            ],
             text: 'How is a bubble born? Why does it shine in every colour? In this playful workshop, children discover the secrets of soap bubbles and learn to make their own, from the tiniest to the most surprising. A moment of discovery and wonder, where everyone leaves with stars in their eyes.',
         },
         mariage: {
             accroche: '“Art and emotion at the heart of your wedding”',
+            flyerAlt: '“Sublimez votre mariage” flyer presenting the Instant Précieux, Éclat de Bulles and Prestige packages',
             intro: 'The most beautiful day of your life deserves a touch of magic. Soap bubbles floating all around you, light shining through them, the emotion of your guests: Flory Animation creates a unique, elegant and poetic moment with you.',
             formules: [
                 {

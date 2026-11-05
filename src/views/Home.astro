@@ -9,6 +9,7 @@ import { pageUrl, UI, type Lang } from '../i18n/ui';
 import { HOME } from '../i18n/home';
 
 import decor from '../assets/img/FOND_DECOR_FLORY_ANIMATION.jpg';
+import famille from '../assets/img/FLORY_ANIMATION_FAMILLE.jpg';
 
 interface Props {
     lang: Lang;
@@ -17,8 +18,11 @@ interface Props {
 const { lang } = Astro.props;
 const t = HOME[lang];
 const ui = UI[lang];
+// Les 2 derniers paragraphes de la bio (l'aventure familiale) s'affichent à côté de la photo de famille
+const aboutDebut = t.about.slice(0, -2);
+const aboutFamille = t.about.slice(-2);
 ---
-<Base lang={lang} page="accueil" title={t.title} description={t.description} keywords={t.keywords}>
+<Base lang={lang} page="accueil" title={t.title} description={t.description} schema="organisation">
     <!-- Bannière : photo « fond décor Flory Animation » (le nom est écrit dans l'image) -->
     <section id="accueil" class="hero">
         <Image
@@ -65,7 +69,19 @@ const ui = UI[lang];
                 sizes="(max-width: 960px) 90vw, 880px"
             />
             <div class="about-text">
-                {t.about.map((p) => <p set:html={p} />)}
+                {aboutDebut.map((p) => <p set:html={p} />)}
+                <div class="about-famille">
+                    <Image
+                        src={famille}
+                        alt={t.familleAlt}
+                        class="famille-image"
+                        width={300}
+                        densities={[1, 2]}
+                    />
+                    <div class="about-famille-text">
+                        {aboutFamille.map((p) => <p set:html={p} />)}
+                    </div>
+                </div>
             </div>
         </div>
     </section>

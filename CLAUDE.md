@@ -1,7 +1,7 @@
 # CLAUDE.md — Site Flory Animation
 
 Document de référence pour toutes les sessions de travail sur ce dépôt.
-Dernière mise à jour : 2026-11-05 (site bilingue FR/EN, pied de page et pages légales, formulaire de devis, infos pratiques, accroches).
+Dernière mise à jour : 2026-11-05 (nouvelles images : flyer Mariage, affiche Atelier, chariot du Jardin des Bulles, photo de famille ; SEO de base ; site bilingue).
 
 ---
 
@@ -16,9 +16,9 @@ Dernière mise à jour : 2026-11-05 (site bilingue FR/EN, pied de page et pages 
   | Spectacles | « La Valise » | ambiance Poétique | `LA_VALISE.png` | `la-valise` |
   | Spectacles thématiques (`#spectacles-thematiques`) | Carnaval (« Le Carnaval de Nani ») | — | `AFFICHE_CARNAVAL_DE_NANI.jpg` | `carnaval` |
   | Spectacles thématiques | Noël (« Nani la Lutine » et « Bulles de Noël ») | — | les 2 affiches `AFFICHE_NOEL_*.png` | `spectacle-noel` |
-  | Animation déambulation extérieur | Le Jardin des Bulles | en extérieur | `BULLE_SAVON_TABLE_LUMINEUSE.jpg` (ancienne photo réutilisée) | `jardin-des-bulles` |
-  | Atelier | L'Atelier « Bulles de Savon » | à partir de 6 ans | `les_bulles.jpeg` (ancienne photo réutilisée) | `atelier-bulles` |
-  | Mariage | « L'art et l'émotion au cœur de votre mariage » : formules **Instant Précieux** (bulles pendant la séance photo), **Éclat de Bulles** (pendant le vin d'honneur), **Prestige** (« Entre Toi et Moi », spectacle féerique de bulles de savon) | cible particuliers | aucune photo (TODO) | `mariage`, `mariage-instant-precieux`, `mariage-eclat-de-bulles`, `mariage-prestige` |
+  | Animation déambulation extérieur | Le Jardin des Bulles | en extérieur | `JARDIN_DES_BULLES_CHARIOT.jpg` (photo du chariot) | `jardin-des-bulles` |
+  | Atelier | L'Atelier « Bulles de Savon » | à partir de 6 ans, **durée 1 heure, 12 participants maximum** (d'après l'affiche fournie le 2026-11-05) | `AFFICHE_ATELIER_BULLES_DE_SAVON.jpg` | `atelier-bulles` |
+  | Mariage | « L'art et l'émotion au cœur de votre mariage » : formules **Instant Précieux** (bulles pendant la séance photo), **Éclat de Bulles** (pendant le vin d'honneur), **Prestige** (« Entre Toi et Moi », spectacle féerique de bulles de savon ; ⚠️ le flyer l'appelle « Magic Bubble Show », voir questions ouvertes) | cible particuliers | `MARIAGE_FLYER_FORMULES.png` (flyer « Sublimez votre mariage », affiché à côté de l'accroche, agrandissable) | `mariage`, `mariage-instant-precieux`, `mariage-eclat-de-bulles`, `mariage-prestige` |
   | Dans ma bulle | Vivre une expérience unique et éphémère : être dans une bulle géante | — | `DANS_MA_BULLE.jpg` | `dans-ma-bulle` |
 - **Anciennes prestations supprimées le 2026-11-05** : L'atelier magique, Nani la Lutine Magicienne (ancienne fiche), Cabaret « Étincelle magique », Bar à Bulles, ancien Atelier Bulles (dès 4 ans), ainsi que les mascottes.
 - **Textes provisoires** : tous les textes descriptifs des prestations sont des **versions de test** rédigées par Claude, en attendant les textes définitifs de la cliente. Depuis le passage au bilingue, **les textes ne sont plus dans les pages mais dans `src/i18n/`** : `prestations.ts` (cartes, Mariage, informations pratiques), `home.ts` (accroches et bio ; une phrase de la bio est balisée `TEXTE MODIFIÉ`), `devis.ts` ; les pages légales (`mentions-legales.astro`, `confidentialite.astro` et leurs versions `en/`) sont des modèles balisés `<!-- TEXTE PROVISOIRE -->`. **Toute la version anglaise est une première traduction à faire relire** par une personne anglophone. Infos manquantes : commentaires `TODO`. Chercher `TEXTE PROVISOIRE`, `TEXTE MODIFIÉ` et `TODO` pour les retrouver.
@@ -51,20 +51,22 @@ floryanimation/
 ├── astro.config.mjs        # site/base via SITE_URL et BASE_PATH, build.format 'preserve', i18n fr/en
 ├── package.json            # scripts dev / build / preview
 ├── src/
-│   ├── layouts/Base.astro  # <head> (lang, hreflang), favicon généré, Header, Footer, boutons flottants, script commun ; props lang + page
+│   ├── layouts/Base.astro  # <head> : title, description, canonical, hreflang, favicons, Open Graph (image 1200×630 générée), JSON-LD ; Header, Footer, boutons flottants ; props lang, page, schema
 │   ├── components/         # Header.astro (menu, sélecteur de langue, téléphone), Footer.astro, FloatingButtons.astro (retour en haut, Instagram, barre d'action mobile),
 │   │                       # Prestation.astro (carte de prestation), ContactSection.astro (bloc Contact de l'accueil et des prestations)
 │   ├── views/              # Home.astro, Prestations.astro, Devis.astro : contenu des pages, commun aux deux langues (prop lang)
 │   ├── pages/              # index.astro, spectacles.astro, devis.astro (une ligne : <Vue lang="fr" />), mentions-legales.astro, confidentialite.astro
 │   │   └── en/             # index.astro, shows.astro, quote.astro (<Vue lang="en" />), legal-notice.astro, privacy.astro
+│   │                       # + robots.txt.ts et sitemap.xml.ts : générés au build à partir de SITE_URL, BASE_PATH et ROUTES
 │   ├── i18n/               # ui.ts (langues, routes, pageUrl, libellés communs), home.ts, prestations.ts, devis.ts (textes FR et EN)
 │   ├── styles/             # global.css (commun, dont le pied de page), index.css, spectacles.css, devis.css, legal.css
 │   ├── scripts/common.ts   # défilement fluide, ombre navbar, retour en haut, menu burger et sous-menu (ouverture/fermeture, Échap)
 │   ├── lib/url.ts          # url('chemin') : préfixe avec le base (utilisé par pageUrl)
 │   ├── lib/legal.ts        # dénomination, forme, SIRET, siège, directeur de publication, hébergeur (mentions légales, confidentialité)
+│   ├── lib/schema.ts       # données structurées JSON-LD : PerformingGroup (accueil), + liste des prestations (page Prestations)
 │   ├── lib/contact.ts      # téléphone, email, Instagram, clé Web3Forms, PRESTATIONS_DEVIS (id + libellés FR/EN), devisHref(id, lang) => devis.html?prestation=<id>
 │   └── assets/img/         # images sources, optimisées au build
-├── public/                 # copié tel quel : robot.txt (À RENOMMER robots.txt), sitemap.xml (à corriger)
+├── public/                 # copié tel quel : favicon.svg (source), favicon-32.png et apple-touch-icon.png (générés depuis le SVG avec sharp)
 ├── .github/workflows/deploy.yml   # build + déploiement GitHub Pages
 ├── .claude/launch.json     # serveurs astro-preview / astro-dev pour l'aperçu dans Claude
 ├── .gitignore              # node_modules, dist, .astro, .idea, réglages locaux
@@ -80,14 +82,15 @@ floryanimation/
 | `AFFICHE_CARNAVAL_DE_NANI.jpg` | 550 Ko | 1024×1536 | spectacle thématique Carnaval |
 | `AFFICHE_NOEL_NANI_LA_LUTINE.png`, `AFFICHE_NOEL_BULLES_DE_NOEL.png` | 1,8 et 1,7 Mo | 1024×1536, 843×1264 | spectacle thématique Noël (les deux affiches) |
 | `DANS_MA_BULLE.jpg` | 490 Ko | 1728×3072 | prestation Dans ma bulle |
-| `BULLE_SAVON_TABLE_LUMINEUSE.jpg` | 68 Ko | 2000×900 | Jardin des Bulles (ancienne photo réutilisée en attendant mieux) |
-| `les_bulles.jpeg` | 67 Ko | 1010×916 | Atelier Bulles de Savon (ancienne photo réutilisée) |
-| `FLORY_ANNE.jpg` | 92 Ko | 1080×1727 | **favicon uniquement** (retirée de la bio). À remplacer par un vrai favicon à l'étape 9 |
+| `JARDIN_DES_BULLES_CHARIOT.jpg` | 356 Ko | 1231×848 | Jardin des Bulles : Flory Anne et le chariot décoré dans un champ de fleurs |
+| `AFFICHE_ATELIER_BULLES_DE_SAVON.jpg` | 336 Ko | 768×1210 | Atelier Bulles de Savon (affiche : public, durée, participants) |
+| `MARIAGE_FLYER_FORMULES.png` | 2,2 Mo | 1024×1403 | section Mariage : flyer des 3 formules (lightbox au clic) |
+| `FLORY_ANIMATION_FAMILLE.jpg` | 211 Ko | 864×1152 | À propos : portrait illustré de l'équipe familiale, à côté des deux paragraphes sur l'aventure familiale (la photo décor reste en haut de la section) |
 | `instagram.png` | 60 Ko | 512×512 | bouton flottant |
 
 Les poids indiqués sont ceux des sources : Astro les convertit en WebP redimensionnés au build.
 
-Fichiers supprimés le 2026-11-05 (récupérables via l'historique Git, par exemple `git checkout a99ee47 -- img/photo_cabaret.jpg`) : anciennes images de prestations et de l'accueil (`SPECTACLE_ENFANTS_AVEC_NOUNOURS1.jpeg`, `noel.jpeg`, `noel2.jpeg`, `CABARET.jpeg`, `famille.jpg`, `theatre-curtain.svg`), photos des mascottes (`LA_LICORNE`, `LA_POULE`, `LE_CLOWN`, `NOUNOURS`, `SAPIN_DE_NOEL`), `theatre.jpg` (4,9 Mo), `IMG_20220204_190840.jpg`, `Magie.jpg`, `FLORY_ANIMATION_L_ATELIER_MAGIQUE_1.jpg`, `LE_LAPIN.jpg`, `duo.jpeg`, `photoNoel.jpg`, `photo_cabaret.jpg`, `description/rideau theatre.webp`. `.idea/` et `.claude/settings.local.json` ne sont plus suivis par Git.
+Fichiers supprimés le 2026-11-05 (récupérables via l'historique Git, par exemple `git checkout a99ee47 -- img/photo_cabaret.jpg`) : `BULLE_SAVON_TABLE_LUMINEUSE.jpg` et `les_bulles.jpeg` (anciennes photos remplacées par le chariot et l'affiche de l'Atelier), `FLORY_ANNE.jpg` (ancien favicon, remplacé par `public/favicon.svg`), `public/robot.txt` et `public/sitemap.xml` (remplacés par des fichiers générés), anciennes images de prestations et de l'accueil (`SPECTACLE_ENFANTS_AVEC_NOUNOURS1.jpeg`, `noel.jpeg`, `noel2.jpeg`, `CABARET.jpeg`, `famille.jpg`, `theatre-curtain.svg`), photos des mascottes (`LA_LICORNE`, `LA_POULE`, `LE_CLOWN`, `NOUNOURS`, `SAPIN_DE_NOEL`), `theatre.jpg` (4,9 Mo), `IMG_20220204_190840.jpg`, `Magie.jpg`, `FLORY_ANIMATION_L_ATELIER_MAGIQUE_1.jpg`, `LE_LAPIN.jpg`, `duo.jpeg`, `photoNoel.jpg`, `photo_cabaret.jpg`, `description/rideau theatre.webp`. `.idea/` et `.claude/settings.local.json` ne sont plus suivis par Git.
 
 ### Lancer le site en local
 ```bash
@@ -153,9 +156,9 @@ Légende : **CONV** conversion · **CIBLE** cibles · **DESIGN** · **MOBILE** �
 | I1 | CONV | **Saisonnalité ignorée** : on est en pleine période de réservation des arbres de Noël (CSE, écoles, mairies) et le spectacle de Noël n'est pas mis en avant sur l'accueil. | `index.html` |
 | I2 | CIBLE | **Pas de parcours par cible** : les 3 blocs du hero ne sont pas cliquables et n'apportent aucun argument propre à chaque public. | `index.html` hero |
 | I3 | CONV | **Aucun moyen de laisser un avis** : le site ne sollicite pas de retours après une prestation, et il n'existe pas de fiche Google Business Profile. | — |
-| I4 | SEO | `spectacles.html` sans meta description ; titles sans métier ni zone ; aucune balise Open Graph ; pas de JSON-LD ; pas de `hreflang` ni de canonical. | `<head>` |
-| I5 | SEO | **Hiérarchie des titres incorrecte** (h1 puis h3 ; prestations découpées en deux h3 ; émojis dans les titres). | les 2 pages |
-| I6 | SEO | `robot.txt` mal nommé ; `sitemap.xml` liste des URLs inexistantes. | racine |
+| I4 | SEO | ✅ *Corrigé le 2026-11-05 (étapes 8 et 9).* `spectacles.html` sans meta description ; titles sans métier ni zone ; aucune balise Open Graph ; pas de JSON-LD ; pas de `hreflang` ni de canonical. | `<head>` |
+| I5 | SEO | ✅ *Corrigé (un seul h1 par page, aucun niveau sauté, pas d'émoji lu dans les titres).* **Hiérarchie des titres incorrecte** (h1 puis h3 ; prestations découpées en deux h3 ; émojis dans les titres). | les 2 pages |
+| I6 | SEO | ✅ *Corrigé le 2026-11-05 (étape 9) : robots.txt et sitemap.xml générés.* `robot.txt` mal nommé ; `sitemap.xml` liste des URLs inexistantes. | racine |
 | I7 | PERF | **Images non optimisées** (pas de WebP, de `loading="lazy"` ni de `width`/`height` ; `famille.jpg` 406 Ko pour une vignette de 150 px). | `img/` |
 | I8 | A11Y | **Contraste insuffisant** du bleu `#4a90e2` (3,3:1 sur blanc, minimum AA 4,5:1), y compris en blanc sur bleu dans la section Contact. | partout |
 | I9 | DESIGN | **Univers visuel générique** (bleu « template », Arial, verre dépoli, rouge vif) qui ne traduit ni le rétro des années 50 ni le cabaret. Photos petites ; aucune vidéo pour donner envie de voir Flory Anne sur scène. | CSS |
@@ -172,7 +175,7 @@ Légende : **CONV** conversion · **CIBLE** cibles · **DESIGN** · **MOBILE** �
 | S4 | CODE | **Code mort** : styles et JS de modale (environ 250 lignes), observer `.card`, `.bubble` sur l'accueil, `theatre.jpg` en commentaire. |
 | S5 | CODE | Styles inline, `</br>` invalides, ordre du menu déroulant différent selon la page. |
 | S6 | DESIGN | Badge « 💰 Tarif : sur demande » en rouge vif (connotation d'alerte). |
-| S7 | SEO | Favicon = photo JPG de 92 Ko déclarée `image/png`. |
+| S7 | SEO | ✅ *Corrigé le 2026-11-05 (étape 9) : favicon SVG dédié.* Favicon = photo JPG de 92 Ko déclarée `image/png`. |
 
 ---
 
@@ -223,7 +226,7 @@ Ordonné par impact sur les réservations rapporté à l'effort. Effort : S (moi
 | 6 | ✅ **Fait le 2026-11-05.** Bandeau d'accroches `.atouts` entre la bannière et À propos sur l'accueil : « Née dans une famille de magiciens », « Formée auprès d'Annie Fratellini et du Cirque de Pékin », « Jusqu'à 600 spectateurs, son et lumière fournis », « Partout en France et à l'international ». 4 colonnes en desktop, 2 en tablette, 1 en mobile ; balisé `TEXTE PROVISOIRE`. Dans la bio, « devient maman en 1995, puis en 1999 » devient « devenue maman à deux reprises » (balisé `TEXTE MODIFIÉ`, à faire valider). Plus aucune année ni durée de carrière sur le site ; restent seulement des âges au moment des faits (« dès l'âge de 6 ans », « à 14 ans »), autorisés par la consigne. | C6 (en partie), I10 | S |
 | 7 | ✅ **Fait le 2026-11-05, sauf 2 informations.** Pied de page commun (`Footer.astro`, dans `Base.astro`) : présentation et zone « Partout en France et à l'international », contact (téléphone, email, Instagram), navigation (Accueil, Prestations, Informations pratiques, Devis), © et liens légaux. Pages `mentions-legales.html` (éditeur, directeur de publication, hébergeur GitHub Pages, propriété intellectuelle, liens externes) et `confidentialite.html` (données du formulaire, finalité, base légale, destinataires Web3Forms et hébergeur, conservation 3 ans au plus, droits, CNIL, aucun cookie), balisées `TEXTE PROVISOIRE` (modèles, pas un avis juridique). La mention RGPD du formulaire de devis renvoie vers la politique. 116 liens internes testés sur les 5 pages. ⚠️ À compléter : directeur ou directrice de la publication et durée de conservation à valider (`TODO`). ⚠️ À mettre à jour : hébergeur (`HEBERGEUR` dans `legal.ts`) lors du passage sur Cloudflare, et la section Cookies si on ajoute un outil d'audience ou une vidéo YouTube. Liens FR/EN : à l'étape 8. | C7, C8 | S |
 | 8 | ✅ **Fait le 2026-11-05.** Version anglaise complète sous `/en/` (accueil, prestations, devis, mentions légales, confidentialité) : contenu des pages dans `src/views/` (une seule mise en page pour les deux langues), textes dans `src/i18n/`, libellés communs et routes dans `ui.ts`. Bouton de langue dans la navbar (visible aussi sur mobile, entre le logo et le burger), `hreflang` réciproques et `x-default`, `lang` correct sur `<html>`. Formulaire anglais : libellés traduits, mais **noms de champs et valeurs envoyés en français** (la cliente reçoit toujours un email en français, avec « Langue du visiteur : Anglais »). Les pages légales anglaises indiquent que la version française fait foi. Noms des spectacles et des formules Mariage gardés en français, avec une traduction entre parenthèses. Testé : 244 liens internes sur les 10 pages, présélection du devis, aucun débordement en 375 et 1 280 px, navbar sur une ligne de 775 à 1 280 px. Au passage : `build.format` passe à `'preserve'`, et l'email du bloc Contact peut désormais passer à la ligne (il débordait entre 900 et 1 020 px). ⚠️ **Traduction à faire relire** par une personne anglophone. | C5 | M/L |
-| 9 | **SEO de base** : titles et meta descriptions par page et par langue, canonical, Open Graph, hiérarchie Hn, `robots.txt` et `sitemap.xml` corrects pour `floryanimation.com`, favicon dédié, JSON-LD `PerformingGroup`/`EntertainmentBusiness` avec `areaServed` France et international, et un `Service` par prestation. | I4, I5, I6, S7 | S/M |
+| 9 | ✅ **Fait le 2026-11-05.** Titles (≤ 60 caractères) et descriptions (≤ 156) revus par page et par langue, balise `keywords` retirée (ignorée par Google) ; URL canonique ; Open Graph et Twitter Card (titre, description, image de partage 1200×630 générée depuis la photo décor, alignée en haut pour garder le nom, `og:locale` fr_FR / en_GB) ; nouveau favicon (bulles irisées et étoile dorée sur bleu nuit : `public/favicon.svg`, PNG 32 px et 180 px pour Apple) ; `robots.txt` et `sitemap.xml` générés au build (10 URL avec leurs versions FR/EN), qui suivent automatiquement le domaine ; JSON-LD `PerformingGroup` (nom, fondatrice, contact, Instagram, siège à Saint-Étienne, zone France et international, langues) sur l'accueil, avec en plus les 10 prestations en `makesOffer` sur la page Prestations (sans prix). Vérifié sur les 10 pages : un seul h1, aucun niveau de titre sauté, 244 liens valides. À faire quand le domaine sera en ligne : déclarer le site et le sitemap dans **Google Search Console**, et tester l'aperçu de partage (par exemple avec l'outil de débogage de partage de Facebook). | I4, I5, I6, S7 | S/M |
 | 10 | **Vidéo verticale** (assets attendus) : composant `VideoVertical` au format 9:16, `<video controls playsinline preload="none" poster>`, MP4 H.264 environ 720×1280, **moins de 25 Mio par fichier** (limite Cloudflare Pages), sous-titres si texte parlé ; repli possible sur un Short YouTube intégré en mode « façade » (pas d'iframe tant qu'on ne clique pas, `youtube-nocookie`). Emplacements : hero ou haut de l'accueil, et une vidéo par spectacle si disponible. | C6, I9 | M |
 | 11 | **Collecte d'avis** : bouton « Vous avez vu le spectacle ? Laissez-nous un avis » (formulaire Web3Forms court, ou lien vers les avis Google une fois la fiche créée) ; section « Ils en parlent » affichée seulement quand il y aura des avis réels. Hors site : **créer la fiche Google Business Profile** (zone desservie, sans adresse publique). | I3 | S |
 | 12 | **Bloc « Vous êtes… »** : 3 cartes cliquables (Collectivité, Entreprise/CSE, Particulier) avec arguments et prestations conseillées. | I2 | M |
@@ -299,6 +302,8 @@ Ordonné par impact sur les réservations rapporté à l'effort. Effort : S (moi
 6. **Vidéos** : durée et nombre de clips attendus ; texte parlé (sous-titres FR et EN à prévoir) ?
 7. **Traduction anglaise** : faite (première version). Une personne anglophone peut-elle la relire ? Les textes sont dans `src/i18n/*.ts` (partie `en`) et `src/pages/en/`.
 8. **Photos** : de nouvelles photos arrivent-elles avec les vidéos (pour la refonte et l'image de partage Open Graph) ?
-9. **Textes définitifs** des prestations (remplacer les 12 blocs `TEXTE PROVISOIRE`), avec durées, publics et nombre de participants de l'Atelier (`TODO`).
-10. **Photos manquantes** : Mariage (aucune), Jardin des Bulles et Atelier (anciennes photos réutilisées en attendant).
+9. **Textes définitifs** des prestations (remplacer les blocs `TEXTE PROVISOIRE`), avec durées et publics (`TODO`). L'Atelier est désormais complet (1 heure, dès 6 ans, 12 participants maximum).
+10. ~~Photos manquantes~~ : flyer Mariage, chariot du Jardin des Bulles et affiche de l'Atelier reçus et intégrés le 2026-11-05.
 11. **Logo texte de la navbar** (« ✨ Flory Animation ») : conservé. La demande « remplacer le titre texte du bandeau » a été appliquée à la bannière de l'accueil. À confirmer avec la cliente.
+
+12. **Nom de la formule Prestige** : le brief parle de « Entre Toi et Moi », spectacle féerique de bulles de savon ; le flyer Mariage parle de « Magic Bubble Show ». Lequel garder sur le site ? (Le site affiche pour l'instant « Entre Toi et Moi ».)

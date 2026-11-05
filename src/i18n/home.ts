@@ -5,9 +5,8 @@
  */
 export const HOME = {
     fr: {
-        title: 'MAGIE – ANIMATION INTERGENERATIONNELLE',
-        description: 'Découvrez Flory Animation, spécialiste des spectacles magiques et animations intergénérationnelles. Réservez des moments inoubliables pour toute la famille.',
-        keywords: 'magie, animation, spectacles, intergénérationnel, Flory Animation',
+        title: 'Flory Animation – Spectacles de magie et bulles de savon',
+        description: "Spectacles de magie, jonglerie et bulles de savon pour enfants, familles, entreprises et mariages, partout en France et à l'international. Devis gratuit.",
         heroAlt: 'Flory Animation : une porte de bibliothèque ouverte sur une forêt enchantée illuminée',
         h1: 'Flory Animation : spectacles de magie et de bulles de savon',
         discover: 'Découvrir nos prestations',
@@ -22,6 +21,7 @@ export const HOME = {
         ],
         aboutTitle: 'À propos de Flory Animation',
         aboutAlt: 'Décor féerique de Flory Animation',
+        familleAlt: 'L’équipe familiale de Flory Animation, en costumes de scène, sous un chapiteau de cirque illustré',
         about: [
             "<strong>Flory Animation</strong>, c'est avant tout une histoire de passion et de transmission. Fondée par <strong>Flory Anne</strong>, fille de magiciens, l'univers du spectacle a bercé son enfance. Dès l'âge de 6 ans, elle fait ses premiers pas sur scène, tout en débutant des cours de danse classique et de piano.",
             "À 14 ans, elle présente son premier numéro de magie en solo et parcourt la France, affirmant peu à peu son identité artistique. Sa rencontre marquante avec <strong>Annie Fratellini</strong> la plonge dans le monde du cirque, enrichissant sa palette avec l'acrobatie, la jonglerie et l'expression scénique.",
@@ -35,8 +35,7 @@ export const HOME = {
     },
     en: {
         title: 'Flory Animation – Magic and soap bubble shows',
-        description: 'Flory Animation creates magic, juggling and soap bubble shows for children, families, companies and weddings, throughout France and internationally.',
-        keywords: 'magic show, soap bubble show, children entertainment, wedding entertainment, Flory Animation',
+        description: 'Magic, juggling and soap bubble shows for children, families, companies and weddings, throughout France and internationally. Free quote.',
         heroAlt: 'Flory Animation: a library door opening onto an enchanted, glowing forest',
         h1: 'Flory Animation: magic and soap bubble shows',
         discover: 'Discover our shows',
@@ -51,6 +50,7 @@ export const HOME = {
         ],
         aboutTitle: 'About Flory Animation',
         aboutAlt: 'Flory Animation’s enchanted stage set',
+        familleAlt: 'The Flory Animation family team in stage costumes, under an illustrated circus big top',
         about: [
             '<strong>Flory Animation</strong> is, above all, a story of passion and of passing it on. It was founded by <strong>Flory Anne</strong>, the daughter of magicians, who grew up surrounded by the world of the stage. She took her first steps on stage at the age of 6, while starting classical ballet and piano lessons.',
             'At 14, she performed her first solo magic act and toured France, gradually shaping her own artistic identity. A defining encounter with <strong>Annie Fratellini</strong> drew her into the world of the circus, adding acrobatics, juggling and stagecraft to her repertoire.',

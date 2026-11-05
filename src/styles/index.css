@@ -325,3 +325,34 @@
         gap: 1rem;
     }
 }
+
+/* À propos : photo de famille à côté de l'aventure familiale */
+.about-famille {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.famille-image {
+    flex-shrink: 0;
+    width: 300px;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.about-famille-text p:last-child {
+    margin-bottom: 0;
+}
+
+/* Seuil distinct de 768 px (voir CLAUDE.md, fusion des media queries) */
+@media (max-width: 700px) {
+    .about-famille {
+        flex-direction: column;
+    }
+
+    .famille-image {
+        width: 100%;
+        max-width: 320px;
+    }
+}

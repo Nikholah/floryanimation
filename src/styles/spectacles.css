@@ -611,3 +611,39 @@ body {
 .infos-cta {
     text-align: center;
 }
+
+/* Mariage : flyer des formules à côté de l'accroche */
+.mariage-header {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    max-width: 900px;
+    margin: 0 auto 2.5rem;
+}
+
+.spectacle-image.mariage-flyer {
+    flex-shrink: 0;
+    width: 280px;
+    height: auto;
+    border-radius: 12px;
+}
+
+.mariage-header-text .mariage-accroche,
+.mariage-header-text .mariage-intro {
+    text-align: left;
+    margin: 0 0 1rem;
+    max-width: none;
+}
+
+/* Seuil distinct de 768 px (voir CLAUDE.md, fusion des media queries) */
+@media (max-width: 700px) {
+    .mariage-header {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .mariage-header-text .mariage-accroche,
+    .mariage-header-text .mariage-intro {
+        text-align: center;
+    }
+}

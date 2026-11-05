@@ -3,25 +3,39 @@ import { getImage } from 'astro:assets';
 import Header from '../components/Header.astro';
 import FloatingButtons from '../components/FloatingButtons.astro';
 import Footer from '../components/Footer.astro';
-import floryAnne from '../assets/img/FLORY_ANNE.jpg';
+import decor from '../assets/img/FOND_DECOR_FLORY_ANIMATION.jpg';
+import { url } from '../lib/url';
+import { organizationSchema } from '../lib/schema';
 import { LANGS, pageUrl, UI, type Lang, type PageKey } from '../i18n/ui';
 import '../styles/global.css';
 
 interface Props {
     lang: Lang;
-    /** Page courante : sert au menu, au sélecteur de langue et aux liens hreflang. */
+    /** Page courante : sert au menu, au sélecteur de langue, aux liens hreflang et à l'URL canonique. */
     page: PageKey;
     title: string;
-    description?: string;
-    keywords?: string;
+    description: string;
+    /** Données structurées JSON-LD (src/lib/schema.ts) : fiche de la compagnie, avec ou sans la liste des prestations. */
+    schema?: 'organisation' | 'organisation-offres';
 }
 
-const { lang, page, title, description, keywords } = Astro.props;
-// Favicon généré au build (64 px) au lieu de la photo pleine taille.
-const favicon = await getImage({ src: floryAnne, width: 64, height: 64, fit: 'cover', format: 'png' });
-// Versions linguistiques de la page (balises hreflang), en URL absolues
-const alternates = LANGS.map((l) => ({ lang: l, href: new URL(pageUrl(page, l), Astro.site).href }));
-const xDefault = new URL(pageUrl(page, 'fr'), Astro.site).href;
+const { lang, page, title, description, schema } = Astro.props;
+const site = Astro.site;
+
+// URL absolues : page courante (canonique) et ses versions linguistiques (hreflang)
+const canonical = new URL(pageUrl(page, lang), site).href;
+const alternates = LANGS.map((l) => ({ lang: l, href: new URL(pageUrl(page, l), site).href }));
+const xDefault = new URL(pageUrl(page, 'fr'), site).href;
+
+// Image de partage (Open Graph) : photo décor recadrée au format 1200×630, alignée en haut (le nom est en haut de l'image)
+const ogImage = await getImage({ src: decor, width: 1200, height: 630, fit: 'cover', position: 'top', format: 'jpg' });
+const ogImageUrl = new URL(ogImage.src, site).href;
+const ogLocale = { fr: 'fr_FR', en: 'en_GB' } as const;
+const jsonLd = schema ? organizationSchema(lang, site, ogImageUrl, schema === 'organisation-offres') : undefined;
+const ogAlt = {
+    fr: 'Flory Animation : une porte ouverte sur une forêt enchantée illuminée',
+    en: 'Flory Animation: a door opening onto an enchanted, glowing forest',
+};
 ---
 <!DOCTYPE html>
 <html lang={UI[lang].htmlLang}>
@@ -29,13 +43,34 @@ const xDefault = new URL(pageUrl(page, 'fr'), Astro.site).href;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{title}</title>
-    <link rel="icon" type="image/png" href={favicon.src}>
-    {description && <meta name="description" content={description}>}
-    {keywords && <meta name="keywords" content={keywords}>}
+    <meta name="description" content={description}>
     <meta name="author" content="Flory Animation">
     <meta name="robots" content="index, follow">
+    <link rel="canonical" href={canonical}>
     {alternates.map((a) => <link rel="alternate" hreflang={a.lang} href={a.href}>)}
     <link rel="alternate" hreflang="x-default" href={xDefault}>
+
+    <!-- Favicons (public/) -->
+    <link rel="icon" href={url('favicon.svg')} type="image/svg+xml">
+    <link rel="icon" href={url('favicon-32.png')} type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href={url('apple-touch-icon.png')}>
+    <meta name="theme-color" content="#1d2438">
+
+    <!-- Partage sur les réseaux sociaux (Open Graph) -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Flory Animation">
+    <meta property="og:title" content={title}>
+    <meta property="og:description" content={description}>
+    <meta property="og:url" content={canonical}>
+    <meta property="og:image" content={ogImageUrl}>
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content={ogAlt[lang]}>
+    <meta property="og:locale" content={ogLocale[lang]}>
+    <meta property="og:locale:alternate" content={ogLocale[lang === 'fr' ? 'en' : 'fr']}>
+    <meta name="twitter:card" content="summary_large_image">
+
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 </head>
 <body>
     <Header lang={lang} page={page} />

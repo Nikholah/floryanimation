@@ -3,6 +3,7 @@
  * Contenu de la page Prestations, commun au français (src/pages/spectacles.astro)
  * et à l'anglais (src/pages/en/shows.astro). Textes : src/i18n/prestations.ts.
  */
+import { Image, getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import Prestation from '../components/Prestation.astro';
 import ContactSection from '../components/ContactSection.astro';
@@ -16,8 +17,9 @@ import laValise from '../assets/img/LA_VALISE.png';
 import afficheCarnaval from '../assets/img/AFFICHE_CARNAVAL_DE_NANI.jpg';
 import afficheNoelNani from '../assets/img/AFFICHE_NOEL_NANI_LA_LUTINE.png';
 import afficheNoelBulles from '../assets/img/AFFICHE_NOEL_BULLES_DE_NOEL.png';
-import jardinDesBulles from '../assets/img/BULLE_SAVON_TABLE_LUMINEUSE.jpg';
-import atelierBulles from '../assets/img/les_bulles.jpeg';
+import jardinDesBulles from '../assets/img/JARDIN_DES_BULLES_CHARIOT.jpg';
+import afficheAtelier from '../assets/img/AFFICHE_ATELIER_BULLES_DE_SAVON.jpg';
+import flyerMariage from '../assets/img/MARIAGE_FLYER_FORMULES.png';
 import dansMaBulle from '../assets/img/DANS_MA_BULLE.jpg';
 
 interface Props {
@@ -27,8 +29,10 @@ interface Props {
 const { lang } = Astro.props;
 const t = PRESTATIONS[lang];
 const ui = UI[lang];
+// Flyer Mariage : version grand format pour la lightbox
+const flyerFull = (await getImage({ src: flyerMariage, width: 1024 })).src;
 ---
-<Base lang={lang} page="prestations" title={t.title} description={t.description}>
+<Base lang={lang} page="prestations" title={t.title} description={t.description} schema="organisation-offres">
     <!-- Hero Section -->
     <section class="hero">
         <div class="bubble"></div>
@@ -128,7 +132,7 @@ const ui = UI[lang];
                     title={t.atelier.title}
                     tag={t.atelier.tag}
                     text={t.atelier.text}
-                    images={[{ src: atelierBulles, alt: t.atelier.alt }]}
+                    images={[{ src: afficheAtelier, alt: t.atelier.alt, portrait: true }]}
                     details={t.atelier.details}
                     devisId="atelier-bulles"
                 />
@@ -138,9 +142,20 @@ const ui = UI[lang];
         <!-- ============ Mariage ============ -->
         <section class="section mariage" id="mariage">
             <h2>{t.sections.mariage}</h2>
-            <p class="mariage-accroche">{t.mariage.accroche}</p>
-            <p class="mariage-intro">{t.mariage.intro}</p>
-            <!-- TODO : photo de mariage à ajouter quand la cliente l'aura fournie -->
+            <div class="mariage-header">
+                <!-- Flyer des 3 formules (cliquable : agrandi dans la lightbox) -->
+                <Image
+                    src={flyerMariage}
+                    alt={t.mariage.flyerAlt}
+                    width={480}
+                    class="spectacle-image portrait mariage-flyer"
+                    data-full={flyerFull}
+                />
+                <div class="mariage-header-text">
+                    <p class="mariage-accroche">{t.mariage.accroche}</p>
+                    <p class="mariage-intro">{t.mariage.intro}</p>
+                </div>
+            </div>
 
             <div class="formules">
                 {t.mariage.formules.map((f) => (

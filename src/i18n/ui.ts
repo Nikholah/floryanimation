@@ -10,7 +10,7 @@ export const LANGS: Lang[] = ['fr', 'en'];
 export const DEFAULT_LANG: Lang = 'fr';
 
 /** Pages du site : la même clé désigne la page équivalente dans chaque langue. */
-export type PageKey = 'accueil' | 'prestations' | 'devis' | 'mentions' | 'confidentialite';
+export type PageKey = 'accueil' | 'prestations' | 'devis' | 'avis' | 'mentions' | 'confidentialite';
 
 /** Chemins de chaque page, par langue (relatifs au base, voir src/lib/url.ts). */
 export const ROUTES: Record<Lang, Record<PageKey, string>> = {
@@ -18,6 +18,7 @@ export const ROUTES: Record<Lang, Record<PageKey, string>> = {
         accueil: '',
         prestations: 'spectacles.html',
         devis: 'devis.html',
+        avis: 'avis.html',
         mentions: 'mentions-legales.html',
         confidentialite: 'confidentialite.html',
     },
@@ -25,6 +26,7 @@ export const ROUTES: Record<Lang, Record<PageKey, string>> = {
         accueil: 'en/',
         prestations: 'en/shows.html',
         devis: 'en/quote.html',
+        avis: 'en/review.html',
         mentions: 'en/legal-notice.html',
         confidentialite: 'en/privacy.html',
     },
@@ -80,6 +82,7 @@ export const UI = {
             prestations: 'Nos prestations',
             infos: 'Informations pratiques',
             quote: 'Demander un devis',
+            review: 'Laisser un avis',
             mentions: 'Mentions légales',
             privacy: 'Politique de confidentialité',
         },
@@ -126,6 +129,7 @@ export const UI = {
             prestations: 'Our shows',
             infos: 'Practical information',
             quote: 'Request a quote',
+            review: 'Leave a review',
             mentions: 'Legal notice',
             privacy: 'Privacy policy',
         },

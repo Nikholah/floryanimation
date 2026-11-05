@@ -7,6 +7,7 @@ import '../styles/index.css';
 import { PHONE_HREF, devisHref } from '../lib/contact';
 import { pageUrl, UI, type Lang } from '../i18n/ui';
 import { HOME } from '../i18n/home';
+import { AVIS, TEMOIGNAGES } from '../i18n/avis';
 
 import decor from '../assets/img/FOND_DECOR_FLORY_ANIMATION.jpg';
 import famille from '../assets/img/FLORY_ANIMATION_FAMILLE.jpg';
@@ -18,6 +19,8 @@ interface Props {
 const { lang } = Astro.props;
 const t = HOME[lang];
 const ui = UI[lang];
+const avis = AVIS[lang];
+const temoignages = TEMOIGNAGES[lang];
 // Les 2 derniers paragraphes de la bio (l'aventure familiale) s'affichent à côté de la photo de famille
 const aboutDebut = t.about.slice(0, -2);
 const aboutFamille = t.about.slice(-2);
@@ -84,6 +87,28 @@ const aboutFamille = t.about.slice(-2);
                 </div>
             </div>
         </div>
+    </section>
+
+    <!-- Avis clients : section affichée seulement s'il y a de vrais avis (src/i18n/avis.ts) -->
+    {temoignages.length > 0 && (
+        <section class="temoignages" aria-labelledby="temoignages-titre">
+            <h2 id="temoignages-titre">{avis.temoignagesTitle}</h2>
+            <div class="temoignages-grid">
+                {temoignages.map((a) => (
+                    <figure class="temoignage">
+                        <blockquote>{a.texte}</blockquote>
+                        <figcaption>{a.auteur}{a.contexte && `, ${a.contexte}`}</figcaption>
+                    </figure>
+                ))}
+            </div>
+        </section>
+    )}
+
+    <!-- Appel à avis -->
+    <section class="avis-cta">
+        <h2>{avis.ctaTitle}</h2>
+        <p>{avis.ctaText}</p>
+        <a href={pageUrl('avis', lang)} class="avis-button">{avis.ctaButton}</a>
     </section>
 
     <ContactSection lang={lang} variant="accueil" />

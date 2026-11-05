@@ -356,3 +356,86 @@
         max-width: 320px;
     }
 }
+
+/* Appel à avis et témoignages */
+.avis-cta {
+    padding: 3rem 2rem;
+    background: #f5f7fa;
+    text-align: center;
+}
+
+.avis-cta h2 {
+    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+    color: #2e6bb3;
+}
+
+.avis-cta p {
+    margin-bottom: 1.25rem;
+    color: #444;
+}
+
+.avis-button {
+    display: inline-block;
+    padding: 0.7rem 1.6rem;
+    border: 2px solid #cf3434;
+    border-radius: 50px;
+    background: white;
+    color: #cf3434;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.avis-button:hover {
+    background: #cf3434;
+    color: white;
+}
+
+.temoignages {
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.temoignages h2 {
+    margin-bottom: 2rem;
+    font-size: 2.2rem;
+    color: #2e6bb3;
+}
+
+.temoignages-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.temoignage {
+    padding: 1.75rem;
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    text-align: left;
+}
+
+.temoignage blockquote {
+    margin-bottom: 1rem;
+    font-style: italic;
+    line-height: 1.6;
+    color: #444;
+}
+
+.temoignage figcaption {
+    font-weight: bold;
+    color: #2e6bb3;
+}
+
+/* Titre du bloc Contact : blanc sur le fond bleu (il était bleu sur bleu, donc invisible) */
+.contact .section h2 {
+    color: white;
+}
+
+.contact .section h2::after {
+    background: rgba(255, 255, 255, 0.6);
+}

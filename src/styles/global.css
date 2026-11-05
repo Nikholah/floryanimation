@@ -6,6 +6,12 @@
     box-sizing: border-box;
 }
 
+/* Fond de page par défaut sur html (pas sur body : les pages Prestations, Devis et Avis y posent leur dégradé,
+   et cette feuille commune est chargée après celle de la page) */
+html {
+    background: white;
+}
+
 body {
     font-family: 'Arial', sans-serif;
     line-height: 1.6;

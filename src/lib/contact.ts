@@ -17,6 +17,13 @@ export const INSTAGRAM_URL = 'https://www.instagram.com/floryanimation/';
 export const WEB3FORMS_ACCESS_KEY = '';
 
 /**
+ * Lien direct pour laisser un avis Google, à renseigner une fois la fiche Google Business Profile créée.
+ * Tant qu'il est vide, le bouton n'apparaît pas sur la page Avis.
+ */
+// TODO : coller le lien d'avis Google
+export const GOOGLE_REVIEW_URL = '';
+
+/**
  * Prestations proposées dans la liste du formulaire de devis.
  * - id : identifiant passé dans l'URL (devis.html?prestation=<id>) pour présélectionner la prestation ;
  * - fr : libellé envoyé à la cliente dans l'email (toujours en français) et affiché en français ;

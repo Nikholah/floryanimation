@@ -10,6 +10,7 @@ const PRIORITE: Record<PageKey, string> = {
     accueil: '1.0',
     prestations: '0.9',
     devis: '0.8',
+    avis: '0.3',
     mentions: '0.2',
     confidentialite: '0.2',
 };

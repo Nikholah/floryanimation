@@ -27,6 +27,7 @@ import { HEBERGEUR, LEGAL } from '../lib/legal';
                 <li>les informations sur votre événement : type de structure, prestation souhaitée, date, lieu, nombre et âge des spectateurs, intérieur ou extérieur ;</li>
                 <li>le contenu de votre message.</li>
             </ul>
+            <p>Lorsque vous <a href={url('avis.html')}>laissez un avis</a>, nous recevons votre prénom, votre avis et, si vous les indiquez, votre structure ou événement, la prestation vue, votre note et votre adresse email.</p>
             <p>Lorsque vous nous contactez par téléphone ou par email, nous recevons les informations que vous choisissez de nous transmettre.</p>
         </section>
 
@@ -40,6 +41,10 @@ import { HEBERGEUR, LEGAL } from '../lib/legal';
                 Ce traitement repose sur votre demande : il s'agit de mesures précontractuelles prises à votre initiative
                 (article 6.1.b du Règlement général sur la protection des données).
             </p>
+            <p>
+                Un avis n'est publié sur ce site que si vous cochez la case d'autorisation du formulaire, avec votre prénom.
+                Vous pouvez demander son retrait à tout moment.
+            </p>
         </section>
 
         <section>
@@ -47,7 +52,7 @@ import { HEBERGEUR, LEGAL } from '../lib/legal';
             <p>Vos données sont destinées uniquement à {LEGAL.denomination}. Pour faire fonctionner le site, nous faisons appel à deux prestataires techniques :</p>
             <ul>
                 <li>
-                    <strong>Web3Forms</strong>, qui transmet par email le contenu du formulaire de devis
+                    <strong>Web3Forms</strong>, qui transmet par email le contenu des formulaires de devis et d'avis
                     (<a href="https://web3forms.com/privacy" target="_blank" rel="noopener noreferrer">politique de confidentialité de Web3Forms</a>) ;
                 </li>
                 <li><strong>{HEBERGEUR.nom}</strong>, qui héberge le site et peut enregistrer des données techniques de connexion (adresse IP, par exemple).</li>

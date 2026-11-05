@@ -239,3 +239,27 @@ body {
 .rgpd a {
     color: #2e6bb3;
 }
+
+/* Formulaire d'avis : autorisation de publication */
+.consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+.consent input {
+    flex-shrink: 0;
+    width: 1.1rem;
+    height: 1.1rem;
+    margin-top: 0.2rem;
+    accent-color: #cf3434;
+}
+
+/* Légende d'un groupe de boutons radio placé directement dans le formulaire (page Avis) */
+.devis-form > fieldset.radios > legend {
+    margin-bottom: 0.4rem;
+    font-size: 1rem;
+    color: #333;
+}

@@ -135,7 +135,7 @@ const PRESTATION_INCONNUE = DEVIS.fr.prestationUnknown;
             </fieldset>
 
             <p class="rgpd">
-                {t.rgpd}
+                {t.rgpd}{' '}
                 <a href={pageUrl('confidentialite', lang)}>{t.rgpdLink}</a>.
             </p>
             <p class="req-note"><span aria-hidden="true">*</span> {t.required}</p>
@@ -148,12 +148,11 @@ const PRESTATION_INCONNUE = DEVIS.fr.prestationUnknown;
 </Base>
 
 <script>
+    import { setupForm } from '../scripts/form';
+
     const form = document.getElementById('devis-form') as HTMLFormElement;
-    const status = document.getElementById('devis-status') as HTMLElement;
-    const submit = form.querySelector<HTMLButtonElement>('.devis-submit')!;
     const prestationSelect = form.querySelector<HTMLSelectElement>('#prestation')!;
     const message = form.querySelector<HTMLTextAreaElement>('#message')!;
-    const d = form.dataset;
 
     // Présélection de la prestation depuis l'URL : devis.html?prestation=la-valise
     const demandee = new URLSearchParams(location.search).get('prestation');
@@ -162,57 +161,10 @@ const PRESTATION_INCONNUE = DEVIS.fr.prestationUnknown;
         if (option) {
             prestationSelect.value = option.value;
         } else {
-            prestationSelect.value = d.unknown ?? '';
+            prestationSelect.value = form.dataset.unknown ?? '';
             message.value = `${demandee}\n`;
         }
     }
 
-    function showStatus(type: 'success' | 'error' | 'info', text: string) {
-        status.className = `devis-status devis-status--${type}`;
-        status.textContent = text;
-    }
-
-    // Repli tant que la clé Web3Forms n'est pas renseignée : email prérempli avec toutes les réponses
-    function openMailFallback(data: FormData) {
-        const lines: string[] = [];
-        data.forEach((value, key) => {
-            if (['access_key', 'subject', 'from_name', 'botcheck'].includes(key)) return;
-            if (String(value).trim()) lines.push(`${key} : ${value}`);
-        });
-        const subject = `${d.mailSubject} : ${data.get('Prestation') ?? ''}`;
-        location.href = `mailto:${d.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
-        showStatus('info', d.msgMail ?? '');
-    }
-
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        if (!form.reportValidity()) return;
-
-        const data = new FormData(form);
-        if (!d.accessKey) {
-            openMailFallback(data);
-            return;
-        }
-
-        submit.disabled = true;
-        showStatus('info', d.msgSending ?? '');
-        try {
-            const response = await fetch(form.action, {
-                method: 'POST',
-                headers: { Accept: 'application/json' },
-                body: data,
-            });
-            const result = await response.json();
-            if (response.ok && result.success) {
-                form.reset();
-                showStatus('success', d.msgSuccess ?? '');
-            } else {
-                throw new Error(result.message);
-            }
-        } catch {
-            showStatus('error', `${d.msgError} ${d.email}.`);
-        } finally {
-            submit.disabled = false;
-        }
-    });
+    setupForm(form, document.getElementById('devis-status') as HTMLElement);
 </script>

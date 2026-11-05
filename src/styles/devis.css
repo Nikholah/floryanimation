@@ -1,0 +1,232 @@
+/* Styles propres à la page Demander un devis. */
+
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.devis-page {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 120px 1.5rem 4rem; /* espace sous la navbar fixe */
+}
+
+.devis-intro {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.devis-intro h1 {
+    font-size: 2.6rem;
+    color: #2e6bb3;
+    margin-bottom: 0.75rem;
+}
+
+.devis-intro p {
+    font-size: 1.1rem;
+    color: #444;
+}
+
+.devis-alt {
+    margin-top: 0.75rem;
+}
+
+.devis-alt a {
+    color: #cf3434;
+    font-weight: bold;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.devis-alt a:hover {
+    text-decoration: underline;
+}
+
+.devis-form {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.devis-form > fieldset {
+    border: none;
+    margin-bottom: 1.5rem;
+}
+
+.devis-form > fieldset > legend {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #2e6bb3;
+    margin-bottom: 1rem;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 1.1rem;
+    flex: 1;
+    min-width: 0;
+}
+
+.field-row {
+    display: flex;
+    gap: 1rem;
+}
+
+.field label,
+.radios legend {
+    font-weight: bold;
+    color: #333;
+}
+
+.req {
+    color: #cf3434;
+}
+
+.field input,
+.field select,
+.field textarea {
+    width: 100%;
+    padding: 0.75rem 0.9rem;
+    border: 2px solid #d5dbe5;
+    border-radius: 10px;
+    font: inherit;
+    font-size: 1rem;
+    color: #333;
+    background: white;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+    outline: none;
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.25);
+}
+
+/* Champ invalide, signalé seulement après une saisie ou une tentative d'envoi */
+.field input:user-invalid,
+.field select:user-invalid {
+    border-color: #cf3434;
+}
+
+.radios {
+    border: none;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+}
+
+.radios legend {
+    width: 100%;
+    margin-bottom: 0.4rem;
+}
+
+.radios label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: normal;
+    cursor: pointer;
+}
+
+.radios input {
+    width: 1.1rem;
+    height: 1.1rem;
+    accent-color: #cf3434;
+}
+
+/* Piège à robots : invisible pour les visiteurs */
+.botcheck {
+    display: none;
+}
+
+.rgpd {
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 0.5rem;
+}
+
+.req-note {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.devis-submit {
+    display: block;
+    width: 100%;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(45deg, #ff0000, #cf3434);
+    color: white;
+    font-size: 1.15rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.devis-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(207, 52, 52, 0.35);
+}
+
+.devis-submit:focus-visible {
+    outline: 3px solid #4a90e2;
+    outline-offset: 3px;
+}
+
+.devis-submit:disabled {
+    opacity: 0.6;
+    cursor: wait;
+    transform: none;
+}
+
+.devis-status:empty {
+    display: none;
+}
+
+.devis-status {
+    margin-top: 1.25rem;
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+    font-weight: bold;
+}
+
+.devis-status--success {
+    background: #e7f6ec;
+    color: #1e6b3a;
+}
+
+.devis-status--error {
+    background: #fdecec;
+    color: #a3141c;
+}
+
+.devis-status--info {
+    background: #eaf2fc;
+    color: #2e6bb3;
+}
+
+@media (max-width: 768px) {
+    .devis-page {
+        padding: 100px 1rem 3rem;
+    }
+
+    .devis-intro h1 {
+        font-size: 2rem;
+    }
+
+    .devis-form {
+        padding: 1.5rem 1.1rem;
+    }
+
+    .field-row {
+        flex-direction: column;
+        gap: 0;
+    }
+}

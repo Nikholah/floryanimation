@@ -1,7 +1,7 @@
 # CLAUDE.md — Site Flory Animation
 
 Document de référence pour toutes les sessions de travail sur ce dépôt.
-Dernière mise à jour : 2026-11-05 (nouvelles prestations de la cliente, bannière photo, menu mobile, barre d'action).
+Dernière mise à jour : 2026-11-05 (nouvelles prestations, bannière photo, menu mobile, barre d'action, formulaire de devis).
 
 ---
 
@@ -25,7 +25,7 @@ Dernière mise à jour : 2026-11-05 (nouvelles prestations de la cliente, banni�
 - **Cibles** : collectivités (écoles, mairies, centres culturels, centres de loisirs), événementiel (soirées d'entreprise, arbres de Noël des CSE), particuliers (mariages, anniversaires).
 - **Zone d'intervention : France entière et international.** Le site doit donc être **bilingue français / anglais** (voir §6, décision D1).
 - **Objectif n°1** : générer des **demandes de devis et des réservations**.
-- **Action attendue** : appeler le **06 67 78 54 19** (`tel:+33667785419`, à l'international `+33 6 67 78 54 19`), écrire à **floryanimation@free.fr** (adresse de réception vérifiée), ou remplir le formulaire de devis (à créer). Instagram : [@floryanimation](https://www.instagram.com/floryanimation/).
+- **Action attendue** : appeler le **06 67 78 54 19** (`tel:+33667785419`, à l'international `+33 6 67 78 54 19`), écrire à **floryanimation@free.fr** (adresse de réception vérifiée), ou remplir le **formulaire de devis** (`devis.html`, Web3Forms, clé à renseigner). Instagram : [@floryanimation](https://www.instagram.com/floryanimation/).
 - **Informations pratiques validées** (à afficher sur le site et dans la fiche technique) :
   - temps de montage : **1 h 30** ;
   - jauge : **jusqu'à environ 600 spectateurs** ;
@@ -54,11 +54,11 @@ floryanimation/
 │   ├── layouts/Base.astro  # <head>, favicon généré, Header, boutons flottants, script commun
 │   ├── components/         # Header.astro (prop current, liste du menu Prestations, téléphone), FloatingButtons.astro (retour en haut, Instagram, barre d'action mobile),
 │   │                       # Prestation.astro (carte de prestation : images, étiquette, texte en slot, tarif, bouton devis)
-│   ├── pages/              # index.astro, spectacles.astro (=> index.html, spectacles.html)
-│   ├── styles/             # global.css (commun), index.css, spectacles.css
+│   ├── pages/              # index.astro, spectacles.astro, devis.astro (=> index.html, spectacles.html, devis.html)
+│   ├── styles/             # global.css (commun), index.css, spectacles.css, devis.css
 │   ├── scripts/common.ts   # défilement fluide, ombre navbar, retour en haut, menu burger et sous-menu (ouverture/fermeture, Échap)
 │   ├── lib/url.ts          # url('spectacles.html') : préfixe les liens internes avec le base
-│   ├── lib/contact.ts      # téléphone, email, Instagram, devisHref(prestation) (lien « Demander un devis »)
+│   ├── lib/contact.ts      # téléphone, email, Instagram, clé Web3Forms, liste PRESTATIONS_DEVIS, devisHref(prestation) => devis.html?prestation=…
 │   └── assets/img/         # images sources, optimisées au build
 ├── public/                 # copié tel quel : robot.txt (À RENOMMER robots.txt), sitemap.xml (à corriger)
 ├── .github/workflows/deploy.yml   # build + déploiement GitHub Pages
@@ -136,7 +136,7 @@ Légende : **CONV** conversion · **CIBLE** cibles · **DESIGN** · **MOBILE** �
 | C1 | MOBILE | ✅ *Corrigé le 2026-11-05 (étape 3).* **Aucune navigation sur mobile** : sous 768 px, `.nav-links { display: none }` sans menu burger. Le menu déroulant « Prestations » ne s'ouvre qu'au survol (`:hover`) : inutilisable au doigt et au clavier. | `index.html`, `spectacles.html` (`@media`, `.dropdown:hover`) |
 | C2 | CONV | **Le test des 5 secondes échoue** : le titre « …vous invite à découvrir son univers enchanté… » ne dit ni *quoi*, ni *où*, ni *quoi faire*. Le seul bouton renvoie vers les prestations. | `index.html` hero |
 | C3 | CONV | ✅ *Corrigé le 2026-11-05 (étape 2).* **Aucun appel à l'action par prestation** (pas de « Demander un devis » ni « Appeler ») ; téléphone absent du header ; contact uniquement en bas de page. | `spectacles.html` |
-| C4 | CONV | **Pas de formulaire de devis.** Le `mailto:` échoue souvent sur ordinateur. | — |
+| C4 | CONV | ✅ *Formulaire créé le 2026-11-05 (étape 4) ; clé Web3Forms à renseigner.* **Pas de formulaire de devis.** Le `mailto:` échoue souvent sur ordinateur. | — |
 | C5 | I18N | **Site uniquement en français** alors que la zone est nationale et internationale. Un organisateur étranger ne peut ni comprendre l'offre ni la trouver sur Google. | tout |
 | C6 | CONV | **Réassurance faible** : ni avis, ni vidéo, ni infos pratiques (montage 1 h 30, 600 spectateurs, son et lumière fournis). Le parcours de Flory Anne n'est pas mis en avant sous forme d'accroches. | — |
 | C7 | légal | **Pas de pied de page ni de mentions légales** (éditeur, SIRET, hébergeur) ni de politique de confidentialité (obligatoire avec un formulaire). | — |
@@ -214,7 +214,7 @@ Ordonné par impact sur les réservations rapporté à l'effort. Effort : S (moi
 | 1 | ✅ **Fait le 2026-11-05.** Hero : bandeau saisonnier « Noël : réservez Nani, la Lutine Magicienne » (affiché automatiquement de septembre à décembre, côté navigateur) qui renvoie vers `#spectacle-noel` ; accroche « Magie · Jonglerie · Bulles de savon » ; h1 « Spectacles de magie pour enfants, familles et événements » ; « Partout en France et à l'international » ; boutons « Demander un devis » (email prérempli via `devisHref()`, à remplacer par le formulaire à l'étape 4) et « 📞 06 67 78 54 19 » ; lien « Découvrir nos spectacles ». Le hero passe en `min-height` (le contenu n'est plus coupé en mobile), et le bouton devis est visible sans défiler en 375 px. Mascottes retirées (section, menu, CSS, JS, images). **Remplacé le jour même à la demande de la cliente** : la bannière est désormais la photo décor (sans rideaux, sans bandeau de Noël, sans accroche, sans zone ni blocs Collectivité / Événementiel / Particulier), avec « Découvrir nos prestations » au centre et deux boutons discrets « Demander un devis » et téléphone. Le h1 est conservé mais masqué visuellement (`.visually-hidden`). En mobile, la photo s'affiche en entier, avec les boutons dessous. ⚠️ « Partout en France et à l'international » n'apparaît donc plus nulle part (C8 à retraiter, par exemple dans le pied de page à l'étape 7). | C2, I1 | S |
 | 2 | ✅ **Fait le 2026-11-05.** Bouton « Demander un devis » sur chaque prestation et chaque formule Mariage, avec l'objet de l'email prérempli. Téléphone en pastille dans la navbar au-delà de 1 100 px (`.nav-phone`). Jusqu'à 1 100 px, barre fixe « 📞 Appeler / Demander un devis » en bas de l'écran (`.action-bar`, dans `FloatingButtons.astro`), qui remplace le bouton Instagram flottant (Instagram reste dans Contact). Le bouton « retour en haut » est réduit à 48 px et placé au-dessus de la barre, et le `body` a un `padding-bottom` pour que la barre ne masque pas le bas de page. Le badge « Tarif : sur demande » est **conservé** (demande de la cliente) ; son style rouge sera revu à l'étape 14. | C3, I11, S6 (en partie) | S |
 | 3 | ✅ **Fait le 2026-11-05.** Menu burger sous 768 px (`.nav-toggle`, `aria-expanded`, croix animée) avec panneau déroulant ; sous-menu Prestations ouvrable au toucher et au clic (bouton flèche `.dropdown-toggle`) et, sur grand écran, au survol et au clavier (`:focus-within`) ; fermeture au clic sur un lien, au clic en dehors et avec Échap (le focus revient au bouton) ; contour `:focus-visible` ; navbar sur une seule ligne de 771 à 1 100 px (liens en 19 px, sans retour à la ligne) ; `scroll-margin-top` sur toutes les ancres. Testé en 375, 800 et 1280 px, avec de vrais clics, au clavier et sur les ancres d'une page à l'autre. | C1, I11 (en partie) | S |
-| 4 | **Formulaire de devis Web3Forms** (choix retenu, voir D3) : vous êtes (collectivité / entreprise-CSE / particulier / autre), prestation(s), date, lieu (ville, pays), nombre et âge des spectateurs, intérieur ou extérieur, téléphone, email, message ; honeypot `botcheck`, mention RGPD, message de remerciement, version anglaise. | C4 | M |
+| 4 | ✅ **Fait le 2026-11-05, sauf la clé.** Page `devis.html` (`src/pages/devis.astro`, `src/styles/devis.css`) avec un formulaire Web3Forms : vous êtes, prestation (liste `PRESTATIONS_DEVIS`), date, lieu (ville, pays), nombre de spectateurs, âge du public, intérieur ou extérieur, nom, email, téléphone, message ; piège à robots `botcheck`, mention RGPD, message de confirmation ou d'erreur affiché sur la page (envoi en `fetch`). Tous les boutons « Demander un devis » mènent à cette page via `devisHref(libellé)`, avec la prestation présélectionnée par `?prestation=` (testé sur les 11 liens). ⚠️ **Clé `WEB3FORMS_ACCESS_KEY` à renseigner** dans `src/lib/contact.ts` : tant qu'elle est vide, l'envoi ouvre un email prérempli avec toutes les réponses (repli). Envoi réel non testé faute de clé (succès et erreur testés avec une réponse simulée). Version anglaise : à faire à l'étape 8. | C4 | M |
 | 5 | **Bloc « Informations pratiques »** sur chaque prestation et dans une FAQ : montage 1 h 30, jusqu'à environ 600 spectateurs, son, lumière et électricité fournis selon la taille du spectacle, pas d'électricité nécessaire en extérieur, intervention en France et à l'international, sur facture. Fiche technique PDF ensuite si utile. | C6 | S |
 | 6 | **Réassurance sans âge** : bandeau d'accroches (« Née dans une famille de magiciens », « Formée par Annie Fratellini et le Cirque de Pékin », « Jusqu'à 600 spectateurs », « Son et lumière fournis ») ; réécriture de la bio sans dates (I10). | C6, I10 | S |
 | 7 | **Pied de page et mentions légales** : contact, zone, Instagram, liens FR/EN, page mentions légales (éditeur, SIRET vérifié, hébergeur) et politique de confidentialité (formulaire Web3Forms). | C7 | S |
@@ -235,7 +235,7 @@ Ordonné par impact sur les réservations rapporté à l'effort. Effort : S (moi
 ### Décisions prises (2026-11-05)
 - **D1 Bilingue FR/EN.** Proposition : pages séparées (`/` en français, `/en/` en anglais) avec un sélecteur de langue, plutôt que les deux langues côte à côte sur la même page. C'est plus lisible et Google indexe chaque langue correctement. **À confirmer par Nicolas.**
 - **D2 Domaine** `floryanimation.com` conservé, migration vers Cloudflare à venir ; travail sur la branche **`v2`**.
-- **D3 Formulaire : Web3Forms** (gratuit jusqu'à 250 envois par mois, sans backend, compatible GitHub Pages et Cloudflare Pages). Nicolas doit générer la clé d'accès sur web3forms.com avec floryanimation@free.fr ; elle peut figurer dans le code (clé publique par conception). Penser à vérifier le dossier spam de Free au premier test.
+- **D3 Formulaire : Web3Forms** (mis en place le 2026-11-05 ; nouvelle prestation = l'ajouter aussi dans `PRESTATIONS_DEVIS`) (gratuit jusqu'à 250 envois par mois, sans backend, compatible GitHub Pages et Cloudflare Pages). Nicolas doit générer la clé d'accès sur web3forms.com avec floryanimation@free.fr ; elle peut figurer dans le code (clé publique par conception). Penser à vérifier le dossier spam de Free au premier test.
 - **D4 Tarifs** : toujours « sur demande », jamais de montant ni de fourchette.
 - **D5 Mascottes** retirées de l'offre et du site.
 - **D6 Administratif** sobre : « Sur facture », pas de détail (pas de GUSO, de bon de commande, etc.).
@@ -244,7 +244,7 @@ Ordonné par impact sur les réservations rapporté à l'effort. Effort : S (moi
 ### Code
 - HTML5 sémantique, **indentation de 4 espaces**, guillemets doubles, classes en **kebab-case**, pas de styles inline.
 - **Conserver les ancres des prestations** (utilisées par le menu Prestations) : `#bubble-magic-show`, `#la-valise`, `#spectacles-thematiques` (`#carnaval`, `#spectacle-noel`), `#jardin-des-bulles`, `#atelier-bulles`, `#mariage` (`#mariage-instant-precieux`, `#mariage-eclat-de-bulles`, `#mariage-prestige`), `#dans-ma-bulle`, ainsi que `#accueil`, `#nous-connaitre`, `#contact`. Les anciennes ancres (`#spectacle-enfants`, `#spectacle-cabaret`, `#animation-bar-bulles`, `#mascottes`) ont disparu avec leurs prestations. Toute ancre (`[id]`) a un `scroll-margin-top` pour ne pas passer sous la navbar.
-- Nouvelle prestation : utiliser le composant `Prestation.astro`, ajouter l'entrée dans la liste `prestations` de `Header.astro`, et entourer tout texte non validé par la cliente de `<!-- TEXTE PROVISOIRE -->`.
+- Nouvelle prestation : utiliser le composant `Prestation.astro`, ajouter l'entrée dans la liste `prestations` de `Header.astro` et dans `PRESTATIONS_DEVIS` de `src/lib/contact.ts` (même libellé que `devisLabel`), et entourer tout texte non validé par la cliente de `<!-- TEXTE PROVISOIRE -->`.
 - Astro : un élément répété sur plusieurs pages devient un **composant** dans `src/components/` ; le `<head>` vit dans `src/layouts/Base.astro`. Styles communs dans `src/styles/global.css`, styles d'une page dans `src/styles/<page>.css` (importés dans le frontmatter de la page, CSS global non scopé, pour rester proche de l'existant). Scripts en TypeScript dans des balises `<script>` (bundlées par Astro), **jamais d'`onclick` inline**.
 - Liens internes avec `url()` de `src/lib/url.ts`, jamais de chemin absolu en dur.
 - Téléphone, email, Instagram et lien de devis : toujours via `src/lib/contact.ts` (une seule source à modifier).

@@ -1,0 +1,9 @@
+---
+import { Image } from 'astro:assets';
+import instagram from '../assets/img/instagram.png';
+---
+<button class="back-to-top" id="backToTop" type="button" aria-label="Revenir en haut de la page">↑</button>
+
+<a href="https://www.instagram.com/floryanimation/" target="_blank" rel="noopener noreferrer" class="instagram-float">
+    <Image src={instagram} alt="Instagram" width={40} densities={[1, 2]} />
+</a>

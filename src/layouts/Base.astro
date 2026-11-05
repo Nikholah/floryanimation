@@ -1,0 +1,42 @@
+---
+import { getImage } from 'astro:assets';
+import Header from '../components/Header.astro';
+import FloatingButtons from '../components/FloatingButtons.astro';
+import floryAnne from '../assets/img/FLORY_ANNE.jpg';
+import '../styles/global.css';
+
+interface Props {
+    title: string;
+    description?: string;
+    keywords?: string;
+    current: 'accueil' | 'prestations';
+}
+
+const { title, description, keywords, current } = Astro.props;
+// Favicon généré au build (64 px) au lieu de la photo pleine taille.
+const favicon = await getImage({ src: floryAnne, width: 64, height: 64, fit: 'cover', format: 'png' });
+---
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
+    <link rel="icon" type="image/png" href={favicon.src}>
+    {description && <meta name="description" content={description}>}
+    {keywords && <meta name="keywords" content={keywords}>}
+    <meta name="author" content="Flory Animation">
+    <meta name="robots" content="index, follow">
+</head>
+<body>
+    <Header current={current} />
+
+    <slot />
+
+    <FloatingButtons />
+
+    <script>
+        import '../scripts/common';
+    </script>
+</body>
+</html>

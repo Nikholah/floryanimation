@@ -1,0 +1,39 @@
+---
+import { url } from '../lib/url';
+
+interface Props {
+    /** Page courante : sert à construire les liens et à marquer l'onglet actif. */
+    current: 'accueil' | 'prestations';
+}
+
+const { current } = Astro.props;
+const onHome = current === 'accueil';
+// Sur l'accueil, ancres locales (défilement fluide) ; ailleurs, liens vers l'accueil.
+const home = (anchor: string) => (onHome ? `#${anchor}` : url(`index.html#${anchor}`));
+const show = (anchor: string) => (current === 'prestations' ? `#${anchor}` : url(`spectacles.html#${anchor}`));
+
+const prestations = [
+    { anchor: 'spectacle-enfants', label: '👨‍👩‍👧‍👦 Spectacle Enfants' },
+    { anchor: 'spectacle-noel', label: '🎄 Spectacle Noël' },
+    { anchor: 'spectacle-cabaret', label: '🎭 Spectacle Cabaret' },
+    { anchor: 'animation-bar-bulles', label: '🫧 Bar à Bulles' },
+    { anchor: 'atelier-bulles', label: '🎨 Atelier Bulles' },
+];
+---
+<nav class="navbar">
+    <div class="nav-container">
+        <a href={onHome ? '#accueil' : url('index.html')} class="logo">✨ Flory Animation</a>
+        <ul class="nav-links">
+            <li><a href={onHome ? '#accueil' : url('index.html')}>Accueil</a></li>
+            <li><a href={home('nous-connaitre')}>A propos</a></li>
+            <li class="dropdown">
+                <a href={url('spectacles.html')} class:list={{ active: current === 'prestations' }}>Prestations <span class="dropdown-arrow">▼</span></a>
+                <div class="dropdown-content">
+                    {prestations.map((p) => <a href={show(p.anchor)}>{p.label}</a>)}
+                </div>
+            </li>
+            <li><a href={home('mascottes')}>Mascottes</a></li>
+            <li><a href={home('contact')}>Contact</a></li>
+        </ul>
+    </div>
+</nav>

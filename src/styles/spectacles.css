@@ -1,0 +1,431 @@
+/* Styles propres à la page Prestations (spectacles). */
+
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+/* Hero Section */
+.hero {
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    margin-top: 80px;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    animation: fadeInUp 1s ease;
+    color: #4a90e2;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    animation: fadeInUp 1s ease 0.3s both;
+    color: #4a90e2;
+}
+
+/* Bubble Animation */
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    animation: float 6s ease-in-out infinite;
+    border: 2px solid #1000ff;
+}
+
+.bubble:nth-child(1) { width: 80px; height: 80px; left: 10%; animation-delay: -2s; }
+.bubble:nth-child(2) { width: 60px; height: 60px; left: 20%; animation-delay: -4s; }
+.bubble:nth-child(3) { width: 100px; height: 100px; left: 85%; top: 37%; animation-delay: -1s; }
+.bubble:nth-child(4) { width: 40px; height: 40px; left: 80%; top:29%; animation-delay: -3s; }
+.bubble:nth-child(5) { width: 120px; height: 120px; left: 72%; animation-delay: -5s; }
+.bubble:nth-child(6) { width: 120px; height: 120px; left: 14%; top: 19%; animation-delay: -5s; }
+
+/* Main Content */
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+}
+
+.section {
+    margin-bottom: 4rem;
+}
+
+.section h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #4a90e2;
+    position: relative;
+}
+
+.section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(45deg, #4a90e2, #63b3ed);
+    border-radius: 2px;
+}
+
+/* Spectacles Grid */
+.spectacles-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.spectacle-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+.spectacle-image {
+    width: 300px;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+
+.spectacle-card:hover .spectacle-image {
+    transform: scale(1.05);
+}
+
+
+.spectacle-images {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex-shrink: 0;
+}
+
+.spectacle-images .spectacle-image {
+    width: 300px;
+
+}
+
+.spectacle-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.spectacle-card.reverse {
+    flex-direction: row-reverse;
+}
+
+@media (max-width: 768px) {
+    .spectacle-card.reverse {
+        flex-direction: column;
+    }
+}
+
+.spectacle-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(45deg, #4a90e2, #63b3ed);
+}
+
+.spectacle-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    border: 2px solid #4a90e2;
+}
+
+.spectacle-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #4a90e2;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.spectacle-card .emoji {
+    font-size: 2rem;
+}
+
+.spectacle-details {
+    margin-top: 1.5rem;
+}
+
+.detail-item {
+    margin-bottom: 1rem;
+}
+
+.detail-label {
+    font-weight: bold;
+    color: #4a90e2;
+    margin-bottom: 0.5rem;
+}
+
+.detail-content {
+    color: #2e6bb3;
+    line-height: 1.6;
+}
+
+.duration {
+    background: linear-gradient(45deg, rgba(74, 144, 226, 0.1), rgba(99, 179, 237, 0.1));
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    display: inline-block;
+    font-weight: bold;
+    color: #4a90e2;
+    margin-top: 1rem;
+}
+
+.price {
+    background: linear-gradient(45deg, #ff0000, #cf3434);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    display: inline-block;
+    font-weight: bold;
+    margin-top: 1rem;
+}
+
+.interactive-badge {
+    background: #4a90e2;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 1rem;
+}
+
+/* Call to Action */
+.cta-section {
+    background:#4a90e2 ;
+    color: white;
+    text-align: center;
+    padding: 4rem 2rem;
+    border-radius: 20px;
+    margin-top: 3rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+    animation: float 20s linear infinite;
+}
+
+.cta-content {
+    position: relative;
+    z-index: 2;
+}
+
+.cta-section h2 {
+    color: white;
+    margin-bottom: 1rem;
+    font-size: 45px;
+}
+
+.cta-section h2::after {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+
+/* Contact Info */
+.contact-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.contact-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.contact-item.priority {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.contact-item h3 {
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+.contact-item.priority h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.contact-item.priority p {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.contact-item.priority a {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    display: inline-block;
+    margin-top: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.contact-item.priority a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Lightbox Styles */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.lightbox.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 90%;
+    position: relative;
+}
+
+.lightbox-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    cursor: zoom-out;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+    z-index: 10000;
+}
+
+.lightbox-close:hover {
+    color: #ff6b6b;
+}
+
+.spectacle-image {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.spectacle-image:hover {
+    transform: scale(1.05);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .spectacles-grid {
+        gap: 2rem;
+    }
+
+    .main-content {
+        padding: 2rem 1rem;
+    }
+
+    .spectacle-card {
+        padding: 1.5rem;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .spectacle-image {
+        width: 100%;
+        height: 200px;
+    }
+
+    .spectacle-images {
+        width: 100%;
+    }
+
+    .spectacle-images .spectacle-image {
+        width: 100%;
+        height: 150px;
+    }
+}
+
+.imgNoel {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+
+/* Anciennement en styles inline */
+.contact-item a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Croix de fermeture de la lightbox (bouton) */
+.lightbox-close {
+    background: none;
+    border: none;
+    line-height: 1;
+}

@@ -1,0 +1,374 @@
+---
+import { Image, getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Base from '../layouts/Base.astro';
+import '../styles/spectacles.css';
+
+import enfants from '../assets/img/SPECTACLE_ENFANTS_AVEC_NOUNOURS1.jpeg';
+import noel from '../assets/img/noel.jpeg';
+import noel2 from '../assets/img/noel2.jpeg';
+import cabaret from '../assets/img/CABARET.jpeg';
+import barBulles from '../assets/img/BULLE_SAVON_TABLE_LUMINEUSE.jpg';
+import atelierBulles from '../assets/img/les_bulles.jpeg';
+
+// Image de carte : 600 px de large, sans recadrage (le cadrage est fait en CSS, object-fit: cover)
+// + version grand format pour la lightbox (data-full).
+async function full(src: ImageMetadata) {
+    const img = await getImage({ src, width: Math.min(1600, src.width) });
+    return img.src;
+}
+const fullSrc = {
+    enfants: await full(enfants),
+    noel: await full(noel),
+    noel2: await full(noel2),
+    cabaret: await full(cabaret),
+    barBulles: await full(barBulles),
+    atelierBulles: await full(atelierBulles),
+};
+const card = { width: 600, class: 'spectacle-image' } as const;
+---
+<Base current="prestations" title="Nos Prestations - FloryAnimation">
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+
+        <div class="hero-content">
+            <h1>Nos Prestations Magiques</h1>
+            <p><strong>Découvrez notre gamme complète de spectacles et animations pour tous les âges</strong></p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Spectacles Section -->
+        <section class="section">
+            <h2>Nos Spectacles</h2>
+
+            <div class="spectacles-grid">
+
+                <!-- Spectacle Enfants -->
+                <div class="spectacle-card reverse" id="spectacle-enfants">
+                    <div>
+                        <Image src={enfants} alt="Spectacle Enfants & Familles" {...card} data-full={fullSrc.enfants} loading="eager" />
+                    </div>
+                    <div class="spectacle-content">
+                        <h3><span class="emoji">👨‍👩‍👧‍👦</span> Spectacle Enfants & Familles</h3>
+                        <h3> "L'atelier magique"</h3>
+
+                        <div class="spectacle-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Description :</div>
+                                <div class="detail-content">
+                                    Ce spectacle est un mélange subtil et enchanteur d'effets magiques et de jonglerie.
+                                    La scène se déroule dans un grenier plein de charme, où une grande malle ancienne trône au centre, entourée d'objets mystérieux et colorés.
+                                </div>
+                            </div>
+
+                            <div class="detail-item">
+                                <div class="detail-label">Contenu :</div>
+                                <div class="detail-content">
+                                    Entre jonglerie, tours de magie et bulles de savon, chaque instant est une explosion de couleurs et d'effets magiques.
+                                    La musique, rythmée et joyeuse, accompagne cette aventure, renforçant la magie de l'instant.
+                                    Spectacle enchanteur qui transporte petits et grands dans un univers féerique.
+                                </div>
+                            </div>
+
+                            <div class="detail-item">
+                                <div class="detail-content">
+                                    Participation active du public. Création d'un moment unique où l'imagination devient réalité.
+                                </div>
+                            </div>
+
+                            <div class="duration">
+                                ⏱️ Durée : 20 - 45 minutes
+                            </div>
+
+                            <div class="price">
+                                💰 Tarif : sur demande
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Animation Noël -->
+                <div class="spectacle-card" id="spectacle-noel">
+                    <div class="imgNoel">
+                        <Image src={noel} alt="Spectacle Noël - Nani, la Lutine Magicienne" {...card} data-full={fullSrc.noel} />
+                        <Image src={noel2} alt="Spectacle Noël - Nani, la Lutine Magicienne" {...card} data-full={fullSrc.noel2} />
+                    </div>
+                    <div class="spectacle-content">
+                        <h3><span class="emoji">🎄</span> Spectacle Noël <span class="emoji">🎄</span></h3>
+                        <h3> "Nani, la Lutine Magicienne"</h3>
+
+                        <div class="spectacle-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Description :</div>
+                                <div class="detail-content">
+                                    Un monde féerique où la magie de Noël prend vie dans un décor hivernal enchanteur, au cœur d'un lieu secret où les jouets s'animent et où l'esprit de Noël s'exprime à chaque souffle.
+                                    Au centre de cet atelier merveilleux, trône une grande malle en bois... C'est là que commence l'incroyable aventure.
+                                </div>
+                            </div>
+
+                            <div class="detail-item">
+                                <div class="detail-label">Personnage :</div>
+                                <div class="detail-content">
+                                    Nani, la Lutine magicienne, entre en scène, curieuse et pétillante. Elle découvre une malle remplie d'objets magiques, tous plus extraordinaires les uns que les autres.
+                                </div>
+                            </div>
+
+                            <div class="detail-item">
+                                <div class="detail-label">Contenu :</div>
+                                <div class="detail-content">
+                                    Des assiettes tourbillonnantes, des foulards enchantés, des boules lumineuses qui dansent comme des étoiles filantes.
+                                    Nani jongle, enchante, fait disparaître et réapparaître ses objets féeriques avec tendresse.
+                                    Les enfants rient, s'émerveillent et deviennent les apprentis d'un instant.
+                                </div>
+                            </div>
+
+                            <div class="detail-item">
+                                <div class="detail-content">
+                                    <em>"Tant que Nani la Lutine magicienne veille sur la malle, l'esprit de Noël ne s'éteindra jamais !"</em>
+                                </div>
+                            </div>
+
+                            <div class="duration">
+                                ⏱️ Durée : 20 - 45 minutes
+                            </div>
+
+                            <div class="price">
+                                💰 Tarif : sur demande
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spectacle Cabaret -->
+                <div class="spectacle-card" id="spectacle-cabaret">
+                    <div class="spectacle-images">
+                        <Image src={cabaret} alt="Spectacle Cabaret - Étincelle magique" {...card} data-full={fullSrc.cabaret} />
+                    </div>
+                    <div class="spectacle-content">
+                        <h3><span class="emoji">🎭</span> Spectacle Cabaret - "Étincelle magique"</h3>
+
+                        <div class="spectacle-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Description :</div>
+                                <div class="detail-content">
+                                    Entrez dans l'univers singulier de Flory Anne, magicienne pour un spectacle de magie cabaret où mystère, poésie et illusion se mêlent dans une ambiance feutrée et intemporelle.
+                                    Sous les lumières tamisées d'un cabaret aux allures rétro, Flory Anne entre en scène. Élégante, toujours en interaction avec son public, elle enchaîne les numéros avec une grâce naturelle et une présence scénique captivante.
+                                </div>
+                            </div>
+
+                            <div class="detail-item">
+                                <div class="detail-label">Ambiance :</div>
+                                <div class="detail-content">
+                                    Chaque tableau est une surprise, chaque tour, un poème visuel. Flory Anne apporte une touche féminine et théâtrale.
+                                    Elle suscite l'émotion et l'émerveillement à chaque instant. Le spectacle commence d'un simple claquement de doigts où une étincelle apparaît.
+                                    Sur scène flotte la magie d'un instant comme des souvenirs suspendus.
+                                </div>
+                            </div>
+
+                            <div class="detail-item">
+                                <div class="detail-label">Public :</div>
+                                <div class="detail-content">
+                                    Adultes
+                                </div>
+                            </div>
+
+                            <div class="duration">
+                                ⏱️ Durée : 20 - 30 minutes
+                            </div>
+
+                            <div class="price">
+                                💰 Tarif : sur demande
+                            </div>
+
+                            <div class="interactive-badge">
+                                🎪 Spectacle de Scène
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Animation Bar à Bulles -->
+                <div class="spectacle-card" id="animation-bar-bulles">
+                    <div>
+                        <Image src={barBulles} alt="Animation Le Bar à Bulles" {...card} data-full={fullSrc.barBulles} />
+                    </div>
+                    <div class="spectacle-content">
+                        <h3><span class="emoji">🫧</span>  Le Bar à Bulles</h3>
+
+                        <div class="spectacle-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Format :</div>
+                                <div class="detail-content">
+                                    Animation d'intérieur en déambulation
+                                </div>
+                            </div>
+
+                            <div class="detail-item">
+                                <div class="detail-label">Description :</div>
+                                <div class="detail-content">
+                                    L'art éphémère du souffleur de bulles transforme un simple liquide en poésie aérienne.
+                                    Expérience unique, visuelle et sensorielle où chaque bulle raconte une histoire avant de s'envoler.
+                                    "C'est un art de l'instant, du vent et de la lumière. Un art qui ne se conserve pas… mais qui se vit"
+                                </div>
+                            </div>
+
+                            <div class="detail-item">
+                                <div class="detail-label">Public :</div>
+                                <div class="detail-content">
+                                    Tous publics (adultes et enfants)
+                                </div>
+                            </div>
+
+                            <div class="price">
+                                💰 Tarif : sur demande
+                            </div>
+                            <div class="interactive-badge">
+                                ✨ Animation de proximité
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Atelier des Bulles -->
+                <div class="spectacle-card reverse" id="atelier-bulles">
+                    <div>
+                        <Image src={atelierBulles} alt="Atelier Magie des bulles de savon" {...card} data-full={fullSrc.atelierBulles} />
+                    </div>
+                    <div class="spectacle-content">
+                        <h3><span class="emoji">🎨</span> Atelier "Bulles de Savon"</h3>
+
+                        <div class="spectacle-details">
+                            <div class="detail-item">
+                                <div class="detail-label">Format :</div>
+                                <div class="detail-content">
+                                    Atelier pédagogique participatif
+                                </div>
+                            </div>
+
+                            <div class="detail-item">
+                                <div class="detail-label">Description :</div>
+                                <div class="detail-content">
+                                    Atelier interactif permettant de découvrir l'art des bulles de savon.
+                                </div>
+                            </div>
+
+                            <div class="detail-item">
+                                <div class="detail-label">Participants :</div>
+                                <div class="detail-content">
+                                    Jusqu'à 15 par session
+                                </div>
+                            </div>
+
+                            <div class="detail-item">
+                                <div class="detail-label">Public :</div>
+                                <div class="detail-content">
+                                    Enfants à partir de 4 ans, familles, centres de loisirs
+                                </div>
+                            </div>
+
+                            <div class="duration">
+                                ⏱️ Durée : 30 min à 1h30
+                            </div>
+
+                            <div class="price">
+                                💰 Tarif : sur demande
+                            </div>
+
+                            <div class="interactive-badge">
+                                ✨ Atelier participatif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2> Contact </h2>
+                <p><strong>Contactez-nous pour transformer votre projet en une réalité magique.</strong></p>
+
+                <div class="contact-info">
+                    <div class="contact-item priority">
+                        <h3>📞 Téléphone</h3>
+                        <p><a href="tel:+33667785419">+33 6 67 78 54 19</a></p>
+                    </div>
+                    <div class="contact-item priority">
+                        <h3> Instagram</h3>
+                        <p><a href="https://www.instagram.com/floryanimation/">Flory Animation</a></p>
+                    </div>
+                    <div class="contact-item priority">
+                        <h3>✉️ Email</h3>
+                        <p><a href="mailto:floryanimation@free.fr">floryanimation@free.fr</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <button class="lightbox-close" type="button" aria-label="Fermer l'image">&times;</button>
+        <div class="lightbox-content">
+            <img id="lightbox-image" class="lightbox-image" src="" alt="Image agrandie">
+        </div>
+    </div>
+</Base>
+
+<script>
+    // Animation d'apparition des cartes
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                (entry.target as HTMLElement).style.animation = 'fadeInUp 0.6s ease forwards';
+            }
+        });
+    });
+    document.querySelectorAll('.spectacle-card').forEach((card) => observer.observe(card));
+
+    // Lightbox
+    const lightbox = document.getElementById('lightbox') as HTMLElement;
+    const lightboxImage = document.getElementById('lightbox-image') as HTMLImageElement;
+
+    function openLightbox(src: string, alt: string) {
+        lightboxImage.src = src;
+        lightboxImage.alt = alt;
+        lightbox.style.display = 'flex';
+        setTimeout(() => lightbox.classList.add('show'), 10);
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove('show');
+        setTimeout(() => {
+            lightbox.style.display = 'none';
+            lightboxImage.src = '';
+        }, 300);
+        document.body.style.overflow = 'auto';
+    }
+
+    document.querySelectorAll<HTMLImageElement>('.spectacle-image').forEach((image) => {
+        image.addEventListener('click', () => openLightbox(image.dataset.full ?? image.currentSrc, image.alt));
+    });
+
+    lightbox.addEventListener('click', (e) => {
+        const target = e.target as HTMLElement;
+        if (target === lightbox || target.classList.contains('lightbox-image') || target.classList.contains('lightbox-close')) {
+            closeLightbox();
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('show')) closeLightbox();
+    });
+</script>

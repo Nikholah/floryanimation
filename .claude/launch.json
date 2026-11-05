@@ -1,0 +1,17 @@
+{
+    "version": "0.0.1",
+    "configurations": [
+        {
+            "name": "astro-preview",
+            "runtimeExecutable": "C:/PROGRA~1/nodejs/node.exe",
+            "runtimeArgs": ["node_modules/astro/bin/astro.mjs", "preview", "--port", "4321"],
+            "port": 4321
+        },
+        {
+            "name": "astro-dev",
+            "runtimeExecutable": "C:/PROGRA~1/nodejs/node.exe",
+            "runtimeArgs": ["node_modules/astro/bin/astro.mjs", "dev", "--port", "4322"],
+            "port": 4322
+        }
+    ]
+}

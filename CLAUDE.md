@@ -17,7 +17,7 @@ Dernière mise à jour : 2026-11-05 (réponses du client intégrées, nettoyage,
   | Spectacle Cabaret « Étincelle magique » | adultes | 20-30 min | `spectacles.html#spectacle-cabaret` |
   | Le Bar à Bulles (déambulation) | tous publics | — | `spectacles.html#animation-bar-bulles` |
   | Atelier « Bulles de Savon » (pédagogique, 15 participants max) | dès 4 ans | 30 min-1h30 | `spectacles.html#atelier-bulles` |
-- **Mascottes : retirées de l'offre.** La section `#mascottes` de l'accueil, ses liens de menu et ses images sont à supprimer (prévu à l'étape 1).
+- **Mascottes : retirées de l'offre et du site** (section, lien de menu et images supprimés le 2026-11-05).
 - **Cibles** : collectivités (écoles, mairies, centres culturels, centres de loisirs), événementiel (soirées d'entreprise, arbres de Noël des CSE), particuliers (mariages, anniversaires).
 - **Zone d'intervention : France entière et international.** Le site doit donc être **bilingue français / anglais** (voir §6, décision D1).
 - **Objectif n°1** : générer des **demandes de devis et des réservations**.
@@ -53,6 +53,7 @@ floryanimation/
 │   ├── styles/             # global.css (commun), index.css, spectacles.css
 │   ├── scripts/common.ts   # défilement fluide, ombre navbar, retour en haut
 │   ├── lib/url.ts          # url('spectacles.html') : préfixe les liens internes avec le base
+│   ├── lib/contact.ts      # téléphone, email, Instagram, devisHref(prestation) (lien « Demander un devis »)
 │   └── assets/img/         # images sources, optimisées au build
 ├── public/                 # copié tel quel : robot.txt (À RENOMMER robots.txt), sitemap.xml (à corriger)
 ├── .github/workflows/deploy.yml   # build + déploiement GitHub Pages
@@ -70,9 +71,8 @@ floryanimation/
 | `SPECTACLE_ENFANTS_AVEC_NOUNOURS1.jpeg` | 232 Ko | 1413×900 | prestations |
 | `noel.jpeg`, `noel2.jpeg`, `CABARET.jpeg`, `BULLE_SAVON_TABLE_LUMINEUSE.jpg`, `les_bulles.jpeg` | 65 à 75 Ko | ~1000 px | prestations |
 | `instagram.png` | 60 Ko | 512×512 | bouton flottant |
-| `LA_LICORNE`, `LA_POULE`, `LE_CLOWN`, `NOUNOURS`, `SAPIN_DE_NOEL` `.jpg` | 94 à 152 Ko | 1512×2016 | carrousel mascottes : **à supprimer avec la section** |
 
-Fichiers supprimés le 2026-11-05 (récupérables via l'historique Git, par exemple `git checkout a99ee47 -- img/photo_cabaret.jpg`) : `theatre.jpg` (4,9 Mo), `IMG_20220204_190840.jpg`, `Magie.jpg`, `FLORY_ANIMATION_L_ATELIER_MAGIQUE_1.jpg`, `LE_LAPIN.jpg`, `duo.jpeg`, `photoNoel.jpg`, `photo_cabaret.jpg`, `description/rideau theatre.webp`. `.idea/` et `.claude/settings.local.json` ne sont plus suivis par Git.
+Fichiers supprimés le 2026-11-05 (récupérables via l'historique Git, par exemple `git checkout a99ee47 -- img/photo_cabaret.jpg`) : photos des mascottes (`LA_LICORNE`, `LA_POULE`, `LE_CLOWN`, `NOUNOURS`, `SAPIN_DE_NOEL`), `theatre.jpg` (4,9 Mo), `IMG_20220204_190840.jpg`, `Magie.jpg`, `FLORY_ANIMATION_L_ATELIER_MAGIQUE_1.jpg`, `LE_LAPIN.jpg`, `duo.jpeg`, `photoNoel.jpg`, `photo_cabaret.jpg`, `description/rideau theatre.webp`. `.idea/` et `.claude/settings.local.json` ne sont plus suivis par Git.
 
 ### Lancer le site en local
 ```bash
@@ -200,7 +200,7 @@ Ordonné par impact sur les réservations rapporté à l'effort. Effort : S (moi
 | # | Action | Résout | Effort |
 |---|---|---|---|
 | 0 | ✅ **Fait le 2026-11-05.** Migration Astro à l'identique : layout, Header, pages FR, images optimisées, workflow de déploiement, code mort supprimé. Rendu comparé élément par élément avec l'ancien site (positions et tailles identiques en desktop, pas de débordement en 375 px). | S3, S4, S5, I7 (en partie) | M/L |
-| 1 | **Hero explicite et retrait des mascottes** : titre du type « Spectacles de magie, jonglerie et bulles de savon, partout en France et à l'international », sous-titre par cible, boutons « Demander un devis » et « 06 67 78 54 19 » ; bandeau saisonnier « Noël : réservez Nani, la Lutine Magicienne » ; suppression de la section, des liens et des images des mascottes. | C2, C8, I1 | S |
+| 1 | ✅ **Fait le 2026-11-05.** Hero : bandeau saisonnier « Noël : réservez Nani, la Lutine Magicienne » (affiché automatiquement de septembre à décembre, côté navigateur) qui renvoie vers `#spectacle-noel` ; accroche « Magie · Jonglerie · Bulles de savon » ; h1 « Spectacles de magie pour enfants, familles et événements » ; « Partout en France et à l'international » ; boutons « Demander un devis » (email prérempli via `devisHref()`, à remplacer par le formulaire à l'étape 4) et « 📞 06 67 78 54 19 » ; lien « Découvrir nos spectacles ». Le hero passe en `min-height` (le contenu n'est plus coupé en mobile), et le bouton devis est visible sans défiler en 375 px. Mascottes retirées (section, menu, CSS, JS, images). | C2, C8, I1 | S |
 | 2 | **Appels à l'action partout** : « Demander un devis pour ce spectacle » sur chaque prestation (préremplit la prestation dans le formulaire) ; téléphone dans le header ; barre fixe « Appeler / Devis » sur mobile à la place des boutons flottants ; badge tarif remplacé par « Devis gratuit sur demande ». | C3, I11, S6 | S |
 | 3 | **Navigation mobile** : menu burger accessible, menu déroulant au clic, au toucher et au clavier, `scroll-margin-top`. | C1, I11 | S |
 | 4 | **Formulaire de devis Web3Forms** (choix retenu, voir D3) : vous êtes (collectivité / entreprise-CSE / particulier / autre), prestation(s), date, lieu (ville, pays), nombre et âge des spectateurs, intérieur ou extérieur, téléphone, email, message ; honeypot `botcheck`, mention RGPD, message de remerciement, version anglaise. | C4 | M |
@@ -232,9 +232,10 @@ Ordonné par impact sur les réservations rapporté à l'effort. Effort : S (moi
 
 ### Code
 - HTML5 sémantique, **indentation de 4 espaces**, guillemets doubles, classes en **kebab-case**, pas de styles inline.
-- **Conserver les ancres des prestations** : `#spectacle-enfants`, `#spectacle-noel`, `#spectacle-cabaret`, `#animation-bar-bulles`, `#atelier-bulles`, ainsi que `#accueil`, `#nous-connaitre`, `#contact`. `#mascottes` disparaît.
+- **Conserver les ancres des prestations** : `#spectacle-enfants`, `#spectacle-noel`, `#spectacle-cabaret`, `#animation-bar-bulles`, `#atelier-bulles`, ainsi que `#accueil`, `#nous-connaitre`, `#contact`. (`#mascottes` a été supprimée.)
 - Astro : un élément répété sur plusieurs pages devient un **composant** dans `src/components/` ; le `<head>` vit dans `src/layouts/Base.astro`. Styles communs dans `src/styles/global.css`, styles d'une page dans `src/styles/<page>.css` (importés dans le frontmatter de la page, CSS global non scopé, pour rester proche de l'existant). Scripts en TypeScript dans des balises `<script>` (bundlées par Astro), **jamais d'`onclick` inline**.
 - Liens internes avec `url()` de `src/lib/url.ts`, jamais de chemin absolu en dur.
+- Téléphone, email, Instagram et lien de devis : toujours via `src/lib/contact.ts` (une seule source à modifier).
 - Rien qui exige un serveur (`output: static`). Pas de nouvelle dépendance sans validation.
 - Images : sources dans `src/assets/img/`, nom en `MAJUSCULES_AVEC_UNDERSCORES`, affichées avec `<Image>` d'`astro:assets` (`width` = largeur affichée, `densities={[1, 2]}`), `alt` descriptif (traduit en anglais pour la version EN). Pas de recadrage au build quand le CSS recadre déjà (`object-fit: cover`).
 - Vérifier `npm run build` sans avertissement avant de proposer une modification.

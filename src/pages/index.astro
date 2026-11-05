@@ -3,34 +3,34 @@ import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import '../styles/index.css';
 import { url } from '../lib/url';
+import { PHONE_DISPLAY, PHONE_HREF, devisHref } from '../lib/contact';
 
 import floryAnne from '../assets/img/FLORY_ANNE.jpg';
 import famille from '../assets/img/famille.jpg';
-import licorne from '../assets/img/LA_LICORNE.jpg';
-import poule from '../assets/img/LA_POULE.jpg';
-import clown from '../assets/img/LE_CLOWN.jpg';
-import nounours from '../assets/img/NOUNOURS.jpg';
-import sapin from '../assets/img/SAPIN_DE_NOEL.jpg';
-
-const mascottes = [
-    { img: licorne, alt: 'Mascotte Licorne', title: '🦄 La Licorne' },
-    { img: poule, alt: 'Mascotte Poule', title: '🐔 La Poule' },
-    { img: clown, alt: 'Mascotte Clown', title: '🤡 Le Clown' },
-    { img: nounours, alt: 'Mascotte Nounours', title: '🧸 Le Nounours' },
-    { img: sapin, alt: 'Mascotte Sapin de Noël', title: '🎄 Le Sapin de Noël' },
-];
 ---
 <Base
     current="accueil"
     title="MAGIE – ANIMATION INTERGENERATIONNELLE"
     description="Découvrez Flory Animation, spécialiste des spectacles magiques et animations intergénérationnelles. Réservez des moments inoubliables pour toute la famille."
-    keywords="magie, animation, spectacles, intergénérationnel, mascottes, Flory Animation"
+    keywords="magie, animation, spectacles, intergénérationnel, Flory Animation"
 >
     <!-- Hero Section -->
     <section id="accueil" class="hero">
         <div class="hero-content">
-            <h1>Flory Animation vous invite à découvrir son univers enchanté...</h1>
-            <a href={url('spectacles.html')} class="cta-button">Découvrir nos prestations</a>
+            <!-- Bandeau saisonnier : visible de septembre à décembre (masqué par le script en dehors) -->
+            <a href={url('spectacles.html#spectacle-noel')} class="season-banner" id="seasonBanner" hidden>
+                <span aria-hidden="true">🎄</span> Noël : réservez <strong>Nani, la Lutine Magicienne</strong> pour votre arbre de Noël
+            </a>
+
+            <p class="hero-eyebrow">Magie · Jonglerie · Bulles de savon</p>
+            <h1>Spectacles de magie pour enfants, familles et événements</h1>
+            <p class="hero-zone">Partout en France et à l'international</p>
+
+            <div class="hero-actions">
+                <a href={devisHref()} class="cta-button">Demander un devis</a>
+                <a href={PHONE_HREF} class="cta-button cta-secondary"><span aria-hidden="true">📞</span> {PHONE_DISPLAY}</a>
+            </div>
+            <a href={url('spectacles.html')} class="hero-link">Découvrir nos spectacles →</a>
 
             <div class="hero-lists">
                 <div class="hero-list-item">
@@ -90,34 +90,6 @@ const mascottes = [
         </div>
     </section>
 
-    <!-- Mascottes Carousel -->
-    <section id="mascottes" class="section">
-        <h2>Mascottes</h2>
-        <div class="carousel-container">
-            <div class="carousel-track" id="carouselTrack">
-                {mascottes.map((m, i) => (
-                    <div class="carousel-slide">
-                        <Image src={m.img} alt={m.alt} class="mascot-image" width={375} densities={[1, 2]} loading={i === 0 ? 'eager' : 'lazy'} />
-                        <div class="mascot-content">
-                            <h3>{m.title}</h3>
-                            <p>Prestation en complément d'une animation.<br>Personnage pour accueillir votre public.</p>
-                            <p><strong>Tarif : sur demande</strong></p>
-                        </div>
-                    </div>
-                ))}
-            </div>
-
-            <button class="carousel-nav prev" type="button" aria-label="Mascotte précédente">‹</button>
-            <button class="carousel-nav next" type="button" aria-label="Mascotte suivante">›</button>
-        </div>
-
-        <div class="carousel-indicators">
-            {mascottes.map((m, i) => (
-                <button class:list={['indicator', { active: i === 0 }]} type="button" data-slide={i} aria-label={`Afficher ${m.alt}`}></button>
-            ))}
-        </div>
-    </section>
-
     <!-- Contact -->
     <section id="contact" class="contact">
         <div class="section">
@@ -143,24 +115,10 @@ const mascottes = [
 </Base>
 
 <script>
-    // Carrousel des mascottes
-    const track = document.getElementById('carouselTrack');
-    const indicators = document.querySelectorAll<HTMLButtonElement>('.indicator');
-    const totalSlides = indicators.length;
-    let currentSlide = 0;
-
-    function goToSlide(index: number) {
-        currentSlide = (index + totalSlides) % totalSlides;
-        if (track) track.style.transform = `translateX(-${currentSlide * 100}%)`;
-        indicators.forEach((indicator, i) => indicator.classList.toggle('active', i === currentSlide));
+    // Bandeau de Noël : affiché seulement de septembre à décembre (mois 8 à 11 en JS).
+    // Calculé dans le navigateur pour ne pas dépendre de la date du dernier build.
+    const banner = document.getElementById('seasonBanner');
+    if (banner && new Date().getMonth() >= 8) {
+        banner.hidden = false;
     }
-
-    document.querySelector('.carousel-nav.prev')?.addEventListener('click', () => goToSlide(currentSlide - 1));
-    document.querySelector('.carousel-nav.next')?.addEventListener('click', () => goToSlide(currentSlide + 1));
-    indicators.forEach((indicator) => {
-        indicator.addEventListener('click', () => goToSlide(Number(indicator.dataset.slide)));
-    });
-
-    // Défilement automatique toutes les 5 secondes
-    setInterval(() => goToSlide(currentSlide + 1), 5000);
 </script>

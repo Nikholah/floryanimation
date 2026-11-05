@@ -2,7 +2,8 @@
 
 /* Hero Section */
 .hero {
-    height: 100vh;
+    min-height: 100vh;
+    padding: 110px 0 3rem; /* espace sous la navbar fixe */
     background-image: url("../assets/img/theatre-curtain.svg");
     background-repeat: no-repeat;
     background-position: center center;
@@ -112,6 +113,77 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
+/* Hero : accroche, zone, boutons d'action, bandeau saisonnier */
+.hero .hero-eyebrow {
+    display: inline-block;
+    padding: 0.3rem 1.2rem;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #252fae;
+    margin-bottom: 0.75rem;
+}
+
+.hero .hero-zone {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #252fae;
+    margin-bottom: 2rem;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.cta-button.cta-secondary {
+    background: white;
+    color: #cf3434;
+    border: 2px solid #cf3434;
+}
+
+.hero-link {
+    display: inline-block;
+    margin-top: 1.25rem;
+    color: #252fae;
+    font-weight: bold;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    animation: fadeInUp 1s ease 0.8s both;
+}
+
+.hero-link:hover {
+    color: #cf3434;
+}
+
+.season-banner {
+    display: table; /* sur sa propre ligne, centré, largeur ajustée au texte */
+    margin: 0 auto 1.5rem;
+    padding: 0.6rem 1.4rem;
+    background: white;
+    color: #a3141c;
+    border: 2px solid #cf3434;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    animation: fadeInUp 1s ease both;
+    transition: all 0.3s ease;
+}
+
+.season-banner:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.season-banner[hidden] {
+    display: none;
+}
+
 /* Sections */
 .section {
     padding: 5rem 0;
@@ -119,7 +191,7 @@
     padding-right: 2rem;
 }
 
-.section:not(#nous-connaitre):not(#mascottes) {
+.section:not(#nous-connaitre) {
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -286,125 +358,6 @@
     }
 }
 
-/* Mascottes Section */
-#mascottes {
-    position: relative;
-    overflow: hidden;
-}
-
-/* Carousel Styles */
-.carousel-container {
-    position: relative;
-    max-width: 900px;
-    margin: 3rem auto;
-    overflow: hidden;
-    border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-}
-
-.carousel-track {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
-
-.carousel-slide {
-    min-width: 100%;
-    background: white;
-    padding: 3rem;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-}
-
-.mascot-image {
-    height: 500px;
-    object-fit: cover;
-    border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-    transition: all 0.3s ease;
-}
-
-.mascot-image:hover {
-    transform: scale(1.05);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-}
-
-.mascot-content h3 {
-    font-size: 2rem;
-    color: #4a90e2;
-    margin-bottom: 1rem;
-}
-
-.mascot-content p {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #666;
-    max-width: 500px;
-}
-
-.carousel-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.9);
-    border: none;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    color: #4a90e2;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    z-index: 100;
-}
-
-.carousel-nav:hover {
-    background: white;
-    transform: translateY(-50%) scale(1.1);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-
-.carousel-nav.prev {
-    left: 20px;
-}
-
-.carousel-nav.next {
-    right: 20px;
-}
-
-.carousel-indicators {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 2rem;
-}
-
-.indicator {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: #ddd;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.indicator.active {
-    background: #4a90e2;
-    transform: scale(1.2);
-}
-
-.indicator:hover {
-    background: #63b3ed;
-}
-
 /* Contact Section */
 .contact {
     background:#4a90e2 ;
@@ -460,35 +413,25 @@
 
 /* Responsive */
 @media (max-width: 768px) {
+    .hero {
+        padding-top: 95px;
+    }
+
     .hero h1 {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
 
     .hero p {
         font-size: 1.1rem;
     }
 
-    .carousel-slide {
-        padding: 2rem 1rem;
+    .hero .hero-eyebrow {
+        font-size: 0.85rem;
+        letter-spacing: 2px;
     }
 
-    .mascot-image {
-        width: 250px;
-        height: 250px;
-    }
-
-    .carousel-nav {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2rem;
-    }
-
-    .carousel-nav.prev {
-        left: 10px;
-    }
-
-    .carousel-nav.next {
-        right: 10px;
+    .season-banner {
+        font-size: 0.9rem;
     }
 }
 
@@ -501,10 +444,4 @@
 .contact-item a {
     color: white;
     text-decoration: none;
-}
-
-/* Indicateurs du carrousel (boutons) */
-.indicator {
-    border: none;
-    padding: 0;
 }

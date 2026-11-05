@@ -1,0 +1,44 @@
+---
+import { url } from '../lib/url';
+import { EMAIL, INSTAGRAM_URL, PHONE_DISPLAY, PHONE_HREF, devisHref } from '../lib/contact';
+import { LEGAL } from '../lib/legal';
+
+const annee = new Date().getFullYear();
+---
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-col footer-brand">
+            <p class="footer-logo">✨ Flory Animation</p>
+            <p>Spectacles de magie, de jonglerie et de bulles de savon.</p>
+            <p>Partout en France et à l'international.</p>
+        </div>
+
+        <div class="footer-col">
+            <h2 class="footer-title">Contact</h2>
+            <ul>
+                <li><a href={PHONE_HREF}><span aria-hidden="true">📞</span> {PHONE_DISPLAY}</a></li>
+                <li><a href={`mailto:${EMAIL}`}><span aria-hidden="true">✉️</span> {EMAIL}</a></li>
+                <li><a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer"><span aria-hidden="true">📷</span> Instagram @floryanimation</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h2 class="footer-title">Navigation</h2>
+            <ul>
+                <li><a href={url('index.html')}>Accueil</a></li>
+                <li><a href={url('spectacles.html')}>Nos prestations</a></li>
+                <li><a href={url('spectacles.html#infos-pratiques')}>Informations pratiques</a></li>
+                <li><a href={devisHref()}>Demander un devis</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© {annee} {LEGAL.denomination}</p>
+        <p class="footer-legal">
+            <a href={url('mentions-legales.html')}>Mentions légales</a>
+            <span aria-hidden="true">·</span>
+            <a href={url('confidentialite.html')}>Politique de confidentialité</a>
+        </p>
+    </div>
+</footer>

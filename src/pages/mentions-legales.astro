@@ -1,0 +1,69 @@
+---
+import Base from '../layouts/Base.astro';
+import '../styles/legal.css';
+import { url } from '../lib/url';
+import { EMAIL, INSTAGRAM_URL, PHONE_DISPLAY, PHONE_HREF } from '../lib/contact';
+import { HEBERGEUR, LEGAL } from '../lib/legal';
+---
+<Base current="legal" title="Mentions légales - Flory Animation" description="Mentions légales du site de Flory Animation : éditeur, hébergeur et propriété intellectuelle.">
+    <!-- TEXTE PROVISOIRE : modèle de mentions légales à faire valider (ce n'est pas un avis juridique) -->
+    <main class="legal-page">
+        <h1>Mentions légales</h1>
+
+        <section>
+            <h2>Éditeur du site</h2>
+            <p>
+                <strong>{LEGAL.denomination}</strong>, {LEGAL.forme.toLowerCase()}<br>
+                Siège : {LEGAL.siegeVille}<br>
+                SIRET : {LEGAL.siret}<br>
+                Activité : {LEGAL.activite.toLowerCase()}<br>
+                Téléphone : <a href={PHONE_HREF}>{PHONE_DISPLAY}</a><br>
+                Email : <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+            </p>
+            <!-- TODO : adresse complète du siège si la cliente souhaite l'afficher (src/lib/legal.ts) -->
+        </section>
+
+        <section>
+            <h2>Directeur ou directrice de la publication</h2>
+            {LEGAL.directeurPublication
+                ? <p>{LEGAL.directeurPublication}</p>
+                : <p class="todo">À compléter : nom de la personne responsable de la publication (en général la présidente ou le président de l'association).</p>}
+        </section>
+
+        <section>
+            <h2>Hébergement</h2>
+            <p>
+                {HEBERGEUR.nom}<br>
+                {HEBERGEUR.adresse}<br>
+                <a href={HEBERGEUR.site} target="_blank" rel="noopener noreferrer">{HEBERGEUR.site.replace('https://', '')}</a>
+            </p>
+        </section>
+
+        <section>
+            <h2>Propriété intellectuelle</h2>
+            <p>
+                L'ensemble des contenus de ce site (textes, photographies, affiches, illustrations, logo et vidéos) est la
+                propriété de {LEGAL.denomination} ou est utilisé avec l'autorisation de leurs auteurs. Toute reproduction,
+                représentation ou diffusion, totale ou partielle, sans autorisation écrite préalable est interdite.
+            </p>
+        </section>
+
+        <section>
+            <h2>Liens externes</h2>
+            <p>
+                Ce site contient des liens vers d'autres sites, notamment notre page
+                <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">Instagram</a>.
+                {LEGAL.denomination} n'est pas responsable du contenu de ces sites.
+            </p>
+        </section>
+
+        <section>
+            <h2>Données personnelles</h2>
+            <p>
+                Pour savoir comment vos données sont utilisées, consultez notre
+                <a href={url('confidentialite.html')}>politique de confidentialité</a>.
+            </p>
+        </section>
+    </main>
+    <!-- /TEXTE PROVISOIRE -->
+</Base>

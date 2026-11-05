@@ -1,0 +1,88 @@
+---
+import Base from '../layouts/Base.astro';
+import '../styles/legal.css';
+import { url } from '../lib/url';
+import { EMAIL } from '../lib/contact';
+import { HEBERGEUR, LEGAL } from '../lib/legal';
+---
+<Base current="legal" title="Politique de confidentialité - Flory Animation" description="Comment Flory Animation utilise et protège les informations envoyées via le formulaire de devis.">
+    <!-- TEXTE PROVISOIRE : modèle de politique de confidentialité à faire valider (ce n'est pas un avis juridique).
+         À mettre à jour si un outil de mesure d'audience, une vidéo intégrée ou un autre service tiers est ajouté. -->
+    <main class="legal-page">
+        <h1>Politique de confidentialité</h1>
+
+        <section>
+            <h2>Responsable du traitement</h2>
+            <p>
+                {LEGAL.denomination}, {LEGAL.forme.toLowerCase()}, {LEGAL.siegeVille}.<br>
+                Contact : <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+            </p>
+        </section>
+
+        <section>
+            <h2>Données collectées</h2>
+            <p>Lorsque vous remplissez le <a href={url('devis.html')}>formulaire de demande de devis</a>, nous recevons :</p>
+            <ul>
+                <li>votre nom, votre adresse email et, si vous le souhaitez, votre numéro de téléphone ;</li>
+                <li>les informations sur votre événement : type de structure, prestation souhaitée, date, lieu, nombre et âge des spectateurs, intérieur ou extérieur ;</li>
+                <li>le contenu de votre message.</li>
+            </ul>
+            <p>Lorsque vous nous contactez par téléphone ou par email, nous recevons les informations que vous choisissez de nous transmettre.</p>
+        </section>
+
+        <section>
+            <h2>Utilisation de vos données</h2>
+            <p>
+                Ces informations servent uniquement à répondre à votre demande, à établir un devis et, si vous le confirmez,
+                à organiser la prestation. Elles ne sont ni vendues, ni louées, ni utilisées pour de la publicité.
+            </p>
+            <p>
+                Ce traitement repose sur votre demande : il s'agit de mesures précontractuelles prises à votre initiative
+                (article 6.1.b du Règlement général sur la protection des données).
+            </p>
+        </section>
+
+        <section>
+            <h2>Destinataires</h2>
+            <p>Vos données sont destinées uniquement à {LEGAL.denomination}. Pour faire fonctionner le site, nous faisons appel à deux prestataires techniques :</p>
+            <ul>
+                <li>
+                    <strong>Web3Forms</strong>, qui transmet par email le contenu du formulaire de devis
+                    (<a href="https://web3forms.com/privacy" target="_blank" rel="noopener noreferrer">politique de confidentialité de Web3Forms</a>) ;
+                </li>
+                <li><strong>{HEBERGEUR.nom}</strong>, qui héberge le site et peut enregistrer des données techniques de connexion (adresse IP, par exemple).</li>
+            </ul>
+            <p>Ces prestataires peuvent traiter des données en dehors de l'Union européenne.</p>
+        </section>
+
+        <section>
+            <h2>Durée de conservation</h2>
+            <p>
+                Vos données sont conservées le temps nécessaire au traitement de votre demande et au suivi de la prestation,
+                puis au plus 3 ans après notre dernier échange. Les factures sont conservées pendant la durée imposée par la loi.
+            </p>
+            <!-- TODO : durée de conservation à confirmer avec la cliente -->
+        </section>
+
+        <section>
+            <h2>Vos droits</h2>
+            <p>
+                Vous pouvez à tout moment demander à accéder à vos données, les faire rectifier ou effacer, limiter leur
+                utilisation, vous y opposer ou les récupérer. Il suffit d'écrire à <a href={`mailto:${EMAIL}`}>{EMAIL}</a>.
+            </p>
+            <p>
+                Si vous estimez que vos droits ne sont pas respectés, vous pouvez adresser une réclamation à la CNIL
+                (<a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer">cnil.fr</a>).
+            </p>
+        </section>
+
+        <section>
+            <h2>Cookies</h2>
+            <p>
+                Ce site ne dépose aucun cookie et n'utilise aucun outil de mesure d'audience ni de publicité.
+                C'est pourquoi aucun bandeau de consentement ne s'affiche.
+            </p>
+        </section>
+    </main>
+    <!-- /TEXTE PROVISOIRE -->
+</Base>

@@ -230,3 +230,7 @@ body {
         gap: 0;
     }
 }
+
+.rgpd a {
+    color: #2e6bb3;
+}

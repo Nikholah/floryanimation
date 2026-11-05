@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import '../styles/devis.css';
+import { url } from '../lib/url';
 import { EMAIL, PHONE_DISPLAY, PHONE_HREF, PRESTATIONS_DEVIS, WEB3FORMS_ACCESS_KEY } from '../lib/contact';
 ---
 <Base
@@ -120,7 +121,7 @@ import { EMAIL, PHONE_DISPLAY, PHONE_HREF, PRESTATIONS_DEVIS, WEB3FORMS_ACCESS_K
             <p class="rgpd">
                 Les informations saisies servent uniquement à répondre à votre demande de devis. Elles sont transmises par email
                 via le service Web3Forms et ne sont pas conservées sur ce site.
-                <!-- TODO étape 7 : lien vers la politique de confidentialité -->
+                <a href={url('confidentialite.html')}>En savoir plus sur vos données</a>.
             </p>
             <p class="req-note"><span aria-hidden="true">*</span> Champs obligatoires</p>
 

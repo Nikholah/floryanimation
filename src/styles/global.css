@@ -387,6 +387,12 @@ body {
         display: none;
     }
 
+    /* Espace pour que le bouton « retour en haut » ne recouvre pas les liens légaux du pied de page
+       (sélecteur à 2 classes : l'emporte sur les règles du pied de page, quel que soit l'ordre) */
+    .site-footer .footer-bottom {
+        padding-bottom: 4.5rem;
+    }
+
     /* Bouton « retour en haut » plus petit, au-dessus de la barre */
     .back-to-top {
         right: 16px;
@@ -512,4 +518,96 @@ body {
 /* Les ancres ne passent pas sous la navbar fixe */
 [id] {
     scroll-margin-top: 95px;
+}
+
+/* Pied de page */
+.site-footer {
+    background: #1d2438;
+    color: #d8deea;
+    font-size: 0.95rem;
+}
+
+.footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem 2rem;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 2rem;
+}
+
+.footer-logo {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.footer-brand p + p {
+    margin-top: 0.25rem;
+}
+
+.footer-title {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: white;
+    margin-bottom: 0.75rem;
+}
+
+.site-footer ul {
+    list-style: none;
+}
+
+.site-footer li + li {
+    margin-top: 0.5rem;
+}
+
+.site-footer a {
+    color: #d8deea;
+    text-decoration: none;
+}
+
+.site-footer a:hover {
+    color: white;
+    text-decoration: underline;
+}
+
+.site-footer a:focus-visible {
+    outline: 3px solid #8fb8ee;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.25rem 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* à gauche : loin du bouton « retour en haut », en bas à droite */
+    gap: 0.5rem 2rem;
+    font-size: 0.875rem;
+    color: #aeb7c9;
+}
+
+.footer-legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* Seuil distinct de 768 px : le minifieur fusionne les media queries identiques et les remonte plus haut dans le fichier */
+@media (max-width: 760px) {
+    .footer-inner {
+        grid-template-columns: 1fr;
+        padding: 2.5rem 1.25rem 1.5rem;
+        gap: 1.75rem;
+    }
+
+    .footer-bottom {
+        padding: 1.25rem;
+        flex-direction: column;
+    }
 }

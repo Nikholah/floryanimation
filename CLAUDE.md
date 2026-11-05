@@ -1,7 +1,7 @@
 # CLAUDE.md — Site Flory Animation
 
 Document de référence pour toutes les sessions de travail sur ce dépôt.
-Dernière mise à jour : 2026-11-05 (nouvelles prestations, bannière photo, menu mobile, barre d'action, formulaire de devis, infos pratiques, accroches et bio sans dates).
+Dernière mise à jour : 2026-11-05 (nouvelles prestations, menu mobile, barre d'action, formulaire de devis, infos pratiques, accroches, pied de page et pages légales).
 
 ---
 
@@ -32,7 +32,7 @@ Dernière mise à jour : 2026-11-05 (nouvelles prestations, bannière photo, men
   - **sonorisation, lumière et électricité fournies selon la taille du spectacle** ; détails réglés au moment du devis ;
   - en extérieur : **pas besoin d'électricité** ;
   - facturation : **sur facture** (rester sobre sur l'administratif, ne pas détailler).
-- **Mentions légales** : SIRET communiqué : `822 373 395 0018`. ⚠️ Il ne compte que 13 chiffres alors qu'un SIRET en a 14 (9 du SIREN + 5 du NIC) : probablement `822 373 395 00018`. **À vérifier avant publication** (sur annuaire-entreprises.data.gouv.fr).
+- **Informations légales** (vérifiées le 2026-11-05 dans l'annuaire des entreprises, recherche-entreprises.api.gouv.fr) : **FLORY ANIMATION, association déclarée** (catégorie juridique 9220), activité « arts du spectacle vivant » (90.01Z), **SIRET 822 373 395 00018** (le numéro communiqué au départ, à 13 chiffres, était incomplet), siège à **Saint-Étienne (42000)**, active. Valeurs centralisées dans `src/lib/legal.ts`. Restent à fournir : **nom du directeur ou de la directrice de la publication** (en général la présidente ou le président ; un encadré rouge « À compléter » s'affiche tant qu'il manque) et, si elle le souhaite, l'adresse complète du siège.
 - **Maintenance** : le site est monté et maintenu par Nicolas (à l'aise avec Git, Node.js et l'outillage front).
 
 ---
@@ -52,12 +52,13 @@ floryanimation/
 ├── package.json            # scripts dev / build / preview
 ├── src/
 │   ├── layouts/Base.astro  # <head>, favicon généré, Header, boutons flottants, script commun
-│   ├── components/         # Header.astro (prop current, liste du menu Prestations, téléphone), FloatingButtons.astro (retour en haut, Instagram, barre d'action mobile),
+│   ├── components/         # Header.astro (prop current, liste du menu Prestations, téléphone), Footer.astro (pied de page commun), FloatingButtons.astro (retour en haut, Instagram, barre d'action mobile),
 │   │                       # Prestation.astro (carte de prestation : images, étiquette, texte en slot, tarif, bouton devis)
-│   ├── pages/              # index.astro, spectacles.astro, devis.astro (=> index.html, spectacles.html, devis.html)
-│   ├── styles/             # global.css (commun), index.css, spectacles.css, devis.css
+│   ├── pages/              # index.astro, spectacles.astro, devis.astro, mentions-legales.astro, confidentialite.astro (=> *.html)
+│   ├── styles/             # global.css (commun, dont le pied de page), index.css, spectacles.css, devis.css, legal.css
 │   ├── scripts/common.ts   # défilement fluide, ombre navbar, retour en haut, menu burger et sous-menu (ouverture/fermeture, Échap)
 │   ├── lib/url.ts          # url('spectacles.html') : préfixe les liens internes avec le base
+│   ├── lib/legal.ts        # dénomination, forme, SIRET, siège, directeur de publication, hébergeur (mentions légales, confidentialité)
 │   ├── lib/contact.ts      # téléphone, email, Instagram, clé Web3Forms, liste PRESTATIONS_DEVIS, devisHref(prestation) => devis.html?prestation=…
 │   └── assets/img/         # images sources, optimisées au build
 ├── public/                 # copié tel quel : robot.txt (À RENOMMER robots.txt), sitemap.xml (à corriger)
@@ -139,7 +140,7 @@ Légende : **CONV** conversion · **CIBLE** cibles · **DESIGN** · **MOBILE** �
 | C4 | CONV | ✅ *Formulaire créé le 2026-11-05 (étape 4) ; clé Web3Forms à renseigner.* **Pas de formulaire de devis.** Le `mailto:` échoue souvent sur ordinateur. | — |
 | C5 | I18N | **Site uniquement en français** alors que la zone est nationale et internationale. Un organisateur étranger ne peut ni comprendre l'offre ni la trouver sur Google. | tout |
 | C6 | CONV | *Infos pratiques (étape 5) et accroches sur le parcours (étape 6) ajoutées le 2026-11-05 ; restent : avis et vidéo.* **Réassurance faible** : ni avis, ni vidéo, ni infos pratiques (montage 1 h 30, 600 spectateurs, son et lumière fournis). Le parcours de Flory Anne n'est pas mis en avant sous forme d'accroches. | — |
-| C7 | légal | **Pas de pied de page ni de mentions légales** (éditeur, SIRET, hébergeur) ni de politique de confidentialité (obligatoire avec un formulaire). | — |
+| C7 | légal | ✅ *Corrigé le 2026-11-05 (étape 7) ; reste le nom du directeur de publication.* **Pas de pied de page ni de mentions légales** (éditeur, SIRET, hébergeur) ni de politique de confidentialité (obligatoire avec un formulaire). | — |
 | C8 | CONV/SEO | ✅ *Zone rétablie le 2026-11-05 dans les informations pratiques (étape 5) ; à reprendre dans le pied de page (étape 7) et le SEO (étape 9).* **Zone d'intervention absente** : rien n'indique « partout en France et à l'international ». | — |
 
 ### 🟠 Important
@@ -217,7 +218,7 @@ Ordonné par impact sur les réservations rapporté à l'effort. Effort : S (moi
 | 4 | ✅ **Fait le 2026-11-05, sauf la clé.** Page `devis.html` (`src/pages/devis.astro`, `src/styles/devis.css`) avec un formulaire Web3Forms : vous êtes, prestation (liste `PRESTATIONS_DEVIS`), date, lieu (ville, pays), nombre de spectateurs, âge du public, intérieur ou extérieur, nom, email, téléphone, message ; piège à robots `botcheck`, mention RGPD, message de confirmation ou d'erreur affiché sur la page (envoi en `fetch`). Tous les boutons « Demander un devis » mènent à cette page via `devisHref(libellé)`, avec la prestation présélectionnée par `?prestation=` (testé sur les 11 liens). ⚠️ **Clé `WEB3FORMS_ACCESS_KEY` à renseigner** dans `src/lib/contact.ts` : tant qu'elle est vide, l'envoi ouvre un email prérempli avec toutes les réponses (repli). Envoi réel non testé faute de clé (succès et erreur testés avec une réponse simulée). Version anglaise : à faire à l'étape 8. | C4 | M |
 | 5 | ✅ **Fait le 2026-11-05.** Section `#infos-pratiques` en bas de la page Prestations (lien « Informations pratiques » en dernier dans le menu Prestations) : 6 encadrés (Où ? France et international ; installation 1 h 30 ; jusqu'à environ 600 spectateurs ; son, lumière et électricité fournis selon la taille, point au moment du devis ; pas d'électricité en extérieur ; tarifs sur demande, devis gratuit, sur facture) et un bouton « Demander un devis gratuit ». Uniquement des faits validés par la cliente ; la formulation est balisée `TEXTE PROVISOIRE`. Grille de 3 colonnes en desktop, 2 en tablette, 1 en mobile. **FAQ retirée** le même jour, car elle répétait les encadrés. N'en ajouter une que pour des questions non couvertes (délai de réservation, déplacements…), une fois les réponses de la cliente connues. Fiche technique PDF : pas faite (rien à mettre de plus pour l'instant). | C6 (en partie), C8 | S |
 | 6 | ✅ **Fait le 2026-11-05.** Bandeau d'accroches `.atouts` entre la bannière et À propos sur l'accueil : « Née dans une famille de magiciens », « Formée auprès d'Annie Fratellini et du Cirque de Pékin », « Jusqu'à 600 spectateurs, son et lumière fournis », « Partout en France et à l'international ». 4 colonnes en desktop, 2 en tablette, 1 en mobile ; balisé `TEXTE PROVISOIRE`. Dans la bio, « devient maman en 1995, puis en 1999 » devient « devenue maman à deux reprises » (balisé `TEXTE MODIFIÉ`, à faire valider). Plus aucune année ni durée de carrière sur le site ; restent seulement des âges au moment des faits (« dès l'âge de 6 ans », « à 14 ans »), autorisés par la consigne. | C6 (en partie), I10 | S |
-| 7 | **Pied de page et mentions légales** : contact, zone, Instagram, liens FR/EN, page mentions légales (éditeur, SIRET vérifié, hébergeur) et politique de confidentialité (formulaire Web3Forms). | C7 | S |
+| 7 | ✅ **Fait le 2026-11-05, sauf 2 informations.** Pied de page commun (`Footer.astro`, dans `Base.astro`) : présentation et zone « Partout en France et à l'international », contact (téléphone, email, Instagram), navigation (Accueil, Prestations, Informations pratiques, Devis), © et liens légaux. Pages `mentions-legales.html` (éditeur, directeur de publication, hébergeur GitHub Pages, propriété intellectuelle, liens externes) et `confidentialite.html` (données du formulaire, finalité, base légale, destinataires Web3Forms et hébergeur, conservation 3 ans au plus, droits, CNIL, aucun cookie), balisées `TEXTE PROVISOIRE` (modèles, pas un avis juridique). La mention RGPD du formulaire de devis renvoie vers la politique. 116 liens internes testés sur les 5 pages. ⚠️ À compléter : directeur ou directrice de la publication et durée de conservation à valider (`TODO`). ⚠️ À mettre à jour : hébergeur (`HEBERGEUR` dans `legal.ts`) lors du passage sur Cloudflare, et la section Cookies si on ajoute un outil d'audience ou une vidéo YouTube. Liens FR/EN : à l'étape 8. | C7, C8 | S |
 | 8 | **Version anglaise** : routes `/en/`, sélecteur FR/EN, `hreflang`, traduction des textes (première traduction proposée par Claude, à faire relire, si possible par une personne anglophone, pour garder la poésie). | C5 | M/L |
 | 9 | **SEO de base** : titles et meta descriptions par page et par langue, canonical, Open Graph, hiérarchie Hn, `robots.txt` et `sitemap.xml` corrects pour `floryanimation.com`, favicon dédié, JSON-LD `PerformingGroup`/`EntertainmentBusiness` avec `areaServed` France et international, et un `Service` par prestation. | I4, I5, I6, S7 | S/M |
 | 10 | **Vidéo verticale** (assets attendus) : composant `VideoVertical` au format 9:16, `<video controls playsinline preload="none" poster>`, MP4 H.264 environ 720×1280, **moins de 25 Mio par fichier** (limite Cloudflare Pages), sous-titres si texte parlé ; repli possible sur un Short YouTube intégré en mode « façade » (pas d'iframe tant qu'on ne clique pas, `youtube-nocookie`). Emplacements : hero ou haut de l'accueil, et une vidéo par spectacle si disponible. | C6, I9 | M |
@@ -251,6 +252,7 @@ Ordonné par impact sur les réservations rapporté à l'effort. Effort : S (moi
 - Rien qui exige un serveur (`output: static`). Pas de nouvelle dépendance sans validation.
 - Images : sources dans `src/assets/img/`, nom en `MAJUSCULES_AVEC_UNDERSCORES`, affichées avec `<Image>` d'`astro:assets` (`width` = largeur affichée, `densities={[1, 2]}`), `alt` descriptif (traduit en anglais pour la version EN). Pas de recadrage au build quand le CSS recadre déjà (`object-fit: cover`).
 - Vérifier `npm run build` sans avertissement avant de proposer une modification.
+- ⚠️ **Media queries** : au build, le minifieur CSS **fusionne les media queries identiques d'un même fichier et les remonte** à la position de la première. Une règle mobile placée dans un second `@media (max-width: 768px)` peut alors se retrouver *avant* la règle de base qu'elle doit surcharger, et être ignorée. Dans un fichier qui contient déjà ce seuil : ajouter la règle dans le bloc existant, utiliser un seuil distinct (par exemple 760 px pour le pied de page) ou un sélecteur plus spécifique. Toujours vérifier le résultat dans le navigateur.
 - **Bilingue** : aucun texte en dur dans les composants ; libellés dans `i18n/fr.json` et `i18n/en.json` ; chaque nouvelle page existe dans les deux langues ; `lang` correct sur `<html>` ; `hreflang` réciproques.
 - Liens externes : `target="_blank" rel="noopener noreferrer"`.
 - Tester en **375 px** et en desktop, dans les deux langues.
@@ -288,8 +290,8 @@ Ordonné par impact sur les réservations rapporté à l'effort. Effort : S (moi
 
 1. ~~Migration Astro~~ : décidée et faite le 2026-11-05.
 2. **Bilingue** : pages séparées `/en/` (recommandé) ou FR et EN sur la même page ?
-3. **SIRET** : confirmer les 14 chiffres (`822 373 395 00018` ?).
-4. **Mentions légales** : nom de l'éditeur (Flory Anne ou raison sociale) et forme juridique (micro-entreprise, association, SARL…) ? Adresse postale à afficher ou non ?
+3. ~~SIRET~~ : vérifié, `822 373 395 00018`.
+4. **Mentions légales** : l'éditeur est l'association Flory Animation (vérifié). Manquent le **nom du directeur ou de la directrice de la publication** et la décision d'afficher ou non l'adresse complète du siège. Durée de conservation des données (3 ans proposés) à valider.
 5. **Cloudflare** : hébergement sur Cloudflare Pages, ou seulement le DNS chez Cloudflare avec GitHub Pages derrière ? Date approximative de libération du domaine ?
 6. **Vidéos** : durée et nombre de clips attendus ; texte parlé (sous-titres FR et EN à prévoir) ?
 7. **Traduction anglaise** : une personne anglophone peut-elle relire ?

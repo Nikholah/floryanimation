@@ -16,7 +16,7 @@ export const HOME = {
         atouts: [
             { icon: '🎩', text: 'Née dans une famille de magiciens' },
             { icon: '🎪', text: "Formée auprès d'Annie Fratellini et du Cirque de Pékin" },
-            { icon: '👥', text: "Jusqu'à 600 spectateurs, son et lumière fournis" },
+            { icon: '🎤', text: 'Son et lumière fournis selon le spectacle' },
             { icon: '🌍', text: "Partout en France et à l'international" },
         ],
         aboutTitle: 'À propos de Flory Animation',
@@ -45,7 +45,7 @@ export const HOME = {
         atouts: [
             { icon: '🎩', text: 'Born into a family of magicians' },
             { icon: '🎪', text: 'Trained with Annie Fratellini and the Beijing Circus' },
-            { icon: '👥', text: 'Up to 600 spectators, sound and lighting provided' },
+            { icon: '🎤', text: 'Sound and lighting provided depending on the show' },
             { icon: '🌍', text: 'Throughout France and internationally' },
         ],
         aboutTitle: 'About Flory Animation',

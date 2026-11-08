@@ -21,9 +21,6 @@ const t = HOME[lang];
 const ui = UI[lang];
 const avis = AVIS[lang];
 const temoignages = TEMOIGNAGES[lang];
-// Les 2 derniers paragraphes de la bio (l'aventure familiale) s'affichent à côté de la photo de famille
-const aboutDebut = t.about.slice(0, -2);
-const aboutFamille = t.about.slice(-2);
 ---
 <Base lang={lang} page="accueil" title={t.title} description={t.description} schema="organisation">
     <!-- Bannière : photo « fond décor Flory Animation » (le nom est écrit dans l'image) -->
@@ -48,21 +45,10 @@ const aboutFamille = t.about.slice(-2);
         </div>
     </section>
 
-    <!-- Accroches de réassurance (sans âge ni dates : voir CLAUDE.md, « Ton des textes ») -->
-    <section class="atouts" aria-label={t.atoutsLabel}>
-        <ul class="atouts-list">
-            {t.atouts.map((a) => (
-                <li class="atout">
-                    <span class="atout-icon" aria-hidden="true">{a.icon}</span>
-                    <span class="atout-text">{a.text}</span>
-                </li>
-            ))}
-        </ul>
-    </section>
-
-    <!-- Nous Connaître -->
+    <!-- À propos : l'univers d'abord (photo décor), la photo de l'équipe en petit à la fin du texte -->
     <section id="nous-connaitre" class="section">
         <h2>{t.aboutTitle}</h2>
+        <p class="about-subtitle">{t.aboutSubtitle}</p>
         <div class="about-content">
             <Image
                 src={decor}
@@ -72,20 +58,15 @@ const aboutFamille = t.about.slice(-2);
                 sizes="(max-width: 960px) 90vw, 880px"
             />
             <div class="about-text">
-                {aboutDebut.map((p) => <p set:html={p} />)}
-                <div class="about-famille">
-                    <Image
-                        src={famille}
-                        alt={t.familleAlt}
-                        class="famille-image"
-                        width={300}
-                        densities={[1, 2]}
-                    />
-                    <div class="about-famille-text">
-                        {aboutFamille.map((p) => <p set:html={p} />)}
-                    </div>
-                </div>
+                {t.about.map((p) => <p set:html={p} />)}
             </div>
+            <Image
+                src={famille}
+                alt={t.familleAlt}
+                class="famille-image"
+                width={200}
+                densities={[1, 2]}
+            />
         </div>
     </section>
 

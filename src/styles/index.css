@@ -269,92 +269,23 @@
     overflow-wrap: anywhere; /* l'adresse email peut passer à la ligne au lieu de déborder */
 }
 
-/* Bandeau d'accroches (réassurance) entre la bannière et À propos */
-.atouts {
-    background: white;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-    padding: 1.75rem 2rem;
-}
-
-.atouts-list {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-    list-style: none;
-}
-
-.atout {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-
-.atout-icon {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 52px;
-    height: 52px;
-    border-radius: 50%;
-    background: rgba(74, 144, 226, 0.1);
-    font-size: 1.6rem;
-}
-
-.atout-text {
-    font-weight: bold;
-    color: #2e6bb3;
-    line-height: 1.35;
-}
-
-@media (max-width: 1000px) {
-    .atouts-list {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 520px) {
-    .atouts {
-        padding: 1.5rem 1rem;
-    }
-
-    .atouts-list {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-}
-
-/* À propos : photo de famille à côté de l'aventure familiale */
-.about-famille {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
+/* À propos : sous-titre, et photo de l'équipe en petit à la fin du texte */
+.about-subtitle {
+    margin: -1rem auto 2rem;
+    text-align: center;
+    font-size: 1.25rem;
+    font-style: italic;
+    color: #555;
 }
 
 .famille-image {
-    flex-shrink: 0;
-    width: 300px;
+    display: block;
+    width: 200px;
+    max-width: 60%;
     height: auto;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.about-famille-text p:last-child {
-    margin-bottom: 0;
-}
-
-/* Seuil distinct de 768 px (voir CLAUDE.md, fusion des media queries) */
-@media (max-width: 700px) {
-    .about-famille {
-        flex-direction: column;
-    }
-
-    .famille-image {
-        width: 100%;
-        max-width: 320px;
-    }
+    margin: 0.5rem auto 0;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 /* Appel à avis et témoignages */

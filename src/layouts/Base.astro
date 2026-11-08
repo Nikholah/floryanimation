@@ -1,5 +1,5 @@
 ---
-import { getImage } from 'astro:assets';
+import { Font, getImage } from 'astro:assets';
 import Header from '../components/Header.astro';
 import FloatingButtons from '../components/FloatingButtons.astro';
 import Footer from '../components/Footer.astro';
@@ -50,11 +50,16 @@ const ogAlt = {
     {alternates.map((a) => <link rel="alternate" hreflang={a.lang} href={a.href}>)}
     <link rel="alternate" hreflang="x-default" href={xDefault}>
 
+    <!-- Polices hébergées sur le site (astro.config.mjs, « fonts ») -->
+    <Font cssVariable="--font-lato" preload />
+    <Font cssVariable="--font-playfair" preload />
+    <Font cssVariable="--font-parisienne" />
+
     <!-- Favicons (public/) -->
     <link rel="icon" href={url('favicon.svg')} type="image/svg+xml">
     <link rel="icon" href={url('favicon-32.png')} type="image/png" sizes="32x32">
     <link rel="apple-touch-icon" href={url('apple-touch-icon.png')}>
-    <meta name="theme-color" content="#1d2438">
+    <meta name="theme-color" content="#14110f">
 
     <!-- Partage sur les réseaux sociaux (Open Graph) -->
     <meta property="og:type" content="website">

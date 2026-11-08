@@ -33,20 +33,12 @@ const ui = UI[lang];
 const flyerFull = (await getImage({ src: flyerMariage, width: 1024 })).src;
 ---
 <Base lang={lang} page="prestations" title={t.title} description={t.description} schema="organisation-offres">
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-        <div class="bubble"></div>
-
-        <div class="hero-content">
-            <h1>{t.heroTitle}</h1>
-            <p><strong>{t.heroText}</strong></p>
-        </div>
-    </section>
+    <!-- En-tête de page -->
+    <header class="page-hero">
+        <p class="kicker">{t.heroKicker}</p>
+        <h1>{t.heroTitle}</h1>
+        <p class="page-hero-text">{t.heroText}</p>
+    </header>
 
     <main class="main-content">
 
@@ -141,7 +133,6 @@ const flyerFull = (await getImage({ src: flyerMariage, width: 1024 })).src;
 
         <!-- ============ Mariage ============ -->
         <section class="section mariage" id="mariage">
-            <h2>{t.sections.mariage}</h2>
             <div class="mariage-header">
                 <!-- Flyer des 3 formules (cliquable : agrandi dans la lightbox) -->
                 <Image
@@ -152,6 +143,7 @@ const flyerFull = (await getImage({ src: flyerMariage, width: 1024 })).src;
                     data-full={flyerFull}
                 />
                 <div class="mariage-header-text">
+                    <h2>{t.sections.mariage}</h2>
                     <p class="mariage-accroche">{t.mariage.accroche}</p>
                     <p class="mariage-intro">{t.mariage.intro}</p>
                 </div>
@@ -165,7 +157,7 @@ const flyerFull = (await getImage({ src: flyerMariage, width: 1024 })).src;
                         <p class="formule-moment">{f.moment}</p>
                         <p class="formule-texte">{f.texte}</p>
                         <p class="formule-tarif">{ui.prestation.price}</p>
-                        <a href={devisHref(f.id as PrestationId, lang)} class="devis-button">{ui.prestation.quote}</a>
+                        <a href={devisHref(f.id as PrestationId, lang)} class="btn btn-marron">{ui.prestation.quote}</a>
                     </article>
                 ))}
             </div>
@@ -196,14 +188,13 @@ const flyerFull = (await getImage({ src: flyerMariage, width: 1024 })).src;
             <ul class="infos-grid">
                 {t.infos.map((info) => (
                     <li class="info">
-                        <span class="info-icon" aria-hidden="true">{info.icon}</span>
                         <h3>{info.title}</h3>
                         <p>{info.text}</p>
                     </li>
                 ))}
             </ul>
             <p class="infos-cta">
-                <a href={devisHref(undefined, lang)} class="devis-button">{t.infosCta}</a>
+                <a href={devisHref(undefined, lang)} class="btn btn-marron">{t.infosCta}</a>
             </p>
         </section>
 

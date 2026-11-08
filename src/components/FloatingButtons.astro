@@ -19,6 +19,6 @@ const t = UI[lang];
 
 <!-- Barre d'action fixe en bas de l'écran (mobile et tablette, jusqu'à 1 100 px) -->
 <div class="action-bar" role="region" aria-label={t.actionBar.region}>
-    <a href={PHONE_HREF} class="action-bar-call"><span aria-hidden="true">📞</span> {t.actionBar.call}</a>
+    <a href={PHONE_HREF} class="action-bar-call">{t.actionBar.call}</a>
     <a href={devisHref(undefined, lang)} class="action-bar-devis">{t.actionBar.quote}</a>
 </div>

@@ -18,7 +18,7 @@ const show = (anchor: string) => (page === 'prestations' ? `#${anchor}` : pageUr
 ---
 <nav class="navbar" aria-label={t.nav.label}>
     <div class="nav-container">
-        <a href={onHome ? '#accueil' : pageUrl('accueil', lang)} class="logo">✨ Flory Animation</a>
+        <a href={onHome ? '#accueil' : pageUrl('accueil', lang)} class="logo">Flory Animation</a>
 
         <!-- Bouton du menu mobile (visible sous 768 px) -->
         <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
@@ -53,6 +53,6 @@ const show = (anchor: string) => (page === 'prestations' ? `#${anchor}` : pageUr
         </a>
 
         <!-- Téléphone (grand écran ; sur mobile et tablette, voir la barre d'action en bas) -->
-        <a href={PHONE_HREF} class="nav-phone"><span aria-hidden="true">📞</span> {t.phoneDisplay}</a>
+        <a href={PHONE_HREF} class="nav-phone">{t.phoneDisplay}</a>
     </div>
 </nav>

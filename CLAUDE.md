@@ -1,7 +1,7 @@
 # CLAUDE.md — Site Flory Animation
 
 Document de référence pour toutes les sessions de travail sur ce dépôt.
-Dernière mise à jour : 2026-11-08 (nouveau texte À propos de la cliente, retrait du bandeau d'accroches, photo de l'équipe réduite en fin de texte).
+Dernière mise à jour : 2026-11-08 (maquette validée et refonte visuelle intégrée au site : charte noir, marron, or et ivoire, polices hébergées sur le site).
 
 ---
 
@@ -40,7 +40,7 @@ Dernière mise à jour : 2026-11-08 (nouveau texte À propos de la cliente, retr
 ## 1. Vue d'ensemble technique
 
 ### Stack (depuis le 2026-11-05)
-- **Astro 7** (site 100 % statique, `output: static`), TypeScript pour les scripts, CSS natif. Seule dépendance : `astro` (avec `sharp` pour les images).
+- **Astro 7** (site 100 % statique, `output: static`), TypeScript pour les scripts, CSS natif. Polices Parisienne, Playfair Display et Lato via l'API `fonts` d'Astro (téléchargées depuis Fontsource au build, servies par le site, aucune requête vers Google chez le visiteur ; le build a donc besoin d'Internet). Seule dépendance : `astro` (avec `sharp` pour les images).
 - **Node.js ≥ 22.23.4** (installé en local : Node 26 LTS, dans `C:\Program Files\nodejs`).
 - Migration faite **à l'identique** : même rendu, mêmes URL françaises (`/index.html`, `/spectacles.html`… grâce à `build.format: 'preserve'`, qui produit aussi `en/index.html`), mêmes ancres. Seules différences voulues : images optimisées en WebP avec `srcset` et lazy loading, favicon de 64 px, code mort supprimé, styles inline remplacés par des classes, `onclick` remplacés par des écouteurs, boutons du carrousel et de la lightbox avec `aria-label`, ordre du menu déroulant harmonisé.
 - **Site bilingue FR / EN** (depuis le 2026-11-05) : français à la racine, anglais sous `/en/` (`en/`, `en/shows.html`, `en/quote.html`, `en/review.html`, `en/legal-notice.html`, `en/privacy.html`). Chaque page a ses balises `hreflang` (fr, en, x-default = fr) et un bouton de langue (« EN » / « FR ») qui mène à la page équivalente. Routes et libellés communs : `src/i18n/ui.ts` (`ROUTES`, `pageUrl(page, lang, ancre)`, `UI`).
@@ -161,8 +161,8 @@ Légende : **CONV** conversion · **CIBLE** cibles · **DESIGN** · **MOBILE** �
 | I5 | SEO | ✅ *Corrigé (un seul h1 par page, aucun niveau sauté, pas d'émoji lu dans les titres).* **Hiérarchie des titres incorrecte** (h1 puis h3 ; prestations découpées en deux h3 ; émojis dans les titres). | les 2 pages |
 | I6 | SEO | ✅ *Corrigé le 2026-11-05 (étape 9) : robots.txt et sitemap.xml générés.* `robot.txt` mal nommé ; `sitemap.xml` liste des URLs inexistantes. | racine |
 | I7 | PERF | **Images non optimisées** (pas de WebP, de `loading="lazy"` ni de `width`/`height` ; `famille.jpg` 406 Ko pour une vignette de 150 px). | `img/` |
-| I8 | A11Y | **Contraste insuffisant** du bleu `#4a90e2` (3,3:1 sur blanc, minimum AA 4,5:1), y compris en blanc sur bleu dans la section Contact. | partout |
-| I9 | DESIGN | **Univers visuel générique** (bleu « template », Arial, verre dépoli, rouge vif) qui ne traduit ni le rétro des années 50 ni le cabaret. Photos petites ; aucune vidéo pour donner envie de voir Flory Anne sur scène. | CSS |
+| I8 | A11Y | ✅ *Corrigé le 2026-11-08 (étape 14) : tous les textes au-dessus de 7:1.* **Contraste insuffisant** du bleu `#4a90e2` (3,3:1 sur blanc, minimum AA 4,5:1), y compris en blanc sur bleu dans la section Contact. | partout |
+| I9 | DESIGN | ✅ *Charte refaite le 2026-11-08 (étape 14) ; reste la vidéo (étape 10).* **Univers visuel générique** (bleu « template », Arial, verre dépoli, rouge vif) qui ne traduit ni le rétro des années 50 ni le cabaret. Photos petites ; aucune vidéo pour donner envie de voir Flory Anne sur scène. | CSS |
 | I10 | CONV | ✅ *Corrigé le 2026-11-05 (étape 6).* **Bio qui date la personne** : « devient maman en 1995, puis en 1999 » permet de déduire l'âge. Contraire à la consigne de ne pas mettre l'âge en avant (voir §6, ton). | `index.html` À propos |
 | I11 | MOBILE | ✅ *Corrigé le 2026-11-05 (étapes 2 et 3).* Boutons flottants de 60 px qui masquent le contenu ; menu en 25 px qui risque de déborder entre 769 et 1 000 px ; header fixe qui masque le haut des ancres (pas de `scroll-margin-top`). | CSS |
 
@@ -171,11 +171,11 @@ Légende : **CONV** conversion · **CIBLE** cibles · **DESIGN** · **MOBILE** �
 | # | Axe | Problème |
 |---|---|---|
 | S1 | A11Y | Lightbox inaccessible au clavier ; croix de fermeture en `<span>` ; bouton ↑ sans `aria-label`. (Le carrousel disparaît avec les mascottes.) |
-| S2 | A11Y | Émojis lus par les lecteurs d'écran ; pas de `prefers-reduced-motion`, de lien d'évitement ni de `:focus-visible`. |
+| S2 | A11Y | *En partie corrigé le 2026-11-08 : `prefers-reduced-motion`, `:focus-visible` partout, émojis retirés de la navbar, du pied de page et du bloc Contact ; reste le lien d'évitement.* Émojis lus par les lecteurs d'écran ; pas de `prefers-reduced-motion`, de lien d'évitement ni de `:focus-visible`. |
 | S3 | CODE | **Duplication** d'environ 70 % du CSS et du JS commun entre les deux pages ; avec le bilinguisme, chaque modification devrait être faite 4 fois. |
 | S4 | CODE | **Code mort** : styles et JS de modale (environ 250 lignes), observer `.card`, `.bubble` sur l'accueil, `theatre.jpg` en commentaire. |
 | S5 | CODE | Styles inline, `</br>` invalides, ordre du menu déroulant différent selon la page. |
-| S6 | DESIGN | Badge « 💰 Tarif : sur demande » en rouge vif (connotation d'alerte). |
+| S6 | DESIGN | ✅ *Corrigé le 2026-11-08 : « Tarif sur demande » en texte discret à côté du bouton.* Badge « 💰 Tarif : sur demande » en rouge vif (connotation d'alerte). |
 | S7 | SEO | ✅ *Corrigé le 2026-11-05 (étape 9) : favicon SVG dédié.* Favicon = photo JPG de 92 Ko déclarée `image/png`. |
 
 ---
@@ -232,7 +232,7 @@ Ordonné par impact sur les réservations rapporté à l'effort. Effort : S (moi
 | 11 | ✅ **Fait le 2026-11-05.** Page `avis.html` / `en/review.html` (`src/views/Avis.astro`) : prénom, structure ou événement, prestation vue, note, avis, email facultatif, case d'autorisation de publication ; envoi Web3Forms via le script commun `src/scripts/form.ts` (même clé que le devis). Appel à avis sur l'accueil (`.avis-cta`, avant Contact) et lien dans le pied de page. Section « Ils en parlent » prête mais **masquée tant que `TEMOIGNAGES` (`src/i18n/avis.ts`) est vide** : n'y mettre que de vrais avis, avec l'accord de leur auteur. Bouton « Laisser un avis sur Google » affiché dès que `GOOGLE_REVIEW_URL` (`src/lib/contact.ts`) est renseigné. Politique de confidentialité FR et EN mise à jour. Au passage : le titre « Contact » de l'accueil était invisible (bleu sur bleu) et passe en blanc ; fond blanc explicite sur `html`. Testé : 304 liens sur les 12 pages, validation et envoi simulés, devis toujours fonctionnel. Envoi réel non testé faute de clé. Hors site : **créer la fiche Google Business Profile** (zone desservie, sans adresse publique). | I3 | S |
 | 12 | **Bloc « Vous êtes… »** : 3 cartes cliquables (Collectivité, Entreprise/CSE, Particulier) avec arguments et prestations conseillées. | I2 | M |
 | 13 | **Images** : WebP/AVIF, `srcset`, `width`/`height`, `loading="lazy"` (automatique avec Astro) ; moins de 500 Ko par page hors vidéo. | I7 | S |
-| 14 | **Refonte visuelle** : en cours. Maquette : https://claude.ai/artifact/QhBtUDiSsqGErbaTaLNSR8. Retour de la cliente (2026-11-06) : « l'idée est là », ambiance **classe**, palette **noir, marron, or et ivoire** (à la place du bleu nuit ; le bordeaux est aussi retiré pour rester sobre), photos plus petites par rapport au texte, photo de la bio réduite et placée à la fin du texte. Second retour (2026-11-08) : bandeau d'accroches supprimé, nouveau texte À propos, l'univers d'abord et la photo de l'équipe en petit à la fin. Maquette mise à jour, **en attente de sa validation**. Reste : compléter la planche Prestations si besoin, intégrer au site (polices hébergées sur le site, pas chez Google), puis **passe accessibilité** complète. | I8, I9, S1, S2 | M/L |
+| 14 | ✅ **Fait le 2026-11-08, sauf la passe accessibilité complète.** Maquette validée par la cliente : https://claude.ai/artifact/QhBtUDiSsqGErbaTaLNSR8 (retours du 2026-11-06 : ambiance classe, noir, marron, or et ivoire, photos plus petites ; du 2026-11-08 : bandeau d'accroches supprimé, nouveau texte À propos, l'univers d'abord et la photo de l'équipe en petit à la fin). Intégration : jetons de couleurs et de polices dans `:root` (`global.css`), classes `.kicker`, `.btn` (`.btn-or`, `.btn-sombre`, `.btn-marron`, `.btn-contour`) et style des `.section > h2` communs ; navbar et pied de page noirs à filet doré, logo en Parisienne ; bloc Contact unique (`ContactSection.astro`) en noir, pleine largeur ; accueil : bannière inchangée, À propos centré avec photo décor et photo de l'équipe encadrées d'or ; Prestations : en-tête noir, visuels encadrés (260 px, affiches 220 px), étiquette en accroche manuscrite, bandeau Mariage marron pleine largeur avec le flyer à côté du titre, informations pratiques à filet doré ; Devis, Avis et pages légales aux mêmes couleurs. Vérifié : 12 pages en 375 et 1 280 px sans débordement, navbar sur une ligne de 770 à 1 280 px (FR et EN), 304 liens internes valides, polices servies par le site (y compris sous `/floryanimation/`). Reste : lien d'évitement, accès clavier de la lightbox (images cliquables non focalisables), test au lecteur d'écran. | I8, I9, S1, S2 | M/L |
 | 15 | **Mesure d'audience sans cookie** (Cloudflare Web Analytics, gratuit avec la migration, ou GoatCounter) et suivi des clics sur le téléphone, l'email et le formulaire. | — | S |
 | 16 | **Une page par prestation** (FR et EN) pour le référencement, par exemple `/spectacle-noel/`, `/en/christmas-show/`. | I4 | M |
 
@@ -254,7 +254,7 @@ Ordonné par impact sur les réservations rapporté à l'effort. Effort : S (moi
 - HTML5 sémantique, **indentation de 4 espaces**, guillemets doubles, classes en **kebab-case**, pas de styles inline.
 - **Conserver les ancres des prestations** (utilisées par le menu Prestations) : `#bubble-magic-show`, `#la-valise`, `#spectacles-thematiques` (`#carnaval`, `#spectacle-noel`), `#jardin-des-bulles`, `#atelier-bulles`, `#mariage` (`#mariage-instant-precieux`, `#mariage-eclat-de-bulles`, `#mariage-prestige`), `#dans-ma-bulle`, `#infos-pratiques`, ainsi que `#accueil`, `#nous-connaitre`, `#contact`. Les anciennes ancres (`#spectacle-enfants`, `#spectacle-cabaret`, `#animation-bar-bulles`, `#mascottes`) ont disparu avec leurs prestations. Toute ancre (`[id]`) a un `scroll-margin-top` pour ne pas passer sous la navbar.
 - Nouvelle prestation : ajouter ses textes FR **et** EN dans `src/i18n/prestations.ts`, l'afficher avec le composant `Prestation.astro` dans `src/views/Prestations.astro`, ajouter l'entrée du menu dans `UI.fr.prestationsMenu` et `UI.en.prestationsMenu` (`src/i18n/ui.ts`), et l'ajouter dans `PRESTATIONS_DEVIS` (`src/lib/contact.ts`, avec un `id` et ses libellés FR/EN, puis `devisId` sur la carte) ; cette liste alimente aussi le formulaire d'avis. Signaler tout texte non validé par un commentaire `// TEXTE PROVISOIRE`.
-- Astro : un élément répété sur plusieurs pages devient un **composant** dans `src/components/` ; le `<head>` vit dans `src/layouts/Base.astro`. Styles communs dans `src/styles/global.css`, styles d'une page dans `src/styles/<page>.css` (importés dans le frontmatter de la page, CSS global non scopé, pour rester proche de l'existant). Scripts en TypeScript dans des balises `<script>` (bundlées par Astro), **jamais d'`onclick` inline**.
+- Astro : un élément répété sur plusieurs pages devient un **composant** dans `src/components/` ; le `<head>` vit dans `src/layouts/Base.astro`. Styles communs dans `src/styles/global.css` (couleurs et polices **uniquement par les variables** `--noir`, `--marron`, `--or`, `--ivoire`, `--font-titre`… ; l'or n'est jamais utilisé pour du texte sur fond clair, contraste 2,1:1), styles d'une page dans `src/styles/<page>.css` (importés dans le frontmatter de la page, CSS global non scopé, pour rester proche de l'existant). Scripts en TypeScript dans des balises `<script>` (bundlées par Astro), **jamais d'`onclick` inline**.
 - Liens internes avec `pageUrl(page, lang, ancre)` de `src/i18n/ui.ts` (ou `url()` pour un fichier hors pages), jamais de chemin absolu en dur.
 - Téléphone, email, Instagram et lien de devis : toujours via `src/lib/contact.ts` (une seule source à modifier).
 - Rien qui exige un serveur (`output: static`). Pas de nouvelle dépendance sans validation.
@@ -276,22 +276,17 @@ Ordonné par impact sur les réservations rapporté à l'effort. Effort : S (moi
 - Émojis : décoratifs seulement (`aria-hidden="true"`), jamais dans les titres Hn.
 - Orthographe soignée, accents sur les majuscules (« À propos »).
 
-### Charte graphique actuelle (relevée dans le code, à revoir à l'étape 14)
+### Charte graphique (validée le 2026-11-08, variables dans `src/styles/global.css`)
 | Rôle | Valeur |
 |---|---|
-| Bleu principal (titres, liens, fond Contact) | `#4a90e2` ⚠️ contraste 3,3:1 sur blanc |
-| Bleu clair (dégradés, survols) | `#63b3ed` |
-| Bleu texte des détails | `#2e6bb3` |
-| Contour du titre du hero | `#252fae` |
-| Boutons d'action / badge tarif | dégradé `#ff0000` → `#cf3434` |
-| Dégradé secondaire (inutilisé) | `#ff6b6b` → `#feca57` |
-| Texte | `#333`, `#555`, `#666` |
-| Fond de la page Prestations | dégradé `#f5f7fa` → `#c3cfe2` |
-| Bouton Instagram | dégradé `#f09433` → `#bc1888` |
-| Typographie | `Arial, sans-serif` ; h1 3,5 rem / 3 rem ; h2 2,5 rem ; menu 25 px |
-| Formes | cartes à coins de 15 à 20 px, boutons en pilule de 50 px, ombres douces `rgba(0,0,0,.1)` |
-| Animations | `fadeInUp`, `float`, `twinkle` ; transitions de 0,3 s |
-| Visuel signature | rideau de théâtre rouge et or (`img/theatre-curtain.svg`) |
+| Noir (navbar, en-têtes, Contact, pied de page) | `--noir` `#14110F` |
+| Marron (bandeau Mariage, boutons Devis, accroches) | `--marron` `#3B2A1E` ; texte secondaire `--marron-doux` `#5C4A3A` |
+| Or (filets, cadres, bouton principal et texte sur fond sombre) | `--or` `#C6A45A`, `--or-clair` `#E2C88A` |
+| Fonds clairs | `--ivoire` `#F8F3EA` (fond de page), `--sable` `#ECE2D2` (appel à avis) |
+| Texte | `--texte` `#2B2420` |
+| Typographies | Parisienne (accroches manuscrites, logo), Playfair Display 500 (titres), Lato 400/700 (texte) |
+| Formes | coins de 2 px, cadres photo blancs à filet doré de 1 px, filet doré de 56 px sous les titres de section, pas d'ombres marquées |
+| Contrastes | texte sur ivoire 13,8:1, or sur noir 7,9:1, ivoire sur marron 12,4:1, texte secondaire 7,6:1 |
 
 ---
 

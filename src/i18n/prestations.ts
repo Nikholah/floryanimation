@@ -13,6 +13,7 @@ export const PRESTATIONS = {
     fr: {
         title: 'Spectacles, Noël, mariage et ateliers – Flory Animation',
         description: 'Bubble Magic Show, La Valise, spectacles de Noël et de Carnaval, Jardin des Bulles, atelier et mariage : toutes les prestations de Flory Animation.',
+        heroKicker: 'Magie, jonglerie et bulles de savon',
         heroTitle: 'Nos Prestations Magiques',
         heroText: 'Découvrez notre gamme complète de spectacles et animations pour tous les âges',
         sections: {
@@ -111,6 +112,7 @@ export const PRESTATIONS = {
     en: {
         title: 'Shows, Christmas, weddings and workshops – Flory Animation',
         description: 'Magic and soap bubble shows, Christmas and Carnival shows, outdoor roaming act, workshop and weddings: all of Flory Animation’s shows, in France and abroad.',
+        heroKicker: 'Magic, juggling and soap bubbles',
         heroTitle: 'Our Magical Shows',
         heroText: 'Discover our full range of shows and entertainment for all ages',
         sections: {

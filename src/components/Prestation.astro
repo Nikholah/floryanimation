@@ -71,9 +71,9 @@ const visuals = await Promise.all(
                 </div>
             ))}
 
-            <div class="price">{t.prestation.price}</div>
-            <div>
-                <a href={devisHref(devisId, lang)} class="devis-button">{t.prestation.quote}</a>
+            <div class="spectacle-actions">
+                <a href={devisHref(devisId, lang)} class="btn btn-marron">{t.prestation.quote}</a>
+                <span class="price">{t.prestation.price}</span>
             </div>
         </div>
     </div>

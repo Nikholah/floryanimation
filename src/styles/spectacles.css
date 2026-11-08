@@ -1,305 +1,377 @@
-/* Styles propres à la page Prestations (spectacles). */
+/* Styles propres à la page Prestations (spectacles). Charte, boutons et bloc Contact : global.css. */
 
-body {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-}
-
-/* Hero Section */
-.hero {
-    height: 60vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/* En-tête de page */
+.page-hero {
+    margin-top: var(--nav-h); /* sous la navbar fixe */
+    padding: 4.5rem 2rem;
+    background: var(--noir);
+    color: var(--ivoire);
     text-align: center;
-    color: white;
-    position: relative;
-    overflow: hidden;
-    margin-top: 80px;
 }
 
-.hero-content h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-    animation: fadeInUp 1s ease;
-    color: #4a90e2;
+.page-hero .kicker {
+    font-size: 2rem;
+    color: var(--or);
 }
 
-.hero-content p {
-    font-size: 1.2rem;
-    animation: fadeInUp 1s ease 0.3s both;
-    color: #4a90e2;
+.page-hero h1 {
+    margin: 0.25rem 0 0.75rem;
+    font-family: var(--font-titre);
+    font-weight: 500;
+    font-size: 3.2rem;
+    line-height: 1.15;
 }
 
-/* Bubble Animation */
-.bubble {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    animation: float 6s ease-in-out infinite;
-    border: 2px solid #1000ff;
-}
-
-.bubble:nth-child(1) { width: 80px; height: 80px; left: 10%; animation-delay: -2s; }
-.bubble:nth-child(2) { width: 60px; height: 60px; left: 20%; animation-delay: -4s; }
-.bubble:nth-child(3) { width: 100px; height: 100px; left: 85%; top: 37%; animation-delay: -1s; }
-.bubble:nth-child(4) { width: 40px; height: 40px; left: 80%; top:29%; animation-delay: -3s; }
-.bubble:nth-child(5) { width: 120px; height: 120px; left: 72%; animation-delay: -5s; }
-.bubble:nth-child(6) { width: 120px; height: 120px; left: 14%; top: 19%; animation-delay: -5s; }
-
-/* Main Content */
-.main-content {
-    max-width: 1200px;
+.page-hero-text {
+    max-width: 640px;
     margin: 0 auto;
-    padding: 4rem 2rem;
+    color: var(--sable);
+    font-size: 1.1rem;
+}
+
+/* Contenu */
+.main-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4.5rem 2rem 0;
 }
 
 .section {
-    margin-bottom: 4rem;
+    margin-bottom: 4.5rem;
 }
 
-.section h2 {
-    font-size: 2.5rem;
-    text-align: center;
+.section > h2 {
     margin-bottom: 3rem;
-    color: #4a90e2;
-    position: relative;
 }
 
-.section h2::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 4px;
-    background: linear-gradient(45deg, #4a90e2, #63b3ed);
-    border-radius: 2px;
-}
-
-/* Spectacles Grid */
+/* Liste des prestations d'une section */
 .spectacles-grid {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
-    margin-top: 3rem;
+    gap: 4rem;
 }
 
+/* Une prestation : visuel encadré et texte côte à côte (alternés avec .reverse) */
 .spectacle-card {
-    background: white;
-    border-radius: 20px;
-    padding: 2rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    max-width: none;
-    margin: 0;
     display: flex;
-    align-items: flex-start;
-    gap: 2rem;
-}
-
-.spectacle-image {
-    width: 300px;
-    height: 250px;
-    object-fit: cover;
-    border-radius: 15px;
-    margin-bottom: 0;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-    flex-shrink: 0;
-}
-
-.spectacle-card:hover .spectacle-image {
-    transform: scale(1.05);
-}
-
-.spectacle-images {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    flex-shrink: 0;
-}
-
-.spectacle-images .spectacle-image {
-    width: 300px;
-
-}
-
-.spectacle-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
 }
 
 .spectacle-card.reverse {
     flex-direction: row-reverse;
 }
 
-@media (max-width: 768px) {
-    .spectacle-card.reverse {
-        flex-direction: column;
-    }
+.spectacle-images {
+    display: flex;
+    gap: 1rem;
+    flex-shrink: 0;
 }
 
-.spectacle-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 5px;
-    background: linear-gradient(45deg, #4a90e2, #63b3ed);
+.spectacle-image {
+    display: block;
+    width: 260px;
+    height: auto;
+    padding: 6px;
+    background: var(--blanc);
+    border: 1px solid var(--or);
+    cursor: zoom-in;
+    transition: box-shadow 0.3s ease;
 }
 
-.spectacle-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-    border: 2px solid #4a90e2;
+.spectacle-image:hover {
+    box-shadow: 0 10px 28px rgba(20, 17, 15, 0.2);
+}
+
+/* Affiches et photos verticales */
+.spectacle-image.portrait {
+    width: 220px;
+}
+
+.spectacle-images--duo .spectacle-image.portrait {
+    width: 170px;
+}
+
+.spectacle-content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Étiquette (ambiance, format) : en accroche manuscrite au-dessus du titre */
+.spectacle-tag {
+    order: -1;
+    font-family: var(--font-script);
+    font-size: 1.7rem;
+    line-height: 1.2;
+    color: var(--marron);
 }
 
 .spectacle-card h3 {
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-    color: #4a90e2;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    font-family: var(--font-titre);
+    font-weight: 500;
+    font-size: 2.1rem;
+    line-height: 1.2;
+    color: var(--noir);
 }
 
-.spectacle-details {
-    margin-top: 1.5rem;
+.spectacle-text p {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    line-height: 1.7;
 }
 
 .detail-item {
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
 }
 
 .detail-label {
     font-weight: bold;
-    color: #4a90e2;
-    margin-bottom: 0.5rem;
+    color: var(--marron);
 }
 
-.detail-content {
-    color: #2e6bb3;
-    line-height: 1.6;
+.spectacle-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+    margin-top: 1.25rem;
 }
 
 .price {
-    background: linear-gradient(45deg, #ff0000, #cf3434);
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    display: inline-block;
-    font-weight: bold;
-    margin-top: 1rem;
+    color: var(--marron-doux);
 }
 
-/* Call to Action */
-.cta-section {
-    background:#4a90e2 ;
-    color: white;
-    text-align: center;
-    padding: 4rem 2rem;
-    border-radius: 20px;
-    margin-top: 3rem;
-    position: relative;
-    overflow: hidden;
+@media (max-width: 768px) {
+    .main-content {
+        padding: 3rem 1.25rem 0;
+    }
+
+    .page-hero {
+        padding: 3rem 1.25rem;
+    }
+
+    .page-hero h1 {
+        font-size: 2.3rem;
+    }
+
+    .spectacles-grid {
+        gap: 3rem;
+    }
+
+    .spectacle-card,
+    .spectacle-card.reverse {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1.5rem;
+    }
+
+    .spectacle-images {
+        justify-content: center;
+    }
+
+    .spectacle-image {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .spectacle-image.portrait {
+        width: 100%;
+        max-width: 260px;
+    }
+
+    .spectacle-images--duo .spectacle-image.portrait {
+        width: calc(50% - 0.5rem);
+        max-width: 200px;
+    }
+
+    .spectacle-card h3 {
+        font-size: 1.8rem;
+    }
+
+    .spectacle-text p {
+        font-size: 1.05rem;
+    }
 }
 
-.cta-section::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
-    animation: float 20s linear infinite;
+/* Mariage : bandeau marron sur toute la largeur, flyer à côté de l'accroche, 3 formules */
+.mariage {
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding: 4.5rem max(2rem, calc(50vw - 550px));
+    background: var(--marron);
+    color: var(--ivoire);
 }
 
-.cta-content {
-    position: relative;
-    z-index: 2;
+.mariage-header {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    margin-bottom: 2.5rem;
 }
 
-.cta-section h2 {
-    color: white;
-    margin-bottom: 1rem;
-    font-size: 45px;
+.spectacle-image.mariage-flyer {
+    flex-shrink: 0;
+    width: 220px;
+    padding: 0;
+    border: none;
+    background: none;
 }
 
-.cta-section h2::after {
-    background: rgba(255, 255, 255, 0.5);
+.mariage-header-text h2 {
+    font-family: var(--font-titre);
+    font-weight: 500;
+    font-size: 2.8rem;
+    line-height: 1.15;
 }
 
-/* Contact Info */
-.contact-info {
+.mariage-accroche {
+    margin-bottom: 0.75rem;
+    font-family: var(--font-script);
+    font-size: 2rem;
+    line-height: 1.25;
+    color: var(--or-clair);
+}
+
+.mariage-intro {
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.formules {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    align-items: stretch;
 }
 
-.contact-item {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 1.5rem;
-    border-radius: 15px;
-    backdrop-filter: blur(10px);
+.formule {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1.5rem;
+    background: var(--ivoire);
+    color: var(--texte);
+    border-radius: var(--rayon);
     text-align: center;
-    transition: all 0.3s ease;
 }
 
-.contact-item.priority {
-    background: rgba(255, 255, 255, 0.2);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    transform: scale(1.05);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+.formule--vedette {
+    outline: 1px solid var(--or);
+    outline-offset: 4px;
 }
 
-.contact-item h3 {
-    margin-bottom: 0.5rem;
-    color: white;
-}
-
-.contact-item.priority h3 {
-    font-size: 1.4rem;
-    margin-bottom: 1rem;
-}
-
-.contact-item.priority p {
-    font-size: 1.3rem;
+.formule-label {
+    font-size: 0.8rem;
     font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--marron);
 }
 
-.contact-item.priority a {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 0.8rem 1.5rem;
-    border-radius: 25px;
-    display: inline-block;
-    margin-top: 0.5rem;
-    transition: all 0.3s ease;
+.formule h3 {
+    margin: 0.25rem 0 0.5rem;
+    font-family: var(--font-titre);
+    font-weight: 500;
+    font-size: 1.7rem;
+    line-height: 1.2;
+    color: var(--noir);
 }
 
-.contact-item.priority a:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
+.formule-moment {
+    margin-bottom: 1rem;
+    font-family: var(--font-titre);
+    font-style: italic;
+    color: var(--marron);
 }
 
-/* Lightbox Styles */
+.formule-texte {
+    flex: 1;
+    line-height: 1.6;
+}
+
+.formule-tarif {
+    margin: 1rem 0 0.75rem;
+    color: var(--marron-doux);
+}
+
+/* Seuil distinct de 768 px (voir CLAUDE.md, fusion des media queries) */
+@media (max-width: 700px) {
+    .mariage {
+        padding: 3.5rem 1.25rem;
+    }
+
+    .mariage-header {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+    }
+
+    .spectacle-image.mariage-flyer {
+        width: 200px;
+        max-width: 70%;
+    }
+
+    .mariage-header-text h2 {
+        font-size: 2.2rem;
+    }
+
+    .mariage-accroche {
+        font-size: 1.7rem;
+    }
+}
+
+/* Informations pratiques : filet doré au-dessus de chaque information */
+.infos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colonnes sur grand écran, 2 sur tablette, 1 sur mobile */
+    gap: 2rem 2.5rem;
+    list-style: none;
+    margin-bottom: 2.5rem;
+}
+
+.info {
+    padding-top: 0.75rem;
+    border-top: 2px solid var(--or);
+}
+
+.info h3 {
+    margin-bottom: 0.25rem;
+    font-family: var(--font-titre);
+    font-weight: 500;
+    font-size: 1.3rem;
+    color: var(--marron);
+}
+
+.info p {
+    line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+    .infos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .infos-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.infos-cta {
+    text-align: center;
+}
+
+/* Lightbox */
 .lightbox {
     display: none;
     position: fixed;
     z-index: 9999;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
+    inset: 0;
+    background-color: rgba(20, 17, 15, 0.94);
     opacity: 0;
     transition: opacity 0.3s ease;
 }
@@ -320,6 +392,7 @@ body {
 .lightbox-image {
     width: 100%;
     height: 100%;
+    max-height: 90vh;
     object-fit: contain;
     cursor: zoom-out;
 }
@@ -328,322 +401,20 @@ body {
     position: absolute;
     top: 20px;
     right: 40px;
-    color: #fff;
+    background: none;
+    border: none;
+    line-height: 1;
+    color: var(--ivoire);
     font-size: 40px;
-    font-weight: bold;
     cursor: pointer;
     transition: color 0.3s;
     z-index: 10000;
 }
 
 .lightbox-close:hover {
-    color: #ff6b6b;
+    color: var(--or);
 }
 
-.spectacle-image {
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.spectacle-image:hover {
-    transform: scale(1.05);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .hero-content h1 {
-        font-size: 2rem;
-    }
-
-    .spectacles-grid {
-        gap: 2rem;
-    }
-
-    .main-content {
-        padding: 2rem 1rem;
-    }
-
-    .spectacle-card {
-        padding: 1.5rem;
-        flex-direction: column;
-        gap: 1rem;
-    }
-
-    .spectacle-image {
-        width: 100%;
-        height: 200px;
-    }
-
-    .spectacle-images {
-        width: 100%;
-    }
-
-    .spectacle-images .spectacle-image {
-        width: 100%;
-        height: 200px;
-    }
-
-    .spectacle-images .spectacle-image.portrait {
-        width: 100%;
-        max-width: 320px;
-        height: auto;
-        margin: 0 auto;
-    }
-
-    .spectacle-images--duo .spectacle-image.portrait {
-        width: calc(50% - 0.5rem);
-    }
-
-    .mariage {
-        padding: 2.5rem 1rem;
-    }
-}
-
-/* Anciennement en styles inline */
-.contact-item a {
-    color: white;
-    text-decoration: none;
-    max-width: 100%;
-    overflow-wrap: anywhere; /* l'adresse email peut passer à la ligne au lieu de déborder */
-}
-
-/* Croix de fermeture de la lightbox (bouton) */
-.lightbox-close {
-    background: none;
-    border: none;
-    line-height: 1;
-}
-
-/* Étiquette sous le titre (ambiance, format) */
-.spectacle-tag {
-    display: inline-block;
-    margin: -0.5rem 0 0.5rem;
-    padding: 0.3rem 0.9rem;
-    border-radius: 20px;
-    background: rgba(74, 144, 226, 0.12);
-    color: #2e6bb3;
-    font-weight: bold;
-    font-style: italic;
-}
-
-.spectacle-text p {
-    margin-bottom: 1rem;
-}
-
-/* Affiches et photos verticales : affichées sans recadrage */
-.spectacle-image.portrait {
-    width: 260px;
-    height: auto;
-}
-
-.spectacle-images--duo {
-    flex-direction: row;
-}
-
-/* Largeur fixe des deux affiches côte à côte uniquement sur grand écran (en mobile : 50 % chacune) */
-@media (min-width: 769px) {
-    .spectacle-images--duo .spectacle-image.portrait {
-        width: 190px;
-    }
-}
-
-/* Bouton « Demander un devis » des prestations */
-.devis-button {
-    display: inline-block;
-    margin-top: 1rem;
-    padding: 0.7rem 1.6rem;
-    border: 2px solid #cf3434;
-    border-radius: 50px;
-    background: white;
-    color: #cf3434;
-    font-weight: bold;
-    text-decoration: none;
-    transition: all 0.3s ease;
-}
-
-.devis-button:hover {
-    background: #cf3434;
-    color: white;
-}
-
-/* Mariage : mise en avant des 3 formules */
-.mariage {
-    background: linear-gradient(180deg, #fffaf0 0%, #fbefe0 100%);
-    border: 2px solid #e6c97a;
-    border-radius: 20px;
-    padding: 3rem 2rem;
-}
-
-.mariage h2 {
-    color: #8a6d1d;
-    font-family: Georgia, 'Times New Roman', serif;
-}
-
-.mariage h2::after {
-    background: linear-gradient(45deg, #c9a227, #e6c97a);
-}
-
-.mariage-accroche {
-    text-align: center;
-    font-family: Georgia, 'Times New Roman', serif;
-    font-style: italic;
-    font-size: 1.5rem;
-    color: #6b4f12;
-}
-
-.mariage-intro {
-    max-width: 760px;
-    margin: 1rem auto 2.5rem;
-    text-align: center;
-    color: #555;
-    line-height: 1.7;
-}
-
-.formules {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 1.5rem;
-    align-items: stretch;
-}
-
-.formule {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem 1.5rem;
-    background: white;
-    border: 1px solid #ecd9a8;
-    border-radius: 18px;
-    box-shadow: 0 10px 30px rgba(138, 109, 29, 0.12);
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.formule:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 16px 40px rgba(138, 109, 29, 0.2);
-}
-
-.formule--vedette {
-    border: 2px solid #c9a227;
-    box-shadow: 0 14px 40px rgba(138, 109, 29, 0.25);
-}
-
-.formule-label {
-    font-size: 0.85rem;
-    font-weight: bold;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #8a6d1d;
-}
-
-.formule h3 {
-    margin: 0.25rem 0 0.5rem;
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: 1.7rem;
-    color: #333;
-}
-
-.formule-moment {
-    margin-bottom: 1rem;
-    font-style: italic;
-    color: #6b4f12;
-}
-
-.formule-texte {
-    flex: 1;
-    color: #555;
-    line-height: 1.6;
-}
-
-.formule-tarif {
-    margin-top: 1rem;
-    font-weight: bold;
-    color: #cf3434;
-}
-
-/* Informations pratiques */
-.infos-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 colonnes sur grand écran, 2 sur tablette, 1 sur mobile */
-    gap: 1.25rem;
-    list-style: none;
-    margin-bottom: 2rem;
-}
-
-.info {
-    padding: 1.5rem;
-    background: white;
-    border-radius: 18px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-    text-align: center;
-}
-
-.info-icon {
-    display: block;
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-}
-
-.info h3 {
-    font-size: 1.2rem;
-    color: #2e6bb3;
-    margin-bottom: 0.4rem;
-}
-
-.info p {
-    color: #444;
-    line-height: 1.5;
-}
-
-@media (max-width: 900px) {
-    .infos-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 600px) {
-    .infos-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-.infos-cta {
-    text-align: center;
-}
-
-/* Mariage : flyer des formules à côté de l'accroche */
-.mariage-header {
-    display: flex;
-    align-items: center;
-    gap: 2.5rem;
-    max-width: 900px;
-    margin: 0 auto 2.5rem;
-}
-
-.spectacle-image.mariage-flyer {
-    flex-shrink: 0;
-    width: 280px;
-    height: auto;
-    border-radius: 12px;
-}
-
-.mariage-header-text .mariage-accroche,
-.mariage-header-text .mariage-intro {
-    text-align: left;
-    margin: 0 0 1rem;
-    max-width: none;
-}
-
-/* Seuil distinct de 768 px (voir CLAUDE.md, fusion des media queries) */
-@media (max-width: 700px) {
-    .mariage-header {
-        flex-direction: column;
-        gap: 1.5rem;
-    }
-
-    .mariage-header-text .mariage-accroche,
-    .mariage-header-text .mariage-intro {
-        text-align: center;
-    }
+.lightbox-close:focus-visible {
+    outline: 3px solid var(--or);
 }

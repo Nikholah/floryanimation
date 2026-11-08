@@ -37,18 +37,18 @@ const temoignages = TEMOIGNAGES[lang];
         <div class="hero-content">
             <!-- Titre conservé pour le référencement et les lecteurs d'écran, masqué visuellement -->
             <h1 class="visually-hidden">{t.h1}</h1>
-            <a href={pageUrl('prestations', lang)} class="cta-button">{t.discover}</a>
+            <a href={pageUrl('prestations', lang)} class="btn btn-or">{t.discover}</a>
             <div class="hero-secondary">
-                <a href={devisHref(undefined, lang)} class="cta-outline">{t.quote}</a>
-                <a href={PHONE_HREF} class="cta-outline"><span aria-hidden="true">📞</span> {ui.phoneDisplay}</a>
+                <a href={devisHref(undefined, lang)} class="btn btn-sombre">{t.quote}</a>
+                <a href={PHONE_HREF} class="btn btn-sombre">{ui.phoneDisplay}</a>
             </div>
         </div>
     </section>
 
     <!-- À propos : l'univers d'abord (photo décor), la photo de l'équipe en petit à la fin du texte -->
     <section id="nous-connaitre" class="section">
+        <p class="kicker">{t.aboutSubtitle}</p>
         <h2>{t.aboutTitle}</h2>
-        <p class="about-subtitle">{t.aboutSubtitle}</p>
         <div class="about-content">
             <Image
                 src={decor}
@@ -64,7 +64,7 @@ const temoignages = TEMOIGNAGES[lang];
                 src={famille}
                 alt={t.familleAlt}
                 class="famille-image"
-                width={200}
+                width={160}
                 densities={[1, 2]}
             />
         </div>
@@ -89,7 +89,7 @@ const temoignages = TEMOIGNAGES[lang];
     <section class="avis-cta">
         <h2>{avis.ctaTitle}</h2>
         <p>{avis.ctaText}</p>
-        <a href={pageUrl('avis', lang)} class="avis-button">{avis.ctaButton}</a>
+        <a href={pageUrl('avis', lang)} class="btn btn-contour">{avis.ctaButton}</a>
     </section>
 
     <ContactSection lang={lang} variant="accueil" />

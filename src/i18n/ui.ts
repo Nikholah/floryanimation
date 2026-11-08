@@ -68,6 +68,7 @@ export const UI = {
         prestation: { price: 'Tarif : sur demande', quote: 'Demander un devis', formula: 'Formule' },
         lightbox: { close: "Fermer l'image", alt: 'Image agrandie' },
         contactSection: {
+            kicker: 'Parlons de votre événement',
             title: 'Contact',
             intro: 'Contactez-nous pour transformer votre projet en une réalité magique.',
             phone: 'Téléphone',
@@ -115,6 +116,7 @@ export const UI = {
         prestation: { price: 'Price on request', quote: 'Request a quote', formula: 'Package' },
         lightbox: { close: 'Close image', alt: 'Enlarged image' },
         contactSection: {
+            kicker: 'Let’s talk about your event',
             title: 'Contact',
             intro: 'Get in touch and let us turn your event into something magical.',
             phone: 'Phone',

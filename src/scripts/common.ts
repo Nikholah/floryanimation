@@ -18,10 +18,7 @@ const backToTop = document.getElementById('backToTop');
 
 window.addEventListener('scroll', () => {
     const y = window.scrollY;
-    if (navbar) {
-        navbar.style.background = y > 50 ? 'rgba(255, 255, 255, 0.98)' : 'rgba(255, 255, 255, 0.95)';
-        navbar.style.boxShadow = y > 50 ? '0 2px 30px rgba(0, 0, 0, 0.15)' : '0 2px 20px rgba(0, 0, 0, 0.1)';
-    }
+    navbar?.classList.toggle('scrolled', y > 50);
     backToTop?.classList.toggle('show', y > 300);
 }, { passive: true });
 

@@ -25,7 +25,7 @@ Dernière mise à jour : 2026-11-08 (maquette validée et refonte visuelle inté
 - **Cibles** : collectivités (écoles, mairies, centres culturels, centres de loisirs), événementiel (soirées d'entreprise, arbres de Noël des CSE), particuliers (mariages, anniversaires).
 - **Zone d'intervention : France entière et international.** Le site doit donc être **bilingue français / anglais** (voir §6, décision D1).
 - **Objectif n°1** : générer des **demandes de devis et des réservations**.
-- **Action attendue** : appeler le **06 67 78 54 19** (`tel:+33667785419`, à l'international `+33 6 67 78 54 19`), écrire à **floryanimation@free.fr** (adresse de réception vérifiée), ou remplir le **formulaire de devis** (`devis.html`, Web3Forms, clé à renseigner). Instagram : [@floryanimation](https://www.instagram.com/floryanimation/).
+- **Action attendue** : appeler le **06 67 78 54 19** (`tel:+33667785419`, à l'international `+33 6 67 78 54 19`), écrire à **floryanimation@free.fr** (adresse de réception vérifiée), ou remplir le **formulaire de devis** (`devis.html`, Web3Forms, clé à renseigner). Instagram : [@floryanimation](https://www.instagram.com/floryanimation/). YouTube : [@amzell2790](https://www.youtube.com/@amzell2790) (ajouté le 2026-11-08 : bloc Contact, pied de page, mentions légales et JSON-LD `sameAs`, via `YOUTUBE_URL` dans `src/lib/contact.ts`).
 - **Informations pratiques validées** (à afficher sur le site et dans la fiche technique) :
   - temps de montage : **1 h 30** ;
   - jauge : **ne plus mentionner de nombre de spectateurs** (demande de la cliente, 2026-11-06 ; les 600 spectateurs ont été retirés du site) ;
@@ -52,7 +52,7 @@ floryanimation/
 ├── package.json            # scripts dev / build / preview
 ├── src/
 │   ├── layouts/Base.astro  # <head> : title, description, canonical, hreflang, favicons, Open Graph (image 1200×630 générée), JSON-LD ; Header, Footer, boutons flottants ; props lang, page, schema
-│   ├── components/         # Header.astro (menu, sélecteur de langue, téléphone), Footer.astro, FloatingButtons.astro (retour en haut, Instagram, barre d'action mobile),
+│   ├── components/         # Header.astro (menu, sélecteur de langue, téléphone), Footer.astro, FloatingButtons.astro (retour en haut, barre d'action mobile ; bouton Instagram flottant retiré le 2026-11-08, Instagram reste dans Contact et le pied de page),
 │   │                       # Prestation.astro (carte de prestation), ContactSection.astro (bloc Contact de l'accueil et des prestations)
 │   ├── views/              # Home.astro, Prestations.astro, Devis.astro, Avis.astro : contenu des pages, commun aux deux langues (prop lang)
 │   ├── pages/              # index.astro, spectacles.astro, devis.astro, avis.astro (une ligne : <Vue lang="fr" />), mentions-legales.astro, confidentialite.astro
@@ -65,7 +65,7 @@ floryanimation/
 │   ├── lib/url.ts          # url('chemin') : préfixe avec le base (utilisé par pageUrl)
 │   ├── lib/legal.ts        # dénomination, forme, SIRET, siège, directeur de publication, hébergeur (mentions légales, confidentialité)
 │   ├── lib/schema.ts       # données structurées JSON-LD : PerformingGroup (accueil), + liste des prestations (page Prestations)
-│   ├── lib/contact.ts      # téléphone, email, Instagram, clé Web3Forms, GOOGLE_REVIEW_URL, PRESTATIONS_DEVIS (id + libellés FR/EN), devisHref(id, lang) => devis.html?prestation=<id>
+│   ├── lib/contact.ts      # téléphone, email, Instagram, YouTube, clé Web3Forms, GOOGLE_REVIEW_URL, PRESTATIONS_DEVIS (id + libellés FR/EN), devisHref(id, lang) => devis.html?prestation=<id>
 │   └── assets/img/         # images sources, optimisées au build
 ├── public/                 # copié tel quel : favicon.svg (source), favicon-32.png et apple-touch-icon.png (générés depuis le SVG avec sharp)
 ├── .github/workflows/deploy.yml   # build + déploiement GitHub Pages
@@ -87,7 +87,6 @@ floryanimation/
 | `AFFICHE_ATELIER_BULLES_DE_SAVON.jpg` | 336 Ko | 768×1210 | Atelier Bulles de Savon (affiche : public, durée, participants) |
 | `MARIAGE_FLYER_FORMULES.png` | 2,2 Mo | 1024×1403 | section Mariage : flyer des 3 formules (lightbox au clic) |
 | `FLORY_ANIMATION_FAMILLE.jpg` | 211 Ko | 864×1152 | À propos : portrait illustré de l'équipe familiale, **en petit (200 px), centré à la fin du texte**. La photo décor reste en haut de la section : la cliente veut que l'on voie d'abord l'univers, pas les visages |
-| `instagram.png` | 60 Ko | 512×512 | bouton flottant |
 
 Les poids indiqués sont ceux des sources : Astro les convertit en WebP redimensionnés au build.
 

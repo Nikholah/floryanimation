@@ -1,5 +1,5 @@
 ---
-import { EMAIL, INSTAGRAM_URL, PHONE_HREF, devisHref } from '../lib/contact';
+import { EMAIL, INSTAGRAM_URL, PHONE_HREF, YOUTUBE_URL, devisHref } from '../lib/contact';
 import { LEGAL } from '../lib/legal';
 import { pageUrl, UI, type Lang } from '../i18n/ui';
 
@@ -25,6 +25,7 @@ const annee = new Date().getFullYear();
                 <li><a href={PHONE_HREF}>{t.phoneDisplay}</a></li>
                 <li><a href={`mailto:${EMAIL}`}>{EMAIL}</a></li>
                 <li><a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">Instagram @floryanimation</a></li>
+                <li><a href={YOUTUBE_URL} target="_blank" rel="noopener noreferrer">YouTube</a></li>
             </ul>
         </div>
 

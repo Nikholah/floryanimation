@@ -73,6 +73,7 @@ export const UI = {
             intro: 'Contactez-nous pour transformer votre projet en une réalité magique.',
             phone: 'Téléphone',
             email: 'Email',
+            videos: 'Nos vidéos',
         },
         footer: {
             tagline: 'Spectacles de magie, de jonglerie et de bulles de savon.',
@@ -121,6 +122,7 @@ export const UI = {
             intro: 'Get in touch and let us turn your event into something magical.',
             phone: 'Phone',
             email: 'Email',
+            videos: 'Our videos',
         },
         footer: {
             tagline: 'Magic, juggling and soap bubble shows.',

@@ -3,7 +3,7 @@
  * La compagnie est décrite comme un PerformingGroup (troupe de spectacle),
  * avec ses prestations en « offres » sur la page Prestations.
  */
-import { EMAIL, INSTAGRAM_URL, PHONE_INTL } from './contact';
+import { EMAIL, INSTAGRAM_URL, PHONE_INTL, YOUTUBE_URL } from './contact';
 import { LEGAL } from './legal';
 import { pageUrl, type Lang } from '../i18n/ui';
 import { PRESTATIONS } from '../i18n/prestations';
@@ -45,7 +45,7 @@ export function organizationSchema(lang: Lang, site: URL | undefined, imageUrl: 
         founder: { '@type': 'Person', name: 'Flory Anne' },
         telephone: PHONE_INTL.replace(/\s/g, ''),
         email: EMAIL,
-        sameAs: [INSTAGRAM_URL],
+        sameAs: [INSTAGRAM_URL, YOUTUBE_URL],
         address: {
             '@type': 'PostalAddress',
             addressLocality: 'Saint-Étienne',

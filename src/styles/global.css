@@ -413,35 +413,6 @@ a {
     background: var(--marron);
 }
 
-/* Bouton Instagram (grand écran) */
-.instagram-float {
-    position: fixed;
-    bottom: 30px;
-    left: 30px;
-    width: 52px;
-    height: 52px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 9px;
-    background: var(--blanc);
-    border: 1px solid var(--or);
-    border-radius: 50%;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-    transition: transform 0.3s ease;
-    z-index: 1000;
-}
-
-.instagram-float:hover {
-    transform: translateY(-3px);
-}
-
-.instagram-float img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
 /* Animations */
 @keyframes fadeInUp {
     from {
@@ -500,11 +471,6 @@ a {
     /* Le bas de page n'est pas masqué par la barre */
     body {
         padding-bottom: calc(70px + env(safe-area-inset-bottom));
-    }
-
-    /* La barre remplace le bouton Instagram flottant (Instagram reste dans Contact) */
-    .instagram-float {
-        display: none;
     }
 
     /* Espace pour que le bouton « retour en haut » ne recouvre pas les liens légaux du pied de page

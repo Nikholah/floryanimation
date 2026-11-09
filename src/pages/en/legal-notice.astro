@@ -2,7 +2,7 @@
 import Base from '../../layouts/Base.astro';
 import '../../styles/legal.css';
 import { pageUrl } from '../../i18n/ui';
-import { EMAIL, INSTAGRAM_URL, PHONE_HREF, PHONE_INTL } from '../../lib/contact';
+import { EMAIL, INSTAGRAM_URL, PHONE_HREF, PHONE_INTL, YOUTUBE_URL } from '../../lib/contact';
 import { HEBERGEUR, LEGAL } from '../../lib/legal';
 ---
 <Base lang="en" page="mentions" title="Legal notice – Flory Animation" description="Legal notice of the Flory Animation website: publisher, hosting provider and intellectual property.">
@@ -52,7 +52,8 @@ import { HEBERGEUR, LEGAL } from '../../lib/legal';
             <h2>External links</h2>
             <p>
                 This website contains links to other websites, including our
-                <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">Instagram</a> page.
+                <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">Instagram</a> and
+                <a href={YOUTUBE_URL} target="_blank" rel="noopener noreferrer">YouTube</a> pages.
                 {LEGAL.denomination} is not responsible for the content of these websites.
             </p>
         </section>

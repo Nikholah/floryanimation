@@ -6,6 +6,7 @@ export const PHONE_INTL = '+33 6 67 78 54 19';
 export const PHONE_HREF = 'tel:+33667785419';
 export const EMAIL = 'floryanimation@free.fr';
 export const INSTAGRAM_URL = 'https://www.instagram.com/floryanimation/';
+export const YOUTUBE_URL = 'https://www.youtube.com/@amzell2790';
 
 /**
  * Clé d'accès Web3Forms (formulaire de devis).

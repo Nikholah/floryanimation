@@ -3,7 +3,7 @@
  * Bloc Contact en bas de l'accueil (variant « accueil », id #contact)
  * et de la page Prestations (variant « prestations »). Styles : global.css.
  */
-import { EMAIL, INSTAGRAM_URL, PHONE_HREF, PHONE_INTL } from '../lib/contact';
+import { EMAIL, INSTAGRAM_URL, PHONE_HREF, PHONE_INTL, YOUTUBE_URL } from '../lib/contact';
 import { UI, type Lang } from '../i18n/ui';
 
 interface Props {
@@ -30,6 +30,10 @@ const t = UI[lang].contactSection;
         <li class="contact-item">
             <span class="contact-label">Instagram</span>
             <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">@floryanimation</a>
+        </li>
+        <li class="contact-item">
+            <span class="contact-label">YouTube</span>
+            <a href={YOUTUBE_URL} target="_blank" rel="noopener noreferrer">{t.videos}</a>
         </li>
     </ul>
 </section>

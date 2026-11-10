@@ -15,7 +15,8 @@ export const AVIS = {
         prestation: 'Prestation vue',
         choose: 'Choisir…',
         ratingLegend: 'Votre note',
-        ratingStars: ['5 étoiles', '4 étoiles', '3 étoiles', '2 étoiles', '1 étoile'],
+        // De 1 à 5 étoiles, dans l'ordre d'affichage
+        ratingStars: ['1 étoile sur 5', '2 étoiles sur 5', '3 étoiles sur 5', '4 étoiles sur 5', '5 étoiles sur 5'],
         message: 'Votre avis',
         messagePlaceholder: "Ce qui vous a plu, l'ambiance, la réaction du public…",
         email: 'Email (si vous souhaitez une réponse)',
@@ -48,7 +49,7 @@ export const AVIS = {
         prestation: 'Show you saw',
         choose: 'Choose…',
         ratingLegend: 'Your rating',
-        ratingStars: ['5 stars', '4 stars', '3 stars', '2 stars', '1 star'],
+        ratingStars: ['1 star out of 5', '2 stars out of 5', '3 stars out of 5', '4 stars out of 5', '5 stars out of 5'],
         message: 'Your review',
         messagePlaceholder: 'What you enjoyed, the atmosphere, how the audience reacted…',
         email: 'Email (if you would like a reply)',

@@ -258,3 +258,76 @@
     font-weight: bold;
     color: var(--texte);
 }
+
+/* Note en étoiles (page Avis) : les étoiles jusqu'à celle choisie (ou survolée) sont pleines.
+   Étoiles en or foncé (#a8822e, contraste 3,6:1 sur blanc) ; étoiles vides en contour (#8f7c64, 4:1). */
+.rating {
+    border: none;
+}
+
+.devis-form > fieldset.rating > legend {
+    margin-bottom: 0.25rem;
+    font-size: 1rem;
+    font-family: var(--font-texte);
+    font-weight: bold;
+    color: var(--texte);
+}
+
+.stars {
+    position: relative; /* les boutons radio masqués restent positionnés ici (pas de saut de défilement au focus) */
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/* .stars .star : plus spécifique que « .field label » (qui donnerait aux étoiles vides la couleur du texte) */
+.stars .star {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    font-size: 2.2rem;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1.5px #8f7c64;
+    cursor: pointer;
+    transition: color 0.15s ease, transform 0.15s ease;
+}
+
+/* Étoiles pleines : jusqu'à l'étoile cochée… */
+.stars:has(.star-input:checked) .star {
+    color: #a8822e;
+    -webkit-text-stroke-color: #a8822e;
+}
+
+.star-input:checked + .star ~ .star {
+    color: transparent;
+    -webkit-text-stroke-color: #8f7c64;
+}
+
+/* … ou, au survol, jusqu'à l'étoile survolée */
+.stars:has(.star:hover) .star {
+    color: #a8822e;
+    -webkit-text-stroke-color: #a8822e;
+}
+
+.stars .star:hover ~ .star {
+    color: transparent;
+    -webkit-text-stroke-color: #8f7c64;
+}
+
+.star:hover {
+    transform: scale(1.12);
+}
+
+/* Contour au clavier sur l'étoile qui a le focus */
+.star-input:focus-visible + .star {
+    outline: 3px solid var(--marron);
+    outline-offset: 1px;
+}
+
+.rating-value {
+    margin-left: 0.75rem;
+    color: var(--marron-doux);
+}

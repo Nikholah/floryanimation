@@ -68,11 +68,22 @@ const t = AVIS[lang];
                 </div>
             </div>
 
-            <fieldset class="field radios">
+            <!-- Note en étoiles : vrais boutons radio (clavier : flèches), masqués visuellement derrière les étoiles.
+                 Valeur envoyée inchangée : « 1/5 » à « 5/5 ». -->
+            <fieldset class="field rating">
                 <legend>{t.ratingLegend}</legend>
-                {t.ratingStars.map((label, i) => (
-                    <label><input type="radio" name="Note" value={`${5 - i}/5`}> {label}</label>
-                ))}
+                <div class="stars">
+                    {t.ratingStars.map((label, i) => (
+                        <Fragment>
+                            <input type="radio" class="star-input visually-hidden" id={`note-${i + 1}`} name="Note" value={`${i + 1}/5`} data-label={label}>
+                            <label for={`note-${i + 1}`} class="star" title={label}>
+                                <span aria-hidden="true">★</span>
+                                <span class="visually-hidden">{label}</span>
+                            </label>
+                        </Fragment>
+                    ))}
+                    <span class="rating-value" id="rating-value" aria-hidden="true"></span>
+                </div>
             </fieldset>
 
             <div class="field">
@@ -105,6 +116,17 @@ const t = AVIS[lang];
 
 <script>
     import { setupForm } from '../scripts/form';
+
+    // Affiche la note choisie en toutes lettres à côté des étoiles (vidée quand le formulaire est réinitialisé)
+    const avisForm = document.getElementById('avis-form') as HTMLFormElement;
+    const ratingValue = document.getElementById('rating-value') as HTMLElement;
+    avisForm.addEventListener('change', (e) => {
+        const input = e.target as HTMLInputElement;
+        if (input.classList.contains('star-input')) ratingValue.textContent = input.dataset.label ?? '';
+    });
+    avisForm.addEventListener('reset', () => {
+        ratingValue.textContent = '';
+    });
 
     setupForm(
         document.getElementById('avis-form') as HTMLFormElement,

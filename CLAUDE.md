@@ -1,7 +1,7 @@
 # CLAUDE.md — Site Flory Animation
 
 Document de référence pour toutes les sessions de travail sur ce dépôt.
-Dernière mise à jour : 2026-11-08 (maquette validée et refonte visuelle intégrée au site : charte noir, marron, or et ivoire, polices hébergées sur le site).
+Dernière mise à jour : 2026-11-25 (nom « Flory Animation » en Fraunces « doux », choisi par la cliente à la place de Toledo).
 
 ---
 
@@ -15,13 +15,13 @@ Dernière mise à jour : 2026-11-08 (maquette validée et refonte visuelle inté
   | Spectacles | « Bubble Magic Show » | ambiance Cabaret | `BUBBLE_MAGIC_SHOW.jpg` | `bubble-magic-show` |
   | Spectacles | « La Valise » | ambiance Poétique | `LA_VALISE.png` | `la-valise` |
   | Spectacles thématiques (`#spectacles-thematiques`) | Carnaval (« Le Carnaval de Nani ») | — | `AFFICHE_CARNAVAL_DE_NANI.jpg` | `carnaval` |
-  | Spectacles thématiques | Noël (« Nani la Lutine » et « Bulles de Noël ») | — | les 2 affiches `AFFICHE_NOEL_*.png` | `spectacle-noel` |
+  | Spectacles thématiques | **deux fiches séparées depuis le 2026-11-23** : « Nani la Lutine » et « Bulles de Noël » (tag « Spectacle de Noël ») | — | une affiche chacune (`AFFICHE_NOEL_NANI_LA_LUTINE.png`, `AFFICHE_NOEL_BULLES_DE_NOEL.png`) | `spectacle-noel` (Nani la Lutine, ancre du menu), `bulles-de-noel` |
   | Animation déambulation extérieur | Le Jardin des Bulles | en extérieur | `JARDIN_DES_BULLES_CHARIOT.jpg` (photo du chariot) | `jardin-des-bulles` |
   | Atelier | L'Atelier « Bulles de Savon » | à partir de 6 ans, **durée 1 heure, 12 participants maximum** (d'après l'affiche fournie le 2026-11-05) | `AFFICHE_ATELIER_BULLES_DE_SAVON.jpg` | `atelier-bulles` |
   | Mariage | « L'art et l'émotion au cœur de votre mariage » : formules **Instant Précieux** (bulles pendant la séance photo), **Éclat de Bulles** (pendant le vin d'honneur), **Prestige** (« Entre Toi et Moi », spectacle féerique de bulles de savon ; ⚠️ le flyer l'appelle « Magic Bubble Show », voir questions ouvertes) | cible particuliers | `MARIAGE_FLYER_FORMULES.png` (flyer « Sublimez votre mariage », affiché à côté de l'accroche, agrandissable) | `mariage`, `mariage-instant-precieux`, `mariage-eclat-de-bulles`, `mariage-prestige` |
   | Dans ma bulle | Vivre une expérience unique et éphémère : être dans une bulle géante | — | `DANS_MA_BULLE.jpg` | `dans-ma-bulle` |
 - **Anciennes prestations supprimées le 2026-11-05** : L'atelier magique, Nani la Lutine Magicienne (ancienne fiche), Cabaret « Étincelle magique », Bar à Bulles, ancien Atelier Bulles (dès 4 ans), ainsi que les mascottes.
-- **Textes provisoires** : tous les textes descriptifs des prestations sont des **versions de test** rédigées par Claude, en attendant les textes définitifs de la cliente. Depuis le passage au bilingue, **les textes ne sont plus dans les pages mais dans `src/i18n/`** : `prestations.ts` (cartes, Mariage, informations pratiques), `home.ts` (bio : **texte définitif fourni par la cliente le 2026-11-08**, en français et en anglais ; la version anglaise est à faire vérifier de son côté), `devis.ts` ; les pages légales (`mentions-legales.astro`, `confidentialite.astro` et leurs versions `en/`) sont des modèles balisés `<!-- TEXTE PROVISOIRE -->`. **Toute la version anglaise est une première traduction à faire relire** par une personne anglophone. Infos manquantes : commentaires `TODO`. Chercher `TEXTE PROVISOIRE`, `TEXTE MODIFIÉ` et `TODO` pour les retrouver.
+- **Textes provisoires** : les textes descriptifs des prestations et des formules Mariage sont **les textes de la cliente depuis le 2026-11-23** (« Modification Texte Site internet.pdf » ; corrections mineures : « où trônent », virgules, « À vivre »). Restent provisoires : les encadrés des informations pratiques, `devis.ts` et toute la version anglaise. Depuis le passage au bilingue, **les textes ne sont plus dans les pages mais dans `src/i18n/`** : `prestations.ts` (cartes, Mariage, informations pratiques), `home.ts` (bio : **texte définitif fourni par la cliente le 2026-11-08**, en français et en anglais ; la version anglaise est à faire vérifier de son côté), `devis.ts` ; les pages légales (`mentions-legales.astro`, `confidentialite.astro` et leurs versions `en/`) sont des modèles balisés `<!-- TEXTE PROVISOIRE -->`. **Toute la version anglaise est une première traduction à faire relire** par une personne anglophone. Infos manquantes : commentaires `TODO`. Chercher `TEXTE PROVISOIRE`, `TEXTE MODIFIÉ` et `TODO` pour les retrouver.
 - **Cibles** : collectivités (écoles, mairies, centres culturels, centres de loisirs), événementiel (soirées d'entreprise, arbres de Noël des CSE), particuliers (mariages, anniversaires).
 - **Zone d'intervention : France entière et international.** Le site doit donc être **bilingue français / anglais** (voir §6, décision D1).
 - **Objectif n°1** : générer des **demandes de devis et des réservations**.
@@ -29,7 +29,7 @@ Dernière mise à jour : 2026-11-08 (maquette validée et refonte visuelle inté
 - **Informations pratiques validées** (à afficher sur le site et dans la fiche technique) :
   - temps de montage : **1 h 30** ;
   - jauge : **ne plus mentionner de nombre de spectateurs** (demande de la cliente, 2026-11-06 ; les 600 spectateurs ont été retirés du site) ;
-  - **sonorisation, lumière et électricité fournies selon la taille du spectacle** ; détails réglés au moment du devis ;
+  - **sonorisation et lumières fournies selon la taille du spectacle** (l'électricité n'est plus mentionnée, demande de la cliente du 2026-11-23) ; détails réglés au moment du devis ;
   - en extérieur : **pas besoin d'électricité** ;
   - facturation : **sur facture** (rester sobre sur l'administratif, ne pas détailler).
 - **Informations légales** (vérifiées le 2026-11-05 dans l'annuaire des entreprises, recherche-entreprises.api.gouv.fr) : **FLORY ANIMATION, association déclarée** (catégorie juridique 9220), activité « arts du spectacle vivant » (90.01Z), **SIRET 822 373 395 00018** (le numéro communiqué au départ, à 13 chiffres, était incomplet), siège à **Saint-Étienne (42000)**, active. Valeurs centralisées dans `src/lib/legal.ts`. Restent à fournir : **nom du directeur ou de la directrice de la publication** (en général la présidente ou le président ; un encadré rouge « À compléter » s'affiche tant qu'il manque) et, si elle le souhaite, l'adresse complète du siège.
@@ -40,7 +40,7 @@ Dernière mise à jour : 2026-11-08 (maquette validée et refonte visuelle inté
 ## 1. Vue d'ensemble technique
 
 ### Stack (depuis le 2026-11-05)
-- **Astro 7** (site 100 % statique, `output: static`), TypeScript pour les scripts, CSS natif. Polices Parisienne, Playfair Display et Lato via l'API `fonts` d'Astro (téléchargées depuis Fontsource au build, servies par le site, aucune requête vers Google chez le visiteur ; le build a donc besoin d'Internet). Seule dépendance : `astro` (avec `sharp` pour les images).
+- **Astro 7** (site 100 % statique, `output: static`), TypeScript pour les scripts, CSS natif. Polices via l'API `fonts` d'Astro : Parisienne, Playfair Display et Lato téléchargées depuis Fontsource au build ; **Fraunces** (nom « Flory Animation ») en fichier local `src/assets/fonts/fraunces-latin-full-normal.woff2` (version variable complète, licence OFL dans `FRAUNCES-OFL.txt`) ; toutes servies par le site, aucune requête vers Google chez le visiteur ; le build a donc besoin d'Internet). Seule dépendance : `astro` (avec `sharp` pour les images).
 - **Node.js ≥ 22.23.4** (installé en local : Node 26 LTS, dans `C:\Program Files\nodejs`).
 - Migration faite **à l'identique** : même rendu, mêmes URL françaises (`/index.html`, `/spectacles.html`… grâce à `build.format: 'preserve'`, qui produit aussi `en/index.html`), mêmes ancres. Seules différences voulues : images optimisées en WebP avec `srcset` et lazy loading, favicon de 64 px, code mort supprimé, styles inline remplacés par des classes, `onclick` remplacés par des écouteurs, boutons du carrousel et de la lightbox avec `aria-label`, ordre du menu déroulant harmonisé.
 - **Site bilingue FR / EN** (depuis le 2026-11-05) : français à la racine, anglais sous `/en/` (`en/`, `en/shows.html`, `en/quote.html`, `en/review.html`, `en/legal-notice.html`, `en/privacy.html`). Chaque page a ses balises `hreflang` (fr, en, x-default = fr) et un bouton de langue (« EN » / « FR ») qui mène à la page équivalente. Routes et libellés communs : `src/i18n/ui.ts` (`ROUTES`, `pageUrl(page, lang, ancre)`, `UI`).
@@ -49,7 +49,7 @@ Dernière mise à jour : 2026-11-08 (maquette validée et refonte visuelle inté
 ```
 floryanimation/
 ├── astro.config.mjs        # site/base via SITE_URL et BASE_PATH, build.format 'preserve', i18n fr/en
-├── package.json            # scripts dev / build / preview
+├── package.json            # scripts dev / build / preview / deploy:nas
 ├── src/
 │   ├── layouts/Base.astro  # <head> : title, description, canonical, hreflang, favicons, Open Graph (image 1200×630 générée), JSON-LD ; Header, Footer, boutons flottants ; props lang, page, schema
 │   ├── components/         # Header.astro (menu, sélecteur de langue, téléphone), Footer.astro, FloatingButtons.astro (retour en haut, barre d'action mobile ; bouton Instagram flottant retiré le 2026-11-08, Instagram reste dans Contact et le pied de page),
@@ -66,8 +66,10 @@ floryanimation/
 │   ├── lib/legal.ts        # dénomination, forme, SIRET, siège, directeur de publication, hébergeur (mentions légales, confidentialité)
 │   ├── lib/schema.ts       # données structurées JSON-LD : PerformingGroup (accueil), + liste des prestations (page Prestations)
 │   ├── lib/contact.ts      # téléphone, email, Instagram, YouTube, clé Web3Forms, GOOGLE_REVIEW_URL, PRESTATIONS_DEVIS (id + libellés FR/EN), devisHref(id, lang) => devis.html?prestation=<id>
-│   └── assets/img/         # images sources, optimisées au build
+│   └── assets/img/         # images sources, optimisées au build ; assets/fonts/ : Fraunces (fichier local + licence OFL)
 ├── public/                 # copié tel quel : favicon.svg (source), favicon-32.png et apple-touch-icon.png (générés depuis le SVG avec sharp)
+├── scripts/deploy-nas.mjs  # npm run deploy:nas : build + copie miroir de dist/ sur le NAS Synology (réseau local)
+├── deploy-nas.config.example.json  # modèle de réglages du NAS (à copier en deploy-nas.config.json, non versionné)
 ├── .github/workflows/deploy.yml   # build + déploiement GitHub Pages
 ├── .claude/launch.json     # serveurs astro-preview / astro-dev pour l'aperçu dans Claude
 ├── .gitignore              # node_modules, dist, .astro, .idea, réglages locaux
@@ -116,6 +118,14 @@ Génère `dist/`. Puis `npm run preview` pour servir ce build.
   - Si l'hébergement passe sur **Cloudflare Pages** : build Astro natif, déploiement à chaque push, HTTPS, mais **25 Mio maximum par fichier** (à respecter pour les vidéos).
   - Le site reste conçu **100 % statique** pour rester portable (GitHub Pages ou Cloudflare Pages), même si Cloudflare permettrait des fonctions serveur.
 - En attendant le domaine : les URL canoniques, Open Graph, `sitemap.xml` et `robots.txt` cibleront `https://floryanimation.com/`. On les écrit dès maintenant pour ce domaine (une seule valeur à changer si besoin, centralisée dans la config Astro).
+
+### NAS Synology (réseau local, depuis le 2026-11-10)
+- **Décision D9** : le site est aussi hébergé sur le NAS Synology de Nicolas, **en réseau local uniquement** (pas d'ouverture de port, pas de tunnel). La mise en ligne publique reste à décider quand le domaine sera libéré (GitHub Pages, Cloudflare, ou NAS exposé via un tunnel Cloudflare).
+- **Côté NAS (une seule fois)** : installer **Web Station** (Centre de paquets ; il crée le dossier partagé `web`), créer le dossier `web/floryanimation` (vide), puis dans Web Station > Portail Web > Créer : service **Static website** (aucun PHP nécessaire), type **basé sur le port** (par exemple HTTP 8080), racine du document `web/floryanimation`. Le site est alors servi à la racine sur `http://<NAS>:8080/` (d'où `basePath: "/"`). Variante sans portail : servir le dossier sous `http://<NAS>/floryanimation/` et mettre `basePath: "/floryanimation"`.
+- **Côté PC (une seule fois)** : vérifier que `\\<NAS>\web\floryanimation` s'ouvre dans l'Explorateur (identifiants DSM d'un compte qui a le droit d'écriture sur `web`), puis copier `deploy-nas.config.example.json` en `deploy-nas.config.json` et y mettre ce chemin (`dest`) et `basePath`. Ce fichier n'est pas versionné. Variables d'environnement possibles à la place : `NAS_DEST`, `NAS_BASE_PATH`, `NAS_SITE_URL`.
+- **À chaque mise à jour** : `npm run deploy:nas`. Le script construit le site avec le bon chemin de base, copie `dist/` sur le NAS et supprime les fichiers qui n'existent plus. **Garde-fou** : il ne fait rien si le dossier cible n'est pas vide et ne contient pas le fichier témoin `.floryanimation-site` (déposé au premier déploiement) ; une erreur de chemin ne peut donc pas effacer un autre dossier du NAS. Testé le 2026-11-10 sur un dossier local (refus sans réglage, refus d'un dossier introuvable ou étranger, premier déploiement, nettoyage des fichiers périmés).
+- Les URL canoniques, `sitemap.xml` et Open Graph continuent de viser `https://floryanimation.com/` (sans effet en réseau local). Les mentions légales ne changent pas tant que le site du NAS n'est pas public ; **s'il le devient**, mettre à jour `HEBERGEUR` dans `src/lib/legal.ts` (pour un auto-hébergement, l'hébergeur est la personne ou l'association qui exploite le NAS).
+- Sécurité : ne jamais exposer DSM (ports 5000/5001) sur Internet ; garder DSM et Web Station à jour.
 
 ---
 
@@ -248,6 +258,7 @@ Ordonné par impact sur les réservations rapporté à l'effort. Effort : S (moi
 - **D6 Administratif** sobre : « Sur facture », pas de détail (pas de GUSO, de bon de commande, etc.).
 - **D7 Fichiers inutilisés** supprimés ; `.idea/` et `.claude/settings.local.json` ignorés.
 - **D8 Jauge** : ne mentionner aucun nombre de spectateurs (2026-11-06).
+- **D9 NAS Synology** : hébergement sur le NAS en réseau local, déploiement par `npm run deploy:nas` depuis le PC (2026-11-10). Voir §1, « NAS Synology ».
 
 ### Code
 - HTML5 sémantique, **indentation de 4 espaces**, guillemets doubles, classes en **kebab-case**, pas de styles inline.
@@ -283,7 +294,7 @@ Ordonné par impact sur les réservations rapporté à l'effort. Effort : S (moi
 | Or (filets, cadres, bouton principal et texte sur fond sombre) | `--or` `#C6A45A`, `--or-clair` `#E2C88A` |
 | Fonds clairs | `--ivoire` `#F8F3EA` (fond de page), `--sable` `#ECE2D2` (appel à avis) |
 | Texte | `--texte` `#2B2420` |
-| Typographies | Parisienne (accroches manuscrites, logo), Playfair Display 500 (titres), Lato 400/700 (texte) |
+| Typographies | **Fraunces 600 « doux »** (`--font-nom`, réglage `"SOFT" 100, "WONK" 1` : nom « Flory Animation » de la navbar et du pied de page, depuis le 2026-11-25), Parisienne (accroches manuscrites), Playfair Display 500 (titres), Lato 400/700 (texte) |
 | Formes | coins de 2 px, cadres photo blancs à filet doré de 1 px, filet doré de 56 px sous les titres de section, pas d'ombres marquées |
 | Contrastes | texte sur ivoire 13,8:1, or sur noir 7,9:1, ivoire sur marron 12,4:1, texte secondaire 7,6:1 |
 
@@ -306,3 +317,4 @@ Ordonné par impact sur les réservations rapporté à l'effort. Effort : S (moi
 12. **Nom de la formule Prestige** : le brief parle de « Entre Toi et Moi », spectacle féerique de bulles de savon ; le flyer Mariage parle de « Magic Bubble Show ». Lequel garder sur le site ? (Le site affiche pour l'instant « Entre Toi et Moi ».)
 13. ~~Bio~~ : nouveau texte reçu et intégré le 2026-11-08 (FR et EN fournis par la cliente).
 14. **Champ « Nombre de spectateurs » du formulaire de devis** : la cliente ne veut plus de jauge affichée ; garder ou retirer cette question posée au visiteur ?
+15. ~~Police « Toledo »~~ : le fichier fourni (kit fonts2u, « Copyright 1990-1993 FontBank, Inc. », intégration « Restricted License », aucune licence web) n'a **pas** été intégré. La cliente a choisi le 2026-11-25 **Fraunces en version douce** (police libre OFL), appliquée au logo de la navbar et du pied de page. Le nom écrit dans la photo décor ne change pas. Ne pas mettre Toledo sur le site sans licence web écrite de l'ayant droit.

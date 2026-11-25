@@ -5,3 +5,6 @@ dist/
 .astro/
 .DS_Store
 Thumbs.db
+
+# Réglages locaux du déploiement sur le NAS (npm run deploy:nas)
+deploy-nas.config.json

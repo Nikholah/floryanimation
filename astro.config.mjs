@@ -15,6 +15,24 @@ export default defineConfig({
     // (aucune requête vers Google ou un CDN chez le visiteur). Utilisées via les variables CSS de global.css.
     fonts: [
         {
+            // Nom « Flory Animation » (logo de la navbar et du pied de page), choisi par la cliente le 2026-11-25
+            // à la place de Toledo (police FontBank à usage restreint). Version variable complète (axes wght, opsz,
+            // SOFT, WONK : le réglage « doux » est dans global.css, .logo) ; fichier local, licence OFL à côté.
+            provider: fontProviders.local(),
+            name: 'Fraunces',
+            cssVariable: '--font-fraunces',
+            fallbacks: ['Georgia', 'serif'],
+            options: {
+                variants: [
+                    {
+                        src: ['./src/assets/fonts/fraunces-latin-full-normal.woff2'],
+                        weight: '100 900',
+                        style: 'normal',
+                    },
+                ],
+            },
+        },
+        {
             provider: fontProviders.fontsource(),
             name: 'Parisienne',
             cssVariable: '--font-parisienne',

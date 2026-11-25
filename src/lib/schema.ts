@@ -23,11 +23,12 @@ export function organizationSchema(lang: Lang, site: URL | undefined, imageUrl: 
         p.bubbleMagicShow,
         p.laValise,
         p.carnaval,
-        p.noel,
+        p.naniLutine,
+        p.bullesNoel,
         p.jardin,
         p.atelier,
         p.bulle,
-    ].map((s) => ({ name: s.title, description: s.text }));
+    ].map((s) => ({ name: s.title, description: s.text.replace(/<br>/g, ' ') }));
     const mariage = p.mariage.formules.map((f) => ({
         name: `${p.sections.mariage} – ${f.nom}`,
         description: f.texte,

@@ -15,7 +15,6 @@ export const HOME = {
         aboutAlt: 'Décor féerique de Flory Animation',
         familleAlt: 'L’équipe familiale de Flory Animation, en costumes de scène, sous un chapiteau de cirque illustré',
         // Texte fourni par la cliente (« A PROPOS Flory Animation New Version 08112026.docx »)
-        aboutSubtitle: 'Une passion pour la magie du spectacle et l’émerveillement',
         about: [
             '<strong>Flory Animation, c’est avant tout une histoire de passion, de famille et de transmission.</strong>',
             'Fondée par <strong>Flory Anne</strong>, fille de magicien, elle grandit dans l’univers fascinant du spectacle, qui devient très tôt son terrain d’expression. Dès l’âge de 6 ans, elle fait ses premiers pas sur scène, tout en commençant à pratiquer la danse classique et le piano.',
@@ -37,7 +36,6 @@ export const HOME = {
         aboutAlt: 'Flory Animation’s enchanted stage set',
         familleAlt: 'The Flory Animation family team in stage costumes, under an illustrated circus big top',
         // Traduction fournie par la cliente avec le texte français, encore à faire vérifier de son côté
-        aboutSubtitle: 'A passion for the magic of performance and wonder',
         about: [
             '<strong>Above all, Flory Animation is a story of passion, family and the art of passing on a love of performance.</strong>',
             'Founded by <strong>Flory Anne</strong>, the daughter of a magician, Flory Animation has its roots in the fascinating world of entertainment, which surrounded her from an early age and soon became her natural form of expression. At just six years old, she took her first steps on stage while beginning lessons in classical ballet and piano.',

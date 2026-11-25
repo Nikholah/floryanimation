@@ -82,17 +82,25 @@ const flyerFull = (await getImage({ src: flyerMariage, width: 1024 })).src;
                     devisId="carnaval"
                     reverse
                 />
+                <!-- Noël : deux spectacles ; l'ancre #spectacle-noel reste sur le premier -->
                 <Prestation
                     lang={lang}
                     id="spectacle-noel"
-                    title={t.noel.title}
-                    tag={t.noel.tag}
-                    text={t.noel.text}
-                    images={[
-                        { src: afficheNoelNani, alt: t.noel.altNani, portrait: true },
-                        { src: afficheNoelBulles, alt: t.noel.altBulles, portrait: true },
-                    ]}
-                    devisId="noel"
+                    title={t.naniLutine.title}
+                    tag={t.naniLutine.tag}
+                    text={t.naniLutine.text}
+                    images={[{ src: afficheNoelNani, alt: t.naniLutine.alt, portrait: true }]}
+                    devisId="nani-la-lutine"
+                />
+                <Prestation
+                    lang={lang}
+                    id="bulles-de-noel"
+                    title={t.bullesNoel.title}
+                    tag={t.bullesNoel.tag}
+                    text={t.bullesNoel.text}
+                    images={[{ src: afficheNoelBulles, alt: t.bullesNoel.alt, portrait: true }]}
+                    devisId="bulles-de-noel"
+                    reverse
                 />
             </div>
         </section>

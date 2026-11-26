@@ -1,0 +1,52 @@
+---
+import { EMAIL, INSTAGRAM_URL, PHONE_HREF, YOUTUBE_URL, devisHref } from '../lib/contact';
+import { LEGAL } from '../lib/legal';
+import { pageUrl, UI, type Lang } from '../i18n/ui';
+
+interface Props {
+    lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = UI[lang];
+const annee = new Date().getFullYear();
+---
+<footer class="site-footer">
+    <div class="footer-inner">
+        <div class="footer-col footer-brand">
+            <p class="footer-logo">Flory Animation</p>
+            <p>{t.footer.tagline}</p>
+            <p>{t.footer.zone}</p>
+        </div>
+
+        <div class="footer-col">
+            <h2 class="footer-title">{t.footer.contact}</h2>
+            <ul>
+                <li><a href={PHONE_HREF}>{t.phoneDisplay}</a></li>
+                <li><a href={`mailto:${EMAIL}`}>{EMAIL}</a></li>
+                <li><a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">Instagram @floryanimation</a></li>
+                <li><a href={YOUTUBE_URL} target="_blank" rel="noopener noreferrer">YouTube</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h2 class="footer-title">{t.footer.navigation}</h2>
+            <ul>
+                <li><a href={pageUrl('accueil', lang)}>{t.footer.home}</a></li>
+                <li><a href={pageUrl('prestations', lang)}>{t.footer.prestations}</a></li>
+                <li><a href={pageUrl('prestations', lang, 'infos-pratiques')}>{t.footer.infos}</a></li>
+                <li><a href={devisHref(undefined, lang)}>{t.footer.quote}</a></li>
+                <li><a href={pageUrl('avis', lang)}>{t.footer.review}</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© {annee} {LEGAL.denomination}</p>
+        <p class="footer-legal">
+            <a href={pageUrl('mentions', lang)}>{t.footer.mentions}</a>
+            <span aria-hidden="true">·</span>
+            <a href={pageUrl('confidentialite', lang)}>{t.footer.privacy}</a>
+        </p>
+    </div>
+</footer>

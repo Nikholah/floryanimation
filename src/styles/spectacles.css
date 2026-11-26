@@ -1,0 +1,420 @@
+/* Styles propres à la page Prestations (spectacles). Charte, boutons et bloc Contact : global.css. */
+
+/* En-tête de page */
+.page-hero {
+    margin-top: var(--nav-h); /* sous la navbar fixe */
+    padding: 4.5rem 2rem;
+    background: var(--noir);
+    color: var(--ivoire);
+    text-align: center;
+}
+
+.page-hero .kicker {
+    font-size: 2rem;
+    color: var(--or);
+}
+
+.page-hero h1 {
+    margin: 0.25rem 0 0.75rem;
+    font-family: var(--font-titre);
+    font-weight: 500;
+    font-size: 3.2rem;
+    line-height: 1.15;
+}
+
+.page-hero-text {
+    max-width: 640px;
+    margin: 0 auto;
+    color: var(--sable);
+    font-size: 1.1rem;
+}
+
+/* Contenu */
+.main-content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4.5rem 2rem 0;
+}
+
+.section {
+    margin-bottom: 4.5rem;
+}
+
+.section > h2 {
+    margin-bottom: 3rem;
+}
+
+/* Liste des prestations d'une section */
+.spectacles-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+}
+
+/* Une prestation : visuel encadré et texte côte à côte (alternés avec .reverse) */
+.spectacle-card {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.spectacle-card.reverse {
+    flex-direction: row-reverse;
+}
+
+.spectacle-images {
+    display: flex;
+    gap: 1rem;
+    flex-shrink: 0;
+}
+
+.spectacle-image {
+    display: block;
+    width: 260px;
+    height: auto;
+    padding: 6px;
+    background: var(--blanc);
+    border: 1px solid var(--or);
+    cursor: zoom-in;
+    transition: box-shadow 0.3s ease;
+}
+
+.spectacle-image:hover {
+    box-shadow: 0 10px 28px rgba(20, 17, 15, 0.2);
+}
+
+/* Affiches et photos verticales */
+.spectacle-image.portrait {
+    width: 220px;
+}
+
+.spectacle-images--duo .spectacle-image.portrait {
+    width: 170px;
+}
+
+.spectacle-content {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Étiquette (ambiance, format) : en accroche manuscrite au-dessus du titre */
+.spectacle-tag {
+    order: -1;
+    font-family: var(--font-script);
+    font-size: 1.7rem;
+    line-height: 1.2;
+    color: var(--marron);
+}
+
+.spectacle-card h3 {
+    margin-bottom: 0.75rem;
+    font-family: var(--font-titre);
+    font-weight: 500;
+    font-size: 2.1rem;
+    line-height: 1.2;
+    color: var(--noir);
+}
+
+.spectacle-text p {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.detail-item {
+    margin-bottom: 0.75rem;
+}
+
+.detail-label {
+    font-weight: bold;
+    color: var(--marron);
+}
+
+.spectacle-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+    margin-top: 1.25rem;
+}
+
+.price {
+    color: var(--marron-doux);
+}
+
+@media (max-width: 768px) {
+    .main-content {
+        padding: 3rem 1.25rem 0;
+    }
+
+    .page-hero {
+        padding: 3rem 1.25rem;
+    }
+
+    .page-hero h1 {
+        font-size: 2.3rem;
+    }
+
+    .spectacles-grid {
+        gap: 3rem;
+    }
+
+    .spectacle-card,
+    .spectacle-card.reverse {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1.5rem;
+    }
+
+    .spectacle-images {
+        justify-content: center;
+    }
+
+    .spectacle-image {
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .spectacle-image.portrait {
+        width: 100%;
+        max-width: 260px;
+    }
+
+    .spectacle-images--duo .spectacle-image.portrait {
+        width: calc(50% - 0.5rem);
+        max-width: 200px;
+    }
+
+    .spectacle-card h3 {
+        font-size: 1.8rem;
+    }
+
+    .spectacle-text p {
+        font-size: 1.05rem;
+    }
+}
+
+/* Mariage : bandeau marron sur toute la largeur, flyer à côté de l'accroche, 3 formules */
+.mariage {
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding: 4.5rem max(2rem, calc(50vw - 550px));
+    background: var(--marron);
+    color: var(--ivoire);
+}
+
+.mariage-header {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    margin-bottom: 2.5rem;
+}
+
+.spectacle-image.mariage-flyer {
+    flex-shrink: 0;
+    width: 220px;
+    padding: 0;
+    border: none;
+    background: none;
+}
+
+.mariage-header-text h2 {
+    font-family: var(--font-titre);
+    font-weight: 500;
+    font-size: 2.8rem;
+    line-height: 1.15;
+}
+
+.mariage-accroche {
+    margin-bottom: 0.75rem;
+    font-family: var(--font-script);
+    font-size: 2rem;
+    line-height: 1.25;
+    color: var(--or-clair);
+}
+
+.mariage-intro {
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.formules {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    align-items: stretch;
+}
+
+.formule {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1.5rem;
+    background: var(--ivoire);
+    color: var(--texte);
+    border-radius: var(--rayon);
+    text-align: center;
+}
+
+.formule--vedette {
+    outline: 1px solid var(--or);
+    outline-offset: 4px;
+}
+
+.formule-label {
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--marron);
+}
+
+.formule h3 {
+    margin: 0.25rem 0 0.5rem;
+    font-family: var(--font-titre);
+    font-weight: 500;
+    font-size: 1.7rem;
+    line-height: 1.2;
+    color: var(--noir);
+}
+
+.formule-moment {
+    margin-bottom: 1rem;
+    font-family: var(--font-titre);
+    font-style: italic;
+    color: var(--marron);
+}
+
+.formule-texte {
+    flex: 1;
+    line-height: 1.6;
+}
+
+.formule-tarif {
+    margin: 1rem 0 0.75rem;
+    color: var(--marron-doux);
+}
+
+/* Seuil distinct de 768 px (voir CLAUDE.md, fusion des media queries) */
+@media (max-width: 700px) {
+    .mariage {
+        padding: 3.5rem 1.25rem;
+    }
+
+    .mariage-header {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+    }
+
+    .spectacle-image.mariage-flyer {
+        width: 200px;
+        max-width: 70%;
+    }
+
+    .mariage-header-text h2 {
+        font-size: 2.2rem;
+    }
+
+    .mariage-accroche {
+        font-size: 1.7rem;
+    }
+}
+
+/* Informations pratiques : filet doré au-dessus de chaque information */
+.infos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colonnes sur grand écran, 2 sur tablette, 1 sur mobile */
+    gap: 2rem 2.5rem;
+    list-style: none;
+    margin-bottom: 2.5rem;
+}
+
+.info {
+    padding-top: 0.75rem;
+    border-top: 2px solid var(--or);
+}
+
+.info h3 {
+    margin-bottom: 0.25rem;
+    font-family: var(--font-titre);
+    font-weight: 500;
+    font-size: 1.3rem;
+    color: var(--marron);
+}
+
+.info p {
+    line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+    .infos-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .infos-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.infos-cta {
+    text-align: center;
+}
+
+/* Lightbox */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    inset: 0;
+    background-color: rgba(20, 17, 15, 0.94);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.lightbox.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 90%;
+    position: relative;
+}
+
+.lightbox-image {
+    width: 100%;
+    height: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    cursor: zoom-out;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    background: none;
+    border: none;
+    line-height: 1;
+    color: var(--ivoire);
+    font-size: 40px;
+    cursor: pointer;
+    transition: color 0.3s;
+    z-index: 10000;
+}
+
+.lightbox-close:hover {
+    color: var(--or);
+}
+
+.lightbox-close:focus-visible {
+    outline: 3px solid var(--or);
+}

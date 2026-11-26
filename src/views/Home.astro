@@ -1,0 +1,95 @@
+---
+/** Contenu de la page d'accueil, commun au français (src/pages/index.astro) et à l'anglais (src/pages/en/index.astro). */
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import ContactSection from '../components/ContactSection.astro';
+import '../styles/index.css';
+import { PHONE_HREF, devisHref } from '../lib/contact';
+import { pageUrl, UI, type Lang } from '../i18n/ui';
+import { HOME } from '../i18n/home';
+import { AVIS, TEMOIGNAGES } from '../i18n/avis';
+
+import decor from '../assets/img/FOND_DECOR_FLORY_ANIMATION.jpg';
+import famille from '../assets/img/FLORY_ANIMATION_FAMILLE.jpg';
+
+interface Props {
+    lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = HOME[lang];
+const ui = UI[lang];
+const avis = AVIS[lang];
+const temoignages = TEMOIGNAGES[lang];
+---
+<Base lang={lang} page="accueil" title={t.title} description={t.description} schema="organisation">
+    <!-- Bannière : photo « fond décor Flory Animation » (le nom est écrit dans l'image) -->
+    <section id="accueil" class="hero">
+        <Image
+            src={decor}
+            alt={t.heroAlt}
+            class="hero-bg"
+            widths={[640, 960, 1280, 1600, 2000]}
+            sizes="100vw"
+            loading="eager"
+            fetchpriority="high"
+        />
+        <div class="hero-content">
+            <!-- Titre conservé pour le référencement et les lecteurs d'écran, masqué visuellement -->
+            <h1 class="visually-hidden">{t.h1}</h1>
+            <a href={pageUrl('prestations', lang)} class="btn btn-or">{t.discover}</a>
+            <div class="hero-secondary">
+                <a href={devisHref(undefined, lang)} class="btn btn-sombre">{t.quote}</a>
+                <a href={PHONE_HREF} class="btn btn-sombre">{ui.phoneDisplay}</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- À propos : l'univers d'abord (photo décor), la photo de l'équipe en petit à la fin du texte -->
+    <section id="nous-connaitre" class="section">
+        <h2>{t.aboutTitle}</h2>
+        <div class="about-content">
+            <Image
+                src={decor}
+                alt={t.aboutAlt}
+                class="about-image"
+                widths={[480, 880, 1320]}
+                sizes="(max-width: 960px) 90vw, 880px"
+            />
+            <div class="about-text">
+                {t.about.map((p) => <p set:html={p} />)}
+            </div>
+            <Image
+                src={famille}
+                alt={t.familleAlt}
+                class="famille-image"
+                width={160}
+                densities={[1, 2]}
+            />
+        </div>
+    </section>
+
+    <!-- Avis clients : section affichée seulement s'il y a de vrais avis (src/i18n/avis.ts) -->
+    {temoignages.length > 0 && (
+        <section class="temoignages" aria-labelledby="temoignages-titre">
+            <h2 id="temoignages-titre">{avis.temoignagesTitle}</h2>
+            <div class="temoignages-grid">
+                {temoignages.map((a) => (
+                    <figure class="temoignage">
+                        <blockquote>{a.texte}</blockquote>
+                        <figcaption>{a.auteur}{a.contexte && `, ${a.contexte}`}</figcaption>
+                    </figure>
+                ))}
+            </div>
+        </section>
+    )}
+
+    <!-- Appel à avis -->
+    <section class="avis-cta">
+        <h2>{avis.ctaTitle}</h2>
+        <p>{avis.ctaText}</p>
+        <a href={pageUrl('avis', lang)} class="btn btn-contour">{avis.ctaButton}</a>
+    </section>
+
+    <ContactSection lang={lang} variant="accueil" />
+</Base>

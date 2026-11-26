@@ -1,0 +1,18 @@
+---
+import { PHONE_HREF, devisHref } from '../lib/contact';
+import { UI, type Lang } from '../i18n/ui';
+
+interface Props {
+    lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = UI[lang];
+---
+<button class="back-to-top" id="backToTop" type="button" aria-label={t.backToTop}>↑</button>
+
+<!-- Barre d'action fixe en bas de l'écran (mobile et tablette, jusqu'à 1 100 px) -->
+<div class="action-bar" role="region" aria-label={t.actionBar.region}>
+    <a href={PHONE_HREF} class="action-bar-call">{t.actionBar.call}</a>
+    <a href={devisHref(undefined, lang)} class="action-bar-devis">{t.actionBar.quote}</a>
+</div>

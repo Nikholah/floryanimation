@@ -1,0 +1,135 @@
+---
+/**
+ * Page « Laisser un avis », commune au français (src/pages/avis.astro) et à l'anglais (src/pages/en/review.astro).
+ * Textes : src/i18n/avis.ts. Mise en forme partagée avec le formulaire de devis (devis.css).
+ * Comme pour le devis, les noms de champs et les valeurs envoyés restent en français.
+ */
+import Base from '../layouts/Base.astro';
+import '../styles/devis.css';
+import { EMAIL, GOOGLE_REVIEW_URL, PRESTATIONS_DEVIS, WEB3FORMS_ACCESS_KEY } from '../lib/contact';
+import { pageUrl, type Lang } from '../i18n/ui';
+import { AVIS } from '../i18n/avis';
+
+interface Props {
+    lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = AVIS[lang];
+---
+<Base lang={lang} page="avis" title={t.title} description={t.description}>
+    <main class="devis-page">
+        <header class="devis-intro">
+            <h1>{t.h1}</h1>
+            <p>{t.intro}</p>
+            {GOOGLE_REVIEW_URL && (
+                <p class="devis-alt">
+                    <a href={GOOGLE_REVIEW_URL} target="_blank" rel="noopener noreferrer">{t.google}</a>
+                </p>
+            )}
+        </header>
+
+        <form
+            id="avis-form"
+            class="devis-form"
+            action="https://api.web3forms.com/submit"
+            method="POST"
+            data-access-key={WEB3FORMS_ACCESS_KEY}
+            data-email={EMAIL}
+            data-msg-sending={t.msgSending}
+            data-msg-success={t.msgSuccess}
+            data-msg-error={t.msgError}
+            data-msg-mail={t.msgMail}
+            data-mail-subject={t.mailSubject}
+        >
+            <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY}>
+            <input type="hidden" name="subject" value="Nouvel avis client - site Flory Animation">
+            <input type="hidden" name="from_name" value="Site Flory Animation">
+            <input type="hidden" name="Langue du visiteur" value={lang === 'fr' ? 'Français' : 'Anglais'}>
+            <!-- Piège à robots (honeypot) : doit rester vide -->
+            <input type="checkbox" name="botcheck" class="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+            <div class="field">
+                <label for="nom">{t.name} <span class="req" aria-hidden="true">*</span></label>
+                <input type="text" id="nom" name="name" required autocomplete="given-name">
+            </div>
+
+            <div class="field-row">
+                <div class="field">
+                    <label for="structure">{t.org}</label>
+                    <input type="text" id="structure" name="Structure ou événement" placeholder={t.orgPlaceholder}>
+                </div>
+                <div class="field">
+                    <label for="prestation">{t.prestation}</label>
+                    <select id="prestation" name="Prestation">
+                        <option value="">{t.choose}</option>
+                        {PRESTATIONS_DEVIS.map((p) => <option value={p.fr}>{p[lang]}</option>)}
+                    </select>
+                </div>
+            </div>
+
+            <!-- Note en étoiles : vrais boutons radio (clavier : flèches), masqués visuellement derrière les étoiles.
+                 Valeur envoyée inchangée : « 1/5 » à « 5/5 ». -->
+            <fieldset class="field rating">
+                <legend>{t.ratingLegend}</legend>
+                <div class="stars">
+                    {t.ratingStars.map((label, i) => (
+                        <Fragment>
+                            <input type="radio" class="star-input visually-hidden" id={`note-${i + 1}`} name="Note" value={`${i + 1}/5`} data-label={label}>
+                            <label for={`note-${i + 1}`} class="star" title={label}>
+                                <span aria-hidden="true">★</span>
+                                <span class="visually-hidden">{label}</span>
+                            </label>
+                        </Fragment>
+                    ))}
+                    <span class="rating-value" id="rating-value" aria-hidden="true"></span>
+                </div>
+            </fieldset>
+
+            <div class="field">
+                <label for="message">{t.message} <span class="req" aria-hidden="true">*</span></label>
+                <textarea id="message" name="message" rows="5" required placeholder={t.messagePlaceholder}></textarea>
+            </div>
+
+            <div class="field">
+                <label for="email">{t.email}</label>
+                <input type="email" id="email" name="email" autocomplete="email">
+            </div>
+
+            <label class="consent">
+                <input type="checkbox" name="Publication autorisée" value="Oui">
+                <span>{t.consent}</span>
+            </label>
+
+            <p class="rgpd">
+                {t.rgpd}{' '}
+                <a href={pageUrl('confidentialite', lang)}>{t.rgpdLink}</a>.
+            </p>
+            <p class="req-note"><span aria-hidden="true">*</span> {t.required}</p>
+
+            <button type="submit" class="devis-submit">{t.submit}</button>
+
+            <div id="avis-status" class="devis-status" role="status" aria-live="polite"></div>
+        </form>
+    </main>
+</Base>
+
+<script>
+    import { setupForm } from '../scripts/form';
+
+    // Affiche la note choisie en toutes lettres à côté des étoiles (vidée quand le formulaire est réinitialisé)
+    const avisForm = document.getElementById('avis-form') as HTMLFormElement;
+    const ratingValue = document.getElementById('rating-value') as HTMLElement;
+    avisForm.addEventListener('change', (e) => {
+        const input = e.target as HTMLInputElement;
+        if (input.classList.contains('star-input')) ratingValue.textContent = input.dataset.label ?? '';
+    });
+    avisForm.addEventListener('reset', () => {
+        ratingValue.textContent = '';
+    });
+
+    setupForm(
+        document.getElementById('avis-form') as HTMLFormElement,
+        document.getElementById('avis-status') as HTMLElement,
+    );
+</script>

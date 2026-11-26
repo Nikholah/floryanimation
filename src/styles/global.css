@@ -1,0 +1,789 @@
+/* Styles communs à toutes les pages : charte, navbar, menu déroulant, boutons, pied de page.
+   Charte validée le 2026-11-08 (maquette de l'étape 14) : noir, marron, or et ivoire ;
+   Parisienne (accroches manuscrites), Playfair Display (titres), Lato (texte). */
+
+:root {
+    --noir: #14110f;
+    --marron: #3b2a1e;
+    --marron-doux: #5c4a3a;   /* texte secondaire sur fond clair */
+    --or: #c6a45a;            /* filets, boutons et texte sur fond sombre uniquement (contraste insuffisant sur ivoire) */
+    --or-clair: #e2c88a;
+    --ivoire: #f8f3ea;
+    --sable: #ece2d2;
+    --texte: #2b2420;
+    --blanc: #fff;
+
+    --font-script: var(--font-parisienne), cursive;
+    --font-nom: var(--font-fraunces), Georgia, serif;   /* nom « Flory Animation » (logo) */
+    --font-titre: var(--font-playfair), Georgia, serif;
+    --font-texte: var(--font-lato), Arial, sans-serif;
+
+    --nav-h: 72px;            /* hauteur de la navbar fixe */
+    --rayon: 2px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Fond de page sur html (pas sur body : cette feuille commune est chargée après celle de la page) */
+html {
+    background: var(--ivoire);
+}
+
+body {
+    font-family: var(--font-texte);
+    line-height: 1.6;
+    color: var(--texte);
+    overflow-x: hidden;
+}
+
+a {
+    color: var(--marron);
+}
+
+/* Contour visible pour la navigation au clavier (sur fond clair ; voir aussi la navbar et le pied de page) */
+:focus-visible {
+    outline: 3px solid var(--marron);
+    outline-offset: 3px;
+}
+
+/* Accroche manuscrite au-dessus d'un titre */
+.kicker {
+    font-family: var(--font-script);
+    font-size: 1.9rem;
+    line-height: 1.2;
+    color: var(--marron);
+}
+
+/* Boutons communs */
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.6rem;
+    border-radius: var(--rayon);
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Or sur fond sombre (action principale) */
+.btn-or {
+    background: var(--or);
+    color: var(--noir);
+}
+
+.btn-or:hover {
+    background: var(--or-clair);
+    color: var(--noir);
+}
+
+/* Sur photo ou fond sombre (action secondaire) */
+.btn-sombre {
+    background: rgba(20, 17, 15, 0.8);
+    color: var(--ivoire);
+    border: 1px solid var(--or);
+}
+
+.btn-sombre:hover {
+    background: var(--noir);
+    color: var(--or-clair);
+}
+
+/* Marron plein sur fond clair (Demander un devis) */
+.btn-marron {
+    background: var(--marron);
+    color: var(--ivoire);
+}
+
+.btn-marron:hover {
+    background: var(--noir);
+    color: var(--ivoire);
+}
+
+/* Contour marron sur fond clair */
+.btn-contour {
+    border: 2px solid var(--marron);
+    color: var(--marron);
+}
+
+.btn-contour:hover {
+    background: var(--marron);
+    color: var(--ivoire);
+}
+
+/* Titres de section (Playfair, petit filet doré dessous) */
+.section-title,
+.section > h2 {
+    font-family: var(--font-titre);
+    font-weight: 500;
+    font-size: 2.6rem;
+    line-height: 1.15;
+    color: var(--noir);
+    text-align: center;
+}
+
+.section-title::after,
+.section > h2::after {
+    content: '';
+    display: block;
+    width: 56px;
+    height: 1px;
+    margin: 1rem auto 0;
+    background: var(--or);
+}
+
+/* Seuil distinct de 768 px (fusion des media queries, voir CLAUDE.md) */
+@media (max-width: 700px) {
+    .section-title,
+    .section > h2 {
+        font-size: 2rem;
+    }
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    min-height: var(--nav-h);
+    display: flex;
+    align-items: center;
+    background: var(--noir);
+    border-bottom: 1px solid var(--or);
+    z-index: 1000;
+    padding: 0.6rem 0;
+    transition: box-shadow 0.3s ease;
+}
+
+.navbar.scrolled {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.nav-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+    padding: 0 2rem;
+}
+
+.logo {
+    margin-right: auto;
+    font-family: var(--font-nom);
+    font-weight: 600;
+    font-variation-settings: "SOFT" 100, "WONK" 1; /* Fraunces « doux » (si le fichier contient ces axes) */
+    font-size: 1.6rem;
+    line-height: 1.1;
+    color: var(--ivoire);
+    text-decoration: none;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 1.75rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--ivoire);
+    font-size: 1.05rem;
+    transition: color 0.2s ease;
+    position: relative;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--or);
+}
+
+/* Menu déroulant « Prestations »
+   - grand écran : ouverture au survol, au clavier (focus) ou au clic sur la flèche ;
+   - mobile : ouverture au toucher sur la flèche (voir le bloc responsive). */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-head {
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.2rem;
+    padding: 0.25rem;
+    background: none;
+    border: none;
+    border-radius: var(--rayon);
+    color: var(--ivoire);
+    cursor: pointer;
+}
+
+.dropdown-toggle:hover {
+    color: var(--or);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    background: var(--noir);
+    min-width: 260px;
+    border: 1px solid var(--or);
+    border-radius: var(--rayon);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    z-index: 1000;
+    padding: 0.5rem 0;
+    list-style: none;
+}
+
+/* Pont invisible entre le lien et le sous-menu, pour ne pas le perdre au survol */
+.dropdown-content::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 100%;
+    height: 0.6rem;
+}
+
+.dropdown.open .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 0.6rem 1.25rem;
+    font-size: 1rem;
+}
+
+.dropdown-content a:hover {
+    background: rgba(198, 164, 90, 0.12);
+}
+
+.dropdown-arrow {
+    font-size: 0.7rem;
+    transition: transform 0.3s ease;
+    display: inline-block;
+}
+
+.dropdown.open .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+/* Grand écran uniquement : survol et navigation au clavier */
+@media (min-width: 769px) {
+    .dropdown:hover .dropdown-content,
+    .dropdown:focus-within .dropdown-content {
+        display: block;
+    }
+
+    .dropdown:hover .dropdown-arrow,
+    .dropdown:focus-within .dropdown-arrow {
+        transform: rotate(180deg);
+    }
+}
+
+/* Contour au clavier sur fond sombre */
+.navbar a:focus-visible,
+.navbar button:focus-visible,
+.site-footer a:focus-visible,
+.action-bar a:focus-visible {
+    outline: 3px solid var(--or);
+    outline-offset: 3px;
+}
+
+/* Bouton du menu mobile (masqué sur grand écran) */
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    background: none;
+    border: none;
+    border-radius: var(--rayon);
+    cursor: pointer;
+}
+
+.nav-toggle-bar {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--ivoire);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Les trois barres forment une croix quand le menu est ouvert */
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(2) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(3) {
+    opacity: 0;
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-bar:nth-child(4) {
+    transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Sélecteur de langue (FR / EN) */
+.lang-switch {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 36px;
+    padding: 0 0.6rem;
+    border: 1px solid var(--or);
+    border-radius: var(--rayon);
+    color: var(--or);
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.lang-switch:hover {
+    background: var(--or);
+    color: var(--noir);
+}
+
+/* Téléphone dans la navbar : grand écran uniquement (au-delà de 1 100 px) */
+.nav-phone {
+    display: none;
+    align-items: center;
+    padding: 0.55rem 1rem;
+    border-radius: var(--rayon);
+    background: var(--or);
+    color: var(--noir);
+    font-weight: bold;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 0.2s ease;
+}
+
+.nav-phone:hover {
+    background: var(--or-clair);
+}
+
+@media (min-width: 1101px) {
+    .nav-phone {
+        display: inline-flex;
+    }
+}
+
+/* Bouton « retour en haut » */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--noir);
+    color: var(--or);
+    border: 1px solid var(--or);
+    border-radius: 50%;
+    font-size: 1.4rem;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background: var(--marron);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Barre d'action fixe « Appeler / Demander un devis » : mobile et tablette (jusqu'à 1 100 px) */
+.action-bar {
+    display: none;
+}
+
+@media (max-width: 1100px) {
+    .action-bar {
+        display: flex;
+        gap: 0.6rem;
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 999; /* sous la navbar et son menu */
+        padding: 0.6rem 0.75rem calc(0.6rem + env(safe-area-inset-bottom));
+        background: var(--noir);
+        border-top: 1px solid var(--or);
+    }
+
+    .action-bar a {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+        min-height: 48px;
+        border-radius: var(--rayon);
+        font-weight: bold;
+        font-size: 1rem;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    .action-bar-call {
+        border: 1px solid var(--or);
+        color: var(--ivoire);
+    }
+
+    .action-bar-devis {
+        background: var(--or);
+        color: var(--noir);
+    }
+
+    /* Le bas de page n'est pas masqué par la barre */
+    body {
+        padding-bottom: calc(70px + env(safe-area-inset-bottom));
+    }
+
+    /* Espace pour que le bouton « retour en haut » ne recouvre pas les liens légaux du pied de page
+       (sélecteur à 2 classes : l'emporte sur les règles du pied de page, quel que soit l'ordre) */
+    .site-footer .footer-bottom {
+        padding-bottom: 4.5rem;
+    }
+
+    /* Bouton « retour en haut » au-dessus de la barre */
+    .back-to-top {
+        right: 16px;
+        bottom: calc(84px + env(safe-area-inset-bottom));
+        width: 46px;
+        height: 46px;
+        font-size: 1.2rem;
+    }
+}
+
+/* Écrans intermédiaires (tablettes) : liens plus petits pour que la navbar reste sur une ligne */
+.logo,
+.nav-links a {
+    white-space: nowrap;
+}
+
+@media (min-width: 769px) and (max-width: 1100px) {
+    .nav-container,
+    .nav-links {
+        gap: 1.25rem;
+    }
+
+    .nav-links a {
+        font-size: 1rem;
+    }
+}
+
+/* Responsive : menu mobile (burger) */
+@media (max-width: 768px) {
+    :root {
+        --nav-h: 64px;
+    }
+
+    .nav-container {
+        gap: 0.5rem;
+        padding: 0 1rem;
+    }
+
+    .logo {
+        font-size: 1.4rem;
+    }
+
+    .nav-toggle {
+        display: flex;
+        order: 2;
+    }
+
+    .lang-switch {
+        order: 1;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .navbar.menu-open .nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        max-height: calc(100vh - var(--nav-h));
+        overflow-y: auto;
+        padding: 0.5rem 1.5rem 1.5rem;
+        background: var(--noir);
+        border-bottom: 1px solid var(--or);
+    }
+
+    .nav-links > li {
+        border-bottom: 1px solid rgba(198, 164, 90, 0.25);
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 0.9rem 0;
+        font-size: 1.15rem;
+    }
+
+    .dropdown-head {
+        justify-content: space-between;
+    }
+
+    .dropdown-head > a {
+        flex: 1;
+    }
+
+    .dropdown-toggle {
+        width: 44px;
+        height: 44px;
+    }
+
+    .dropdown-content {
+        position: static;
+        min-width: 0;
+        padding: 0 0 0.75rem 1rem;
+        border: none;
+        box-shadow: none;
+    }
+
+    .dropdown-content::before {
+        display: none;
+    }
+
+    .dropdown-content a {
+        padding: 0.6rem 0;
+        font-size: 1.05rem;
+    }
+}
+
+/* Texte réservé aux lecteurs d'écran et aux moteurs de recherche */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Les ancres ne passent pas sous la navbar fixe */
+[id] {
+    scroll-margin-top: calc(var(--nav-h) + 16px);
+}
+
+/* Bloc Contact (accueil et page Prestations) */
+.contact {
+    background: var(--noir);
+    color: var(--ivoire);
+    text-align: center;
+    padding: 4.5rem 2rem;
+}
+
+.contact .kicker {
+    color: var(--or);
+}
+
+.contact h2 {
+    margin: 0.25rem 0 0.75rem;
+    font-family: var(--font-titre);
+    font-size: 2.6rem;
+    font-weight: 500;
+    line-height: 1.15;
+}
+
+.contact-intro {
+    max-width: 640px;
+    margin: 0 auto 2rem;
+    color: var(--sable);
+}
+
+.contact-info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem 3.5rem;
+    list-style: none;
+}
+
+.contact-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+    min-width: 0;
+}
+
+.contact-label {
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--or);
+}
+
+.contact-item a {
+    max-width: 100%;
+    color: var(--ivoire);
+    font-size: 1.25rem;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(198, 164, 90, 0.5);
+    overflow-wrap: anywhere; /* l'adresse email peut passer à la ligne au lieu de déborder */
+}
+
+.contact-item a:hover {
+    color: var(--or-clair);
+    border-bottom-color: var(--or-clair);
+}
+
+.contact a:focus-visible {
+    outline: 3px solid var(--or);
+    outline-offset: 3px;
+}
+
+/* Page Prestations : le bloc occupe toute la largeur, comme la section Mariage */
+.contact--prestations {
+    margin: 0 calc(50% - 50vw);
+}
+
+/* Pied de page */
+.site-footer {
+    background: var(--noir);
+    color: var(--sable);
+    border-top: 1px solid var(--or);
+    font-size: 0.95rem;
+}
+
+.footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 2rem 2rem;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 2rem;
+}
+
+.footer-logo {
+    font-family: var(--font-nom);
+    font-weight: 600;
+    font-variation-settings: "SOFT" 100, "WONK" 1;
+    font-size: 1.6rem;
+    line-height: 1.2;
+    color: var(--ivoire);
+    margin-bottom: 0.5rem;
+}
+
+.footer-brand p + p {
+    margin-top: 0.25rem;
+}
+
+.footer-title {
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--or);
+    margin-bottom: 0.75rem;
+}
+
+.site-footer ul {
+    list-style: none;
+}
+
+.site-footer li + li {
+    margin-top: 0.5rem;
+}
+
+.site-footer a {
+    color: var(--sable);
+    text-decoration: none;
+}
+
+.site-footer a:hover {
+    color: var(--or-clair);
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.25rem 2rem;
+    border-top: 1px solid rgba(198, 164, 90, 0.3);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* à gauche : loin du bouton « retour en haut », en bas à droite */
+    gap: 0.5rem 2rem;
+    font-size: 0.875rem;
+    color: #b9ad9c;
+}
+
+.footer-legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* Seuil distinct de 768 px : le minifieur fusionne les media queries identiques et les remonte plus haut dans le fichier */
+@media (max-width: 760px) {
+    .footer-inner {
+        grid-template-columns: 1fr;
+        padding: 2.5rem 1.25rem 1.5rem;
+        gap: 1.75rem;
+    }
+
+    .footer-bottom {
+        padding: 1.25rem;
+        flex-direction: column;
+    }
+}
+
+/* Mouvements réduits si le visiteur l'a demandé à son système */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

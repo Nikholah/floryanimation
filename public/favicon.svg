@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+    <!-- Favicon Flory Animation : bulles de savon irisées et étoile dorée sur fond bleu nuit -->
+    <defs>
+        <linearGradient id="irise" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#9cd8ff"/>
+            <stop offset="0.5" stop-color="#c9b6ff"/>
+            <stop offset="1" stop-color="#ff9fcf"/>
+        </linearGradient>
+    </defs>
+    <rect width="64" height="64" rx="14" fill="#1d2438"/>
+    <circle cx="27" cy="37" r="17" fill="url(#irise)" fill-opacity="0.16" stroke="url(#irise)" stroke-width="3.5"/>
+    <path d="M17 31.5a11.5 11.5 0 0 1 8-7.5" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="51" cy="44" r="6" fill="url(#irise)" fill-opacity="0.16" stroke="url(#irise)" stroke-width="2.5"/>
+    <path d="M49 5l2.4 7.1L58.5 14.5l-7.1 2.4L49 24l-2.4-7.1L39.5 14.5l7.1-2.4z" fill="#f2c94c"/>
+</svg>

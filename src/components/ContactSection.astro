@@ -1,0 +1,39 @@
+---
+/**
+ * Bloc Contact en bas de l'accueil (variant « accueil », id #contact)
+ * et de la page Prestations (variant « prestations »). Styles : global.css.
+ */
+import { EMAIL, INSTAGRAM_URL, PHONE_HREF, PHONE_INTL, YOUTUBE_URL } from '../lib/contact';
+import { UI, type Lang } from '../i18n/ui';
+
+interface Props {
+    lang: Lang;
+    variant: 'accueil' | 'prestations';
+}
+
+const { lang, variant } = Astro.props;
+const t = UI[lang].contactSection;
+---
+<section id={variant === 'accueil' ? 'contact' : undefined} class:list={['contact', `contact--${variant}`]}>
+    <p class="kicker">{t.kicker}</p>
+    <h2>{t.title}</h2>
+    <p class="contact-intro">{t.intro}</p>
+    <ul class="contact-info">
+        <li class="contact-item">
+            <span class="contact-label">{t.phone}</span>
+            <a href={PHONE_HREF}>{PHONE_INTL}</a>
+        </li>
+        <li class="contact-item">
+            <span class="contact-label">{t.email}</span>
+            <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+        </li>
+        <li class="contact-item">
+            <span class="contact-label">Instagram</span>
+            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">@floryanimation</a>
+        </li>
+        <li class="contact-item">
+            <span class="contact-label">YouTube</span>
+            <a href={YOUTUBE_URL} target="_blank" rel="noopener noreferrer">{t.videos}</a>
+        </li>
+    </ul>
+</section>
